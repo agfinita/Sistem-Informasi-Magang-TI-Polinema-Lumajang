@@ -13,14 +13,14 @@ class FormKelolaAdminController extends Controller
      * Display a listing of the resource.
      */
     public function index() {
-        return view('pages.contents.form-kelola-admin');
+        return view('pages.contents.admin.form-kelola-admin');
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create() {
-        //
+        return view('pages.contents.admin.form-kelola-admin');
     }
 
     /**
@@ -32,7 +32,7 @@ class FormKelolaAdminController extends Controller
             'email'         => 'required|email',
             'password'      => ['required', Password::min(8)],
             'gridRadios'    => 'required|in:Admin,Mahasiswa,Dosen',
-            'date_created'  => 'required|date',
+            'date_created'  => 'date',
         ]);
 
         // menyimpan data ke database
@@ -45,38 +45,78 @@ class FormKelolaAdminController extends Controller
         ]);
 
         // redirect ke halaman
-        return redirect('/kelolaAdmin')->with('status');
+        return redirect('/tableUserAdmin')->with('status', 'Data added!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
-    {
-        //
+    public function show(User $user) {
+        $users = DB::table('users')
+                    ->select('id','nama', 'username', 'email', 'role', 'is_active', 'created_at', 'updated_at')
+                    ->orderBy('users.nama', 'ASC')
+                    ->where('role', 'admin')->get();
+        return view ('pages.contents.admin.table-user-admin', compact('users'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
-    {
-        //
+    public function edit($id) {
+        $users  = DB::table('users')->where('id', $id)->first();
+        return view('pages.contents.admin.update-user-admin', compact('users'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
-    {
-        //
+    public function update(Request $request, $id) {
+
+        $validatedData  = $request->validate([
+            'username'              => 'required',
+            'email'                 => 'required',
+            'gridRadios-status'     => 'required',
+            'gridRadios'            => 'required',
+            'date_created'          => 'date',
+            // 'date_updated'          => 'date',
+        ]);
+
+        $users      = DB::table('users')->where('id', $id)->first();
+        $is_active  = $users->is_active;
+
+        if($is_active === 1 && $validatedData['gridRadios-status'] === 0) {
+            //jika user diubah non-active
+            $validatedData['gridRadios-status'] = 0;
+        }
+
+        $users  = DB::table('users')->where('id', $id)->update([
+            'username'      => $validatedData['username'],
+            'email'         => $validatedData['email'],
+            'is_active'     => $validatedData['gridRadios-status'],
+            'role'          => $validatedData['gridRadios'],
+            'created_at'    => $validatedData['date_created'],
+            // 'updated_at'    => $validatedData['date_updated']
+        ]);
+
+        if ($users) {
+            return redirect('/tableUserAdmin')->with('status', 'Data updated successfully.');
+        } else {
+            return redirect('/tableUserAdmin')->with('error', 'Failed to updated data.');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
-    {
-        //
+    public function destroy($id) {
+        $users  = DB::table('users')->where('id', $id)->first();
+
+        if($users) {
+            $users  = DB::table('users')->where('id', $id)->delete();
+
+            return redirect('/tableUserAdmin')->with('status', 'Data berhasil dihapus.');
+        }
+
+        return redirect('/tableUserAdmin')->with('error', 'Data tidak ditemukan.');
     }
 }

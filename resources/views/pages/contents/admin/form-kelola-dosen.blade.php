@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 
 <!-- Head -->
@@ -34,33 +34,17 @@
                                 <li><a class="nav-link" href="{{ url('/data-magang') }}">Data Magang</a></li>
                             </ul>
                         </li>
-                        <li class="menu-header">Kelola Pengguna</li>
-                        <li class="nav-item dropdown active">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                    class="fa fa-user"></i> <span>Admin</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="#">Data Admin</a></li>
-                                <li class="active"><a class="nav-link" href="{{ url('/kelolaAdmin') }}">Users</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                    class="fa fa-user"></i> <span>Dosen</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="#">Data Dosen</a></li>
-                                <li><a class="nav-link" href="{{ url('/kelolaDosen') }}">Users</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                    class="fa fa-graduation-cap"></i> <span>Mahasiswa</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="#">Data Mahasiswa</a></li>
-                                <li><a class="nav-link" href="{{ url('kelolaMahasiswa') }}">Users</a>
-                                </li>
-                            </ul>
-                        </li>
+
                         <li class="menu-header">Lainnya</li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                                class="fa fa-user"></i> <span>Kelola Pengguna</span></a>
+                            <ul class="dropdown-menu">
+                                <li><a class="nav-link" href="{{ url('/tableUserAdmin') }}"><span>Admin</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/tableUserDosen') }}"><span>Dosen</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/tableUserMahasiswa') }}"><span>Mahasiswa</span></a></li>
+                            </ul>
+                        </li>
                         <li>
                             <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="fas fa-sign-out-alt"></i>
@@ -71,24 +55,6 @@
                                 @csrf
                             </form>
                         </li>
-
-                        <li class="menu-header">Pages</li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown"><i class="far fa-user"></i>
-                                <span>Auth</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{ url('/forgot') }}">Forgot Password</a></li>
-                                <li><a href="{{ url('/login') }}">Login</a></li>
-                                <li><a href="{{ url('/reset') }}">Reset Password</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-
-                    <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-                        <a href="https://getstisla.com/docs" class="btn btn-primary btn-lg btn-block btn-icon-split">
-                            <i class="fas fa-rocket"></i> Documentation
-                        </a>
-                    </div>
                 </aside>
             </div>
 
@@ -110,32 +76,44 @@
                                 <!--Horizontal-->
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4>Create user admin</h4>
+                                        <h4>Create user dosen</h4>
                                     </div>
-                                    <form action="{{ url('/kelolaAdmin') }}" method="POST">
+                                    <form action="{{ url('/tableUserDosen') }}" method="POST">
                                         @csrf
                                         <div class="card-body">
                                             <div class="form-group row">
                                                 <label for="username" class="col-sm-3 col-form-label">Username</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="username" name="username"
-                                                        placeholder="Masukkan NIP" autofocus>
+                                                    <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan NIP" autofocus>
+                                                    @if (count($errors) > 0)
+                                                    <div style="width: auto; color:red; margin-top:0.25rem;">
+                                                        {{ $errors->first('username') }}
+                                                    </div>
+                                                    @endif
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label for="email" class="col-sm-3 col-form-label">Email</label>
                                                 <div class="col-sm-9">
-                                                    <input type="email" class="form-control" id="email" name="email"
-                                                        placeholder="Masukkan Email">
+                                                    <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Email">
+                                                    @if (count($errors) > 0)
+                                                    <div style="width: auto; color:red; margin-top:0.25rem;">
+                                                        {{ $errors->first('email') }}
+                                                    </div>
+                                                    @endif
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label for="password" class="col-sm-3 col-form-label">Password</label>
                                                 <div class="col-sm-9">
-                                                    <input type="password" class="form-control" id="password" name="password"
-                                                        placeholder="Password">
+                                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                                                    @if (count($errors) > 0)
+                                                    <div style="width: auto; color:red; margin-top:0.25rem;">
+                                                        {{ $errors->first('password') }}
+                                                    </div>
+                                                    @endif
                                                 </div>
                                             </div>
 
@@ -144,7 +122,7 @@
                                                     <div class="col-sm-9">
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                name="gridRadios" id="admin" value="Admin" checked>
+                                                                name="gridRadios" id="admin" value="Admin">
                                                             <label class="form-check-label" for="admin">
                                                                 Admin
                                                             </label>
@@ -158,7 +136,7 @@
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                name="gridRadios" id="dosen" value="Dosen">
+                                                                name="gridRadios" id="dosen" value="Dosen" checked>
                                                             <label class="form-check-label" for="mahasiswa">
                                                                 Dosen
                                                             </label>
@@ -169,7 +147,7 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Date Created</label>
                                                 <div class="col-sm-9">
-                                                    <input type="datetime-local"  name="date_created" id="date_created" class="form-control">
+                                                    <input type="datetime-local" name="date_created" id="date_created" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -210,4 +188,4 @@
     <!-- Page Specific JS File -->
 </body>
 
-</html>
+</html> --}}

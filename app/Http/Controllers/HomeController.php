@@ -8,33 +8,46 @@ use Illuminate\Validation\Rules\Password;
 
 
 class HomeController extends Controller {
-    //login
+
+    // Menampilkan halaman login
     public function masuk() {
         return view('pages.contents.auth-login');
     }
 
-    public function prosesMasuk(Request $request) {
+    public function authenticate(Request $request) {
         $request->validate([
             'username'  => 'required',
             'password'  => ['required', Password::min(8)]
         ]);
 
-        //save input ketika berhasil divalidasi
-        $data   = [
+        // Save input ketika berhasil divalidasi
+        $credentials   = [
             'username'  => $request->username,
             'password'  => $request->password
         ];
 
         //proses pengecekan login
-        if(Auth::attempt($data)) {
+        if(Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/');
+
+            // Cek role pengguna setelah login
+            $role   = Auth::user()->role;
+            switch ($role) {
+                case 'Admin':
+                    return redirect()->intended('/');
+                case 'Mahasiswa':
+                    return redirect('/mahasiswa/dashboard');
+                case 'Dosen':
+                    return redirect('/dosen/dashboard');
+                default:
+                abort(403, 'Unauthorized action.');
+            }
         }
 
-        return back()->with('error', 'username atau password salah!');
+        return back()->with('error', 'Username atau password salah!');
     }
 
-    //logout
+    //Logout
     public function logout(Request $request) {
         Auth::logout();
 

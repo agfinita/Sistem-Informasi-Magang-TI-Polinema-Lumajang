@@ -14,7 +14,7 @@
             <div class="main-sidebar sidebar-style-2">
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
-                        <a href="{{ url('/') }}">Admin</a>
+                        <a href="{{ url('/') }}">{{ Auth::user()->role }}</a>
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
                         <a href="{{ url('/') }}">SIMMAG</a>
@@ -24,39 +24,37 @@
                         <li class="active"><a class="nav-link" href="{{ url('/') }}"><i
                             class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i> <span>Dashboard</span></a></li>
                         <li><a class="nav-link" href="{{ url('/pengumuman') }}"><i class="fa fa-bullhorn"></i>
-                                <span>Pengumuman</span></a></li>
-                        <li class="menu-header">Mahasiswa</li>
+                            <span>Pengumuman</span></a></li>
+
+
+                            <li class="menu-header">Manajemen Pengguna</li>
+                            <li class="nav-item-dropdown">
+                                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                                    <i class="fa fa-school"></i><span>Data Pengguna</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="nav-link" href="{{ url('/dataAdmin') }}"><span>Admin</span></a></li>
+                                    <li><a class="nav-link" href="{{ url('/dataDosen') }}"><span>Dosen</span></a></li>
+                                    <li><a class="nav-link" href="{{ url('/dataMahasiswa') }}"><span>Mahasiswa</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                                        class="fa fa-user"></i> <span>Kelola Pengguna</span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="nav-link" href="{{ url('/tableUserAdmin') }}"><span>Admin</span></a></li>
+                                        <li><a class="nav-link" href="{{ url('/tableUserDosen') }}"><span>Dosen</span></a></li>
+                                        <li><a class="nav-link" href="{{ url('/tableUserMahasiswa') }}"><span>Mahasiswa</span></a></li>
+                                    </ul>
+                            </li>
+
+                        <li class="menu-header">Pages</li>
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                     class="fas fa-columns"></i> <span>Magang</span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link" href="{{ url('/persuratan') }}">Persuratan</a></li>
                                 <li><a class="nav-link" href="{{ url('/data-magang') }}">Data Magang</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-header">Kelola Pengguna</li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                    class="fa fa-user"></i> <span>Admin</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="#">Data Admin</a></li>
-                                <li><a class="nav-link" href="{{ url('/kelolaAdmin') }}">Users</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                    class="fa fa-user"></i> <span>Dosen</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="#">Data Dosen</a></li>
-                                <li><a class="nav-link" href="{{ url('/kelolaDosen') }}">Users</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                    class="fa fa-graduation-cap"></i> <span>Mahasiswa</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="#">Data Mahasiswa</a></li>
-                                <li><a class="nav-link" href="{{ url('/kelolaMahasiswa') }}">Users</a></li>
                             </ul>
                         </li>
 
@@ -158,33 +156,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-5 col-md-12 col-12 col-sm-12">
-                            <form method="post" class="needs-validation" novalidate="">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4>Quick Draft</h4>
-                                    </div>
-                                    <div class="card-body pb-0">
-                                        <div class="form-group">
-                                            <label>Title</label>
-                                            <input type="text" name="title" class="form-control" required>
-                                            <div class="invalid-feedback">
-                                                Please fill in the title
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Content</label>
-                                            <textarea class="summernote-simple"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer pt-0">
-                                        <button class="btn btn-primary">Save Draft</button>
-                                    </div>
-                                </div>
-                            </form>
                         </div>
                     </div>
                 </section>

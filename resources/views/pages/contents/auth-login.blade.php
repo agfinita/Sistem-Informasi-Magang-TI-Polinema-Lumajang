@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Login &mdash; Stisla</title>
+    <title>Login &mdash;</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -33,22 +33,25 @@
                                 TEKNOLOGI INFORMASI</span></h4>
                         <p class="text-muted">PSDKU Politeknik Negeri Malang di Lumajang</p>
 
-                        @if(session('error'))
+                        <!-- Form Login -->
+                        <form method="POST" action="{{url('/prosesLogin')}}" autocomplete="off">
+                            @csrf
+
+                            @if(session('error'))
                             <div class="alert alert-danger">
                                 {{ session('error') }}
                             </div>
-                        @endif
+                            @endif
 
-                        <!-- Form Login -->
-                        <form method="POST" action="{{url('/prosesLogin')}}">
-                            @csrf
+                            <div id="alertUsernamePassword" class="alert alert-danger" style="display: none;">
+                                Mohon lengkapi username dan password terlebih dahulu.
+                            </div>
+
+
                             <div class="form-group">
                                 <label for="username">Username</label>
                                 <input id="username" type="text" class="form-control" name="username"
-                                    tabindex="1" required autofocus>
-                                <div class="invalid-feedback">
-                                    Please fill in your email
-                                </div>
+                                    tabindex="1" autofocus>
                             </div>
 
                             <div class="form-group">
@@ -56,10 +59,7 @@
                                     <label for="password" class="control-label">Password</label>
                                 </div>
                                 <input id="password" type="password" class="form-control" name="password"
-                                    tabindex="2" required>
-                                <div class="invalid-feedback">
-                                    please fill in your password
-                                </div>
+                                    tabindex="2">
                             </div>
 
                             <div class="form-group">
@@ -74,21 +74,21 @@
                                 <a href="{{url('/forgot')}}" class="float-left mt-3">
                                     Forgot Password?
                                 </a>
-                                <button type="submit" id="login" name="login" class="btn btn-primary btn-lg btn-icon icon-right"
+                                <button type="submit" id="loginBtn" name="login" class="btn btn-primary btn-lg btn-icon icon-right"
                                     tabindex="4">
                                     Login
                                 </button>
                             </div>
                         </form>
 
-                        <div class="text-center mt-5 text-small">
-                            Copyright &copy; Your Company. Made with 💙 by Stisla
+                        {{-- <div class="text-center mt-5 text-small">
+                            Copyright &copy; Made with 💙 by Stisla
                             <div class="mt-2">
                                 <a href="#">Privacy Policy</a>
                                 <div class="bullet"></div>
                                 <a href="#">Terms of Service</a>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 background-walk-y position-relative overlay-gradient-bottom"

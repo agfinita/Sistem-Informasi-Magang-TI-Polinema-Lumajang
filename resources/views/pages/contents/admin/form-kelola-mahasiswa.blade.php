@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 
 <!-- Head -->
@@ -21,7 +21,8 @@
                     </div>
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
-                        <li><a class="nav-link" href="{{ url('/') }}"><i class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i>
+                        <li><a class="nav-link" href="{{ url('/') }}"><i class="ion ion-speedometer"
+                                    data-pack="default" data-tags="travel, accelerate"></i>
                                 <span>Dashboard</span></a></li>
                         <li><a class="nav-link" href="{{ url('/pengumuman') }}"><i class="fa fa-bullhorn"></i>
                                 <span>Pengumuman</span></a></li>
@@ -34,35 +35,21 @@
                                 <li><a class="nav-link" href="{{ url('/data-magang') }}">Data Magang</a></li>
                             </ul>
                         </li>
-                        <li class="menu-header">Kelola Pengguna</li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                    class="fa fa-user"></i> <span>Admin</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="#">Data Admin</a></li>
-                                <li><a class="nav-link" href="{{ url('/kelolaAdmin') }}">Users</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                    class="fa fa-user"></i> <span>Dosen</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="#">Data Dosen</a></li>
-                                <li><a class="nav-link" href="{{ url('/kelolaDosen') }}">Users</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown active">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                    class="fa fa-graduation-cap"></i> <span>Mahasiswa</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="#">Data Mahasiswa</a></li>
-                                <li class="active"><a class="nav-link" href="{{ url('kelolaMahasiswa') }}">Users</a>
-                                </li>
-                            </ul>
-                        </li>
+
                         <li class="menu-header">Lainnya</li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                                    class="fa fa-user"></i> <span>Kelola Pengguna</span></a>
+                            <ul class="dropdown-menu">
+                                <li><a class="nav-link" href="{{ url('/tableUserAdmin') }}"><span>Admin</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/tableUserDosen') }}"><span>Dosen</span></a></li>
+                                <li><a class="nav-link"
+                                        href="{{ url('/tableUserMahasiswa') }}"><span>Mahasiswa</span></a></li>
+                            </ul>
+                        </li>
                         <li>
-                            <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a class="nav-link" href="#"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="fas fa-sign-out-alt"></i>
                                 <span>Logout</span>
                             </a>
@@ -112,68 +99,86 @@
                                     <div class="card-header">
                                         <h4>Create user mahasiswa</h4>
                                     </div>
-                                    <form action="{{ url('/kelolaMahasiswa') }}" method="POST">
+                                    <form action="{{ url('/tableUserMahasiswa') }}" method="POST">
                                         @csrf
                                         <div class="card-body">
                                             <div class="form-group row">
                                                 <label for="username" class="col-sm-3 col-form-label">Username</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="username" name="username"
-                                                        placeholder="Masukkan NIM" autofocus>
+                                                    <input type="text" class="form-control" id="username"
+                                                        name="username" placeholder="Masukkan NIM" autofocus>
+                                                    @if (count($errors) > 0)
+                                                        <div style="width: auto; color:red; margin-top:0.25rem;">
+                                                            {{ $errors->first('username') }}
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="email" class="col-sm-3 col-form-label">Email</label>
                                                 <div class="col-sm-9">
-                                                    <input type="email" class="form-control" id="email" name="email"
-                                                        placeholder="Masukkan Email">
+                                                    <input type="email" class="form-control" id="email"
+                                                        name="email" placeholder="Masukkan Email">
+                                                    @if (count($errors) > 0)
+                                                        <div style="width: auto; color:red; margin-top:0.25rem;">
+                                                            {{ $errors->first('email') }}
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label for="password" class="col-sm-3 col-form-label">Password</label>
                                                 <div class="col-sm-9">
-                                                    <input type="password" class="form-control" id="password" name="password"
-                                                        placeholder="Password">
+                                                    <input type="password" class="form-control" id="password"
+                                                        name="password" placeholder="Password">
+                                                    @if (count($errors) > 0)
+                                                        <div style="width: auto; color:red; margin-top:0.25rem;">
+                                                            {{ $errors->first('password') }}
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
 
                                             <fieldset class="form-group row">
-                                                    <label class="col-sm-3 col-form-label">Role</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="gridRadios" id="admin" value="Admin">
-                                                            <label class="form-check-label" for="admin">
-                                                                Admin
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="gridRadios" id="mahasiswa" value="Mahasiswa" checked>
-                                                            <label class="form-check-label" for="mahasiswa">
-                                                                Mahasiswa
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="gridRadios" id="dosen" value="Dosen">
-                                                            <label class="form-check-label" for="mahasiswa">
-                                                                Dosen
-                                                            </label>
-                                                        </div>
+                                                <label class="col-sm-3 col-form-label">Role</label>
+                                                <div class="col-sm-9">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="gridRadios" id="admin" value="Admin">
+                                                        <label class="form-check-label" for="admin">
+                                                            Admin
+                                                        </label>
                                                     </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="gridRadios" id="mahasiswa" value="Mahasiswa"
+                                                            checked>
+                                                        <label class="form-check-label" for="mahasiswa">
+                                                            Mahasiswa
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="gridRadios" id="dosen" value="Dosen">
+                                                        <label class="form-check-label" for="mahasiswa">
+                                                            Dosen
+                                                        </label>
+                                                    </div>
+                                                </div>
                                             </fieldset>
 
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Date Created</label>
                                                 <div class="col-sm-9">
-                                                    <input type="datetime-local" name="date_created" id="date_created" class="form-control">
+                                                    <input type="datetime-local" name="date_created"
+                                                        id="date_created" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="card-footer">
-                                            <button type="submit" id="kirim" name="kirim" class="btn btn-primary">Tambah</button>
+                                            <button type="submit" id="kirim" name="kirim"
+                                                class="btn btn-primary">Tambah</button>
                                         </div>
                                     </form>
                                 </div>
@@ -209,4 +214,4 @@
     <!-- Page Specific JS File -->
 </body>
 
-</html>
+</html> --}}

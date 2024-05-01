@@ -20,42 +20,40 @@
                         <a href="{{ url('/') }}">SIMMAG</a>
                     </div>
                     <ul class="sidebar-menu">
-                        <li><a class="nav-link" href="{{ url('/') }}"><i class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i>
-                                <span>Dashboard</span></a></li>
-                        <li class="active"><a class="nav-link" href="{{ url('/pengumuman') }}"><i
-                                    class="fa fa-bullhorn"></i> <span>Pengumuman</span></a></li>
-                        <li class="menu-header">Mahasiswa</li>
-                        <li class="nav-item dropdown">
+                        <li><a class="nav-link" href="{{ url('/') }}"><i
+                            class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i> <span>Dashboard</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/pengumuman') }}"><i class="fa fa-bullhorn"></i>
+                            <span>Pengumuman</span></a></li>
+
+
+                            <li class="menu-header">Manajemen Pengguna</li>
+                            <li class="nav-item-dropdown">
+                                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                                    <i class="fa fa-school"></i><span>Data Pengguna</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="nav-link" href="{{ url('/dataAdmin') }}"><span>Admin</span></a></li>
+                                    <li><a class="nav-link" href="{{ url('/dataDosen') }}"><span>Dosen</span></a></li>
+                                    <li><a class="nav-link" href="{{ url('/dataMahasiswa') }}"><span>Mahasiswa</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                                        class="fa fa-user"></i> <span>Kelola Pengguna</span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="nav-link" href="{{ url('/tableUserAdmin') }}"><span>Admin</span></a></li>
+                                        <li><a class="nav-link" href="{{ url('/tableUserDosen') }}"><span>Dosen</span></a></li>
+                                        <li><a class="nav-link" href="{{ url('/tableUserMahasiswa') }}"><span>Mahasiswa</span></a></li>
+                                    </ul>
+                            </li>
+
+                        <li class="menu-header">Pages</li>
+                        <li class="nav-item dropdown active">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                     class="fas fa-columns"></i> <span>Magang</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/persuratan') }}">Persuratan</a></li>
+                                <li class="active"><a class="nav-link" href="{{ url('/persuratan') }}">Persuratan</a></li>
                                 <li><a class="nav-link" href="{{ url('/data-magang') }}">Data Magang</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-header">Kelola Pengguna</li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                    class="fa fa-user"></i> <span>Admin</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="#">Data Admin</a></li>
-                                <li><a class="nav-link" href="{{ url('/kelolaAdmin') }}">Users</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                    class="fa fa-user"></i> <span>Dosen</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="#">Data Dosen</a></li>
-                                <li><a class="nav-link" href="{{ url('/kelolaDosen') }}">Users</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                    class="fa fa-graduation-cap"></i> <span>Mahasiswa</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="#">Data Mahasiswa</a></li>
-                                <li><a class="nav-link" href="{{ url('/kelolaMahasiswa') }}">Users</a></li>
                             </ul>
                         </li>
 
@@ -70,25 +68,7 @@
                                 @csrf
                             </form>
                         </li>
-
-                        <li class="menu-header">Pages</li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown"><i class="far fa-user"></i>
-                                <span>Auth</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{ url('/forgot') }}">Forgot Password</a></li>
-                                <li><a href="{{ url('/login') }}">Login</a></li>
-                                <li><a href="{{ url('/reset') }}">Reset Password</a></li>
-                            </ul>
-                        </li>
                     </ul>
-
-
-                    <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-                        <a href="https://getstisla.com/docs" class="btn btn-primary btn-lg btn-block btn-icon-split">
-                            <i class="fas fa-rocket"></i> Documentation
-                        </a>
-                    </div>
                 </aside>
             </div>
 
