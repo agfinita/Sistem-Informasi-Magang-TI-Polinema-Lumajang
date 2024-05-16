@@ -14,7 +14,11 @@ class FormKelolaDosenController extends Controller
      * Display a listing of the resource.
      */
     public function index() {
-        return view('pages.contents.admin.form-kelola-dosen');
+        $users = DB::table('users')
+            ->select('id', 'nama', 'username', 'email', 'role', 'is_active', 'created_at', 'updated_at')
+            ->orderBy('users.nama', 'ASC')
+            ->where('role', 'dosen')->get();
+        return view('pages.contents.admin.kelola-dosen.index', compact('users'));
     }
 
     /**
@@ -53,11 +57,7 @@ class FormKelolaDosenController extends Controller
      * Display the specified resource.
      */
     public function show(User $user) {
-        $users = DB::table('users')
-                    ->select('id', 'nama', 'username', 'email', 'role', 'is_active', 'created_at', 'updated_at')
-                    ->orderBy('users.nama', 'ASC')
-                    ->where('role', 'dosen')->get();
-        return view('pages.contents.admin.table-user-dosen', compact('users'));
+        return view('pages.contents.admin.form-kelola-dosen');
     }
 
     /**
@@ -65,7 +65,7 @@ class FormKelolaDosenController extends Controller
      */
     public function edit($id) {
         $users  = DB::table('users')->where('id', $id)->first();
-        return view('pages.contents.admin.update-user-dosen', compact('users'));
+        return view('pages.contents.admin.kelola-dosen.edit', compact('users'));
     }
 
     /**
@@ -96,7 +96,7 @@ class FormKelolaDosenController extends Controller
             $dosen->updateIsActive($validatedData['gridRadios-status']);
         }
 
-        return redirect('/tableUserDosen')->with('status', 'Data updated successfully.');
+        return redirect('/kelola-pengguna/dosen')->with('status', 'Data updated successfully.');
 
         // $users      = DB::table('users')->where('id', $id)->first();
         // $is_active  = $users->is_active;
@@ -117,9 +117,9 @@ class FormKelolaDosenController extends Controller
         // ]);
 
         // if ($users) {
-        //     return redirect('/tableUserDosen')->with('status', 'Data updated successfully.');
+        //     return redirect('/kelola-pengguna/dosen')->with('status', 'Data updated successfully.');
         // } else {
-        //     return redirect('/tableUserDosen')->with('error', 'Failed to updated data.');
+        //     return redirect('/kelola-pengguna/dosen')->with('error', 'Failed to updated data.');
         // }
     }
 
@@ -132,9 +132,9 @@ class FormKelolaDosenController extends Controller
         if ($users) {
             DB::table('users')->where('id', $id)->delete();
 
-            return redirect('/tableUserDosen')->with('status', 'Data deleted successfully.');
+            return redirect('/kelola-pengguna/dosen')->with('status', 'Data deleted successfully.');
         }
 
-        return redirect('/tableUserDosen')->with('error', 'Data not found.');
+        return redirect('/kelola-pengguna/dosen')->with('error', 'Data not found.');
     }
 }

@@ -12,14 +12,19 @@ class DataAdminController extends Controller
      * Display a listing of the resource.
      */
     public function index() {
-        //
+        $admin  = DB::table('admin')
+                    ->select('id', 'nip', 'nama',
+                    'email', 'telp', 'alamat', 'role')
+                    ->where('is_active', 1)
+                    ->orderBy('admin.nama', 'ASC')->get();
+        return view('pages.contents.admin.data-admin.index', compact('admin'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create() {
-        return view('pages.contents.admin.form-data-admin');
+        return view('pages.contents.admin.data-admin.create');
     }
 
     /**
@@ -46,19 +51,14 @@ class DataAdminController extends Controller
         $admin->save();
 
         // Redirect halaman
-        return redirect('/dataAdmin')->with('status', 'Data berhasil ditambahkan!');
+        return redirect('/data-pengguna/admin')->with('status', 'Data berhasil ditambahkan!');
     }
 
     /**
      * Display the specified resource.
      */
     public function show(Admin $admin) {
-        $admin  = DB::table('admin')
-                    ->select('id', 'nip', 'nama',
-                    'email', 'telp', 'alamat', 'role')
-                    ->where('is_active', 1)
-                    ->orderBy('admin.nama', 'ASC')->get();
-        return view('pages.contents.admin.data-admin', compact('admin'));
+        //
     }
 
     /**
@@ -66,7 +66,7 @@ class DataAdminController extends Controller
      */
     public function edit($id) {
         $admin = DB::table('admin')->where('id', $id)->first();
-        return view('pages.contents.admin.update-data-admin', compact('admin'));
+        return view('pages.contents.admin.data-admin.edit', compact('admin'));
     }
 
 
@@ -91,9 +91,9 @@ class DataAdminController extends Controller
         ]);
 
         if ($admin) {
-            return redirect('/dataAdmin')->with('status', 'Data berhasil diupdate!');
+            return redirect('/data-pengguna/admin')->with('status', 'Data berhasil diupdate!');
         } else {
-            return redirect('/dataAdmin')->with('error', 'Gagal update data.');
+            return redirect('/data-pengguna/admin')->with('error', 'Gagal update data.');
         }
     }
 
@@ -106,9 +106,9 @@ class DataAdminController extends Controller
         if ($admin) {
             $admin  =    DB::table('admin')->where('id', $id)->delete();
 
-            return redirect('/dataAdmin')->with('status', 'Data berhasil dihapus.');
+            return redirect('/data-pengguna/admin')->with('status', 'Data berhasil dihapus.');
         }
 
-        return redirect('/dataAdmin')->with('error', 'Data gagal dihapus.');
+        return redirect('/data-pengguna/admin')->with('error', 'Data gagal dihapus.');
     }
 }

@@ -29,18 +29,18 @@
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                     class="fa fa-school"></i> <span>Data Pengguna</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/dataAdmin') }}"><span>Admin</span></a></li>
-                                <li><a class="nav-link" href="{{ url('/dataDosen') }}"><span>Dosen</span></a></li>
-                                <li><a class="nav-link" href="{{ url('/dataMahasiswa') }}"><span>Mahasiswa</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/data-pengguna/admin') }}"><span>Admin</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/data-pengguna/dosen') }}"><span>Dosen</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/data-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                     class="fa fa-user"></i> <span>Kelola Pengguna</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/tableUserAdmin') }}"><span>Admin</span></a></li>
-                                <li><a class="nav-link" href="{{ url('/tableUserDosen') }}"><span>Dosen</span></a></li>
-                                <li><a class="nav-link" href="{{ url('/tableUserMahasiswa') }}"><span>Mahasiswa</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/kelola-pengguna/admin') }}"><span>Admin</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/kelola-pengguna/dosen') }}"><span>Dosen</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/kelola-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
                             </ul>
                         </li>
 
@@ -49,7 +49,7 @@
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Magang</span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link" href="{{ url('/persuratan') }}">Persuratan</a></li>
-                                <li><a class="nav-link" href="{{ url('/data-magang') }}">Data Magang</a></li>
+                                <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
                         </li>
 
@@ -80,7 +80,7 @@
                                     <div class="card-header">
                                         <h4>Update Data Mahasiswa</h4>
                                     </div>
-                                    <form action="{{ url('/updateDataMahasiswa/' . $mahasiswa->id) }}" method="POST" autocomplete="off">
+                                    <form action="{{ url('/data-pengguna/mahasiswa/edit/' . $mahasiswa->id) }}" method="POST" autocomplete="off">
                                         @method('patch')
                                         @csrf
                                         <div class="card-body">
@@ -206,7 +206,7 @@
                                         </div>
                                         <div class="card-footer">
                                             <button type="submit" id="kirim" name="kirim" class="btn btn-primary m-2">Simpan</button>
-                                            <a href="{{ url('/dataMahasiswa') }}" class="btn btn-warning m-2">Batal</a>
+                                            <a href="{{ url('/data-pengguna/mahasiswa') }}" class="btn btn-warning m-2">Batal</a>
                                         </div>
                                     </form>
                                 </div>

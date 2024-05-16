@@ -33,18 +33,18 @@
                                     <i class="fa fa-school"></i><span>Data Pengguna</span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="nav-link" href="{{ url('/dataAdmin') }}"><span>Admin</span></a></li>
-                                    <li><a class="nav-link" href="{{ url('/dataDosen') }}"><span>Dosen</span></a></li>
-                                    <li><a class="nav-link" href="{{ url('/dataMahasiswa') }}"><span>Mahasiswa</span></a></li>
+                                    <li><a class="nav-link" href="{{ url('/data-pengguna/admin') }}"><span>Admin</span></a></li>
+                                    <li><a class="nav-link" href="{{ url('/data-pengguna/dosen') }}"><span>Dosen</span></a></li>
+                                    <li><a class="nav-link" href="{{ url('/data-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown active">
                                     <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                         class="fa fa-user"></i> <span>Kelola Pengguna</span></a>
                                     <ul class="dropdown-menu">
-                                        <li class="active"><a class="nav-link" href="{{ url('/tableUserAdmin') }}"><span>Admin</span></a></li>
-                                        <li><a class="nav-link" href="{{ url('/tableUserDosen') }}"><span>Dosen</span></a></li>
-                                        <li><a class="nav-link" href="{{ url('/tableUserMahasiswa') }}"><span>Mahasiswa</span></a></li>
+                                        <li><a class="nav-link" href="{{ url('/kelola-pengguna/admin') }}"><span>Admin</span></a></li>
+                                        <li class="active"><a class="nav-link" href="{{ url('/kelola-pengguna/dosen') }}"><span>Dosen</span></a></li>
+                                        <li><a class="nav-link" href="{{ url('/kelola-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
                                     </ul>
                             </li>
 
@@ -54,7 +54,7 @@
                                     class="fas fa-columns"></i> <span>Magang</span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link" href="{{ url('/persuratan') }}">Persuratan</a></li>
-                                <li><a class="nav-link" href="{{ url('/data-magang') }}">Data Magang</a></li>
+                                <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
                         </li>
 
@@ -76,27 +76,18 @@
             <!-- Main Content -->
             <div class="main-content">
                 <section class="section">
-                    <div class="section-header">
-                        <h1>DataTables</h1>
-                        <div class="section-header-breadcrumb">
-                            <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                            <div class="breadcrumb-item"><a href="#">Modules</a></div>
-                            <div class="breadcrumb-item">DataTables</div>
-                        </div>
-                    </div>
-
                     <div class="section-body">
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4>User Admin</h4>
+                                        <h4>User Dosen</h4>
                                     </div>
 
                                     {{-- <div class="col-md-6 mx-2 my-auto">
                                         <!-- Tambah data -->
                                         <button type="submit" class="btn btn-success">
-                                            <a href="{{ url('/kelolaAdmin') }}" class="text-decoration-none text-white">
+                                            <a href="{{ url('/kelolaDosen') }}" class="text-decoration-none text-white">
                                                 <span>
                                                     <i class="ion ion-plus-circled" data-pack="default" data-tags="add, include, new, invite, +">
                                                     </i>
@@ -108,10 +99,12 @@
 
                                     <div class="card-body">
                                         <div class="table-responsive">
-                                            <table id="example" class="display nowrap" style="width:100%">
+                                            <table id="example" class="display nowrap" style="width:100%"">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center">No</th>
+                                                        <th class="text-center">
+                                                            No
+                                                        </th>
                                                         <th>Nama</th>
                                                         <th>Username</th>
                                                         <th>Email</th>
@@ -129,7 +122,7 @@
                                                 <tbody>
                                                     @foreach ($users as $u)
                                                         <tr>
-                                                            <td class="text-center">{{ $no++ }}</td>
+                                                            <td>{{ $no++ }}</td>
                                                             <td>{{ $u->nama }}</td>
                                                             <td>{{ $u->username }}</td>
                                                             <td>{{ $u->email }}</td>
@@ -143,16 +136,15 @@
                                                             </td>
                                                             <td>{{ $u->created_at }}</td>
                                                             <td>{{ $u->updated_at }}</td>
-
                                                             <td>
                                                                 <div class="row">
-                                                                    <a href="{{ url('/updateUserAdmin/' . $u->id) }}">
+                                                                    <a href="{{ url('/kelola-pengguna/dosen/edit/' . $u->id) }}">
                                                                         <button class="btn btn-sm btn-warning mx-1">
                                                                             <i class="ion ion-edit" data-pack="default" data-tags="change, update, write, type, pencil"></i>
                                                                         </button>
                                                                     </a>
 
-                                                                    <form action="{{ url('/tableUserAdmin/' . $u->id) }}" method="POST" onsubmit="return confirm('Yakin hapus data?')">
+                                                                    <form action="{{ url('/kelola-pengguna/dosen/' . $u->id) }}" method="POST" onsubmit="return confirm('Are you sure delete data?')">
                                                                         @method('DELETE')
                                                                         @csrf
                                                                         <button class="btn btn-sm btn-danger mx-1">
@@ -166,7 +158,9 @@
                                                 </tbody>
                                                 <tfoot>
                                                     <tr>
-                                                        <th class="text-center">No</th>
+                                                        <th class="text-center">
+                                                            No
+                                                        </th>
                                                         <th>Nama</th>
                                                         <th>Username</th>
                                                         <th>Email</th>
@@ -186,6 +180,7 @@
                     </div>
                 </section>
             </div>
+
 
             <!-- Footer -->
             @include('pages.layouts.footer')

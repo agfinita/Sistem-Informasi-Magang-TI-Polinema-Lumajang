@@ -12,14 +12,19 @@ class DataMahasiswaController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        return view ('pages.contents.admin.data-mahasiswa');
+        $mahasiswa  = DB::table('mahasiswa')
+                        ->select('id', 'nim', 'nama', 'kelas',
+                                'jurusan', 'email', 'telp', 'alamat', 'role')
+                        ->where('is_active', 1)
+                        ->orderBy('mahasiswa.nama', 'ASC')->get();
+        return view('pages.contents.admin.data-mahasiswa.index', compact('mahasiswa'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create() {
-        return view ('pages.contents.admin.form-data-mahasiswa');
+        return view ('pages.contents.admin.data-mahasiswa.create');
     }
 
     /**
@@ -62,19 +67,14 @@ class DataMahasiswaController extends Controller {
             ]);
         }
         // Redirect halaman
-        return redirect('/dataMahasiswa')->with('status', 'Data added!');
+        return redirect('/data-pengguna/mahasiswa')->with('status', 'Data added!');
     }
 
     /**
      * Display the specified resource.
      */
     public function show(Mahasiswa $mahasiswa) {
-        $mahasiswa  = DB::table('mahasiswa')
-                        ->select('id', 'nim', 'nama', 'kelas',
-                                'jurusan', 'email', 'telp', 'alamat', 'role')
-                        ->where('is_active', 1)
-                        ->orderBy('mahasiswa.nama', 'ASC')->get();
-        return view('pages.contents.admin.data-mahasiswa', compact('mahasiswa'));
+        //
     }
 
     /**
@@ -82,7 +82,7 @@ class DataMahasiswaController extends Controller {
      */
     public function edit($id) {
         $mahasiswa  = DB::table('mahasiswa')->where('id', $id)->first();
-        return view('pages.contents.admin.update-data-mahasiswa', compact('mahasiswa'));
+        return view('pages.contents.admin.data-mahasiswa.edit', compact('mahasiswa'));
     }
 
     /**
@@ -110,9 +110,9 @@ class DataMahasiswaController extends Controller {
         ]);
 
         if ($mahasiswa) {
-            return redirect('/dataMahasiswa')->with('status', 'Data berhasil diupdate!');
+            return redirect('/data-pengguna/mahasiswa')->with('status', 'Data berhasil diupdate!');
         } else {
-            return redirect('/dataMahasiswa')->with('error', 'Gagal update data.');
+            return redirect('/data-pengguna/mahasiswa')->with('error', 'Gagal update data.');
         }
 
     }
@@ -126,9 +126,9 @@ class DataMahasiswaController extends Controller {
         if ($mahasiswa) {
             $mahasiswa  = DB::table('mahasiswa')->where('id', $id)->delete();
 
-            return redirect('/dataMahasiswa')->with('status'. 'Data berhasil dihapus.');
+            return redirect('/data-pengguna/mahasiswa')->with('status'. 'Data berhasil dihapus.');
         }
 
-        return redirect('/dataMahasiswa')->with('error', 'Data tidak ditemukan');
+        return redirect('/data-pengguna/mahasiswa')->with('error', 'Data tidak ditemukan');
     }
 }

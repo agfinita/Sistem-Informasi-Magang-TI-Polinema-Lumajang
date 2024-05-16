@@ -21,32 +21,39 @@
                     </div>
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
-                        <li class="active"><a class="nav-link" href="{{ url('/') }}"><i
-                            class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i> <span>Dashboard</span></a></li>
+                        <li class="active"><a class="nav-link" href="{{ url('/') }}"><i class="ion ion-speedometer"
+                                    data-pack="default" data-tags="travel, accelerate"></i> <span>Dashboard</span></a>
+                        </li>
                         <li><a class="nav-link" href="{{ url('/pengumuman') }}"><i class="fa fa-bullhorn"></i>
-                            <span>Pengumuman</span></a></li>
+                                <span>Pengumuman</span></a></li>
 
 
-                            <li class="menu-header">Manajemen Pengguna</li>
-                            <li class="nav-item-dropdown">
-                                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                                    <i class="fa fa-school"></i><span>Data Pengguna</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="nav-link" href="{{ url('/dataAdmin') }}"><span>Admin</span></a></li>
-                                    <li><a class="nav-link" href="{{ url('/dataDosen') }}"><span>Dosen</span></a></li>
-                                    <li><a class="nav-link" href="{{ url('/dataMahasiswa') }}"><span>Mahasiswa</span></a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                        class="fa fa-user"></i> <span>Kelola Pengguna</span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="nav-link" href="{{ url('/tableUserAdmin') }}"><span>Admin</span></a></li>
-                                        <li><a class="nav-link" href="{{ url('/tableUserDosen') }}"><span>Dosen</span></a></li>
-                                        <li><a class="nav-link" href="{{ url('/tableUserMahasiswa') }}"><span>Mahasiswa</span></a></li>
-                                    </ul>
-                            </li>
+                        <li class="menu-header">Manajemen Pengguna</li>
+                        <li class="nav-item-dropdown">
+                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                                <i class="fa fa-school"></i><span>Data Pengguna</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="nav-link" href="{{ url('/data-pengguna/admin') }}"><span>Admin</span></a>
+                                </li>
+                                <li><a class="nav-link" href="{{ url('/data-pengguna/dosen') }}"><span>Dosen</span></a>
+                                </li>
+                                <li><a class="nav-link"
+                                        href="{{ url('/data-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                                    class="fa fa-user"></i> <span>Kelola Pengguna</span></a>
+                            <ul class="dropdown-menu">
+                                <li><a class="nav-link"
+                                        href="{{ url('/kelola-pengguna/admin') }}"><span>Admin</span></a></li>
+                                <li><a class="nav-link"
+                                        href="{{ url('/kelola-pengguna/dosen') }}"><span>Dosen</span></a></li>
+                                <li><a class="nav-link"
+                                        href="{{ url('/kelola-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
+                            </ul>
+                        </li>
 
                         <li class="menu-header">Pages</li>
                         <li class="nav-item dropdown">
@@ -54,13 +61,14 @@
                                     class="fas fa-columns"></i> <span>Magang</span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link" href="{{ url('/persuratan') }}">Persuratan</a></li>
-                                <li><a class="nav-link" href="{{ url('/data-magang') }}">Data Magang</a></li>
+                                <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
                         </li>
 
                         <li class="menu-header">Lainnya</li>
                         <li>
-                            <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a class="nav-link" href="#"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="fas fa-sign-out-alt"></i>
                                 <span>Logout</span>
                             </a>

@@ -29,18 +29,18 @@
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                     class="fa fa-school"></i> <span>Data Pengguna</span></a>
                             <ul class="dropdown-menu">
-                                <li class="active"><a class="nav-link" href="{{ url('/dataAdmin') }}"><span>Admin</span></a></li>
-                                <li><a class="nav-link" href="{{ url('/dataDosen') }}"><span>Dosen</span></a></li>
-                                <li><a class="nav-link" href="{{ url('/dataMahasiswa') }}"><span>Mahasiswa</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/data-pengguna/admin') }}"><span>Admin</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/data-pengguna/dosen') }}"><span>Dosen</span></a></li>
+                                <li class="active"><a class="nav-link" href="{{ url('/data-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                     class="fa fa-user"></i> <span>Kelola Pengguna</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/tableUserAdmin') }}"><span>Admin</span></a></li>
-                                <li><a class="nav-link" href="{{ url('/tableUserDosen') }}"><span>Dosen</span></a></li>
-                                <li><a class="nav-link" href="{{ url('/tableUserMahasiswa') }}"><span>Mahasiswa</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/kelola-pengguna/admin') }}"><span>Admin</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/kelola-pengguna/dosen') }}"><span>Dosen</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/kelola-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
                             </ul>
                         </li>
 
@@ -49,7 +49,7 @@
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Magang</span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link" href="{{ url('/persuratan') }}">Persuratan</a></li>
-                                <li><a class="nav-link" href="{{ url('/data-magang') }}">Data Magang</a></li>
+                                <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
                         </li>
 
@@ -72,31 +72,20 @@
             <!-- Main Content -->
             <div class="main-content">
                 <section class="section">
-                    <div class="section-header">
-                        <h1>DataTables</h1>
-                        <div class="section-header-breadcrumb">
-                            <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                            <div class="breadcrumb-item"><a href="#">Modules</a></div>
-                            <div class="breadcrumb-item">DataTables</div>
-                        </div>
-                    </div>
-
                     <div class="section-body">
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4>Data Dosen</h4>
+                                        <h4>Data Mahasiswa</h4>
                                     </div>
 
                                     <div class="col-md-6 mx-2 my-auto">
                                         <!-- Tambah data -->
                                         <button type="submit" class="btn btn-success">
-                                            <a href="{{ url('/formDataAdmin') }}"
-                                                class="text-decoration-none text-white">
+                                            <a href="{{ url('/data-pengguna/mahasiswa/create') }}" class="text-decoration-none text-white">
                                                 <span>
-                                                    <i class="ion ion-plus-circled" data-pack="default"
-                                                        data-tags="add, include, new, invite, +">
+                                                    <i class="ion ion-plus-circled" data-pack="default" data-tags="add, include, new, invite, +">
                                                     </i>
                                                 </span>
                                                 Tambah Data
@@ -105,25 +94,17 @@
                                     </div>
 
                                     <div class="card-body">
-                                        @if (session('error'))
-                                            <div class="alert alert-danger">
-                                                {{ session('error') }}
-                                            </div>
-                                        @endif
-
-                                        @if (session('error'))
-                                            <div class="alert alert-success">
-                                                {{ session('status') }}
-                                            </div>
-                                        @endif
-
                                         <div class="table-responsive">
                                             <table id="example" class="display nowrap" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center">No</th>
-                                                        <th>NIP</th>
+                                                        <th class="text-center">
+                                                            No
+                                                        </th>
+                                                        <th>NIM</th>
                                                         <th>Nama</th>
+                                                        <th>Kelas</th>
+                                                        <th>Jurusan</th>
                                                         <th>Email</th>
                                                         <th>Telepon</th>
                                                         <th>Alamat</th>
@@ -135,48 +116,47 @@
                                                 @php
                                                     $no = 1;
                                                 @endphp
-
                                                 <tbody>
-                                                    @foreach ($admin as $a)
-                                                        <tr>
-                                                            <td>{{ $no++ }}</td>
-                                                            <td>{{ $a->nip }}</td>
-                                                            <td>{{ $a->nama }}</td>
-                                                            <td>{{ $a->email }}</td>
-                                                            <td>{{ $a->telp }}</td>
-                                                            <td>{{ $a->alamat }}</td>
-                                                            <td>{{ $a->role }}</td>
-                                                            <td>
-                                                                <div class="row">
-                                                                    <a href="{{ url('/updateDataAdmin/' . $a->id) }}">
-                                                                        <button class="btn btn-sm btn-warning mx-1">
-                                                                            <i class="ion ion-edit"
-                                                                                data-pack="default"
-                                                                                data-tags="change, update, write, type, pencil"></i>
-                                                                        </button>
-                                                                    </a>
+                                                    @foreach ( $mahasiswa as $mhs )
+                                                    <tr>
+                                                        <td>{{ $no++ }}</td>
+                                                        <td>{{ $mhs->nim }}</td>
+                                                        <td>{{ $mhs->nama }}</td>
+                                                        <td>{{ $mhs->kelas }}</td>
+                                                        <td>{{ $mhs->jurusan }}</td>
+                                                        <td>{{ $mhs->email }}</td>
+                                                        <td>{{ $mhs->telp }}</td>
+                                                        <td>{{ $mhs->alamat }}</td>
+                                                        <td>{{ $mhs->role }}</td>
+                                                        <td>
+                                                            <div class="row">
+                                                                <a href="{{ url('/data-pengguna/mahasiswa/edit/' . $mhs->id) }}">
+                                                                    <button class="btn btn-sm btn-warning mx-1">
+                                                                        <i class="ion ion-edit" data-pack="default" data-tags="change, update, write, type, pencil"></i>
+                                                                    </button>
+                                                                </a>
 
-                                                                    <form action="{{ url('/dataAdmin/' . $a->id) }}"
-                                                                        method="POST"
-                                                                        onsubmit="return confirm('Yakin hapus data?')">
-                                                                        @method('DELETE')
-                                                                        @csrf
-                                                                        <button class="btn btn-sm btn-danger mx-1">
-                                                                            <i class="ion ion-trash-a"
-                                                                                data-pack="default"
-                                                                                data-tags="delete, remove, dump"></i>
-                                                                        </button>
-                                                                    </form>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
+                                                                <form action="{{ url('/data-pengguna/mahasiswa/' . $mhs->id) }}" method="POST" onsubmit="return confirm('Yakin hapus data?')">
+                                                                    @method('DELETE')
+                                                                    @csrf
+                                                                    <button class="btn btn-sm btn-danger mx-1">
+                                                                        <i class="ion ion-trash-a" data-pack="default" data-tags="delete, remove, dump"></i>
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
                                                     @endforeach
                                                 </tbody>
                                                 <tfoot>
                                                     <tr>
-                                                        <th class="text-center">No</th>
-                                                        <th>NIP</th>
+                                                        <th class="text-center">
+                                                            No
+                                                        </th>
+                                                        <th>NIM</th>
                                                         <th>Nama</th>
+                                                        <th>Kelas</th>
+                                                        <th>Jurusan</th>
                                                         <th>Email</th>
                                                         <th>Telepon</th>
                                                         <th>Alamat</th>
@@ -194,6 +174,7 @@
                 </section>
             </div>
 
+
             <!-- Footer -->
             @include('pages.layouts.footer')
 
@@ -208,10 +189,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="../assets/js/stisla.js"></script>
 
-    <!-- JS Data Tables Print -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
-    <!-- JS Libraies -->
+    <!-- JS Libraries -->
     <script src="../node_modules/simpleweather/jquery.simpleWeather.min.js"></script>
     <script src="../node_modules/chart.js/dist/Chart.min.js"></script>
     <script src="../node_modules/jqvmap/dist/jquery.vmap.min.js"></script>
@@ -219,15 +197,15 @@
     <script src="../node_modules/summernote/dist/summernote-bs4.js"></script>
     <script src="../node_modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
 
+    <!-- Data Tables -->
+    @include('pages.layouts.datatables')
+
     <!-- Template JS File -->
     <script src="../assets/js/scripts.js"></script>
     <script src="../assets/js/custom.js"></script>
 
     <!-- Page Specific JS File -->
     <script src="../assets/js/page/index-0.js"></script>
-
-    <!-- Data Tables JS -->
-    @include('pages.layouts.datatables')
 </body>
 
 </html>

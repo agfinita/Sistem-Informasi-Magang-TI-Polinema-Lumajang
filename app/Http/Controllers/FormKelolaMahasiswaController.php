@@ -14,7 +14,11 @@ class FormKelolaMahasiswaController extends Controller
      * Display a listing of the resource.
      */
     public function index() {
-        // return view('pages.contents.form-kelola-mahasiswa');
+        $users = DB::table('users')
+                    ->select('id','username', 'nama', 'email', 'role', 'is_active', 'created_at', 'updated_at')
+                    ->orderBy('users.nama', 'ASC')
+                    ->where('role', 'mahasiswa')->get();
+        return view('pages.contents.admin.kelola-mahasiswa.index', compact('users'));
     }
 
     /**
@@ -53,11 +57,7 @@ class FormKelolaMahasiswaController extends Controller
      * Display the specified resource.
      */
     public function show(User $user) {
-        $users = DB::table('users')
-                    ->select('id','username', 'nama', 'email', 'role', 'is_active', 'created_at', 'updated_at')
-                    ->orderBy('users.nama', 'ASC')
-                    ->where('role', 'mahasiswa')->get();
-        return view('pages.contents.admin.table-user-mahasiswa', compact('users'));
+        // return view('pages.contents.form-kelola-mahasiswa');
     }
 
     /**
@@ -65,7 +65,7 @@ class FormKelolaMahasiswaController extends Controller
      */
     public function edit($id) {
         $users  = DB::table('users')->where('id', $id)->first();
-        return view('pages.contents.admin.update-user-mahasiswa', compact('users'));
+        return view('pages.contents.admin.kelola-mahasiswa.edit', compact('users'));
     }
 
     /**
@@ -95,7 +95,7 @@ class FormKelolaMahasiswaController extends Controller
             $mahasiswa->updateIsActive($validatedData['gridRadios-status']);
         }
 
-        return redirect('/tableUserMahasiswa')->with('status', 'Data updated successfully.');
+        return redirect('/kelola-pengguna/mahasiswa')->with('status', 'Data updated successfully.');
     }
 
     /**
@@ -107,8 +107,8 @@ class FormKelolaMahasiswaController extends Controller
         if ($users) {
             DB::table('users')->where('id', $id)->delete();
 
-            return redirect('/tableUserMahasiswa')->with('status', 'Data deleted successfully.');
+            return redirect('/kelola-pengguna/mahasiswa')->with('status', 'Data deleted successfully.');
         }
-        return redirect('/tableUserMahasiswa')->with('error', 'Data not found.');
+        return redirect('/kelola-pengguna/mahasiswa')->with('error', 'Data not found.');
     }
 }

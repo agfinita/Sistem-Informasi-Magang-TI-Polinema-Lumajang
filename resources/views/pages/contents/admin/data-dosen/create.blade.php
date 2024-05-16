@@ -29,27 +29,27 @@
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                     class="fa fa-school"></i> <span>Data Pengguna</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/dataAdmin') }}"><span>Admin</span></a></li>
-                                <li><a class="nav-link" href="{{ url('/dataDosen') }}"><span>Dosen</span></a></li>
-                                <li><a class="nav-link" href="{{ url('/dataMahasiswa') }}"><span>Mahasiswa</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/data-pengguna/admin') }}"><span>Admin</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/data-pengguna/dosen') }}"><span>Dosen</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/data-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                     class="fa fa-user"></i> <span>Kelola Pengguna</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/tableUserAdmin') }}"><span>Admin</span></a></li>
-                                <li><a class="nav-link" href="{{ url('/tableUserDosen') }}"><span>Dosen</span></a></li>
-                                <li><a class="nav-link" href="{{ url('/tableUserMahasiswa') }}"><span>Mahasiswa</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/kelola-pengguna/admin') }}"><span>Admin</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/kelola-pengguna/dosen') }}"><span>Dosen</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/kelola-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
                             </ul>
                         </li>
 
-                        <li class="menu-header">Mahasiswa</li>
+                        <li class="menu-header">Pages</li>
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Magang</span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link" href="{{ url('/persuratan') }}">Persuratan</a></li>
-                                <li><a class="nav-link" href="{{ url('/data-magang') }}">Data Magang</a></li>
+                                <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
                         </li>
 
@@ -78,17 +78,16 @@
                                 <!--Horizontal-->
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4>Update Data Dosen</h4>
+                                        <h4>Tambah Dosen</h4>
                                     </div>
-                                    <form action="{{ url('/updateDataDosen/' . $dosen->id) }}" method="POST" autocomplete="off">
-                                        @method('patch')
+                                    <form action="{{ url('/data-pengguna/dosen') }}" method="POST" autocomplete="off">
                                         @csrf
                                         <div class="card-body">
                                             <div class="form-group row">
                                                 <label for="nip" class="col-sm-3 col-form-label">NIP</label>
                                                 <div class="col-sm-7">
                                                     <input type="text" class="form-control" id="nip"
-                                                        name="nip" placeholder="Masukkan NIM" autofocus value={{ $dosen->nip }}>
+                                                        name="nip" placeholder="Masukkan NIP" autofocus>
 
                                                     {{-- alert --}}
                                                     @if (count($errors) > 0)
@@ -104,7 +103,7 @@
                                                 <label for="nama" class="col-sm-3 col-form-label">Nama</label>
                                                 <div class="col-sm-7">
                                                     <input type="text" class="form-control" id="nama"
-                                                        name="nama" placeholder="Masukkan nama" value="{{ $dosen->nama }}">
+                                                        name="nama" placeholder="Masukkan nama">
 
                                                     {{-- alert --}}
                                                     @if (count($errors) > 0)
@@ -120,7 +119,7 @@
                                                 <label for="email" class="col-sm-3 col-form-label">Email</label>
                                                 <div class="col-sm-7">
                                                     <input type="email" class="form-control" id="email"
-                                                        name="email" placeholder="Masukkan Email" value="{{ $dosen->email }}">
+                                                        name="email" placeholder="Masukkan Email">
 
                                                     {{-- alert --}}
                                                     @if (count($errors) > 0)
@@ -137,7 +136,7 @@
                                                     Telepon</label>
                                                 <div class="col-sm-3">
                                                     <input type="telp" class="form-control" id="telp"
-                                                        name="telp" placeholder="Masukkan no telepon aktif" value="{{ $dosen->telp }}">
+                                                        name="telp" placeholder="Masukkan no telepon aktif">
 
                                                     {{-- alert --}}
                                                     @if (count($errors) > 0)
@@ -153,7 +152,7 @@
                                                 <label for="alamat" class="col-sm-3 col-form-label">Alamat</label>
                                                 <div class="col-sm-7">
                                                     <input type="text" class="form-control" id="alamat"
-                                                        name="alamat" placeholder="Masukkan alamat" value="{{ $dosen->alamat }}">
+                                                        name="alamat" placeholder="Masukkan alamat">
 
                                                     {{-- alert --}}
                                                     @if (count($errors) > 0)
@@ -166,8 +165,8 @@
                                             </div>
                                         </div>
                                         <div class="card-footer">
-                                            <button type="submit" id="kirim" name="kirim" class="btn btn-primary m-2">Simpan</button>
-                                            <a href="{{ url('/dataDosen') }}" class="btn btn-warning m-2">Batal</a>
+                                            <button type="submit" id="kirim" name="kirim"
+                                                class="btn btn-primary">Tambah</button>
                                         </div>
                                     </form>
                                 </div>

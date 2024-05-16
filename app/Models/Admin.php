@@ -56,4 +56,8 @@ class Admin extends Model
             ]);
         });
     }
+
+    public function pengajuanMagang() {
+        return $this->hasMany(PengajuanMagang::class);
+    }
 }

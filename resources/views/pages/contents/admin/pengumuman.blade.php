@@ -20,32 +20,40 @@
                         <a href="{{ url('/') }}">SIMMAG</a>
                     </div>
                     <ul class="sidebar-menu">
-                        <li><a class="nav-link" href="{{ url('/') }}"><i
-                            class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i> <span>Dashboard</span></a></li>
-                        <li class="active"><a class="nav-link" href="{{ url('/pengumuman') }}"><i class="fa fa-bullhorn"></i>
-                            <span>Pengumuman</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/') }}"><i class="ion ion-speedometer"
+                                    data-pack="default" data-tags="travel, accelerate"></i> <span>Dashboard</span></a>
+                        </li>
+                        <li class="active"><a class="nav-link" href="{{ url('/pengumuman') }}"><i
+                                    class="fa fa-bullhorn"></i>
+                                <span>Pengumuman</span></a></li>
 
 
-                            <li class="menu-header">Manajemen Pengguna</li>
-                            <li class="nav-item-dropdown">
-                                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                                    <i class="fa fa-school"></i><span>Data Pengguna</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="nav-link" href="{{ url('/dataAdmin') }}"><span>Admin</span></a></li>
-                                    <li><a class="nav-link" href="{{ url('/dataDosen') }}"><span>Dosen</span></a></li>
-                                    <li><a class="nav-link" href="{{ url('/dataMahasiswa') }}"><span>Mahasiswa</span></a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                        class="fa fa-user"></i> <span>Kelola Pengguna</span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="nav-link" href="{{ url('/tableUserAdmin') }}"><span>Admin</span></a></li>
-                                        <li><a class="nav-link" href="{{ url('/tableUserDosen') }}"><span>Dosen</span></a></li>
-                                        <li><a class="nav-link" href="{{ url('/tableUserMahasiswa') }}"><span>Mahasiswa</span></a></li>
-                                    </ul>
-                            </li>
+                        <li class="menu-header">Manajemen Pengguna</li>
+                        <li class="nav-item-dropdown">
+                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                                <i class="fa fa-school"></i><span>Data Pengguna</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="nav-link" href="{{ url('/data-pengguna/admin') }}"><span>Admin</span></a>
+                                </li>
+                                <li><a class="nav-link" href="{{ url('/data-pengguna/dosen') }}"><span>Dosen</span></a>
+                                </li>
+                                <li><a class="nav-link"
+                                        href="{{ url('/data-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                                    class="fa fa-user"></i> <span>Kelola Pengguna</span></a>
+                            <ul class="dropdown-menu">
+                                <li><a class="nav-link"
+                                        href="{{ url('/kelola-pengguna/admin') }}"><span>Admin</span></a></li>
+                                <li><a class="nav-link"
+                                        href="{{ url('/kelola-pengguna/dosen') }}"><span>Dosen</span></a></li>
+                                <li><a class="nav-link"
+                                        href="{{ url('/kelola-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
+                            </ul>
+                        </li>
 
                         <li class="menu-header">Pages</li>
                         <li class="nav-item dropdown">
@@ -53,13 +61,14 @@
                                     class="fas fa-columns"></i> <span>Magang</span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link" href="{{ url('/persuratan') }}">Persuratan</a></li>
-                                <li><a class="nav-link" href="{{ url('/data-magang') }}">Data Magang</a></li>
+                                <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
                         </li>
 
                         <li class="menu-header">Lainnya</li>
                         <li>
-                            <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a class="nav-link" href="#"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="fas fa-sign-out-alt"></i>
                                 <span>Logout</span>
                             </a>
@@ -87,7 +96,8 @@
                                     <button type="submit" class="btn btn-success">
                                         <a href="{{ url('/formPengumuman') }}" class="text-decoration-none text-white">
                                             <span>
-                                                <i class="ion ion-plus-circled" data-pack="default" data-tags="add, include, new, invite, +">
+                                                <i class="ion ion-plus-circled" data-pack="default"
+                                                    data-tags="add, include, new, invite, +">
                                                 </i>
                                             </span>
                                             Tambah Data
@@ -127,15 +137,19 @@
                                                             <div class="row">
                                                                 <a href="#">
                                                                     <button class="btn btn-sm btn-warning mx-1">
-                                                                        <i class="ion ion-edit" data-pack="default" data-tags="change, update, write, type, pencil"></i>
+                                                                        <i class="ion ion-edit" data-pack="default"
+                                                                            data-tags="change, update, write, type, pencil"></i>
                                                                     </button>
                                                                 </a>
 
-                                                                <form action="{{ url('/pengumuman/' . $p->id) }}" method="POST" onsubmit="return confirm('Are you sure delete data?')">
+                                                                <form action="{{ url('/pengumuman/' . $p->id) }}"
+                                                                    method="POST"
+                                                                    onsubmit="return confirm('Are you sure delete data?')">
                                                                     @method('DELETE')
                                                                     @csrf
                                                                     <button class="btn btn-sm btn-danger mx-1">
-                                                                        <i class="ion ion-trash-a" data-pack="default" data-tags="delete, remove, dump"></i>
+                                                                        <i class="ion ion-trash-a" data-pack="default"
+                                                                            data-tags="delete, remove, dump"></i>
                                                                     </button>
                                                                 </form>
                                                             </div>

@@ -29,18 +29,18 @@
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                     class="fa fa-school"></i> <span>Data Pengguna</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/dataAdmin') }}"><span>Admin</span></a></li>
-                                <li><a class="nav-link" href="{{ url('/dataDosen') }}"><span>Dosen</span></a></li>
-                                <li><a class="nav-link" href="{{ url('/dataMahasiswa') }}"><span>Mahasiswa</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/data-pengguna/admin') }}"><span>Admin</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/data-pengguna/dosen') }}"><span>Dosen</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/data-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                     class="fa fa-user"></i> <span>Kelola Pengguna</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/tableUserAdmin') }}"><span>Admin</span></a></li>
-                                <li><a class="nav-link" href="{{ url('/tableUserDosen') }}"><span>Dosen</span></a></li>
-                                <li><a class="nav-link" href="{{ url('/tableUserMahasiswa') }}"><span>Mahasiswa</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/kelola-pengguna/admin') }}"><span>Admin</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/kelola-pengguna/dosen') }}"><span>Dosen</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/kelola-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
                             </ul>
                         </li>
 
@@ -49,7 +49,7 @@
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Magang</span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link" href="{{ url('/persuratan') }}">Persuratan</a></li>
-                                <li><a class="nav-link" href="{{ url('/data-magang') }}">Data Magang</a></li>
+                                <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
                         </li>
 
@@ -78,21 +78,21 @@
                                 <!--Horizontal-->
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4>Tambah Dosen</h4>
+                                        <h4>Tambah Mahasiswa</h4>
                                     </div>
-                                    <form action="{{ url('/dataDosen') }}" method="POST" autocomplete="off">
+                                    <form action="{{ url('/data-pengguna/mahasiswa') }}" method="POST" autocomplete="off">
                                         @csrf
                                         <div class="card-body">
                                             <div class="form-group row">
-                                                <label for="nip" class="col-sm-3 col-form-label">NIP</label>
+                                                <label for="nim" class="col-sm-3 col-form-label">NIM</label>
                                                 <div class="col-sm-7">
-                                                    <input type="text" class="form-control" id="nip"
-                                                        name="nip" placeholder="Masukkan NIP" autofocus>
+                                                    <input type="text" class="form-control" id="nim"
+                                                        name="nim" placeholder="Masukkan NIM" autofocus>
 
                                                     {{-- alert --}}
                                                     @if (count($errors) > 0)
                                                         <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                            {{ $errors->first('nip') }}
+                                                            {{ $errors->first('nim') }}
                                                         </div>
                                                     @endif
                                                     {{-- end of alert --}}
@@ -110,6 +110,45 @@
                                                         <div style="width: auto; color:red; margin-top:0.25rem;">
                                                             {{ $errors->first('nama') }}
                                                         </div>
+                                                    @endif
+                                                    {{-- end of alert --}}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="control-kelas"
+                                                    class="col-sm-3 col-form-label">Kelas</label>
+                                                <div class="col-sm-2">
+                                                    <select class="form-control" id="control-kelas" name="control-kelas">
+                                                        <option>3A</option>
+                                                        <option>3B</option>
+                                                        <option>3C</option>
+                                                    </select>
+
+                                                    {{-- alert --}}
+                                                    @if (count($errors) > 0)
+                                                    <div style="width: auto; color:red; margin-top:0.25rem;">
+                                                        {{ $errors->first('control-kelas') }}
+                                                    </div>
+                                                    @endif
+                                                    {{-- end of alert --}}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="control-jurusan"
+                                                    class="col-sm-3 col-form-label">Jurusan</label>
+                                                <div class="col-sm-5">
+                                                    <select class="form-control" id="control-jurusan" name="control-jurusan">
+                                                        <option>D3 TI</option>
+                                                        <option>D4 TI</option>
+                                                    </select>
+
+                                                    {{-- alert --}}
+                                                    @if (count($errors) > 0)
+                                                    <div style="width: auto; color:red; margin-top:0.25rem;">
+                                                        {{ $errors->first('control-jurusan') }}
+                                                    </div>
                                                     @endif
                                                     {{-- end of alert --}}
                                                 </div>

@@ -22,22 +22,33 @@
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
                         <li class="active"><a class="nav-link" href="{{ url('/mahasiswa/dashboard') }}"><i
-                            class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i> <span>Dashboard</span></a></li>
-                        <li><a class="nav-link" href="#"><i class="fa fa-bullhorn"></i>
-                                <span>Pengumuman</span></a></li>
+                                    class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i>
+                                <span>Dashboard</span></a></li>
 
-                        <li class="menu-header">Mahasiswa</li>
-                        <li class="nav-item dropdown">
+                        <li class="menu-header">Magang</li>
+                        <li><a class="nav-link" href="{{ url('/mahasiswa/pengajuan-magang') }}"><i class="ion ion-card" data-pack="default"
+                                    data-tags="travel, accelerate"></i> <span>Pengajuan Magang</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/mahasiswa/data-magang') }}"><i class="fas fa-columns" data-pack="default"
+                                    data-tags="travel, accelerate"></i> <span>Data Magang</span></a></li>
+
+                        <li class="menu-header">Aktivitas Magang</li>
+                        <li><a class="nav-link" href="#"><i class="fas fa-users" data-pack="default"
+                                    data-tags="travel, accelerate"></i> <span>Bimbingan</span></a></li>
+                        <li><a class="nav-link" href="#"><i class="fas fa-columns" data-pack="default"
+                                    data-tags="travel, accelerate"></i> <span>Logbook</span></a></li>
+
+                        {{-- <li class="nav-item dropdown">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                     class="fas fa-columns"></i> <span>Magang</span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link" href="{{ url('/persuratan') }}">Persuratan</a></li>
                             </ul>
-                        </li>
+                        </li> --}}
 
                         <li class="menu-header">Lainnya</li>
                         <li>
-                            <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a class="nav-link" href="#"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="fas fa-sign-out-alt"></i>
                                 <span>Logout</span>
                             </a>
@@ -59,21 +70,6 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                             <div class="card card-statistic-1">
-                                <div class="card-icon bg-primary">
-                                    <i class="far fa-user"></i>
-                                </div>
-                                <div class="card-wrap">
-                                    <div class="card-header">
-                                        <h4>Total Admin</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        10
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                            <div class="card card-statistic-1">
                                 <div class="card-icon bg-danger">
                                     <i class="far fa-newspaper"></i>
                                 </div>
@@ -83,36 +79,6 @@
                                     </div>
                                     <div class="card-body">
                                         42
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                            <div class="card card-statistic-1">
-                                <div class="card-icon bg-warning">
-                                    <i class="far fa-file"></i>
-                                </div>
-                                <div class="card-wrap">
-                                    <div class="card-header">
-                                        <h4>Reports</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        1,201
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                            <div class="card card-statistic-1">
-                                <div class="card-icon bg-success">
-                                    <i class="fas fa-circle"></i>
-                                </div>
-                                <div class="card-wrap">
-                                    <div class="card-header">
-                                        <h4>Online Users</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        47
                                     </div>
                                 </div>
                             </div>

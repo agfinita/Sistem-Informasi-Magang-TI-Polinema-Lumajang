@@ -33,18 +33,18 @@
                                     <i class="fa fa-school"></i><span>Data Pengguna</span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="nav-link" href="{{ url('/dataAdmin') }}"><span>Admin</span></a></li>
-                                    <li><a class="nav-link" href="{{ url('/dataDosen') }}"><span>Dosen</span></a></li>
-                                    <li><a class="nav-link" href="{{ url('/dataMahasiswa') }}"><span>Mahasiswa</span></a></li>
+                                    <li><a class="nav-link" href="{{ url('/data-pengguna/admin') }}"><span>Admin</span></a></li>
+                                    <li><a class="nav-link" href="{{ url('/data-pengguna/dosen') }}"><span>Dosen</span></a></li>
+                                    <li><a class="nav-link" href="{{ url('/data-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown active">
                                     <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                         class="fa fa-user"></i> <span>Kelola Pengguna</span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="nav-link" href="{{ url('/tableUserAdmin') }}"><span>Admin</span></a></li>
-                                        <li><a class="nav-link" href="{{ url('/tableUserDosen') }}"><span>Dosen</span></a></li>
-                                        <li class="active"><a class="nav-link" href="{{ url('/tableUserMahasiswa') }}"><span>Mahasiswa</span></a></li>
+                                        <li><a class="nav-link" href="{{ url('/kelola-pengguna/admin') }}"><span>Admin</span></a></li>
+                                        <li><a class="nav-link" href="{{ url('/kelola-pengguna/dosen') }}"><span>Dosen</span></a></li>
+                                        <li class="active"><a class="nav-link" href="{{ url('/kelola-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
                                     </ul>
                             </li>
 
@@ -54,7 +54,7 @@
                                     class="fas fa-columns"></i> <span>Magang</span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link" href="{{ url('/persuratan') }}">Persuratan</a></li>
-                                <li><a class="nav-link" href="{{ url('/data-magang') }}">Data Magang</a></li>
+                                <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
                         </li>
 
@@ -139,13 +139,13 @@
                                                             <td>{{ $u->updated_at }}</td>
                                                             <td>
                                                                 <div class="row">
-                                                                    <a href="{{ url('/updateUserMahasiswa/' . $u->id) }}">
+                                                                    <a href="{{ url('/kelola-pengguna/mahasiswa/edit/' . $u->id) }}">
                                                                         <button class="btn btn-sm btn-warning mx-1">
                                                                             <i class="ion ion-edit" data-pack="default" data-tags="change, update, write, type, pencil"></i>
                                                                         </button>
                                                                     </a>
 
-                                                                    <form action="{{ url('/tableUserMahasiswa/' . $u->id) }}" method="POST" onsubmit="return confirm('Are you sure delete data?')">
+                                                                    <form action="{{ url('/kelola-pengguna/mahasiswa/' . $u->id) }}" method="POST" onsubmit="return confirm('Are you sure delete data?')">
                                                                         @method('DELETE')
                                                                         @csrf
                                                                         <button class="btn btn-sm btn-danger mx-1">

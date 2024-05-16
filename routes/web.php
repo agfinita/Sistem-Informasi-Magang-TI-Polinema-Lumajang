@@ -4,10 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DataAdminController;
 use App\Http\Controllers\DataDosenController;
+use App\Http\Controllers\DataMagangController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\DataMahasiswaController;
 use App\Http\Controllers\FormKelolaAdminController;
 use App\Http\Controllers\FormKelolaDosenController;
+use App\Http\Controllers\PengajuanMagangController;
+use App\Http\Controllers\DataMagangAdminSideController;
 use App\Http\Controllers\FormKelolaMahasiswaController;
 
 /*
@@ -27,6 +30,8 @@ use App\Http\Controllers\FormKelolaMahasiswaController;
 
 // Middleware
 Route::group(['middleware' => 'role'], function () {
+
+    // Auth Admin
     // Menampilkan index simmag admin
     Route::get('/', function() {
         return view('pages.contents.admin.index');
@@ -35,65 +40,54 @@ Route::group(['middleware' => 'role'], function () {
     Route::get('/persuratan', function() {
         return view('pages.contents.admin.persuratan');
     });
-    // Menampilkan data-magang
-    Route::get('/data-magang', function() {
-        return view('pages.contents.admin.data-magang');
-    });
 
     //Kelola pengguna
-    Route::get('/tableUserAdmin', [FormKelolaAdminController::class, 'show']);
-    // Route::get('/kelolaAdmin', [FormKelolaAdminController::class, 'index']);
-    // Route::post('/tableUserAdmin', [FormKelolaAdminController::class, 'store']);
-    Route::delete('/tableUserAdmin/{id}', [FormKelolaAdminController::class, 'destroy']);
-    Route::get('/updateUserAdmin/{id}', [FormKelolaAdminController::class, 'edit']);
-    Route::patch('/updateUserAdmin/{id}', [FormKelolaAdminController::class, 'update']);
+    // Admin
+    Route::resource('/kelola-pengguna/admin', FormKelolaAdminController::class)->except('show', 'store', 'create');
+    Route::get('/kelola-pengguna/admin/edit/{id}', [FormKelolaAdminController::class, 'edit']);
+    Route::patch('/kelola-pengguna/admin/edit/{id}', [FormKelolaAdminController::class, 'update']);
+    // Mahasiswa
+    Route::resource('/kelola-pengguna/mahasiswa', FormKelolaMahasiswaController::class)->except('show', 'create' ,'store');
+    Route::get('/kelola-pengguna/mahasiswa/edit/{id}', [FormKelolaMahasiswaController::class, 'edit']);
+    Route::patch('/kelola-pengguna/mahasiswa/edit/{id}', [FormKelolaMahasiswaController::class, 'update']);
+    // Dosen
+    Route::resource('/kelola-pengguna/dosen', FormKelolaDosenController::class)->except('show', 'create', 'store');
+    Route::get('/kelola-pengguna/dosen/edit/{id}', [FormKelolaDosenController::class,'edit']);
+    Route::patch('/kelola-pengguna/dosen/edit/{id}', [FormKelolaDosenController::class, 'update']);
 
-    Route::get('/tableUserDosen', [FormKelolaDosenController::class, 'show']);
-    // Route::get('/kelolaDosen', [FormKelolaDosenController::class, 'index']);
-    // Route::post('/tableUserDosen', [FormKelolaDosenController::class, 'store']);
-    Route::delete('/tableUserDosen/{id}', [FormKelolaDosenController::class, 'destroy']);
-    Route::get('/updateUserDosen/{id}', [FormKelolaDosenController::class, 'edit']);
-    Route::patch('/updateUserDosen/{id}', [FormKelolaDosenController::class, 'update']);
+    // Data Pengguna
+    // Admin
+    Route::resource('/data-pengguna/admin', DataAdminController::class)->except('show');
+    Route::get('/data-pengguna/admin/edit/{id}', [DataAdminController::class,'edit']);
+    Route::patch('/data-pengguna/admin/edit/{id}', [DataAdminController::class, 'update']);
+    // Mahasiswa
+    Route::resource('/data-pengguna/mahasiswa', DataMahasiswaController::class)->except('show');
+    Route::get('/data-pengguna/mahasiswa/edit/{id}', [DataMahasiswaController::class,'edit']);
+    Route::patch('/data-pengguna/mahasiswa/edit/{id}', [DataMahasiswaController::class, 'update']);
+    // Dosen
+    Route::resource('/data-pengguna/dosen', DataDosenController::class)->except('show');
+    Route::get('/data-pengguna/dosen/edit/{id}', [DataDosenController::class,'edit']);
+    Route::patch('/data-pengguna/dosen/edit/{id}', [DataDosenController::class, 'update']);
 
-    Route::get('/tableUserMahasiswa', [FormKelolaMahasiswaController::class, 'show']);
-    // Route::get('/kelolaMahasiswa', [FormKelolaMahasiswaController::class, 'index']);
-    // Route::post('/tableUserMahasiswa', [FormKelolaMahasiswaController::class, 'store']);
-    Route::delete('/tableUserMahasiswa/{id}', [FormKelolaMahasiswaController::class, 'destroy']);
-    Route::get('/updateUserMahasiswa/{id}', [FormKelolaMahasiswaController::class,'edit']);
-    Route::patch('/updateUserMahasiswa/{id}', [FormKelolaMahasiswaController::class, 'update']);
-
-    // Data
-    Route::get('/dataMahasiswa', [DataMahasiswaController::class,'show']);
-    Route::post('/dataMahasiswa', [DataMahasiswaController::class,'store']);
-    Route::get('/formDataMahasiswa', [DataMahasiswaController::class,'create']);
-    Route::delete('/dataMahasiswa/{id}', [DataMahasiswaController::class, 'destroy']);
-    Route::get('/updateDataMahasiswa/{id}', [DataMahasiswaController::class,'edit']);
-    Route::patch('/updateDataMahasiswa/{id}', [DataMahasiswaController::class, 'update']);
-
-    Route::get('/dataDosen', [DataDosenController::class,'show']);
-    Route::post('/dataDosen', [DataDosenController::class,'store']);
-    Route::get('/formDataDosen', [DataDosenController::class,'create']);
-    Route::delete('/dataDosen/{id}', [DataDosenController::class, 'destroy']);
-    Route::get('/updateDataDosen/{id}', [DataDosenController::class,'edit']);
-    Route::patch('/updateDataDosen/{id}', [DataDosenController::class, 'update']);
-
-    Route::get('/dataAdmin', [DataAdminController::class,'show']);
-    Route::post('/dataAdmin', [DataAdminController::class,'store']);
-    Route::get('/formDataAdmin', [DataAdminController::class,'create']);
-    Route::delete('/dataAdmin/{id}', [DataAdminController::class, 'destroy']);
-    Route::get('/updateDataAdmin/{id}', [DataAdminController::class,'edit']);
-    Route::patch('/updateDataAdmin/{id}', [DataAdminController::class, 'update']);
-
+    // Pengumuman
     Route::get('/pengumuman', [PengumumanController::class,'show']);
     Route::get('/formPengumuman', [PengumumanController::class,'create']);
     Route::post('/pengumuman', [PengumumanController::class,'store']);
     Route::delete('/pengumuman/{id}', [PengumumanController::class, 'destroy']);
+
+    // Data Magang - Admin Side
+    Route::resource('/admin/data-magang', DataMagangAdminSideController::class)->except('create','show','store', 'update', 'destroy', 'edit');
 
     // Auth Mahasiswa
     // Menampilkan index simmag mahasiswa
     Route::get('/mahasiswa/dashboard', function() {
         return view('pages.contents.mahasiswa.index');
     });
+
+    // Pengajuan Magang
+    Route::resource('/mahasiswa/pengajuan-magang', PengajuanMagangController::class)->except('show','store', 'update', 'destroy', 'edit');
+    // Data Magang - Mahasiswa Side
+    Route::resource('/mahasiswa/data-magang', DataMagangController::class)->except('create','show','store', 'update', 'destroy', 'edit');
 });
 
 

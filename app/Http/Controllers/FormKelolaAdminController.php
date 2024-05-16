@@ -12,8 +12,12 @@ class FormKelolaAdminController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index() {
-        return view('pages.contents.admin.form-kelola-admin');
+    public function index(User $user) {
+        $users = DB::table('users')
+                    ->select('id','nama', 'username', 'email', 'role', 'is_active', 'created_at', 'updated_at')
+                    ->orderBy('users.nama', 'ASC')
+                    ->where('role', 'admin')->get();
+        return view ('pages.contents.admin.kelola-admin.index', compact('users'));
     }
 
     /**
@@ -51,12 +55,8 @@ class FormKelolaAdminController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user) {
-        $users = DB::table('users')
-                    ->select('id','nama', 'username', 'email', 'role', 'is_active', 'created_at', 'updated_at')
-                    ->orderBy('users.nama', 'ASC')
-                    ->where('role', 'admin')->get();
-        return view ('pages.contents.admin.table-user-admin', compact('users'));
+    public function show() {
+        return view('pages.contents.admin.form-kelola-admin');
     }
 
     /**
@@ -64,7 +64,7 @@ class FormKelolaAdminController extends Controller
      */
     public function edit($id) {
         $users  = DB::table('users')->where('id', $id)->first();
-        return view('pages.contents.admin.update-user-admin', compact('users'));
+        return view('pages.contents.admin.kelola-admin.edit', compact('users'));
     }
 
     /**
@@ -99,9 +99,9 @@ class FormKelolaAdminController extends Controller
         ]);
 
         if ($users) {
-            return redirect('/tableUserAdmin')->with('status', 'Data updated successfully.');
+            return redirect('/kelola-pengguna/admin')->with('status', 'Data updated successfully.');
         } else {
-            return redirect('/tableUserAdmin')->with('error', 'Failed to updated data.');
+            return redirect('/kelola-pengguna/admin')->with('error', 'Failed to updated data.');
         }
     }
 
@@ -114,9 +114,9 @@ class FormKelolaAdminController extends Controller
         if($users) {
             $users  = DB::table('users')->where('id', $id)->delete();
 
-            return redirect('/tableUserAdmin')->with('status', 'Data berhasil dihapus.');
+            return redirect('/kelola-pengguna/admin')->with('status', 'Data berhasil dihapus.');
         }
 
-        return redirect('/tableUserAdmin')->with('error', 'Data tidak ditemukan.');
+        return redirect('/kelola-pengguna/admin')->with('error', 'Data tidak ditemukan.');
     }
 }

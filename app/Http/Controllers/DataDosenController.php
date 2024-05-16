@@ -12,14 +12,18 @@ class DataDosenController extends Controller
      * Display a listing of the resource.
      */
     public function index() {
-        //
+        $dosen  = DB::table('dosen')
+                    ->select('id', 'nip', 'nama', 'email', 'telp', 'alamat', 'role')
+                    ->where('is_active', 1)
+                    ->orderBy('dosen.nama', 'ASC')->get();
+        return view('pages.contents.admin.data-dosen.index', compact('dosen'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create() {
-        return view('pages.contents.admin.form-data-dosen');
+        return view('pages.contents.admin.data-dosen.create');
     }
 
     /**
@@ -46,18 +50,14 @@ class DataDosenController extends Controller
         $dosen->save();
 
         // Redirect halaman
-        return redirect('/dataDosen')->with('status', 'Data berhasil ditambahkan!');
+        return redirect('/data-pengguna/dosen')->with('status', 'Data berhasil ditambahkan!');
     }
 
     /**
      * Display the specified resource.
      */
     public function show(Dosen $dosen) {
-        $dosen  = DB::table('dosen')
-                    ->select('id', 'nip', 'nama', 'email', 'telp', 'alamat', 'role')
-                    ->where('is_active', 1)
-                    ->orderBy('dosen.nama', 'ASC')->get();
-        return view('pages.contents.admin.data-dosen', compact('dosen'));
+        //
     }
 
     /**
@@ -65,7 +65,7 @@ class DataDosenController extends Controller
      */
     public function edit($id) {
         $dosen  = DB::table('dosen')->where('id', $id)->first();
-        return view('pages.contents.admin.update-data-dosen', compact('dosen'));
+        return view('pages.contents.admin.data-dosen.edit', compact('dosen'));
     }
 
     /**
@@ -89,9 +89,9 @@ class DataDosenController extends Controller
         ]);
 
         if ($dosen) {
-            return redirect('/dataDosen')->with('status', 'Data berhasil diupdate!');
+            return redirect('/data-pengguna/dosen')->with('status', 'Data berhasil diupdate!');
         } else {
-            return redirect('/dataDosen')->with('error', 'Gagal update data.');
+            return redirect('/data-pengguna/dosen')->with('error', 'Gagal update data.');
         }
     }
 
@@ -104,9 +104,9 @@ class DataDosenController extends Controller
         if ($dosen) {
             $dosen  =    DB::table('dosen')->where('id', $id)->delete();
 
-            return redirect('/dataDosen')->with('status', 'Data berhasil dihapus.');
+            return redirect('/data-pengguna/dosen')->with('status', 'Data berhasil dihapus.');
         }
 
-        return redirect('/dataDosen')->with('error', 'Data gagal dihapus.');
+        return redirect('/data-pengguna/dosen')->with('error', 'Data gagal dihapus.');
     }
 }

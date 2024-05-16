@@ -53,4 +53,12 @@ class Mahasiswa extends Model {
             }
         });
     }
+
+    public function pengajuanMagang() {
+        return $this->hasMany(PengajuanMagang::class);
+    }
+
+    public function dataMagang() {
+        return $this->hasMany(DataMagang::class);
+    }
 }
