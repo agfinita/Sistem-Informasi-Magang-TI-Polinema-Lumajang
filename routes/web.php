@@ -88,6 +88,12 @@ Route::group(['middleware' => 'role'], function () {
     Route::resource('/mahasiswa/pengajuan-magang', PengajuanMagangController::class)->except('show','store', 'update', 'destroy', 'edit');
     // Data Magang - Mahasiswa Side
     Route::resource('/mahasiswa/data-magang', DataMagangController::class)->except('create','show','store', 'update', 'destroy', 'edit');
+
+    // Auth Dosen
+    // Menampilkan index simmag dosen
+    Route::get('/dosen/dashboard', function() {
+        return view('pages.contents.dosen.index');
+    });
 });
 
 

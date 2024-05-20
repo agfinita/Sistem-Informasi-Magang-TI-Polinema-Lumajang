@@ -21,34 +21,44 @@
                     </div>
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
-                        <li><a class="nav-link" href="{{ url('/') }}"><i class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i><span>Dashboard</span></a></li>
-                        <li><a class="nav-link" href="{{ url('/pengumuman') }}"><i class="fa fa-bullhorn"></i><span>Pengumuman</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/') }}"><i class="ion ion-speedometer"
+                                    data-pack="default" data-tags="travel, accelerate"></i><span>Dashboard</span></a>
+                        </li>
+                        <li><a class="nav-link" href="{{ url('/pengumuman') }}"><i
+                                    class="ion ion-speakerphone"></i><span>Pengumuman</span></a></li>
 
                         <li class="menu-header">Manajemen Pengguna</li>
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                    class="fa fa-school"></i> <span>Data Pengguna</span></a>
+                                    class="ion ion-ios-paper"></i> <span>Data Pengguna</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/data-pengguna/admin') }}"><span>Admin</span></a></li>
-                                <li><a class="nav-link" href="{{ url('/data-pengguna/dosen') }}"><span>Dosen</span></a></li>
-                                <li><a class="nav-link" href="{{ url('/data-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/data-pengguna/admin') }}"><span>Admin</span></a>
+                                </li>
+                                <li><a class="nav-link" href="{{ url('/data-pengguna/dosen') }}"><span>Dosen</span></a>
+                                </li>
+                                <li><a class="nav-link"
+                                        href="{{ url('/data-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                    class="fa fa-user"></i> <span>Kelola Pengguna</span></a>
+                                    class="ion ion-android-person"></i> <span>Kelola Pengguna</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/kelola-pengguna/admin') }}"><span>Admin</span></a></li>
-                                <li><a class="nav-link" href="{{ url('/kelola-pengguna/dosen') }}"><span>Dosen</span></a></li>
-                                <li><a class="nav-link" href="{{ url('/kelola-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
+                                <li><a class="nav-link"
+                                        href="{{ url('/kelola-pengguna/admin') }}"><span>Admin</span></a></li>
+                                <li><a class="nav-link"
+                                        href="{{ url('/kelola-pengguna/dosen') }}"><span>Dosen</span></a></li>
+                                <li><a class="nav-link"
+                                        href="{{ url('/kelola-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
                             </ul>
                         </li>
 
                         <li class="menu-header">Pages</li>
                         <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Magang</span></a>
+                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                                    class="fas fa-columns"></i> <span>Magang</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/persuratan') }}">Persuratan</a></li>
+                                <li><a class="nav-link" href="{{ url('/persuratan') }}">Permintaan Magang</a></li>
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
                         </li>
@@ -72,6 +82,10 @@
             <!-- Main Content -->
             <div class="main-content">
                 <section class="section">
+                    <div class="section-header">
+                        <h1>Data Pengguna</h1>
+                    </div>
+
                     <div class="section-body">
                         <div class="row">
                             <div class="col-12 col-md col-lg">
@@ -80,7 +94,8 @@
                                     <div class="card-header">
                                         <h4>Tambah Mahasiswa</h4>
                                     </div>
-                                    <form action="{{ url('/data-pengguna/mahasiswa') }}" method="POST" autocomplete="off">
+                                    <form action="{{ url('/data-pengguna/mahasiswa') }}" method="POST"
+                                        autocomplete="off">
                                         @csrf
                                         <div class="card-body">
                                             <div class="form-group row">
@@ -116,10 +131,10 @@
                                             </div>
 
                                             <div class="form-group row">
-                                                <label for="control-kelas"
-                                                    class="col-sm-3 col-form-label">Kelas</label>
+                                                <label for="control-kelas" class="col-sm-3 col-form-label">Kelas</label>
                                                 <div class="col-sm-2">
-                                                    <select class="form-control" id="control-kelas" name="control-kelas">
+                                                    <select class="form-control" id="control-kelas"
+                                                        name="control-kelas">
                                                         <option>3A</option>
                                                         <option>3B</option>
                                                         <option>3C</option>
@@ -127,9 +142,9 @@
 
                                                     {{-- alert --}}
                                                     @if (count($errors) > 0)
-                                                    <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                        {{ $errors->first('control-kelas') }}
-                                                    </div>
+                                                        <div style="width: auto; color:red; margin-top:0.25rem;">
+                                                            {{ $errors->first('control-kelas') }}
+                                                        </div>
                                                     @endif
                                                     {{-- end of alert --}}
                                                 </div>
@@ -139,16 +154,17 @@
                                                 <label for="control-jurusan"
                                                     class="col-sm-3 col-form-label">Jurusan</label>
                                                 <div class="col-sm-5">
-                                                    <select class="form-control" id="control-jurusan" name="control-jurusan">
+                                                    <select class="form-control" id="control-jurusan"
+                                                        name="control-jurusan">
                                                         <option>D3 TI</option>
                                                         <option>D4 TI</option>
                                                     </select>
 
                                                     {{-- alert --}}
                                                     @if (count($errors) > 0)
-                                                    <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                        {{ $errors->first('control-jurusan') }}
-                                                    </div>
+                                                        <div style="width: auto; color:red; margin-top:0.25rem;">
+                                                            {{ $errors->first('control-jurusan') }}
+                                                        </div>
                                                     @endif
                                                     {{-- end of alert --}}
                                                 </div>
@@ -195,9 +211,9 @@
 
                                                     {{-- alert --}}
                                                     @if (count($errors) > 0)
-                                                    <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                        {{ $errors->first('alamat') }}
-                                                    </div>
+                                                        <div style="width: auto; color:red; margin-top:0.25rem;">
+                                                            {{ $errors->first('alamat') }}
+                                                        </div>
                                                     @endif
                                                     {{-- end of alert --}}
                                                 </div>
@@ -232,17 +248,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="../assets/js/stisla.js"></script>
 
-   <!-- JS Libraies -->
-   <script src="{{ asset('node_modules/simpleweather/jquery.simpleWeather.min.js') }}"></script>
-   <script src="{{ asset('node_modules/chart.js/dist/Chart.min.js') }}"></script>
-   <script src="{{ asset('node_modules/jqvmap/dist/jquery.vmap.min.js') }}"></script>
-   <script src="{{ asset('node_modules/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
-   <script src="{{ asset('node_modules/summernote/dist/summernote-bs4.js') }}"></script>
-   <script src="{{ asset('node_modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
+    <!-- JS Libraies -->
+    <script src="{{ asset('node_modules/simpleweather/jquery.simpleWeather.min.js') }}"></script>
+    <script src="{{ asset('node_modules/chart.js/dist/Chart.min.js') }}"></script>
+    <script src="{{ asset('node_modules/jqvmap/dist/jquery.vmap.min.js') }}"></script>
+    <script src="{{ asset('node_modules/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
+    <script src="{{ asset('node_modules/summernote/dist/summernote-bs4.js') }}"></script>
+    <script src="{{ asset('node_modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
 
-   <!-- Template JS File -->
-   <script src="{{ asset('assets/js/scripts.js') }}"></script>
-   <script src="{{ asset('assets/js/custom.js') }}"></script>
+    <!-- Template JS File -->
+    <script src="{{ asset('assets/js/scripts.js') }}"></script>
+    <script src="{{ asset('assets/js/custom.js') }}"></script>
 
     <!-- Page Specific JS File -->
 </body>

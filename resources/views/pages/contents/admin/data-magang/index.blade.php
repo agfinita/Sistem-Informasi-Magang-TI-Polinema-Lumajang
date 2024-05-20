@@ -25,12 +25,12 @@
                                     data-pack="default" data-tags="travel, accelerate"></i><span>Dashboard</span></a>
                         </li>
                         <li><a class="nav-link" href="{{ url('/pengumuman') }}"><i
-                                    class="fa fa-bullhorn"></i><span>Pengumuman</span></a></li>
+                                    class="ion ion-speakerphone"></i><span>Pengumuman</span></a></li>
 
                         <li class="menu-header">Manajemen Pengguna</li>
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                    class="fa fa-school"></i> <span>Data Pengguna</span></a>
+                                    class="ion ion-ios-paper"></i> <span>Data Pengguna</span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link" href="{{ url('/data-pengguna/admin') }}"><span>Admin</span></a>
                                 </li>
@@ -42,7 +42,7 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                    class="fa fa-user"></i> <span>Kelola Pengguna</span></a>
+                                    class="ion ion-android-person"></i> <span>Kelola Pengguna</span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link"
                                         href="{{ url('/kelola-pengguna/admin') }}"><span>Admin</span></a></li>
@@ -58,7 +58,7 @@
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                     class="fas fa-columns"></i> <span>Magang</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/persuratan') }}">Persuratan</a></li>
+                                <li><a class="nav-link" href="{{ url('/persuratan') }}">Permintaan Magang</a></li>
                                 <li class="active"><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data
                                         Magang</a>
                                 </li>
@@ -84,6 +84,10 @@
             <!-- Main Content -->
             <div class="main-content">
                 <section class="section">
+                    <div class="section-header">
+                        <h1>Data Magang</h1>
+                    </div>
+
                     <div class="section-body">
                         <div class="row">
                             <div class="col-12">
@@ -95,7 +99,7 @@
                                     <div class="col-md-6 mx-2 my-auto">
                                         <!-- Tambah data -->
                                         <button type="submit" class="btn btn-success">
-                                            <a href="{{ url('/formDataMahasiswa') }}"
+                                            <a href="#"
                                                 class="text-decoration-none text-white">
                                                 <span>
                                                     <i class="ion ion-plus-circled" data-pack="default"

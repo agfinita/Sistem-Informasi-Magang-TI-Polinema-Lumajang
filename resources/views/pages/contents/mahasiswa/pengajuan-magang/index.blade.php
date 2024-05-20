@@ -26,16 +26,12 @@
                                 <span>Dashboard</span></a></li>
 
                         <li class="menu-header">Magang</li>
-                        <li class="active"><a class="nav-link" href="{{ url('/mahasiswa/pengajuan-magang') }}"><i class="ion ion-card" data-pack="default"
-                                    data-tags="travel, accelerate"></i> <span>Pengajuan Magang</span></a></li>
-                        <li><a class="nav-link" href="{{ url('/mahasiswa/data-magang') }}"><i class="fas fa-columns" data-pack="default"
-                                    data-tags="travel, accelerate"></i> <span>Data Magang</span></a></li>
+                        <li class="active"><a class="nav-link" href="{{ url('/mahasiswa/pengajuan-magang') }}"><i class="ion ion-archive" data-pack="default" data-tags="mail""></i> <span>Pengajuan Magang</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/mahasiswa/data-magang') }}"><i class="fas fa-columns"></i> <span>Data Magang</span></a></li>
 
                         <li class="menu-header">Aktivitas Magang</li>
-                        <li><a class="nav-link" href="#"><i class="fas fa-users" data-pack="default"
-                                    data-tags="travel, accelerate"></i> <span>Bimbingan</span></a></li>
-                        <li><a class="nav-link" href="#"><i class="fas fa-columns" data-pack="default"
-                                    data-tags="travel, accelerate"></i> <span>Logbook</span></a></li>
+                        <li><a class="nav-link" href="#"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
+                        <li><a class="nav-link" href="#"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
 
                         {{-- <li class="nav-item dropdown">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
@@ -64,6 +60,10 @@
             <!-- Main Content -->
             <div class="main-content">
                 <section class="section">
+                    <div class="section-header">
+                        <h1>Pengajuan Magang</h1>
+                    </div>
+
                     <div class="section-body">
                         <div class="row">
                             <div class="col-12">
