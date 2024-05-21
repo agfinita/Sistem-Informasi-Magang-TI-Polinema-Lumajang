@@ -214,12 +214,17 @@
     <script src="../node_modules/summernote/dist/summernote-bs4.js"></script>
     <script src="../node_modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
 
-    <!-- Template JS File -->
-    <script src="../assets/js/scripts.js"></script>
-    <script src="../assets/js/custom.js"></script>
+    <!-- JS Libraies -->
+    <script src="{{ asset('node_modules/simpleweather/jquery.simpleWeather.min.js') }}"></script>
+    <script src="{{ asset('node_modules/chart.js/dist/Chart.min.js') }}"></script>
+    <script src="{{ asset('node_modules/jqvmap/dist/jquery.vmap.min.js') }}"></script>
+    <script src="{{ asset('node_modules/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
+    <script src="{{ asset('node_modules/summernote/dist/summernote-bs4.js') }}"></script>
+    <script src="{{ asset('node_modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
 
-    <!-- Page Specific JS File -->
-    <script src="../assets/js/page/index-0.js"></script>
+    <!-- Template JS File -->
+    <script src="{{ asset('assets/js/scripts.js') }}"></script>
+    <script src="{{ asset('assets/js/custom.js') }}"></script>
 
     <!-- Data Tables JS -->
     @include('pages.layouts.datatables')
