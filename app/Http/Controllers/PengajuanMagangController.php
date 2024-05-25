@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use App\Models\PengajuanMagang;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class PengajuanMagangController extends Controller
 {
@@ -17,6 +19,7 @@ class PengajuanMagangController extends Controller
 
         $pengajuanMagang = DB::table('pengajuan_magang')
             ->select('id','mahasiswa_id', 'instansi_magang', 'alamat_magang', 'status', 'files')
+            ->orderBy('created_at', 'desc')
             ->where('mahasiswa_id', $mahasiswa_id)
             ->get();
         return view('pages.contents.mahasiswa.pengajuan-magang.index', compact('pengajuanMagang'));
@@ -26,7 +29,19 @@ class PengajuanMagangController extends Controller
      * Show the form for creating a new resource.
      */
     public function create() {
-        return view('pages.contents.mahasiswa.pengajuan-magang.create');
+        // Ambil user yang sedang login
+        $user   = Auth::user();
+
+        // Cari data mahasiswa berdasarkan username yang login
+        $mahasiswa          = Mahasiswa::where('nim', $user->username)->first();
+
+        // Jika mahasiswa ditemukan ambil data mahasiswa
+        if ($mahasiswa) {
+            $pengajuanMagang   = PengajuanMagang::where('mahasiswa_id', $mahasiswa->nim)->first();
+        } else {
+            $pengajuanMagang    = null;
+        }
+        return view('pages.contents.mahasiswa.pengajuan-magang.create', compact('mahasiswa', 'pengajuanMagang'));
     }
 
     /**

@@ -73,13 +73,12 @@ Route::group(['middleware' => 'role'], function () {
     Route::delete('/pengumuman/{id}', [PengumumanController::class, 'destroy']);
 
     // Data Magang - Admin Side
-    Route::resource('/admin/data-magang', DataMagangAdminSideController::class)->except('show','store', 'update', 'destroy', 'edit');
+    Route::resource('/admin/data-magang', DataMagangAdminSideController::class)->except('show','store', 'update', 'edit');
 
     // Pengajuan Magang - Admin Side
     Route::resource('/admin/mahasiswa/pengajuan-magang', PengajuanMagangAdminSideController::class)->except('show','update', 'edit');
     Route::get('/admin/mahasiswa/pengajuan-magang/create/{id}', [PengajuanMagangAdminSideController::class,'create']);
     Route::post('/admin/mahasiswa/pengajuan-magang/store/{id}', [PengajuanMagangAdminSideController::class,'store']);
-
 
 
     // AUTH MAHASISWA
@@ -91,7 +90,8 @@ Route::group(['middleware' => 'role'], function () {
     // Pengajuan Magang
     Route::resource('/mahasiswa/pengajuan-magang', PengajuanMagangController::class)->except('show','update', 'destroy', 'edit');
     // Data Magang - Mahasiswa Side
-    Route::resource('/mahasiswa/data-magang', DataMagangController::class)->except('create','show','store', 'update', 'destroy', 'edit');
+    Route::resource('/mahasiswa/data-magang', DataMagangController::class)->except('show', 'update', 'destroy', 'edit');
+
 
     // Auth Dosen
     // Menampilkan index simmag dosen

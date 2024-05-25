@@ -17,7 +17,7 @@
                         <a href="{{ url('/mahasiswa/dashboard') }}">{{ Auth::user()->role }}</a>
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
-                        <a href="{{ url('/mahasiswa/dashboard') }}">SIMMAG</a>
+                        <a href="{{ url('/mahasiswa/dashboard') }}">SIMAG</a>
                     </div>
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
@@ -53,21 +53,17 @@
             <div class="main-content">
                 <section class="section">
                     <div class="section-header">
-                        <h1>Data Magang</h1>
+                        <h1>Data Magang Mahasiswa</h1>
                     </div>
 
                     <div class="section-body">
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
-                                    <div class="card-header">
-                                        <h4>Data Magang Mahasiswa</h4>
-                                    </div>
-
-                                    {{-- <div class="col-md-6 mx-2 my-auto">
+                                    <div class="col-md-6 mx-2 my-4">
                                         <!-- Tambah data -->
                                         <button type="submit" class="btn btn-success">
-                                            <a href="{{ url('/mahasiswa/pengajuan-magang/create') }}" class="text-decoration-none text-white">
+                                            <a href="{{ url('/mahasiswa/data-magang/create') }}" class="text-decoration-none text-white">
                                                 <span>
                                                     <i class="ion ion-plus-circled" data-pack="default" data-tags="add, include, new, invite, +">
                                                     </i>
@@ -75,7 +71,7 @@
                                                 Data Baru
                                             </a>
                                         </button>
-                                    </div> --}}
+                                    </div>
 
                                     <div class="card-body">
                                         <div class="table-responsive">
@@ -101,18 +97,18 @@
                                                     $no = 1;
                                                 @endphp
                                                 <tbody>
-                                                    @foreach ( $dm as $dataMagang )
+                                                    @foreach ( $dataMagang as $dm )
                                                     <tr>
                                                         <td class="text-center">{{ $no++ }}</td>
-                                                        <td>{{ $dataMagang->mahasiswa->nim }}</td>
-                                                        <td>{{ $dataMagang->mahasiswa->nama }}</td>
-                                                        <td>{{ $dataMagang->mahasiswa->kelas }}</td>
-                                                        <td>{{ $dataMagang->mahasiswa->jurusan }}</td>
-                                                        <td>{{ $dataMagang->pengajuan_magang->instansi_magang }}</td>
-                                                        <td>{{ $dataMagang->pengajuan_magang->alamat_magang }}</td>
-                                                        <td>{{ $dataMagang->periode }}</td>
-                                                        <td>{{ $dataMagang->tanggal_mulai }}</td>
-                                                        <td>{{ $dataMagang->tanggal_selesai }}</td>
+                                                        <td>{{ $dm->mahasiswa->nim }}</td>
+                                                        <td>{{ $dm->mahasiswa->nama }}</td>
+                                                        <td>{{ $dm->mahasiswa->kelas }}</td>
+                                                        <td>{{ $dm->mahasiswa->jurusan }}</td>
+                                                        <td>{{ $dm->pengajuanMagang->instansi_magang }}</td>
+                                                        <td>{{ $dm->pengajuanMagang->alamat_magang }}</td>
+                                                        <td>{{ $dm->periode }}</td>
+                                                        <td>{{ $dm->tanggal_mulai }}</td>
+                                                        <td>{{ $dm->tanggal_selesai }}</td>
                                                     </tr>
                                                     @endforeach
                                                 </tbody>

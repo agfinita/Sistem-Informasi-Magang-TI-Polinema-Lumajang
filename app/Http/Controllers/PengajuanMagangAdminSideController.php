@@ -15,6 +15,9 @@ class PengajuanMagangAdminSideController extends Controller
     public function index() {
         $pengajuanMagang = DB::table('pengajuan_magang')
                     ->select('id','mahasiswa_id', 'instansi_magang', 'alamat_magang', 'status')
+                    ->whereIn('status', ['diproses', 'selesai'])
+                    ->orderByRaw("CASE WHEN status = 'diproses' THEN 0 ELSE 1 END")
+                    ->orderBy('status')
                     ->get();
         return view ('pages.contents.admin.pengajuan-magang.index', compact('pengajuanMagang'));
     }
@@ -24,9 +27,9 @@ class PengajuanMagangAdminSideController extends Controller
      */
     public function create($id) {
         $pengajuanMagang = DB::table('pengajuan_magang')
-                        ->select('id', 'status', 'mahasiswa_id')
-                        ->where('id', $id)
-                        ->first();
+            ->select('id', 'status', 'mahasiswa_id')
+            ->where('id', $id)
+            ->first();
         return view ('pages.contents.admin.pengajuan-magang.create', compact('pengajuanMagang'));
     }
 
@@ -47,8 +50,9 @@ class PengajuanMagangAdminSideController extends Controller
         // Handle upload file
         if ($request->hasFile('file')) {
             $file           = $request->file('file');
-            $originalname   = $file->getClientOriginalName();
+
             // Generate nama file unik
+            $originalname   = $file->getClientOriginalName();
             $filename   = uniqid() . '_' . $originalname;
 
             // Menentukan lokasi penyimpanan
@@ -94,7 +98,7 @@ class PengajuanMagangAdminSideController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy($id) {
-        $pengajuanMagang    = DB::table('pengajuan_magang')->where('id', $id)->first();
+        $pengajuanMagang    = PengajuanMagang::find($id);
 
         if($pengajuanMagang) {
             $filepath           = $pengajuanMagang->files; //path file yang akan dihapus
@@ -105,7 +109,7 @@ class PengajuanMagangAdminSideController extends Controller
             }
 
             // Hapus data
-            DB::table('pengajuan_magang')->where('id', $id)->delete();
+            $pengajuanMagang->delete();
 
             return redirect ('/admin/mahasiswa/pengajuan-magang')->with('status', 'Data deleted successfully!');
         }

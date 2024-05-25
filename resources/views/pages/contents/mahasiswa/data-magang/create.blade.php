@@ -14,54 +14,24 @@
             <div class="main-sidebar sidebar-style-2">
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
-                        <a href="{{ url('/') }}">Admin</a>
+                        <a href="{{ url('/mahasiswa/dashboard') }}">{{ Auth::user()->role }}</a>
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
-                        <a href="{{ url('/') }}">SIMAG</a>
+                        <a href="{{ url('/mahasiswa/dashboard') }}">SIMAG</a>
                     </div>
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
-                        <li><a class="nav-link" href="{{ url('/') }}"><i class="ion ion-speedometer"
-                                    data-pack="default" data-tags="travel, accelerate"></i><span>Dashboard</span></a>
-                        </li>
-                        <li><a class="nav-link" href="{{ url('/pengumuman') }}"><i
-                                    class="ion ion-speakerphone"></i><span>Pengumuman</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/mahasiswa/dashboard') }}"><i
+                                    class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i>
+                                <span>Dashboard</span></a></li>
 
-                        <li class="menu-header">Manajemen Pengguna</li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                    class="ion ion-ios-paper"></i> <span>Data Pengguna</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/data-pengguna/admin') }}"><span>Admin</span></a>
-                                </li>
-                                <li><a class="nav-link" href="{{ url('/data-pengguna/dosen') }}"><span>Dosen</span></a>
-                                </li>
-                                <li><a class="nav-link"
-                                        href="{{ url('/data-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                    class="ion ion-android-person"></i> <span>Kelola Pengguna</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link"
-                                        href="{{ url('/kelola-pengguna/admin') }}"><span>Admin</span></a></li>
-                                <li><a class="nav-link"
-                                        href="{{ url('/kelola-pengguna/dosen') }}"><span>Dosen</span></a></li>
-                                <li><a class="nav-link"
-                                        href="{{ url('/kelola-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
-                            </ul>
-                        </li>
+                        <li class="menu-header">Magang</li>
+                        <li><a class="nav-link" href="{{ url('/mahasiswa/pengajuan-magang') }}"><i class="ion ion-archive" data-pack="default" data-tags="mail""></i> <span>Pengajuan Magang</span></a></li>
+                        <li class="active"><a class="nav-link" href="{{ url('/mahasiswa/data-magang') }}"><i class="fas fa-columns" ></i> <span>Data Magang</span></a></li>
 
-                        <li class="menu-header">Manajemen Magang</li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                    class="fas fa-columns"></i> <span>Magang</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a></li>
-                                <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
-                            </ul>
-                        </li>
+                        <li class="menu-header">Aktivitas Magang</li>
+                        <li><a class="nav-link" href="#"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
+                        <li><a class="nav-link" href="#"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
 
                         <li class="menu-header">Lainnya</li>
                         <li>
@@ -83,7 +53,7 @@
             <div class="main-content">
                 <section class="section">
                     <div class="section-header">
-                        <h1>Data Pengguna</h1>
+                        <h1>Data Magang</h1>
                     </div>
 
                     <div class="section-body">
@@ -92,17 +62,16 @@
                                 <!--Horizontal-->
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4>Tambah Mahasiswa</h4>
+                                        <h4>Formulir Data Magang Mahasiswa</h4>
                                     </div>
-                                    <form action="{{ url('/data-pengguna/mahasiswa') }}" method="POST"
-                                        autocomplete="off">
+
+                                    <form action="{{ url('/mahasiswa/data-magang') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
                                         @csrf
                                         <div class="card-body">
                                             <div class="form-group row">
                                                 <label for="nim" class="col-sm-3 col-form-label">NIM</label>
                                                 <div class="col-sm-7">
-                                                    <input type="text" class="form-control" id="nim"
-                                                        name="nim" placeholder="Masukkan NIM" autofocus>
+                                                    <input type="text" class="form-control" id="nim" name="nim" placeholder="Masukkan NIM" value="{{ $mahasiswa->nim }}" autofocus readonly>
 
                                                     {{-- alert --}}
                                                     @if (count($errors) > 0)
@@ -117,8 +86,7 @@
                                             <div class="form-group row">
                                                 <label for="nama" class="col-sm-3 col-form-label">Nama</label>
                                                 <div class="col-sm-7">
-                                                    <input type="text" class="form-control" id="nama"
-                                                        name="nama" placeholder="Masukkan nama">
+                                                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama" value="{{ $mahasiswa->nama }}" disabled>
 
                                                     {{-- alert --}}
                                                     @if (count($errors) > 0)
@@ -133,11 +101,9 @@
                                             <div class="form-group row">
                                                 <label for="control-kelas" class="col-sm-3 col-form-label">Kelas</label>
                                                 <div class="col-sm-2">
-                                                    <select class="form-control" id="control-kelas"
-                                                        name="control-kelas">
-                                                        <option>3A</option>
-                                                        <option>3B</option>
-                                                        <option>3C</option>
+                                                    <select class="form-control" id="control-kelas" name="control-kelas" disabled>
+                                                        <option value="3A" {{ $mahasiswa->kelas == '3A' ? 'selected' : '' }}>3A</option>
+                                                        <option value="3B" {{ $mahasiswa->kelas == '3B' ? 'selected' : '' }}>3B</option>
                                                     </select>
 
                                                     {{-- alert --}}
@@ -151,13 +117,11 @@
                                             </div>
 
                                             <div class="form-group row">
-                                                <label for="control-jurusan"
-                                                    class="col-sm-3 col-form-label">Jurusan</label>
-                                                <div class="col-sm-5">
-                                                    <select class="form-control" id="control-jurusan"
-                                                        name="control-jurusan">
-                                                        <option>D3 TI</option>
-                                                        <option>D4 TI</option>
+                                                <label for="control-jurusan" class="col-sm-3 col-form-label">Jurusan</label>
+                                                <div class="col-sm-2">
+                                                    <select class="form-control" id="control-jurusan" name="control-jurusan" disabled>
+                                                        <option value= "D3 TI" {{ $mahasiswa->jurusan == 'D3 TI' ? 'selected' : '' }}>D3 TI</option>
+                                                        <option value= "D4 TI" {{ $mahasiswa->jurusan == 'D4 TI' ? 'selected' : '' }}>D4 TI</option>
                                                     </select>
 
                                                     {{-- alert --}}
@@ -171,15 +135,14 @@
                                             </div>
 
                                             <div class="form-group row">
-                                                <label for="email" class="col-sm-3 col-form-label">Email</label>
+                                                <label for="instansi_magang" class="col-sm-3 col-form-label">Instansi Magang</label>
                                                 <div class="col-sm-7">
-                                                    <input type="email" class="form-control" id="email"
-                                                        name="email" placeholder="Masukkan Email">
+                                                    <input type="text" class="form-control" id="instansi_magang" name="instansi_magang" placeholder="Masukkan instansi magang" value="{{ $pengajuanMagang->instansi_magang ?? '' }}" disabled>
 
                                                     {{-- alert --}}
                                                     @if (count($errors) > 0)
                                                         <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                            {{ $errors->first('email') }}
+                                                            {{ $errors->first('instansi_magang') }}
                                                         </div>
                                                     @endif
                                                     {{-- end of alert --}}
@@ -187,16 +150,28 @@
                                             </div>
 
                                             <div class="form-group row">
-                                                <label for="telp" class="col-sm-3 col-form-label">No
-                                                    Telepon</label>
+                                                <label for="alamat_magang" class="col-sm-3 col-form-label">Alamat Instansi Magang</label>
+                                                <div class="col-sm-7">
+                                                    <input type="text" class="form-control" id="alamat_magang" name="alamat_magang" placeholder="Masukkan alamat instansi magang" value="{{ $pengajuanMagang->alamat_magang ?? '' }}" disabled>
+                                                    {{-- alert --}}
+                                                    @if (count($errors) > 0)
+                                                        <div style="width: auto; color:red; margin-top:0.25rem;">
+                                                            {{ $errors->first('alamat_magang') }}
+                                                        </div>
+                                                    @endif
+                                                    {{-- end of alert --}}
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="period" class="col-sm-3 col-form-label"> Periode Magang </label>
                                                 <div class="col-sm-3">
-                                                    <input type="telp" class="form-control" id="telp"
-                                                        name="telp" placeholder="Masukkan no telepon aktif">
+                                                    <input type="text" class="form-control" id="period" name="period" placeholder="Contoh: 5 bulan">
 
                                                     {{-- alert --}}
                                                     @if (count($errors) > 0)
                                                         <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                            {{ $errors->first('telp') }}
+                                                            {{ $errors->first('period') }}
                                                         </div>
                                                     @endif
                                                     {{-- end of alert --}}
@@ -204,24 +179,40 @@
                                             </div>
 
                                             <div class="form-group row">
-                                                <label for="alamat" class="col-sm-3 col-form-label">Alamat</label>
-                                                <div class="col-sm-7">
-                                                    <input type="text" class="form-control" id="alamat"
-                                                        name="alamat" placeholder="Masukkan alamat">
+                                                <label class="col-sm-3 col-form-label">Tanggal Mulai</label>
+                                                <div class="col-sm-3">
+                                                    <input type="date"  name="tm" id="tm" class="form-control">
+                                                </div>
+                                            </div>
 
-                                                    {{-- alert --}}
-                                                    @if (count($errors) > 0)
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">Tanggal Selesai</label>
+                                                <div class="col-sm-3">
+                                                    <input type="date"  name="ts" id="ts" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="file" class="col-sm-3 col-form-label">File</label>
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+                                                        <input type="file" class="form-control-file" id="file" name="file">
+                                                    </div>
+
+                                                    @if ($errors->has('file'))
                                                         <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                            {{ $errors->first('alamat') }}
+                                                            {{ $errors->first('file') }}
                                                         </div>
                                                     @endif
-                                                    {{-- end of alert --}}
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="card-footer">
-                                            <button type="submit" id="kirim" name="kirim"
-                                                class="btn btn-primary">Tambah</button>
+                                            <div class="row">
+                                                <button type="submit" id="kirim" name="kirim" class="btn btn-primary m-2">Simpan</button>
+                                                <button type="button" class="btn btn-warning m-2" onclick="window.history.back();">Batal</button>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>

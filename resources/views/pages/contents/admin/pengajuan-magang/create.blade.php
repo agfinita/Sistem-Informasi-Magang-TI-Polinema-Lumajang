@@ -54,7 +54,7 @@
                             </ul>
                         </li>
 
-                        <li class="menu-header">Pages</li>
+                        <li class="menu-header">Manajemen Magang</li>
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                     class="fas fa-columns"></i> <span>Magang</span></a>

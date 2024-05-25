@@ -17,7 +17,7 @@
                         <a href="{{ url('/') }}">{{ Auth::user()->role }}</a>
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
-                        <a href="{{ url('/') }}">SIMMAG</a>
+                        <a href="{{ url('/') }}">SIMAG</a>
                     </div>
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
@@ -55,7 +55,7 @@
                             </ul>
                         </li>
 
-                        <li class="menu-header">Pages</li>
+                        <li class="menu-header">Manajemen Magang</li>
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                     class="fas fa-columns"></i> <span>Magang</span></a>

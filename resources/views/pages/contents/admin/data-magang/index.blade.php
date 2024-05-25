@@ -17,7 +17,7 @@
                         <a href="{{ url('/') }}">Admin</a>
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
-                        <a href="{{ url('/') }}">SIMMAG</a>
+                        <a href="{{ url('/') }}">SIMAG</a>
                     </div>
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
@@ -53,7 +53,7 @@
                             </ul>
                         </li>
 
-                        <li class="menu-header">Pages</li>
+                        <li class="menu-header">Manajemen Magang</li>
                         <li class="nav-item dropdown active">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                     class="fas fa-columns"></i> <span>Magang</span></a>
@@ -128,6 +128,7 @@
                                                         <th>Periode</th>
                                                         <th>Tanggal Dimulai</th>
                                                         <th>Tanggal Selesai</th>
+                                                        <th>File</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -136,23 +137,28 @@
                                                     $no = 1;
                                                 @endphp
                                                 <tbody>
-                                                    @foreach ($dm as $dataMagang)
+                                                    @foreach ($dataMagang as $dm)
                                                         <tr>
-                                                            <td>{{ $no++ }}</td>
-                                                            <td>{{ $dataMagang->mahasiswa->nim }}</td>
-                                                            <td>{{ $dataMagang->mahasiswa->nama }}</td>
-                                                            <td>{{ $dataMagang->mahasiswa->kelas }}</td>
-                                                            <td>{{ $dataMagang->mahasiswa->jurusan }}</td>
-                                                            <td>{{ $dataMagang->pengajuan_magang->instansi_magang }}
-                                                            </td>
-                                                            <td>{{ $dataMagang->pengajuan_magang->alamat_magang }}</td>
-                                                            <td>{{ $dataMagang->periode }}</td>
-                                                            <td>{{ $dataMagang->tanggal_mulai }}</td>
-                                                            <td>{{ $dataMagang->tanggal_selesai }}</td>
+                                                            <td class="text-center">{{ $no++ }}</td>
+                                                            <td>{{ $dm->mahasiswa->nim ?? '-' }}</td>
+                                                            <td>{{ $dm->mahasiswa->nama ?? '-' }}</td>
+                                                            <td>{{ $dm->mahasiswa->kelas ?? '-' }}</td>
+                                                            <td>{{ $dm->mahasiswa->jurusan ?? '-' }}</td>
+                                                            <td>{{ $dm->pengajuanMagang->instansi_magang ?? '-' }} </td>
+                                                            <td>{{ $dm->pengajuanMagang->alamat_magang ?? '-' }}</td>
+                                                            <td>{{ $dm->periode }}</td>
+                                                            <td>{{ $dm->tanggal_mulai }}</td>
+                                                            <td>{{ $dm->tanggal_selesai }}</td>
+                                                            <td>
+                                                                @if ($dm->files)
+                                                                    <a href="#" onclick="openFile('{{ asset('storage/' . $dm->files) }}'); return false;">{{ basename($dm->files) }}</a>
+                                                                @else
+                                                                    <h5> - </h5>
+                                                                @endif
                                                             <td>
                                                                 <div class="row">
                                                                     <a
-                                                                        href="{{ url('/updateDataMahasiswa/' . $dataMagang->id) }}">
+                                                                        href="{{ url('/updateDataMahasiswa/' . $dm->id) }}">
                                                                         <button class="btn btn-sm btn-warning mx-1">
                                                                             <i class="ion ion-edit" data-pack="default"
                                                                                 data-tags="change, update, write, type, pencil"></i>
@@ -160,7 +166,7 @@
                                                                     </a>
 
                                                                     <form
-                                                                        action="{{ url('/dataMahasiswa/' . $dataMagang->id) }}"
+                                                                        action="{{ url('/admin/data-magang/' . $dm->id) }}"
                                                                         method="POST"
                                                                         onsubmit="return confirm('Yakin hapus data?')">
                                                                         @method('DELETE')
@@ -190,6 +196,7 @@
                                                         <th>Periode</th>
                                                         <th>Tanggal Dimulai</th>
                                                         <th>Tanggal Selesai</th>
+                                                        <th>File</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </tfoot>
@@ -238,6 +245,13 @@
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('assets/js/page/index-0.js') }}"></script>
+
+    <script>
+        function openFile(url) {
+            // Membuka file pdf dalam tab baru
+            window.open(url, '_blank');
+        }
+    </script>
 
 </body>
 

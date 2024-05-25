@@ -79,8 +79,7 @@
                                             <div class="form-group row">
                                                 <label for="nim" class="col-sm-2 col-form-label">NIM</label>
                                                 <div class="col-sm-3">
-                                                    <input type="text" class="form-control" id="nim"
-                                                        name="nim" placeholder="Masukkan NIM" autofocus>
+                                                    <input type="text" class="form-control" id="nim" name="nim" placeholder="Masukkan NIM" autofocus value="{{ $mahasiswa->nim ?? '' }}" readonly>
                                                     {{-- alert --}}
                                                     @if (count($errors) > 0)
                                                         <div style="width: auto; color:red; margin-top:0.25rem;">
@@ -91,8 +90,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="instansi_magang" class="col-sm-2 col-form-label">Tempat
-                                                    Magang</label>
+                                                <label for="instansi_magang" class="col-sm-2 col-form-label">Tempat Magang</label>
                                                 <div class="col-sm-3">
                                                     <input type="text" class="form-control" id="instansi_magang" name="instansi_magang" placeholder="Masukkan Instansi Magang" autofocus>
                                                     {{-- alert --}}
@@ -105,8 +103,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="alamat_magang" class="col-sm-2 col-form-label">Alamat
-                                                    Magang</label>
+                                                <label for="alamat_magang" class="col-sm-2 col-form-label">Alamat Magang</label>
                                                 <div class="col-sm-3">
                                                     <input type="text" class="form-control" id="alamat_magang" name="alamat_magang" placeholder="Masukkan Alamat Instansi Magang" autofocus>
                                                     {{-- alert --}}
