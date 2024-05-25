@@ -17,7 +17,7 @@
                         <a href="{{ url('/mahasiswa/dashboard') }}">{{ Auth::user()->role }}</a>
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
-                        <a href="{{ url('/mahasiswa/dashboard') }}">SIMMAG</a>
+                        <a href="{{ url('/mahasiswa/dashboard') }}">SIMAG</a>
                     </div>
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
@@ -61,7 +61,7 @@
             <div class="main-content">
                 <section class="section">
                     <div class="section-header">
-                        <h1>Pengajuan Magang</h1>
+                        <h1>Pengajuan Magang Mahasiswa</h1>
                     </div>
 
                     <div class="section-body">
@@ -69,7 +69,7 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4>Riwayat Pengajuan Magang Mahasiswa</h4>
+                                        <h4>Riwayat Pengajuan Magang </h4>
                                     </div>
 
                                     <div class="col-md-6 mx-2 my-auto">
@@ -94,8 +94,6 @@
                                                             No
                                                         </th>
                                                         <th>NIM</th>
-                                                        <th>Instansi Magang</th>
-                                                        <th>Catatan</th>
                                                         <th>Status</th>
                                                         <th>Files</th>
                                                     </tr>
@@ -105,20 +103,24 @@
                                                     $no = 1;
                                                 @endphp
                                                 <tbody>
-                                                    @foreach ( $pm as $pengajuanMagang )
+                                                    @foreach ( $pengajuanMagang as $pm )
                                                     <tr>
                                                         <td class="text-center">{{ $no++ }}</td>
-                                                        <td>{{ $pengajuanMagang->mahasiswa->nim }}</td>
-                                                        <td>{{ $pengajuanMagang->instansi_magang }}</td>
-                                                        <td>{{ $pengajuanMagang->catatan }}</td>
+                                                        <td>{{ $pm->mahasiswa_id }}</td>
                                                         <td>
-                                                            @if ($pengajuanMagang->status == 'diproses')
+                                                            @if ($pm->status == 'diproses')
                                                                 <div class="badge badge-warning">diproses</div>
-                                                            @elseif ($pengajuanMagang->status == 'selesai')
+                                                            @elseif ($pm->status == 'selesai')
                                                                 <div class="badge badge-success">selesai</div>
                                                             @endif
                                                         </td>
-                                                        <td>{{ $pengajuanMagang->files }}</td>
+                                                        <td>
+                                                            @if ($pm->files)
+                                                            <a href="{{ asset('storage/' . $pm->files) }}" download>{{ basename($pm->files) }}</a>
+                                                            @else
+                                                            <h5> - </h5>
+                                                            @endif
+                                                        </td>
                                                     </tr>
                                                     @endforeach
                                                 </tbody>
@@ -128,8 +130,6 @@
                                                             No
                                                         </th>
                                                         <th>NIM</th>
-                                                        <th>Instansi Magang</th>
-                                                        <th>Catatan</th>
                                                         <th>Status</th>
                                                         <th>Files</th>
                                                     </tr>

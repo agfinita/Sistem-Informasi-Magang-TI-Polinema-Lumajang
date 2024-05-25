@@ -13,14 +13,11 @@ return new class extends Migration
     {
         Schema::create('pengajuan_magang', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('admin_id');
-            $table->unsignedBigInteger('mahasiswa_id');
-            $table->foreign('admin_id')->references('id')->on('admin')->onDelete('cascade');
-            $table->foreign('mahasiswa_id')->references('id')->on('mahasiswa')->onDelete('cascade');
+            $table->string('mahasiswa_id', 20);
+            $table->foreign('mahasiswa_id')->references('nim')->on('mahasiswa')->onDelete('cascade');
             $table->string('instansi_magang', 100)->nullable(false);
-            $table->string('alamat_magang', 255)->nullable();
+            $table->string('alamat_magang', 255)->nullable(false);
             $table->enum('status', ['diproses', 'selesai'])->default('diproses');
-            $table->string('catatan', 100)->nullable();
             $table->string('files', 255)->nullable();
             $table->timestamps();
         });

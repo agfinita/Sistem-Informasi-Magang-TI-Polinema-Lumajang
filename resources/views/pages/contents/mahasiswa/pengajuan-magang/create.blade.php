@@ -17,7 +17,7 @@
                         <a href="{{ url('/mahasiswa/dashboard') }}">{{ Auth::user()->role }}</a>
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
-                        <a href="{{ url('/mahasiswa/dashboard') }}">SIMMAG</a>
+                        <a href="{{ url('/mahasiswa/dashboard') }}">SIMAG</a>
                     </div>
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
@@ -73,7 +73,7 @@
                                     <div class="card-header">
                                         <h4>Pengajuan Magang Mahasiswa</h4>
                                     </div>
-                                    <form action="{{ url('/prosesPermintaan') }}" method="POST" autocomplete="off">
+                                    <form action="{{ url('/mahasiswa/pengajuan-magang') }}" method="POST" autocomplete="off">
                                         @csrf
                                         <div class="card-body">
                                             <div class="form-group row">

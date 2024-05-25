@@ -12,6 +12,7 @@ use App\Http\Controllers\FormKelolaDosenController;
 use App\Http\Controllers\PengajuanMagangController;
 use App\Http\Controllers\DataMagangAdminSideController;
 use App\Http\Controllers\FormKelolaMahasiswaController;
+use App\Http\Controllers\PengajuanMagangAdminSideController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,14 +32,10 @@ use App\Http\Controllers\FormKelolaMahasiswaController;
 // Middleware
 Route::group(['middleware' => 'role'], function () {
 
-    // Auth Admin
+    // AUTH ADMIN
     // Menampilkan index simmag admin
     Route::get('/', function() {
         return view('pages.contents.admin.index');
-    });
-    // Menampilkan persuratan simmag
-    Route::get('/persuratan', function() {
-        return view('pages.contents.admin.persuratan');
     });
 
     //Kelola pengguna
@@ -76,16 +73,23 @@ Route::group(['middleware' => 'role'], function () {
     Route::delete('/pengumuman/{id}', [PengumumanController::class, 'destroy']);
 
     // Data Magang - Admin Side
-    Route::resource('/admin/data-magang', DataMagangAdminSideController::class)->except('create','show','store', 'update', 'destroy', 'edit');
+    Route::resource('/admin/data-magang', DataMagangAdminSideController::class)->except('show','store', 'update', 'destroy', 'edit');
 
-    // Auth Mahasiswa
+    // Pengajuan Magang - Admin Side
+    Route::resource('/admin/mahasiswa/pengajuan-magang', PengajuanMagangAdminSideController::class)->except('show','update', 'edit');
+    Route::get('/admin/mahasiswa/pengajuan-magang/create/{id}', [PengajuanMagangAdminSideController::class,'create']);
+    Route::post('/admin/mahasiswa/pengajuan-magang/store/{id}', [PengajuanMagangAdminSideController::class,'store']);
+
+
+
+    // AUTH MAHASISWA
     // Menampilkan index simmag mahasiswa
     Route::get('/mahasiswa/dashboard', function() {
         return view('pages.contents.mahasiswa.index');
     });
 
     // Pengajuan Magang
-    Route::resource('/mahasiswa/pengajuan-magang', PengajuanMagangController::class)->except('show','store', 'update', 'destroy', 'edit');
+    Route::resource('/mahasiswa/pengajuan-magang', PengajuanMagangController::class)->except('show','update', 'destroy', 'edit');
     // Data Magang - Mahasiswa Side
     Route::resource('/mahasiswa/data-magang', DataMagangController::class)->except('create','show','store', 'update', 'destroy', 'edit');
 

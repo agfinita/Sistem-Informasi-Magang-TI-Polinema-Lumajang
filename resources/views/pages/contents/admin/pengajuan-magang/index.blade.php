@@ -17,14 +17,13 @@
                         <a href="{{ url('/') }}">Admin</a>
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
-                        <a href="{{ url('/') }}">SIMMAG</a>
+                        <a href="{{ url('/') }}">SIMAG</a>
                     </div>
                     <ul class="sidebar-menu">
                         <li><a class="nav-link" href="{{ url('/') }}"><i class="ion ion-speedometer"
                                     data-pack="default" data-tags="travel, accelerate"></i> <span>Dashboard</span></a>
                         </li>
-                        <li class="active"><a class="nav-link" href="{{ url('/pengumuman') }}"><i
-                                    class="ion ion-speakerphone"></i>
+                        <li><a class="nav-link" href="{{ url('/pengumuman') }}"><i class="ion ion-speakerphone"></i>
                                 <span>Pengumuman</span></a></li>
 
 
@@ -56,11 +55,12 @@
                         </li>
 
                         <li class="menu-header">Pages</li>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown active">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                     class="fas fa-columns"></i> <span>Magang</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a></li>
+                                <li class="active"><a class="nav-link" href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a>
+                                </li>
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
                         </li>
@@ -85,40 +85,25 @@
             <div class="main-content">
                 <section class="section">
                     <div class="section-header">
-                        <h1>Pengumuman</h1>
+                        <h1>Pengajuan Magang Mahasiswa</h1>
                     </div>
+
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4>Kelola Pengumuman</h4>
+                                    <h4>Kelola Permintaan Magang</h4>
                                 </div>
-
-                                <div class="col-md-6 mx-2 my-auto">
-                                    <!-- Tambah data -->
-                                    <button type="submit" class="btn btn-success">
-                                        <a href="{{ url('/formPengumuman') }}" class="text-decoration-none text-white">
-                                            <span>
-                                                <i class="ion ion-plus-circled" data-pack="default"
-                                                    data-tags="add, include, new, invite, +">
-                                                </i>
-                                            </span>
-                                            Tambah Data
-                                        </a>
-                                    </button>
-                                </div>
-
                                 <div class="card-body">
                                     <div class="table-responsive">
                                         <table class="table table-striped" id="table-1">
                                             <thead>
                                                 <tr>
                                                     <th class="text-center">No</th>
-                                                    <th>Judul</th>
-                                                    <th>Deskripsi</th>
-                                                    <th>Kategori</th>
-                                                    <th>Penulis</th>
-                                                    <th>Created</th>
+                                                    <th>NIM</th>
+                                                    <th>Instansi Magang</th>
+                                                    <th>Alamat Instansi Magang</th>
+                                                    <th>Status</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -127,32 +112,34 @@
                                                 $no = 1;
                                             @endphp
                                             <tbody>
-                                                @foreach ($pengumuman as $p)
+                                                @foreach ($pengajuanMagang as $pm)
                                                     <tr>
                                                         <td class="text-center">{{ $no++ }}</td>
-                                                        <td>{{ $p->judul }}</td>
-                                                        <td>{{ $p->deskripsi }}</td>
-                                                        <td>{{ $p->kategori }}</td>
-                                                        <td>{{ $p->created_by }}</td>
-                                                        <td>{{ $p->created_at }}</td>
-
+                                                        <td>{{ $pm->mahasiswa_id }}</td>
+                                                        <td>{{ $pm->instansi_magang }}</td>
+                                                        <td>{{ $pm->alamat_magang }}</td>
+                                                        <td>
+                                                            @if ($pm->status == 'diproses')
+                                                            <div class="badge badge-warning">diproses</div>
+                                                            @elseif ($pm->status == 'selesai')
+                                                            <div class="badge badge-success">selesai</div>
+                                                            @endif
+                                                        </td>
                                                         <td>
                                                             <div class="row">
-                                                                <a href="#">
-                                                                    <button class="btn btn-sm btn-warning mx-1">
-                                                                        <i class="ion ion-edit" data-pack="default"
-                                                                            data-tags="change, update, write, type, pencil"></i>
+                                                                <a href="{{ ('/admin/mahasiswa/pengajuan-magang/create/' . $pm->id) }}">
+                                                                    <button class="btn btn-sm btn-info mx-1">
+                                                                        <i class="ion ion-compose"></i>
                                                                     </button>
                                                                 </a>
 
-                                                                <form action="{{ url('/pengumuman/' . $p->id) }}"
+                                                                <form action="{{ url('/admin/mahasiswa/pengajuan-magang/' . $pm->id) }}"
                                                                     method="POST"
-                                                                    onsubmit="return confirm('Are you sure delete data?')">
+                                                                    onsubmit="return confirm('Yakin hapus data?')">
                                                                     @method('DELETE')
                                                                     @csrf
                                                                     <button class="btn btn-sm btn-danger mx-1">
-                                                                        <i class="ion ion-trash-a" data-pack="default"
-                                                                            data-tags="delete, remove, dump"></i>
+                                                                        <i class="ion ion-trash-a"></i>
                                                                     </button>
                                                                 </form>
                                                             </div>
@@ -160,6 +147,17 @@
                                                     </tr>
                                                 @endforeach
                                             </tbody>
+
+                                            <tfoot>
+                                                <tr>
+                                                    <th class="text-center">No</th>
+                                                    <th>NIM</th>
+                                                    <th>Instansi Magang</th>
+                                                    <th>Alamat Instansi Magang</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </tfoot>
                                         </table>
                                     </div>
                                 </div>

@@ -48,7 +48,7 @@
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Magang</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/persuratan') }}">Permintaan Magang</a></li>
+                                <li><a class="nav-link" href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a></li>
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
                         </li>
@@ -191,7 +191,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="../assets/js/stisla.js"></script>
+    <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
     <!-- Data Tables -->
     @include('pages.layouts.datatables')
@@ -209,7 +209,7 @@
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 
     <!-- Page Specific JS File -->
-    <script src="../assets/js/page/index-0.js"></script>
+    <script src="{{ asset('assets/js/page/index-0.js') }}"></script>
 </body>
 
 </html>

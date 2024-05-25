@@ -11,7 +11,7 @@
             @include('pages.layouts.navbar')
 
             <!-- Sidebar -->
-            <div class="main-sidebar sidebar-style-2">
+            <div class="main-sidebar sidebar-style-2"
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
                         <a href="{{ url('/') }}">Admin</a>
@@ -48,7 +48,7 @@
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Magang</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/persuratan') }}">Permintaan Magang</a></li>
+                                <li><a class="nav-link" href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a></li>
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
                         </li>
@@ -201,18 +201,18 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="../assets/js/stisla.js"></script>
+    <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
     <!-- JS Data Tables Print -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <!-- JS Libraies -->
-    <script src="../node_modules/simpleweather/jquery.simpleWeather.min.js"></script>
-    <script src="../node_modules/chart.js/dist/Chart.min.js"></script>
-    <script src="../node_modules/jqvmap/dist/jquery.vmap.min.js"></script>
-    <script src="../node_modules/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-    <script src="../node_modules/summernote/dist/summernote-bs4.js"></script>
-    <script src="../node_modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
+    <script src="{{ asset('node_modules/simpleweather/jquery.simpleWeather.min.js') }}"></script>
+    <script src="{{ asset('node_modules/chart.js/dist/Chart.min.js') }}"></script>
+    <script src="{{ asset('node_modules/jqvmap/dist/jquery.vmap.min.js') }}"></script>
+    <script src="{{ asset('node_modules/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
+    <script src="{{ asset('node_modules/summernote/dist/summernote-bs4.js') }}"></script>
+    <script src="{{ asset('node_modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
 
     <!-- JS Libraies -->
     <script src="{{ asset('node_modules/simpleweather/jquery.simpleWeather.min.js') }}"></script>
