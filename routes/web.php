@@ -34,9 +34,7 @@ Route::group(['middleware' => 'role'], function () {
 
     // AUTH ADMIN
     // Menampilkan index simmag admin
-    Route::get('/', function() {
-        return view('pages.contents.admin.index');
-    });
+    Route::get('/', [HomeController::class, 'statistik']);
 
     //Kelola pengguna
     // Admin
@@ -67,28 +65,25 @@ Route::group(['middleware' => 'role'], function () {
     Route::patch('/data-pengguna/dosen/edit/{id}', [DataDosenController::class, 'update']);
 
     // Pengumuman
-    Route::get('/pengumuman', [PengumumanController::class,'show']);
-    Route::get('/formPengumuman', [PengumumanController::class,'create']);
-    Route::post('/pengumuman', [PengumumanController::class,'store']);
-    Route::delete('/pengumuman/{id}', [PengumumanController::class, 'destroy']);
+    Route::resource('/pengumuman', PengumumanController::class)->except('show');
+    Route::get('/pengumuman/edit/{id}', [PengumumanController::class,'edit']);
+    Route::patch('/pengumuman/edit/{id}', [PengumumanController::class,'update']);
 
     // Data Magang - Admin Side
-    Route::resource('/admin/data-magang', DataMagangAdminSideController::class)->except('show','store', 'update', 'edit');
+    Route::resource('/admin/data-magang', DataMagangAdminSideController::class)->except('show', 'store', 'update', 'edit');
 
     // Pengajuan Magang - Admin Side
-    Route::resource('/admin/mahasiswa/pengajuan-magang', PengajuanMagangAdminSideController::class)->except('show','update', 'edit');
+    Route::resource('/admin/mahasiswa/pengajuan-magang', PengajuanMagangAdminSideController::class)->except('show', 'update', 'edit');
     Route::get('/admin/mahasiswa/pengajuan-magang/create/{id}', [PengajuanMagangAdminSideController::class,'create']);
     Route::post('/admin/mahasiswa/pengajuan-magang/store/{id}', [PengajuanMagangAdminSideController::class,'store']);
 
 
     // AUTH MAHASISWA
     // Menampilkan index simmag mahasiswa
-    Route::get('/mahasiswa/dashboard', function() {
-        return view('pages.contents.mahasiswa.index');
-    });
+    Route::get('/mahasiswa/dashboard', [HomeController::class, 'index']);
 
     // Pengajuan Magang
-    Route::resource('/mahasiswa/pengajuan-magang', PengajuanMagangController::class)->except('show','update', 'destroy', 'edit');
+    Route::resource('/mahasiswa/pengajuan-magang', PengajuanMagangController::class)->except('show', 'update', 'destroy', 'edit');
     // Data Magang - Mahasiswa Side
     Route::resource('/mahasiswa/data-magang', DataMagangController::class)->except('show', 'update', 'destroy', 'edit');
 

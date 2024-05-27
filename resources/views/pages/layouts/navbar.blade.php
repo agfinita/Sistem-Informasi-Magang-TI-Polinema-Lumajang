@@ -4,10 +4,13 @@
     <form class="form-inline mr-auto">
         <ul class="navbar-nav mr-3">
             <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
-            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i
-                        class="fas fa-search"></i></a></li>
+            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
         </ul>
+
+        <!-- Tanggal waktu terkini-->
+        <div id="currentDateTime" style="color: white"></div>
     </form>
+
     <ul class="navbar-nav navbar-right">
         <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
                 class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
@@ -58,3 +61,31 @@
         </li>
     </ul>
 </nav>
+
+<script>
+    function displayCurrentDateTime() {
+        const now = new Date();
+        const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+        const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September',
+            'Oktober', 'November', 'Desember'
+        ];
+
+        const dayName = days[now.getDay()];
+        const day = String(now.getDate()).padStart(2, '0');
+        const month = months[now.getMonth()];
+        const year = now.getFullYear();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+
+        const formattedDateTime = `${dayName}, ${day} ${month} ${year} ${hours}:${minutes}:${seconds}`;
+
+        document.getElementById('currentDateTime').innerText = formattedDateTime;
+    }
+
+    // Update the date and time every second
+    setInterval(displayCurrentDateTime, 1000);
+
+    // Display the date and time immediately on page load
+    displayCurrentDateTime();
+</script>

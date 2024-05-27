@@ -21,6 +21,7 @@
                     </div>
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
+                        <li class="menu-header">Dashboard</li>
                         <li class="active"><a class="nav-link" href="{{ url('/') }}"><i class="ion ion-speedometer"
                                     data-pack="default" data-tags="travel, accelerate"></i> <span>Dashboard</span></a>
                         </li>
@@ -60,7 +61,9 @@
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                     class="fas fa-columns"></i> <span>Magang</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a></li>
+                                <li><a class="nav-link"
+                                        href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a>
+                                </li>
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
                         </li>
@@ -99,21 +102,21 @@
                         <h1>Dashboard</h1>
                     </div>
                     <div class="row">
+                        <!-- Total seluruh pengguna -->
                         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                             <div class="card card-statistic-1">
                                 <div class="card-icon bg-primary">
-                                    <i class="far fa-user"></i>
+                                    <i class="ion ion-android-people"></i>
                                 </div>
                                 <div class="card-wrap">
                                     <div class="card-header">
-                                        <h4>Total Admin</h4>
+                                        <h4>Total Pengguna</h4>
                                     </div>
-                                    <div class="card-body">
-                                        10
-                                    </div>
+                                    <div class="card-body"> {{ $totalUser }} </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- Berita -->
                         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                             <div class="card card-statistic-1">
                                 <div class="card-icon bg-danger">
@@ -123,12 +126,11 @@
                                     <div class="card-header">
                                         <h4>News</h4>
                                     </div>
-                                    <div class="card-body">
-                                        42
-                                    </div>
+                                    <div class="card-body"> {{ $totalPengumuman }} </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- Total pengajuan magang -->
                         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                             <div class="card card-statistic-1">
                                 <div class="card-icon bg-warning">
@@ -136,14 +138,13 @@
                                 </div>
                                 <div class="card-wrap">
                                     <div class="card-header">
-                                        <h4>Reports</h4>
+                                        <h4>Data Magang</h4>
                                     </div>
-                                    <div class="card-body">
-                                        1,201
-                                    </div>
+                                    <div class="card-body"> {{ $totalDataMagang }} </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- Online user -->
                         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                             <div class="card card-statistic-1">
                                 <div class="card-icon bg-success">
@@ -153,9 +154,32 @@
                                     <div class="card-header">
                                         <h4>Online Users</h4>
                                     </div>
-                                    <div class="card-body">
-                                        47
-                                    </div>
+                                    <div class="card-body">{{ $activeUsers }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Statistik -->
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Kategori Pengguna</h4>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="myChart2"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Status Pengajuan Magang</h4>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="myChart4"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -182,12 +206,7 @@
     <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
     <!-- JS Libraies -->
-    <script src="{{ asset('node_modules/simpleweather/jquery.simpleWeather.min.js') }}"></script>
     <script src="{{ asset('node_modules/chart.js/dist/Chart.min.js') }}"></script>
-    <script src="{{ asset('node_modules/jqvmap/dist/jquery.vmap.min.js') }}"></script>
-    <script src="{{ asset('node_modules/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
-    <script src="{{ asset('node_modules/summernote/dist/summernote-bs4.js') }}"></script>
-    <script src="{{ asset('node_modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
 
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
@@ -195,6 +214,83 @@
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('assets/js/page/index-0.js') }}"></script>
+    <!-- Chart -->
+    <script>
+        "use strict";
+
+        // Bar chart
+        var ctx = document.getElementById("myChart2").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Admin", "Dosen", "Mahasiswa"],
+                datasets: [{
+                    label: 'Statistics',
+                    data: [{{ $totalAdmin }}, {{ $totalDosen }}, {{ $totalMhs }}],
+                    borderWidth: 2,
+                    backgroundColor: '#6777ef',
+                    borderColor: '#6777ef',
+                    borderWidth: 2.5,
+                    pointBackgroundColor: '#ffffff',
+                    pointRadius: 4
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        gridLines: {
+                            drawBorder: false,
+                            color: '#f2f2f2',
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 150
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            display: false
+                        },
+                        gridLines: {
+                            display: false
+                        }
+                    }]
+                },
+            }
+        });
+
+        // Pie chart
+        var ctx = document.getElementById("myChart4").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: [
+                        {{ $selesai }},
+                        {{ $diproses }},
+                    ],
+                    backgroundColor: [
+                        '#63ed7a',
+                        '#ffa426',
+                    ],
+                    label: 'Dataset 1'
+                }],
+                labels: [
+                    'Selesai',
+                    'Diproses',
+                ],
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'bottom',
+                },
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -21,6 +21,7 @@
                     </div>
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
+                        <li class="menu-header">Dashboard</li>
                         <li><a class="nav-link" href="{{ url('/') }}"><i class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i><span>Dashboard</span></a></li>
                         <li><a class="nav-link" href="{{ url('/pengumuman') }}"><i class="ion ion-speakerphone"></i><span>Pengumuman</span></a></li>
 
@@ -169,8 +170,8 @@
                                             </div>
                                         </div>
                                         <div class="card-footer">
-                                            <button type="submit" id="kirim" name="kirim"
-                                                class="btn btn-primary">Tambah</button>
+                                            <button type="submit" id="kirim" name="kirim" class="btn btn-primary">Tambah</button>
+                                            <a href="{{ url('/data-pengguna/dosen') }}" class="btn btn-warning m-2">Batal</a>
                                         </div>
                                     </form>
                                 </div>

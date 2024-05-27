@@ -21,6 +21,7 @@
                     </div>
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
+                        <li class="menu-header">Dashboard</li>
                         <li><a class="nav-link" href="{{ url('/') }}"><i class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i><span>Dashboard</span></a></li>
                         <li><a class="nav-link" href="{{ url('/pengumuman') }}"><i class="ion ion-speakerphone"></i><span>Pengumuman</span></a></li>
 
@@ -123,7 +124,11 @@
                                             <div class="form-group row">
                                                 <label for="cat" class="col-sm-3 col-form-label">Kategori</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="cat" name="cat" placeholder="Masukkan kategori pengumuman">
+                                                    <select class="form-control" id="cat" name="cat">
+                                                        <option value="" disabled selected>Pilih kategori pengumuman</option>
+                                                        <option value="Informasi">Informasi</option>
+                                                        <option value="Pendaftaran">Pendaftaran</option>
+                                                    </select>
 
                                                     @if (count($errors) > 0)
                                                     <div style="width: auto; color:red; margin-top:0.25rem;">
@@ -136,8 +141,11 @@
                                             <div class="form-group row">
                                                 <label for="creator" class="col-sm-3 col-form-label">Penulis</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="creator" name="creator" placeholder="Masukkan role penulis. Contoh: 'Admin' atau 'Dosen' ">
-
+                                                    <select class="form-control" id="creator" name="creator">
+                                                        <option selected disabled>- select -</option>
+                                                        <option value="Admin">Admin</option>
+                                                        <option value="Dosen">Dosen</option>
+                                                    </select>
                                                     @if (count($errors) > 0)
                                                     <div style="width: auto; color:red; margin-top:0.25rem;">
                                                         {{ $errors->first('creator') }}
@@ -156,6 +164,7 @@
 
                                         <div class="card-footer">
                                             <button type="submit" id="kirim" name="kirim" class="btn btn-primary">Tambah</button>
+                                            <a href="{{ url('/pengumuman') }}" class="btn btn-warning m-2">Batal</a>
                                         </div>
                                     </form>
                                 </div>
@@ -175,20 +184,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="../assets/js/stisla.js"></script> --}}
+    <script src="{{ asset('assets/js/stisla.js') }}"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> --}}
 
     <!-- JS Libraies -->
-    <script src="{{ asset('node_modules/simpleweather/jquery.simpleWeather.min.js') }}"></script>
-    <script src="{{ asset('node_modules/chart.js/dist/Chart.min.js') }}"></script>
-    <script src="{{ asset('node_modules/jqvmap/dist/jquery.vmap.min.js') }}"></script>
-    <script src="{{ asset('node_modules/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
     <script src="{{ asset('node_modules/summernote/dist/summernote-bs4.js') }}"></script>
-    <script src="{{ asset('node_modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
 
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
+
+    <!-- Page Specific JS File -->
 </body>
 
 </html>

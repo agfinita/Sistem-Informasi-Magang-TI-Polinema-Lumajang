@@ -20,6 +20,7 @@
                         <a href="{{ url('/') }}">SIMAG</a>
                     </div>
                     <ul class="sidebar-menu">
+                        <li class="menu-header">Dashboard</li>
                         <li><a class="nav-link" href="{{ url('/') }}"><i class="ion ion-speedometer"
                                     data-pack="default" data-tags="travel, accelerate"></i> <span>Dashboard</span></a>
                         </li>
@@ -97,7 +98,7 @@
                                 <div class="col-md-6 mx-2 my-auto">
                                     <!-- Tambah data -->
                                     <button type="submit" class="btn btn-success">
-                                        <a href="{{ url('/formPengumuman') }}" class="text-decoration-none text-white">
+                                        <a href="{{ url('/pengumuman/create') }}" class="text-decoration-none text-white">
                                             <span>
                                                 <i class="ion ion-plus-circled" data-pack="default"
                                                     data-tags="add, include, new, invite, +">
@@ -131,14 +132,14 @@
                                                     <tr>
                                                         <td class="text-center">{{ $no++ }}</td>
                                                         <td>{{ $p->judul }}</td>
-                                                        <td>{{ $p->deskripsi }}</td>
+                                                        <td>{!! $p->deskripsi !!}</td>
                                                         <td>{{ $p->kategori }}</td>
                                                         <td>{{ $p->created_by }}</td>
                                                         <td>{{ $p->created_at }}</td>
 
                                                         <td>
                                                             <div class="row">
-                                                                <a href="#">
+                                                                <a href="{{ url('/pengumuman/edit/' . $p->id) }}">
                                                                     <button class="btn btn-sm btn-warning mx-1">
                                                                         <i class="ion ion-edit" data-pack="default"
                                                                             data-tags="change, update, write, type, pencil"></i>
@@ -177,23 +178,14 @@
 
     <!-- General JS Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
     <!-- JS Libraies -->
-    <script src="{{ asset('node_modules/simpleweather/jquery.simpleWeather.min.js') }}"></script>
-    <script src="{{ asset('node_modules/chart.js/dist/Chart.min.js') }}"></script>
-    <script src="{{ asset('node_modules/jqvmap/dist/jquery.vmap.min.js') }}"></script>
-    <script src="{{ asset('node_modules/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
     <script src="{{ asset('node_modules/summernote/dist/summernote-bs4.js') }}"></script>
-    <script src="{{ asset('node_modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
 
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
@@ -205,7 +197,6 @@
     <script src="{{ asset('node_modules/datatables.net-select-bs4/js/select.bootstrap4.min.js') }}"></script>
 
     <!-- Page Specific JS File -->
-    <script src="{{ asset('assets/js/page/index-0.js') }}"></script>
     <script src="{{ asset('assets/js/page/modules-datatables.js') }}"></script>
 </body>
 

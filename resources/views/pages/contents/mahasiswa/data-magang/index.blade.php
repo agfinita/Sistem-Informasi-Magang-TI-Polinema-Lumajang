@@ -21,6 +21,7 @@
                     </div>
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
+                        <li class="menu-header">Dashboard</li>
                         <li><a class="nav-link" href="{{ url('/mahasiswa/dashboard') }}"><i
                                     class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i>
                                 <span>Dashboard</span></a></li>
@@ -158,12 +159,6 @@
 <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
 <!-- JS Libraies -->
-<script src="{{ asset('node_modules/simpleweather/jquery.simpleWeather.min.js') }}"></script>
-<script src="{{ asset('node_modules/chart.js/dist/Chart.min.js') }}"></script>
-<script src="{{ asset('node_modules/jqvmap/dist/jquery.vmap.min.js') }}"></script>
-<script src="{{ asset('node_modules/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
-<script src="{{ asset('node_modules/summernote/dist/summernote-bs4.js') }}"></script>
-<script src="{{ asset('node_modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
 
 <!-- Template JS File -->
 <script src="{{ asset('assets/js/scripts.js') }}"></script>
@@ -175,7 +170,6 @@
 <script src="{{ asset('node_modules/datatables.net-select-bs4/js/select.bootstrap4.min.js') }}"></script>
 
 <!-- Page Specific JS File -->
-<script src="{{ asset('assets/js/page/index-0.js') }}"></script>
 <script src="{{ asset('assets/js/page/modules-datatables.js') }}"></script>
 
 </body>

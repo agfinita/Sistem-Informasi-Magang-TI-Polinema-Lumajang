@@ -14,11 +14,11 @@
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <!-- CSS Libraries -->
-    <link rel="stylesheet" href="../node_modules/bootstrap-social/bootstrap-social.css">
+    <link rel="stylesheet" href="{{ asset('node_modules/bootstrap-social/bootstrap-social.css') }}">
 
     <!-- Template CSS -->
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
 </head>
 
 <body>
@@ -29,18 +29,18 @@
                     <div class="p-4 m-3">
                         <img src="../assets/img/logo_polinema.png" alt="logo" width="125"
                             class="shadow-light rounded-circle mb-4 mt-2">
-                        <h4 class="text-dark font-weight-normal">SIM-MAGANG<span class="font-weight-bold"><br>JURUSAN
+                        <h4 class="text-dark font-weight-normal">SI-MAGANG<span class="font-weight-bold"><br>JURUSAN
                                 TEKNOLOGI INFORMASI</span></h4>
                         <p class="text-muted">PSDKU Politeknik Negeri Malang di Lumajang</p>
 
                         <!-- Form Login -->
-                        <form method="POST" action="{{url('/prosesLogin')}}" autocomplete="off">
+                        <form method="POST" action="{{ url('/prosesLogin') }}" autocomplete="off">
                             @csrf
 
-                            @if(session('error'))
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
+                            @if (session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
                             @endif
 
                             <div id="alertUsernamePassword" class="alert alert-danger" style="display: none;">
@@ -50,20 +50,22 @@
 
                             <div class="form-group">
                                 <label for="username">Username</label>
-                                <input id="username" type="text" class="form-control" name="username"
-                                    tabindex="1" autofocus>
+                                <input id="username" type="text" class="form-control" name="username" tabindex="1"
+                                    autofocus>
                             </div>
 
                             <div class="form-group">
                                 <div class="d-block">
                                     <label for="password" class="control-label">Password</label>
                                 </div>
-                                <input id="password" type="password" class="form-control" name="password" tabindex="2">
+                                <input id="password" type="password" class="form-control" name="password"
+                                    tabindex="2">
                             </div>
 
                             <div class="form-group row justify-content-between mx-auto">
                                 <div class="col-auto custom-control custom-checkbox">
-                                    <input type="checkbox" name="show" class="custom-control-input" tabindex="3" id="show-password" onclick="togglePasswordVisibility()">
+                                    <input type="checkbox" name="show" class="custom-control-input" tabindex="3"
+                                        id="show-password" onclick="togglePasswordVisibility()">
                                     <label class="custom-control-label" for="show-password">Show Password</label>
                                 </div>
 
@@ -75,11 +77,11 @@
                             </div>
 
                             <div class="form-group text-right">
-                                <a href="{{url('/forgot')}}" class="float-left mt-3">
+                                <a href="{{ url('/forgot') }}" class="float-left mt-3">
                                     Forgot Password?
                                 </a>
-                                <button type="submit" id="loginBtn" name="login" class="btn btn-primary btn-lg btn-icon icon-right"
-                                    tabindex="4">
+                                <button type="submit" id="loginBtn" name="login"
+                                    class="btn btn-primary btn-lg btn-icon icon-right" tabindex="4">
                                     Login
                                 </button>
                             </div>
@@ -106,27 +108,34 @@
     <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
     <!-- JS Libraies -->
-    <script src="{{ asset('node_modules/simpleweather/jquery.simpleWeather.min.js') }}"></script>
-    <script src="{{ asset('node_modules/chart.js/dist/Chart.min.js') }}"></script>
-    <script src="{{ asset('node_modules/jqvmap/dist/jquery.vmap.min.js') }}"></script>
-    <script src="{{ asset('node_modules/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
-    <script src="{{ asset('node_modules/summernote/dist/summernote-bs4.js') }}"></script>
-    <script src="{{ asset('node_modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
 
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 
-    <!-- Show password -->
     <script>
+        // Proses login
+        document.getElementById('loginBtn').addEventListener('click', function(e) {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            if (!username || !password) {
+                e.preventDefault(); // Menghentikan submit form
+                alertUsernamePassword.style.display = 'block'; // Menampilkan peringatan
+            } else {
+                alertUsernamePassword.style.display = 'none'; // Menyembunyikan peringatan jika input sudah diisi
+            }
+        });
+
+        // Show password
         function togglePasswordVisibility() {
-            var passwordInput           = document.getElementById('password');
-            var showPasswordCheckbox    = document.getElementById('show-password');
+            var passwordInput = document.getElementById('password');
+            var showPasswordCheckbox = document.getElementById('show-password');
 
             if (showPasswordCheckbox.checked) {
-                passwordInput.type  = 'text';
+                passwordInput.type = 'text';
             } else {
-                passwordInput.type  = 'password';
+                passwordInput.type = 'password';
             }
         }
     </script>

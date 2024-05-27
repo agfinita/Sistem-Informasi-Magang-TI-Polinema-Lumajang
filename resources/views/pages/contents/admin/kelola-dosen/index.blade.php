@@ -21,46 +21,57 @@
                     </div>
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
-                        <li><a class="nav-link" href="{{ url('/') }}"><i
-                            class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i> <span>Dashboard</span></a></li>
+                        <li class="menu-header">Dashboard</li>
+                        <li><a class="nav-link" href="{{ url('/') }}"><i class="ion ion-speedometer"
+                                    data-pack="default" data-tags="travel, accelerate"></i> <span>Dashboard</span></a>
+                        </li>
                         <li><a class="nav-link" href="{{ url('/pengumuman') }}"><i class="ion ion-speakerphone"></i>
-                            <span>Pengumuman</span></a></li>
+                                <span>Pengumuman</span></a></li>
 
 
-                            <li class="menu-header">Manajemen Pengguna</li>
-                            <li class="nav-item-dropdown">
-                                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                                    <i class="ion ion-ios-paper"></i><span>Data Pengguna</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="nav-link" href="{{ url('/data-pengguna/admin') }}"><span>Admin</span></a></li>
-                                    <li><a class="nav-link" href="{{ url('/data-pengguna/dosen') }}"><span>Dosen</span></a></li>
-                                    <li><a class="nav-link" href="{{ url('/data-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown active">
-                                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                        class="ion ion-android-person"></i> <span>Kelola Pengguna</span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="nav-link" href="{{ url('/kelola-pengguna/admin') }}"><span>Admin</span></a></li>
-                                        <li class="active"><a class="nav-link" href="{{ url('/kelola-pengguna/dosen') }}"><span>Dosen</span></a></li>
-                                        <li><a class="nav-link" href="{{ url('/kelola-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
-                                    </ul>
-                            </li>
+                        <li class="menu-header">Manajemen Pengguna</li>
+                        <li class="nav-item-dropdown">
+                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                                <i class="ion ion-ios-paper"></i><span>Data Pengguna</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="nav-link" href="{{ url('/data-pengguna/admin') }}"><span>Admin</span></a>
+                                </li>
+                                <li><a class="nav-link" href="{{ url('/data-pengguna/dosen') }}"><span>Dosen</span></a>
+                                </li>
+                                <li><a class="nav-link"
+                                        href="{{ url('/data-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown active">
+                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                                    class="ion ion-android-person"></i> <span>Kelola Pengguna</span></a>
+                            <ul class="dropdown-menu">
+                                <li><a class="nav-link"
+                                        href="{{ url('/kelola-pengguna/admin') }}"><span>Admin</span></a></li>
+                                <li class="active"><a class="nav-link"
+                                        href="{{ url('/kelola-pengguna/dosen') }}"><span>Dosen</span></a></li>
+                                <li><a class="nav-link"
+                                        href="{{ url('/kelola-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
+                            </ul>
+                        </li>
 
                         <li class="menu-header">Manajemen Magang</li>
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                     class="fas fa-columns"></i> <span>Magang</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a></li>
+                                <li><a class="nav-link"
+                                        href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a>
+                                </li>
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
                         </li>
 
                         <li class="menu-header">Lainnya</li>
                         <li>
-                            <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a class="nav-link" href="#"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="fas fa-sign-out-alt"></i>
                                 <span>Logout</span>
                             </a>
@@ -142,17 +153,24 @@
                                                             <td>{{ $u->updated_at }}</td>
                                                             <td>
                                                                 <div class="row">
-                                                                    <a href="{{ url('/kelola-pengguna/dosen/edit/' . $u->id) }}">
+                                                                    <a
+                                                                        href="{{ url('/kelola-pengguna/dosen/edit/' . $u->id) }}">
                                                                         <button class="btn btn-sm btn-warning mx-1">
-                                                                            <i class="ion ion-edit" data-pack="default" data-tags="change, update, write, type, pencil"></i>
+                                                                            <i class="ion ion-edit" data-pack="default"
+                                                                                data-tags="change, update, write, type, pencil"></i>
                                                                         </button>
                                                                     </a>
 
-                                                                    <form action="{{ url('/kelola-pengguna/dosen/' . $u->id) }}" method="POST" onsubmit="return confirm('Are you sure delete data?')">
+                                                                    <form
+                                                                        action="{{ url('/kelola-pengguna/dosen/' . $u->id) }}"
+                                                                        method="POST"
+                                                                        onsubmit="return confirm('Are you sure delete data?')">
                                                                         @method('DELETE')
                                                                         @csrf
                                                                         <button class="btn btn-sm btn-danger mx-1">
-                                                                            <i class="ion ion-trash-a" data-pack="default" data-tags="delete, remove, dump"></i>
+                                                                            <i class="ion ion-trash-a"
+                                                                                data-pack="default"
+                                                                                data-tags="delete, remove, dump"></i>
                                                                         </button>
                                                                     </form>
                                                                 </div>
@@ -208,19 +226,12 @@
     @include('pages.layouts.datatables')
 
     <!-- JS Libraies -->
-    <script src="{{ asset('node_modules/simpleweather/jquery.simpleWeather.min.js') }}"></script>
-    <script src="{{ asset('node_modules/chart.js/dist/Chart.min.js') }}"></script>
-    <script src="{{ asset('node_modules/jqvmap/dist/jquery.vmap.min.js') }}"></script>
-    <script src="{{ asset('node_modules/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
-    <script src="{{ asset('node_modules/summernote/dist/summernote-bs4.js') }}"></script>
-    <script src="{{ asset('node_modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
 
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 
     <!-- Page Specific JS File -->
-    <script src="../assets/js/page/index-0.js"></script>
 </body>
 
 </html>

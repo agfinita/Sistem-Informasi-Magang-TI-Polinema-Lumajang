@@ -12,14 +12,19 @@ class PengumumanController extends Controller
      * Display a listing of the resource.
      */
     public function index() {
-        //
+        $pengumuman = DB::table('pengumuman')
+                        ->select('id', 'created_by', 'judul',
+                                'deskripsi', 'kategori', 'created_at')
+                        ->orderBy('pengumuman.id', 'DESC')->get();
+
+        return view('pages.contents.admin.pengumuman.index', compact('pengumuman'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create() {
-        return view('pages.contents.admin.form-pengumuman');
+        return view('pages.contents.admin.pengumuman.create');
     }
 
     /**
@@ -37,40 +42,62 @@ class PengumumanController extends Controller
         // Menyimpan ke dalam database
         DB::table('pengumuman')->insert([
             'judul'         => $validatedData['judul'],
-            'deskripsi'     => $validatedData['desc'],
+            'deskripsi'     => strip_tags($validatedData['desc'], '<a><b><u>'),
             'kategori'      => $validatedData['cat'],
             'created_by'    => $validatedData['creator'],
             'created_at'    => $validatedData['date_created']
         ]);
 
         // Redirect halaman
-        return redirect('/pengumuman')->with('status', 'Data berhasil dibuat.');
+        return redirect('/pengumuman')->with('status', 'Pengumuman beru berhasil ditambahkan.');
     }
 
     /**
      * Display the specified resource.
      */
     public function show(Pengumuman $pengumuman) {
-        $pengumuman = DB::table('pengumuman')
-                        ->select('id', 'created_by', 'judul',
-                                'deskripsi', 'kategori', 'created_at')
-                        ->orderBy('pengumuman.id', 'DESC')->get();
-
-        return view('pages.contents.admin.pengumuman', compact('pengumuman'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pengumuman $pengumuman) {
-        //
+    public function edit($id) {
+        $pengumuman = Pengumuman::find($id);
+
+        if(!$pengumuman) {
+            return redirect('/pengumuman')->with('error', 'Pengumuman tidak ditemukan');
+        }
+
+        return view('pages.contents.admin.pengumuman.edit', compact('pengumuman'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pengumuman $pengumuman) {
-        //
+    public function update(Request $request, $id) {
+        $validatedData  = $request->validate([
+            'judul'         => 'required',
+            'desc'          => 'required',
+            'cat'           => 'required',
+            'creator'       => 'required',
+            'date_created'  => 'required|date'
+        ]);
+
+        $pengumuman = Pengumuman::find($id);
+        if (!$pengumuman) {
+            return redirect('/pengumuman')->with('error', 'Pengumuman tidak ditemukan');
+        }
+
+        $pengumuman->update([
+            'judul'         => $validatedData['judul'],
+            'deskripsi'     => $validatedData['desc'],
+            'kategori'      => $validatedData['cat'],
+            'created_by'    => $validatedData['creator'],
+            'created_at'    => $validatedData['date_created']
+        ]);
+
+        return redirect('/pengumuman')->with('status', 'Pengumuman berhasil diperbarui.');
     }
 
     /**
@@ -85,6 +112,6 @@ class PengumumanController extends Controller
             return redirect('/pengumuman')->with('status'. 'Data berhasil dihapus.');
         }
 
-        return redirect('/pengumuman')->with('error', 'Data tidak ditemukan');
+        return redirect('/pengumuman')->with('error', 'Pengumuman tidak ditemukan');
     }
 }

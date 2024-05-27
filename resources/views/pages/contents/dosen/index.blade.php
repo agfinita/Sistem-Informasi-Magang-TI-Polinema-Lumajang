@@ -21,6 +21,7 @@
                     </div>
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
+                        <li class="menu-header">Dashboard</li>
                         <li class="active"><a class="nav-link" href="{{ url('/dosen/dashboard') }}"><i class="ion ion-speedometer"
                                     data-pack="default" data-tags="travel, accelerate"></i>
                                 <span>Dashboard</span></a></li>

@@ -21,6 +21,7 @@
                     </div>
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
+                        <li class="menu-header">Dashboard</li>
                         <li><a class="nav-link" href="{{ url('/') }}"><i
                             class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i> <span>Dashboard</span></a></li>
                         <li><a class="nav-link" href="{{ url('/pengumuman') }}"><i class="ion ion-speakerphone"></i>
@@ -121,14 +122,14 @@
                                                 <div class="col-sm-9">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="radio"
-                                                            name="gridRadios-status" id="gridRadios-status" value="1" {{ $users->is_active == 1? 'checked' : '' }}>
+                                                            name="gridRadios-status" id="gridRadios-status-1" value="1" {{ $users->is_active == 1? 'checked' : '' }}>
                                                         <label class="form-check-label" for="gridRadios-status">
                                                             Active
                                                         </label>
                                                     </div>
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="radio"
-                                                            name="gridRadios-status" id="gridRadios-status" value="0" {{ $users->is_active == 0? 'checked' : '' }}>
+                                                            name="gridRadios-status" id="gridRadios-status-2" value="0" {{ $users->is_active == 0? 'checked' : '' }}>
                                                         <label class="form-check-label" for="gridRadios-status">
                                                             Non-active
                                                         </label>
@@ -212,12 +213,6 @@
     <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
     <!-- JS Libraies -->
-    <script src="{{ asset('node_modules/simpleweather/jquery.simpleWeather.min.js') }}"></script>
-    <script src="{{ asset('node_modules/chart.js/dist/Chart.min.js') }}"></script>
-    <script src="{{ asset('node_modules/jqvmap/dist/jquery.vmap.min.js') }}"></script>
-    <script src="{{ asset('node_modules/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
-    <script src="{{ asset('node_modules/summernote/dist/summernote-bs4.js') }}"></script>
-    <script src="{{ asset('node_modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
 
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
