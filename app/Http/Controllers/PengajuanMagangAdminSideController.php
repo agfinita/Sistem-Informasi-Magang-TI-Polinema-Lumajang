@@ -26,10 +26,7 @@ class PengajuanMagangAdminSideController extends Controller
      * Show the form for creating a new resource.
      */
     public function create($id) {
-        $pengajuanMagang = DB::table('pengajuan_magang')
-            ->select('id', 'status', 'mahasiswa_id')
-            ->where('id', $id)
-            ->first();
+        $pengajuanMagang = PengajuanMagang::findOrFail($id);
         return view ('pages.contents.admin.pengajuan-magang.create', compact('pengajuanMagang'));
     }
 
@@ -37,38 +34,43 @@ class PengajuanMagangAdminSideController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request, $id) {
-        $validatedData  = $request->validate([
-            'file'      => 'required|file|mimes:doc,docx,pdf',
-            'status'    => 'required|in:diproses,selesai'
+        $validatedData = $request->validate([
+            'file'   => 'nullable|file|mimes:doc,docx,pdf',
+            'status' => 'required|in:diproses,selesai'
         ]);
 
-        $pengajuanMagang = PengajuanMagang::where('id', $id)->first();
-        if (!$pengajuanMagang) {
-            return redirect('/admin/mahasiswa/pengajuan-magang')->with('error', 'Data tidak ditemukan!');
-        }
+        $pengajuanMagang = PengajuanMagang::findOrFail($id);
 
-        // Handle upload file
         if ($request->hasFile('file')) {
-            $file           = $request->file('file');
+            $file = $request->file('file');
 
             // Generate nama file unik
-            $originalname   = $file->getClientOriginalName();
-            $filename   = uniqid() . '_' . $originalname;
+            $originalname = $file->getClientOriginalName();
+            $filename = uniqid() . '_' . $originalname;
 
             // Menentukan lokasi penyimpanan
-            $path       = $file->storeAs('uploads', $filename, 'public');
+            $path = $file->storeAs('uploads', $filename, 'public');
+
+            // Hapus file lama jika ada
+            if ($pengajuanMagang->files) {
+                $oldFilePath = public_path('storage/' . $pengajuanMagang->files);
+                if (file_exists($oldFilePath)) {
+                    unlink($oldFilePath);
+                }
+            }
 
             // Simpan path ke dalam database
-            $validatedData['file']  = $path;
+            $pengajuanMagang->files = $path;
         }
 
         // Menyimpan ke database
-        $pengajuanMagang->status    = $validatedData['status'];
-        $pengajuanMagang->files     = $validatedData['file'];
+        $pengajuanMagang->status = $validatedData['status'];
         $pengajuanMagang->save();
 
         return redirect('/admin/mahasiswa/pengajuan-magang')->with('success', 'Success!');
     }
+
+
 
     /**
      * Display the specified resource.

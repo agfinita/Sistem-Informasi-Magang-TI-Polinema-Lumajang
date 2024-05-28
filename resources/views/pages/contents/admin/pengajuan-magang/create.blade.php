@@ -103,11 +103,12 @@
                                         @csrf
                                         <div class="card-body">
                                             <div class="form-group row">
-                                                <label for="file" class="col-sm-1 col-form-label">File</label>
-                                                <div class="col-sm-5">
-                                                    <div class="form-group">
-                                                        <input type="file" class="form-control-file" id="file" name="file">
-                                                    </div>
+                                                <label for="file" class="col-sm-2 col-form-label">File Pengajuan Magang</label>
+                                                <div class="col-sm-7">
+                                                    @if ($pengajuanMagang->files)
+                                                        <p>File saat ini: <a href="{{ url('storage/' . $pengajuanMagang->files) }}" target="_blank">{{ basename($pengajuanMagang->files) }}</a></p>
+                                                    @endif
+                                                    <input type="file" class="form-control-file" id="file" name="file">
 
                                                     @if ($errors->has('file'))
                                                         <div style="width: auto; color:red; margin-top:0.25rem;">
@@ -118,7 +119,7 @@
                                             </div>
 
                                             <div class="form-group row">
-                                                <label for="status" class="col-sm-1 col-form-label">Status</label>
+                                                <label for="status" class="col-sm-2 col-form-label">Status</label>
                                                 <div class="col-sm-2">
                                                     <select class="form-control" name="status">
                                                         <option disabled selected>-select-</option>
@@ -136,7 +137,10 @@
                                         </div>
 
                                         <div class="card-footer">
-                                            <button type="submit" id="kirim" name="kirim" class="btn btn-primary">Kirim</button>
+                                            <div class="row">
+                                                <button type="submit" id="kirim" name="kirim" class="btn btn-primary m-2">Kirim</button>
+                                                <button type="button" class="btn btn-warning m-2" onclick="window.history.back();">Batal</button>
+                                            </div>
                                         </div>
                                     </form>
 

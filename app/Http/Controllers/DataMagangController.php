@@ -123,9 +123,15 @@ class DataMagangController extends Controller {
 
         if ($request->hasFile('file')) {
             $file = $request->file('file');
+
+            // Generate nama file unik
             $originalname = $file->getClientOriginalName();
             $filename = uniqid() . '_' . $originalname;
+
+            // Menentukan lokasi penyimpanan
             $path = $file->storeAs('uploads', $filename, 'public');
+
+            // Simpan path ke dalam database
             $validatedData['files'] = $path;
 
             // Hapus file lama jika ada
