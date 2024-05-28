@@ -63,39 +63,34 @@
                                 <!--Horizontal-->
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4>Formulir Data Magang Mahasiswa</h4>
+                                        <h4>Edit Data Magang Mahasiswa</h4>
                                     </div>
 
-                                    <form action="{{ url('/mahasiswa/data-magang') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
+                                    <form action="{{ url('/mahasiswa/data-magang/edit/' . $dm->id) }}" method="POST" autocomplete="off" enctype="multipart/form-data">
+                                        @method('patch')
                                         @csrf
                                         <div class="card-body">
                                             <div class="form-group row">
                                                 <label for="nim" class="col-sm-3 col-form-label">NIM</label>
                                                 <div class="col-sm-7">
-                                                    <input type="text" class="form-control" id="nim" name="nim" placeholder="Masukkan NIM" value="{{ $mahasiswa->nim }}" autofocus readonly>
-
-                                                    {{-- alert --}}
+                                                    <input type="text" class="form-control" id="nim" name="nim" placeholder="Masukkan NIM" value="{{ $dm->mahasiswa->nim }}" readonly>
                                                     @if (count($errors) > 0)
                                                         <div style="width: auto; color:red; margin-top:0.25rem;">
                                                             {{ $errors->first('nim') }}
                                                         </div>
                                                     @endif
-                                                    {{-- end of alert --}}
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label for="nama" class="col-sm-3 col-form-label">Nama</label>
                                                 <div class="col-sm-7">
-                                                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama" value="{{ $mahasiswa->nama }}" disabled>
-
-                                                    {{-- alert --}}
+                                                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama" value="{{ $dm->mahasiswa->nama }}" disabled>
                                                     @if (count($errors) > 0)
                                                         <div style="width: auto; color:red; margin-top:0.25rem;">
                                                             {{ $errors->first('nama') }}
                                                         </div>
                                                     @endif
-                                                    {{-- end of alert --}}
                                                 </div>
                                             </div>
 
@@ -103,17 +98,14 @@
                                                 <label for="control-kelas" class="col-sm-3 col-form-label">Kelas</label>
                                                 <div class="col-sm-2">
                                                     <select class="form-control" id="control-kelas" name="control-kelas" disabled>
-                                                        <option value="3A" {{ $mahasiswa->kelas == '3A' ? 'selected' : '' }}>3A</option>
-                                                        <option value="3B" {{ $mahasiswa->kelas == '3B' ? 'selected' : '' }}>3B</option>
+                                                        <option value="3A" {{ $dm->mahasiswa->kelas == '3A' ? 'selected' : '' }}>3A</option>
+                                                        <option value="3B" {{ $dm->mahasiswa->kelas == '3B' ? 'selected' : '' }}>3B</option>
                                                     </select>
-
-                                                    {{-- alert --}}
                                                     @if (count($errors) > 0)
                                                         <div style="width: auto; color:red; margin-top:0.25rem;">
                                                             {{ $errors->first('control-kelas') }}
                                                         </div>
                                                     @endif
-                                                    {{-- end of alert --}}
                                                 </div>
                                             </div>
 
@@ -121,84 +113,74 @@
                                                 <label for="control-jurusan" class="col-sm-3 col-form-label">Jurusan</label>
                                                 <div class="col-sm-2">
                                                     <select class="form-control" id="control-jurusan" name="control-jurusan" disabled>
-                                                        <option value= "D3 TI" {{ $mahasiswa->jurusan == 'D3 TI' ? 'selected' : '' }}>D3 TI</option>
-                                                        <option value= "D4 TI" {{ $mahasiswa->jurusan == 'D4 TI' ? 'selected' : '' }}>D4 TI</option>
+                                                        <option value="D3 TI" {{ $dm->mahasiswa->jurusan == 'D3 TI' ? 'selected' : '' }}>D3 TI</option>
+                                                        <option value="D4 TI" {{ $dm->mahasiswa->jurusan == 'D4 TI' ? 'selected' : '' }}>D4 TI</option>
                                                     </select>
-
-                                                    {{-- alert --}}
                                                     @if (count($errors) > 0)
                                                         <div style="width: auto; color:red; margin-top:0.25rem;">
                                                             {{ $errors->first('control-jurusan') }}
                                                         </div>
                                                     @endif
-                                                    {{-- end of alert --}}
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label for="instansi_magang" class="col-sm-3 col-form-label">Instansi Magang</label>
                                                 <div class="col-sm-7">
-                                                    <input type="text" class="form-control" id="instansi_magang" name="instansi_magang" placeholder="Masukkan instansi magang" value="{{ $pengajuanMagang->instansi_magang ?? '' }}" disabled>
-
-                                                    {{-- alert --}}
+                                                    <input type="text" class="form-control" id="instansi_magang" name="instansi_magang" placeholder="Masukkan instansi magang" value="{{ $dm->pengajuanMagang->instansi_magang ?? '' }}" disabled>
                                                     @if (count($errors) > 0)
                                                         <div style="width: auto; color:red; margin-top:0.25rem;">
                                                             {{ $errors->first('instansi_magang') }}
                                                         </div>
                                                     @endif
-                                                    {{-- end of alert --}}
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label for="alamat_magang" class="col-sm-3 col-form-label">Alamat Instansi Magang</label>
                                                 <div class="col-sm-7">
-                                                    <input type="text" class="form-control" id="alamat_magang" name="alamat_magang" placeholder="Masukkan alamat instansi magang" value="{{ $pengajuanMagang->alamat_magang ?? '' }}" disabled>
-                                                    {{-- alert --}}
+                                                    <input type="text" class="form-control" id="alamat_magang" name="alamat_magang" placeholder="Masukkan alamat instansi magang" value="{{ $dm->pengajuanMagang->alamat_magang ?? '' }}" disabled>
                                                     @if (count($errors) > 0)
                                                         <div style="width: auto; color:red; margin-top:0.25rem;">
                                                             {{ $errors->first('alamat_magang') }}
                                                         </div>
                                                     @endif
-                                                    {{-- end of alert --}}
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
-                                                <label for="period" class="col-sm-3 col-form-label"> Periode Magang </label>
+                                                <label for="period" class="col-sm-3 col-form-label">Periode Magang</label>
                                                 <div class="col-sm-3">
-                                                    <input type="text" class="form-control" id="period" name="period" placeholder="Contoh: 5 bulan">
-
-                                                    {{-- alert --}}
+                                                    <input type="text" class="form-control" id="period" name="period" placeholder="Contoh: 5 bulan" value="{{ $dm->periode }}">
                                                     @if (count($errors) > 0)
                                                         <div style="width: auto; color:red; margin-top:0.25rem;">
                                                             {{ $errors->first('period') }}
                                                         </div>
                                                     @endif
-                                                    {{-- end of alert --}}
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Tanggal Mulai</label>
                                                 <div class="col-sm-3">
-                                                    <input type="date"  name="tm" id="tm" class="form-control">
+                                                    <input type="date" name="tm" id="tm" class="form-control" value="{{ $dm->tanggal_mulai }}">
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Tanggal Selesai</label>
                                                 <div class="col-sm-3">
-                                                    <input type="date"  name="ts" id="ts" class="form-control">
+                                                    <input type="date" name="ts" id="ts" class="form-control" value="{{ $dm->tanggal_selesai }}">
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label for="file" class="col-sm-3 col-form-label">File LoA</label>
-                                                <div class="col-sm-3">
-                                                    <div class="form-group">
-                                                        <input type="file" class="form-control-file" id="file" name="file">
-                                                    </div>
+                                                <div class="col-sm-7">
+                                                    @if ($dm->files)
+                                                        <p>File saat ini: <a href="{{ url('storage/' . $dm->files) }}" target="_blank">{{ basename($dm->files) }}</a></p>
+                                                    @endif
+                                                    <input type="file" class="form-control-file" id="file" name="file">
 
                                                     @if ($errors->has('file'))
                                                         <div style="width: auto; color:red; margin-top:0.25rem;">
@@ -216,6 +198,7 @@
                                             </div>
                                         </div>
                                     </form>
+
                                 </div>
                             </div>
                         </div>

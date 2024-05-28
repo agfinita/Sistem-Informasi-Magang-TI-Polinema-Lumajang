@@ -97,10 +97,10 @@
                                         <h4>Data Magang Mahasiswa</h4>
                                     </div>
 
-                                    <div class="col-md-6 mx-2 my-auto">
+                                    {{-- <div class="col-md-6 mx-2 my-auto">
                                         <!-- Tambah data -->
                                         <button type="submit" class="btn btn-success">
-                                            <a href="#"
+                                            <a href="{{ url('/admin/data-magang/create') }}"
                                                 class="text-decoration-none text-white">
                                                 <span>
                                                     <i class="ion ion-plus-circled" data-pack="default"
@@ -110,7 +110,7 @@
                                                 Tambah Data
                                             </a>
                                         </button>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="card-body">
                                         <div class="table-responsive">
@@ -129,7 +129,7 @@
                                                         <th>Periode</th>
                                                         <th>Tanggal Dimulai</th>
                                                         <th>Tanggal Selesai</th>
-                                                        <th>File</th>
+                                                        <th>File LoA</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -157,7 +157,18 @@
                                                                     <h5> - </h5>
                                                                 @endif
                                                             <td>
-                                                                <div class="row">
+                                                                <!-- Hapus -->
+                                                                <form action="{{ url('/admin/data-magang/' . $dm->id) }}" method="POST" onsubmit="return confirm('Yakin hapus data?')">
+                                                                    @method('DELETE')
+                                                                    @csrf
+                                                                    <button class="btn btn-sm btn-danger mx-1">
+                                                                        <i class="ion ion-trash-a"
+                                                                            data-pack="default"
+                                                                            data-tags="delete, remove, dump"></i>
+                                                                    </button>
+                                                                </form>
+                                                                {{-- <div class="row">
+                                                                    <!-- Update -->
                                                                     <a
                                                                         href="{{ url('/updateDataMahasiswa/' . $dm->id) }}">
                                                                         <button class="btn btn-sm btn-warning mx-1">
@@ -166,19 +177,7 @@
                                                                         </button>
                                                                     </a>
 
-                                                                    <form
-                                                                        action="{{ url('/admin/data-magang/' . $dm->id) }}"
-                                                                        method="POST"
-                                                                        onsubmit="return confirm('Yakin hapus data?')">
-                                                                        @method('DELETE')
-                                                                        @csrf
-                                                                        <button class="btn btn-sm btn-danger mx-1">
-                                                                            <i class="ion ion-trash-a"
-                                                                                data-pack="default"
-                                                                                data-tags="delete, remove, dump"></i>
-                                                                        </button>
-                                                                    </form>
-                                                                </div>
+                                                                </div> --}}
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -197,7 +196,7 @@
                                                         <th>Periode</th>
                                                         <th>Tanggal Dimulai</th>
                                                         <th>Tanggal Selesai</th>
-                                                        <th>File</th>
+                                                        <th>File LoA</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </tfoot>

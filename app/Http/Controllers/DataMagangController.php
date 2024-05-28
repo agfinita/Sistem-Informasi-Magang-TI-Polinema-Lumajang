@@ -102,18 +102,49 @@ class DataMagangController extends Controller {
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(DataMagang $dataMagang)
-    {
-        //
+    public function edit($id) {
+        $dm = DataMagang::with('mahasiswa', 'pengajuanMagang')->findOrFail($id);
+        return view('pages.contents.mahasiswa.data-magang.edit', compact('dm'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, DataMagang $dataMagang)
-    {
-        //
+    public function update(Request $request, $id) {
+        $validatedData = $request->validate([
+            'nim' => 'required|exists:mahasiswa,nim',
+            'period' => 'required',
+            'tm' => 'required|date',
+            'ts' => 'required|date',
+            'file' => 'nullable|file|mimes:docx,doc,pdf',
+        ]);
+
+        $dataMagang = DataMagang::findOrFail($id);
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $originalname = $file->getClientOriginalName();
+            $filename = uniqid() . '_' . $originalname;
+            $path = $file->storeAs('uploads', $filename, 'public');
+            $validatedData['files'] = $path;
+
+            // Hapus file lama jika ada
+            if ($dataMagang->files) {
+                $oldFilePath = public_path('storage/' . $dataMagang->files);
+                if (file_exists($oldFilePath)) {
+                    unlink($oldFilePath);
+                }
+            }
+        } else {
+            // Jika tidak ada file baru yang di-upload, jangan ubah field file
+            unset($validatedData['files']);
+        }
+
+        $dataMagang->update($validatedData);
+
+        return redirect('/mahasiswa/data-magang')->with('status', 'Data berhasil diupdate!');
     }
+
 
     /**
      * Remove the specified resource from storage.

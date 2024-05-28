@@ -61,6 +61,10 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
+                                    <div class="card-header text-danger">
+                                        <h6>*Mahasiswa dapat mengisi data magang apabila telah memperoleh surat balasan magang/Letter of Acceptance (LoA) dari instansi magang yang dituju</h6>
+                                    </div>
+
                                     <div class="col-md-6 mx-2 my-4">
                                         <!-- Tambah data -->
                                         <button type="submit" class="btn btn-success">
@@ -91,6 +95,7 @@
                                                         <th>Periode</th>
                                                         <th>Tanggal Dimulai</th>
                                                         <th>Tanggal Selesai</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
 
@@ -110,6 +115,15 @@
                                                         <td>{{ $dm->periode }}</td>
                                                         <td>{{ $dm->tanggal_mulai }}</td>
                                                         <td>{{ $dm->tanggal_selesai }}</td>
+                                                        <td>
+                                                            <!-- Update -->
+                                                            <a href="{{ url('/mahasiswa/data-magang/edit/' . $dm->id) }}">
+                                                                <button class="btn btn-sm btn-warning mx-1">
+                                                                    <i class="ion ion-edit" data-pack="default"
+                                                                    data-tags="change, update, write, type, pencil"></i>
+                                                                </button>
+                                                            </a>
+                                                        </td>
                                                     </tr>
                                                     @endforeach
                                                 </tbody>
@@ -128,6 +142,7 @@
                                                         <th>Periode</th>
                                                         <th>Tanggal Dimulai</th>
                                                         <th>Tanggal Selesai</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </tfoot>
                                             </table>

@@ -70,7 +70,7 @@ Route::group(['middleware' => 'role'], function () {
     Route::patch('/pengumuman/edit/{id}', [PengumumanController::class,'update']);
 
     // Data Magang - Admin Side
-    Route::resource('/admin/data-magang', DataMagangAdminSideController::class)->except('show', 'store', 'update', 'edit');
+    Route::resource('/admin/data-magang', DataMagangAdminSideController::class)->except('show', 'create', 'edit', 'update', 'store');
 
     // Pengajuan Magang - Admin Side
     Route::resource('/admin/mahasiswa/pengajuan-magang', PengajuanMagangAdminSideController::class)->except('show', 'update', 'edit');
@@ -85,7 +85,9 @@ Route::group(['middleware' => 'role'], function () {
     // Pengajuan Magang
     Route::resource('/mahasiswa/pengajuan-magang', PengajuanMagangController::class)->except('show', 'update', 'destroy', 'edit');
     // Data Magang - Mahasiswa Side
-    Route::resource('/mahasiswa/data-magang', DataMagangController::class)->except('show', 'update', 'destroy', 'edit');
+    Route::resource('/mahasiswa/data-magang', DataMagangController::class)->except('show', 'destroy');
+    Route::get('/mahasiswa/data-magang/edit/{id}', [DataMagangController::class, 'edit']);
+    Route::patch('/mahasiswa/data-magang/edit/{id}', [DataMagangController::class, 'update']);
 
 
     // Auth Dosen
