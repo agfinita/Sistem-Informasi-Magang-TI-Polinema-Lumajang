@@ -95,7 +95,7 @@
                                     <div class="card-header">
                                         <h4>Tambah Mahasiswa</h4>
                                     </div>
-                                    <form action="{{ url('/data-pengguna/mahasiswa') }}" method="POST"
+                                    <form id="create-form" action="{{ url('/data-pengguna/mahasiswa') }}" method="POST"
                                         autocomplete="off">
                                         @csrf
                                         <div class="card-body">
@@ -104,14 +104,6 @@
                                                 <div class="col-sm-7">
                                                     <input type="text" class="form-control" id="nim"
                                                         name="nim" placeholder="Masukkan NIM" autofocus>
-
-                                                    {{-- alert --}}
-                                                    @if (count($errors) > 0)
-                                                        <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                            {{ $errors->first('nim') }}
-                                                        </div>
-                                                    @endif
-                                                    {{-- end of alert --}}
                                                 </div>
                                             </div>
 
@@ -120,34 +112,17 @@
                                                 <div class="col-sm-7">
                                                     <input type="text" class="form-control" id="nama"
                                                         name="nama" placeholder="Masukkan nama">
-
-                                                    {{-- alert --}}
-                                                    @if (count($errors) > 0)
-                                                        <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                            {{ $errors->first('nama') }}
-                                                        </div>
-                                                    @endif
-                                                    {{-- end of alert --}}
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label for="control-kelas" class="col-sm-3 col-form-label">Kelas</label>
-                                                <div class="col-sm-2">
-                                                    <select class="form-control" id="control-kelas"
-                                                        name="control-kelas">
-                                                        <option>3A</option>
-                                                        <option>3B</option>
-                                                        <option>3C</option>
+                                                <div class="col-sm-5">
+                                                    <select class="form-control" id="control-kelas" name="control-kelas">
+                                                        <option value="" disabled selected>- Pilih kelas -</option>
+                                                        <option value="3A">3A</option>
+                                                        <option value="3B">3B</option>
                                                     </select>
-
-                                                    {{-- alert --}}
-                                                    @if (count($errors) > 0)
-                                                        <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                            {{ $errors->first('control-kelas') }}
-                                                        </div>
-                                                    @endif
-                                                    {{-- end of alert --}}
                                                 </div>
                                             </div>
 
@@ -157,17 +132,10 @@
                                                 <div class="col-sm-5">
                                                     <select class="form-control" id="control-jurusan"
                                                         name="control-jurusan">
+                                                        <option value="" disabled selected>- Pilih jurusan -</option>
                                                         <option>D3 TI</option>
                                                         <option>D4 TI</option>
                                                     </select>
-
-                                                    {{-- alert --}}
-                                                    @if (count($errors) > 0)
-                                                        <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                            {{ $errors->first('control-jurusan') }}
-                                                        </div>
-                                                    @endif
-                                                    {{-- end of alert --}}
                                                 </div>
                                             </div>
 
@@ -176,31 +144,15 @@
                                                 <div class="col-sm-7">
                                                     <input type="email" class="form-control" id="email"
                                                         name="email" placeholder="Masukkan Email">
-
-                                                    {{-- alert --}}
-                                                    @if (count($errors) > 0)
-                                                        <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                            {{ $errors->first('email') }}
-                                                        </div>
-                                                    @endif
-                                                    {{-- end of alert --}}
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label for="telp" class="col-sm-3 col-form-label">No
                                                     Telepon</label>
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-5">
                                                     <input type="telp" class="form-control" id="telp"
                                                         name="telp" placeholder="Masukkan no telepon aktif">
-
-                                                    {{-- alert --}}
-                                                    @if (count($errors) > 0)
-                                                        <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                            {{ $errors->first('telp') }}
-                                                        </div>
-                                                    @endif
-                                                    {{-- end of alert --}}
                                                 </div>
                                             </div>
 
@@ -209,14 +161,6 @@
                                                 <div class="col-sm-7">
                                                     <input type="text" class="form-control" id="alamat"
                                                         name="alamat" placeholder="Masukkan alamat">
-
-                                                    {{-- alert --}}
-                                                    @if (count($errors) > 0)
-                                                        <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                            {{ $errors->first('alamat') }}
-                                                        </div>
-                                                    @endif
-                                                    {{-- end of alert --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -250,18 +194,17 @@
     <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
     <!-- JS Libraies -->
-    <script src="{{ asset('node_modules/simpleweather/jquery.simpleWeather.min.js') }}"></script>
-    <script src="{{ asset('node_modules/chart.js/dist/Chart.min.js') }}"></script>
-    <script src="{{ asset('node_modules/jqvmap/dist/jquery.vmap.min.js') }}"></script>
-    <script src="{{ asset('node_modules/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
-    <script src="{{ asset('node_modules/summernote/dist/summernote-bs4.js') }}"></script>
-    <script src="{{ asset('node_modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
+    <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
+    <script>
+        var redirectUrl = "{{ url('/data-pengguna/mahasiswa') }}";
+    </script>
 
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 
     <!-- Page Specific JS File -->
+    <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
 </body>
 
 </html>

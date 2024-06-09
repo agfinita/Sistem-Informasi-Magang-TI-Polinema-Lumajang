@@ -149,10 +149,10 @@
                                                                         </button>
                                                                     </a>
 
-                                                                    <form action="{{ url('/kelola-pengguna/mahasiswa/' . $u->id) }}" method="POST" onsubmit="return confirm('Are you sure delete data?')">
+                                                                    <form id="delete-form-{{ $u->id }}" action="{{ url('/kelola-pengguna/mahasiswa/' . $u->id) }}" method="POST">
                                                                         @method('DELETE')
                                                                         @csrf
-                                                                        <button class="btn btn-sm btn-danger mx-1">
+                                                                        <button type="button" class="btn btn-sm btn-danger mx-1 swal-6" data-id="{{ $u->id }}">
                                                                             <i class="ion ion-trash-a" data-pack="default" data-tags="delete, remove, dump"></i>
                                                                         </button>
                                                                     </form>
@@ -209,12 +209,14 @@
     @include('pages.layouts.datatables')
 
     <!-- JS Libraies -->
+    <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
 
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 
     <!-- Page Specific JS File -->
+    <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
 </body>
 
 </html>

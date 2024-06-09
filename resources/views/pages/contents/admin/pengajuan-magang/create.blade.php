@@ -99,11 +99,11 @@
                                         <h4>Proses Pengajuan Magang</h4>
                                     </div>
 
-                                    <form action="{{ url ('/admin/mahasiswa/pengajuan-magang/store', $pengajuanMagang->id) }}" method="POST" enctype="multipart/form-data">
+                                    <form id="create-form-data" action="{{ url ('/admin/mahasiswa/pengajuan-magang/store', $pengajuanMagang->id) }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="card-body">
                                             <div class="form-group row">
-                                                <label for="file" class="col-sm-2 col-form-label">File Pengajuan Magang</label>
+                                                <label for="file" class="col-sm-4 col-form-label">File Pengajuan Magang</label>
                                                 <div class="col-sm-7">
                                                     @if ($pengajuanMagang->files)
                                                         <p>File saat ini: <a href="{{ url('storage/' . $pengajuanMagang->files) }}" target="_blank">{{ basename($pengajuanMagang->files) }}</a></p>
@@ -119,10 +119,10 @@
                                             </div>
 
                                             <div class="form-group row">
-                                                <label for="status" class="col-sm-2 col-form-label">Status</label>
-                                                <div class="col-sm-2">
+                                                <label for="status" class="col-sm-4 col-form-label">Status</label>
+                                                <div class="col-sm-5">
                                                     <select class="form-control" name="status">
-                                                        <option disabled selected>-select-</option>
+                                                        <option disabled selected>- Select -</option>
                                                         <option value="diproses" {{ old('status', $pengajuanMagang->status) == 'diproses' ? 'selected' : '' }}>diproses</option>
                                                         <option value="selesai" {{ old('status', $pengajuanMagang->status) == 'selesai' ? 'selected' : '' }}>selesai</option>
                                                     </select>
@@ -165,20 +165,21 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="../assets/js/stisla.js"></script> --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> --}}
+    <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
     <!-- JS Libraies -->
-    <script src="{{ asset('node_modules/simpleweather/jquery.simpleWeather.min.js') }}"></script>
-    <script src="{{ asset('node_modules/chart.js/dist/Chart.min.js') }}"></script>
-    <script src="{{ asset('node_modules/jqvmap/dist/jquery.vmap.min.js') }}"></script>
-    <script src="{{ asset('node_modules/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
-    <script src="{{ asset('node_modules/summernote/dist/summernote-bs4.js') }}"></script>
-    <script src="{{ asset('node_modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
+    <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
+    <script>
+        var redirectUrl = "{{ url('/admin/mahasiswa/pengajuan-magang') }}";
+    </script>
 
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
+
+    <!-- Page Specific JS File -->
+    <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
 </body>
 
 </html>

@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dosen', function (Blueprint $table) {
+        Schema::create('admin', function (Blueprint $table) {
             $table->id();
             $table->string('nip', 20)->unique()->nullable(false);
             $table->string('nama', 100)->nullable(false);
             $table->string('email', 100)->unique()->nullable();
             $table->char('telp', 15)->nullable();
             $table->string('alamat', 50)->nullable();
+            $table->enum('role', ['Mahasiswa', 'Admin', 'Dosen'] )->default('Admin');
             $table->enum('is_active', ['1', '0'])->default('1');
             $table->timestamps();
         });
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dosen');
+        Schema::dropIfExists('admin');
     }
 };

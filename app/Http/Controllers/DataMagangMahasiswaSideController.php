@@ -8,11 +8,13 @@ use Illuminate\Http\Request;
 use App\Models\PengajuanMagang;
 use Illuminate\Support\Facades\Auth;
 
-class DataMagangController extends Controller {
+class DataMagangMahasiswaSideController extends Controller
+{
     /**
      * Display a listing of the resource.
      */
-    public function index() {
+    public function index()
+    {
         // Mengambil data milik mahasiswa yang sedang login
         $mahasiswa_id = auth()->user()->username;
 
@@ -26,7 +28,8 @@ class DataMagangController extends Controller {
     /**
      * Show the form for creating a new resource.
      */
-    public function create() {
+    public function create()
+    {
         // Ambil user yang sedang login
         $user   = Auth::user();
 
@@ -47,10 +50,12 @@ class DataMagangController extends Controller {
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {
-        // Validasi inputan
+    public function store(Request $request)
+    {
+        // Validasi input
         $validatedData  = $request->validate([
             'nim'               => 'required|exists:mahasiswa,nim',
+            'kategori'          => 'required',
             'period'            => 'required',
             'tm'                => 'required',
             'ts'                => 'required',
@@ -81,14 +86,19 @@ class DataMagangController extends Controller {
         DataMagang::create([
             'mahasiswa_id'          => $validatedData['nim'],
             'pengajuan_magang_id'   => $pengajuanMagang ? $pengajuanMagang->id : null,
+            'kategori_magang'       => $validatedData['kategori'],
             'periode'               => $validatedData['period'],
             'tanggal_mulai'         => $validatedData['tm'],
             'tanggal_selesai'       => $validatedData['ts'],
+            'status_magang'         => 'belum dimulai',
             'files'                 => $validatedData['file']
         ]);
 
+        // Mengembalikan respon sukses
+        return response()->json([ 'status'    => 'success' ]);
+
         // Redirect halaman
-        return redirect('/mahasiswa/data-magang')->with('status', 'Data berhasil ditambahkan!');
+        //return redirect('/mahasiswa/data-magang')->with('status', 'Data berhasil ditambahkan!');
     }
 
     /**
@@ -102,7 +112,8 @@ class DataMagangController extends Controller {
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id) {
+    public function edit($id)
+    {
         $dm = DataMagang::with('mahasiswa', 'pengajuanMagang')->findOrFail($id);
         return view('pages.contents.mahasiswa.data-magang.edit', compact('dm'));
     }
@@ -110,13 +121,16 @@ class DataMagangController extends Controller {
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         $validatedData = $request->validate([
-            'nim' => 'required|exists:mahasiswa,nim',
-            'period' => 'required',
-            'tm' => 'required|date',
-            'ts' => 'required|date',
-            'file' => 'nullable|file|mimes:docx,doc,pdf',
+            'nim'           => 'required|exists:mahasiswa,nim',
+            'kategori'      => 'required',
+            'status_magang' => 'required',
+            'period'        => 'required',
+            'tm'            => 'required|date',
+            'ts'            => 'required|date',
+            'file'          => 'nullable|file|mimes:docx,doc,pdf',
         ]);
 
         $dataMagang = DataMagang::findOrFail($id);
@@ -148,14 +162,17 @@ class DataMagangController extends Controller {
 
         $dataMagang->update($validatedData);
 
-        return redirect('/mahasiswa/data-magang')->with('status', 'Data berhasil diupdate!');
-    }
+        // Mengembalikan respon sukses
+        return response()->json([ 'status' => 'success']);
 
+        // return redirect('/mahasiswa/data-magang')->with('status', 'Data berhasil diupdate!');
+    }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DataMagang $dataMagang) {
+    public function destroy(DataMagang $dataMagang)
+    {
         //
     }
 }

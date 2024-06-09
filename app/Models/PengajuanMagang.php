@@ -9,11 +9,10 @@ class PengajuanMagang extends Model
 {
     use HasFactory;
 
-    // Menentukan nama tabel secara ekplisit
+    // Menentukan nama tabel secara eksplisit
     protected $table    = 'pengajuan_magang';
 
     protected $fillable = [
-        'admin_id',
         'mahasiswa_id',
         'instansi_magang',
         'alamat_magang',
@@ -21,10 +20,6 @@ class PengajuanMagang extends Model
         'catatan',
         'files'
     ];
-
-    public function admin() {
-        return $this->belongsTo(Admin::class);
-    }
 
     public function mahasiswa() {
         return $this->belongsTo(Mahasiswa::class);

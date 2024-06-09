@@ -82,7 +82,7 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4>Data Dosen</h4>
+                                        <h4>Data Admin</h4>
                                     </div>
 
                                     <div class="col-md-6 mx-2 my-auto">
@@ -101,18 +101,6 @@
                                     </div>
 
                                     <div class="card-body">
-                                        @if (session('error'))
-                                            <div class="alert alert-danger">
-                                                {{ session('error') }}
-                                            </div>
-                                        @endif
-
-                                        @if (session('error'))
-                                            <div class="alert alert-success">
-                                                {{ session('status') }}
-                                            </div>
-                                        @endif
-
                                         <div class="table-responsive">
                                             <table id="example" class="display nowrap" style="width:100%">
                                                 <thead>
@@ -152,12 +140,10 @@
                                                                         </button>
                                                                     </a>
 
-                                                                    <form action="{{ url('/data-pengguna/admin' . $a->id) }}"
-                                                                        method="POST"
-                                                                        onsubmit="return confirm('Yakin hapus data?')">
+                                                                    <form id="delete-form-{{ $a->id }}" action="{{ url('/data-pengguna/admin/' . $a->id) }}" method="POST">
                                                                         @method('DELETE')
                                                                         @csrf
-                                                                        <button class="btn btn-sm btn-danger mx-1">
+                                                                        <button type="button" class="btn btn-sm btn-danger mx-1 swal-6" data-id="{{ $a->id }}">
                                                                             <i class="ion ion-trash-a"
                                                                                 data-pack="default"
                                                                                 data-tags="delete, remove, dump"></i>
@@ -208,12 +194,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <!-- JS Libraies -->
+    <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
 
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 
     <!-- Page Specific JS File -->
+    <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
 
     <!-- Data Tables JS -->
     @include('pages.layouts.datatables')

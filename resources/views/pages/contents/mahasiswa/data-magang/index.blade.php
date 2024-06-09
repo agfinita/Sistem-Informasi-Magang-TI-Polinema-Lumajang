@@ -90,8 +90,10 @@
                                                         <th>Nama</th>
                                                         <th>Kelas</th>
                                                         <th>Jurusan</th>
+                                                        <th>Kategori</th>
                                                         <th>Instansi Magang</th>
                                                         <th>Alamat Instansi</th>
+                                                        <th>Status</th>
                                                         <th>Periode</th>
                                                         <th>Tanggal Dimulai</th>
                                                         <th>Tanggal Selesai</th>
@@ -110,8 +112,18 @@
                                                         <td>{{ $dm->mahasiswa->nama }}</td>
                                                         <td>{{ $dm->mahasiswa->kelas }}</td>
                                                         <td>{{ $dm->mahasiswa->jurusan }}</td>
+                                                        <td>{{ $dm->kategori_magang }}</td>
                                                         <td>{{ $dm->pengajuanMagang->instansi_magang }}</td>
                                                         <td>{{ $dm->pengajuanMagang->alamat_magang }}</td>
+                                                        <td>
+                                                            @if ($dm->status_magang == 'selesai')
+                                                                <div class="badge badge-success">Selesai</div>
+                                                            @elseif ($dm->status_magang == 'sedang magang')
+                                                                <div class="badge badge-warning">Sedang magang</div>
+                                                            @elseif ($dm->status_magang == 'belum dimulai')
+                                                                <div class="badge badge-info">Belum dimulai</div>
+                                                            @endif
+                                                        </td>
                                                         <td>{{ $dm->periode }}</td>
                                                         <td>{{ $dm->tanggal_mulai }}</td>
                                                         <td>{{ $dm->tanggal_selesai }}</td>
@@ -127,24 +139,6 @@
                                                     </tr>
                                                     @endforeach
                                                 </tbody>
-
-                                                <tfoot>
-                                                    <tr>
-                                                        <th class="text-center">
-                                                            No
-                                                        </th>
-                                                        <th>NIM</th>
-                                                        <th>Nama</th>
-                                                        <th>Kelas</th>
-                                                        <th>Jurusan</th>
-                                                        <th>Instansi Magang</th>
-                                                        <th>Alamat Instansi</th>
-                                                        <th>Periode</th>
-                                                        <th>Tanggal Dimulai</th>
-                                                        <th>Tanggal Selesai</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </tfoot>
                                             </table>
                                         </div>
                                     </div>

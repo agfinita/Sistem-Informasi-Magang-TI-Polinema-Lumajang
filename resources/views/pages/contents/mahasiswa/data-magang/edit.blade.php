@@ -66,7 +66,7 @@
                                         <h4>Edit Data Magang Mahasiswa</h4>
                                     </div>
 
-                                    <form action="{{ url('/mahasiswa/data-magang/edit/' . $dm->id) }}" method="POST" autocomplete="off" enctype="multipart/form-data">
+                                    <form id="update-form-data" action="{{ url('/mahasiswa/data-magang/edit/' . $dm->id) }}" method="POST" autocomplete="off" enctype="multipart/form-data">
                                         @method('patch')
                                         @csrf
                                         <div class="card-body">
@@ -96,7 +96,7 @@
 
                                             <div class="form-group row">
                                                 <label for="control-kelas" class="col-sm-3 col-form-label">Kelas</label>
-                                                <div class="col-sm-2">
+                                                <div class="col-sm-5">
                                                     <select class="form-control" id="control-kelas" name="control-kelas" disabled>
                                                         <option value="3A" {{ $dm->mahasiswa->kelas == '3A' ? 'selected' : '' }}>3A</option>
                                                         <option value="3B" {{ $dm->mahasiswa->kelas == '3B' ? 'selected' : '' }}>3B</option>
@@ -111,7 +111,7 @@
 
                                             <div class="form-group row">
                                                 <label for="control-jurusan" class="col-sm-3 col-form-label">Jurusan</label>
-                                                <div class="col-sm-2">
+                                                <div class="col-sm-5">
                                                     <select class="form-control" id="control-jurusan" name="control-jurusan" disabled>
                                                         <option value="D3 TI" {{ $dm->mahasiswa->jurusan == 'D3 TI' ? 'selected' : '' }}>D3 TI</option>
                                                         <option value="D4 TI" {{ $dm->mahasiswa->jurusan == 'D4 TI' ? 'selected' : '' }}>D4 TI</option>
@@ -121,6 +121,18 @@
                                                             {{ $errors->first('control-jurusan') }}
                                                         </div>
                                                     @endif
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="kategori" class="col-sm-3 col-form-label">Kategori Magang</label>
+                                                <div class="col-sm-5">
+                                                    <select class="form-control" id="kategori" name="kategori">
+                                                        <option value="MSIB" {{ $dm->kategori_magang == 'MSIB' ? 'selected' : '' }}>MSIB</option>
+                                                        <option value="Studi Independen" {{ $dm->kategori_magang == 'Studi Independen' ? 'selected' : '' }}>Studi Independen</option>
+                                                        <option value="MBKM" {{ $dm->kategori_magang == 'MBKM' ? 'selected' : '' }}>MBKM</option>
+                                                        <option value="Magang Mandiri" {{ $dm->kategori_magang == 'Magang Mandiri' ? 'selected' : '' }}>Magang Mandiri</option>
+                                                    </select>
                                                 </div>
                                             </div>
 
@@ -145,6 +157,16 @@
                                                             {{ $errors->first('alamat_magang') }}
                                                         </div>
                                                     @endif
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="status_magang" class="col-sm-3 col-form-label">Status Magang</label>
+                                                <div class="col-sm-5">
+                                                    <select class="form-control" name="status_magang" id="status_magang">
+                                                        <option value="belum dimulai" {{ $dm->status_magang == 'belum dimulai' ? 'selected' : '' }}>Belum dimulai</option>
+                                                        <option value="sedang magang" {{ $dm->status_magang == 'sedang magang' ? 'selected' : '' }}>Sedang magang</option>
+                                                    </select>
                                                 </div>
                                             </div>
 
@@ -224,12 +246,17 @@
     <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
     <!-- JS Libraies -->
+    <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
+    <script>
+        var redirectUrl = "{{ url('/mahasiswa/data-magang') }}";
+    </script>
 
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 
     <!-- Page Specific JS File -->
+    <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
 </body>
 
 </html>

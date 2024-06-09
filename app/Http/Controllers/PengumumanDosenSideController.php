@@ -6,25 +6,27 @@ use App\Models\Pengumuman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class PengumumanController extends Controller
+class PengumumanDosenSideController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index() {
-        $pengumuman = DB::table('pengumuman')
-                        ->select('id', 'created_by', 'judul',
-                                'deskripsi', 'kategori', 'created_at')
-                        ->orderBy('pengumuman.id', 'DESC')->get();
+        $pengumuman = Pengumuman::select('id', 'created_by', 'judul', 'deskripsi', 'kategori', 'created_at')
+                ->orderBy('id', 'DESC')
+                ->get();
 
-        return view('pages.contents.admin.pengumuman.index', compact('pengumuman'));
+        // Menghitung total pengumuman
+        $totalPengumuman    = Pengumuman::count();
+
+        return view('pages.contents.dosen.index', compact('pengumuman', 'totalPengumuman'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create() {
-        return view('pages.contents.admin.pengumuman.create');
+        return view('pages.contents.dosen.create');
     }
 
     /**
@@ -49,13 +51,14 @@ class PengumumanController extends Controller
         ]);
 
         // Redirect halaman
-        return redirect('/pengumuman')->with('status', 'Pengumuman beru berhasil ditambahkan.');
+        return redirect('/dosen/dashboard');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Pengumuman $pengumuman) {
+    public function show(Pengumuman $pengumuman)
+    {
         //
     }
 
@@ -66,10 +69,10 @@ class PengumumanController extends Controller
         $pengumuman = Pengumuman::find($id);
 
         if(!$pengumuman) {
-            return redirect('/pengumuman')->with('error', 'Pengumuman tidak ditemukan');
+            return redirect('/dosen/dashboard')->with('error', 'Data tidak ditemukan');
         }
 
-        return view('pages.contents.admin.pengumuman.edit', compact('pengumuman'));
+        return view('pages.contents.dosen.edit', compact('pengumuman'));
     }
 
     /**
@@ -86,7 +89,7 @@ class PengumumanController extends Controller
 
         $pengumuman = Pengumuman::find($id);
         if (!$pengumuman) {
-            return redirect('/pengumuman')->with('error', 'Pengumuman tidak ditemukan');
+            return redirect('/dosen/dashboard')->with('error', 'Data tidak ditemukan');
         }
 
         $pengumuman->update([
@@ -97,21 +100,21 @@ class PengumumanController extends Controller
             'created_at'    => $validatedData['date_created']
         ]);
 
-        return redirect('/pengumuman')->with('status', 'Pengumuman berhasil diperbarui.');
+        return redirect('/dosen/dashboard');
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy($id) {
-        $pengumuman  = DB::table('pengumuman')->where('id', $id)->first();
+        $pengumuman = DB::table('pengumuman')->where('id', $id)->first();
 
         if ($pengumuman) {
-            $pengumuman  = DB::table('pengumuman')->where('id', $id)->delete();
+            $pengumuman = DB::table('pengumuman')->where('id', $id)->delete();
 
-            return redirect('/pengumuman')->with('status'. 'Data berhasil dihapus.');
+            return redirect('/dosen/dashboard');
         }
 
-        return redirect('/pengumuman')->with('error', 'Pengumuman tidak ditemukan');
+        return redirect('/dosen/dashboard')->with('error', 'Data tidak ditemukan');
     }
 }

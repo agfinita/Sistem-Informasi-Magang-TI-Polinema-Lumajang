@@ -124,8 +124,10 @@
                                                         <th>Nama</th>
                                                         <th>Kelas</th>
                                                         <th>Jurusan</th>
+                                                        <th>Kategori</th>
                                                         <th>Instansi Magang</th>
                                                         <th>Alamat Instansi</th>
+                                                        <th>Status</th>
                                                         <th>Periode</th>
                                                         <th>Tanggal Dimulai</th>
                                                         <th>Tanggal Selesai</th>
@@ -145,8 +147,18 @@
                                                             <td>{{ $dm->mahasiswa->nama ?? '-' }}</td>
                                                             <td>{{ $dm->mahasiswa->kelas ?? '-' }}</td>
                                                             <td>{{ $dm->mahasiswa->jurusan ?? '-' }}</td>
+                                                            <td>{{ $dm->kategori_magang }}</td>
                                                             <td>{{ $dm->pengajuanMagang->instansi_magang ?? '-' }} </td>
                                                             <td>{{ $dm->pengajuanMagang->alamat_magang ?? '-' }}</td>
+                                                            <td>
+                                                                @if ($dm->status_magang == 'selesai')
+                                                                    <div class="badge badge-success">Selesai</div>
+                                                                @elseif ($dm->status_magang == 'sedang magang')
+                                                                    <div class="badge badge-warning">Sedang magang</div>
+                                                                @elseif ($dm->status_magang == 'belum dimulai')
+                                                                    <div class="badge badge-info">Belum dimulai</div>
+                                                                @endif
+                                                            </td>
                                                             <td>{{ $dm->periode }}</td>
                                                             <td>{{ $dm->tanggal_mulai }}</td>
                                                             <td>{{ $dm->tanggal_selesai }}</td>
@@ -158,10 +170,10 @@
                                                                 @endif
                                                             <td>
                                                                 <!-- Hapus -->
-                                                                <form action="{{ url('/admin/data-magang/' . $dm->id) }}" method="POST" onsubmit="return confirm('Yakin hapus data?')">
+                                                                <form id="delete-form-{{ $dm->id }}" action="{{ url('/admin/data-magang/' . $dm->id) }}" method="POST" >
                                                                     @method('DELETE')
                                                                     @csrf
-                                                                    <button class="btn btn-sm btn-danger mx-1">
+                                                                    <button type="button" class="btn btn-sm btn-danger mx-1 swal-6" data-id="{{ $dm->id }}">
                                                                         <i class="ion ion-trash-a"
                                                                             data-pack="default"
                                                                             data-tags="delete, remove, dump"></i>
@@ -191,8 +203,10 @@
                                                         <th>Nama</th>
                                                         <th>Kelas</th>
                                                         <th>Jurusan</th>
+                                                        <th>Kategori</th>
                                                         <th>Instansi Magang</th>
                                                         <th>Alamat Instansi</th>
+                                                        <th>Status</th>
                                                         <th>Periode</th>
                                                         <th>Tanggal Dimulai</th>
                                                         <th>Tanggal Selesai</th>
@@ -232,12 +246,14 @@
     @include('pages.layouts.datatables')
 
     <!-- JS Libraies -->
+    <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
 
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 
     <!-- Page Specific JS File -->
+    <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
 
     <script>
         function openFile(url) {

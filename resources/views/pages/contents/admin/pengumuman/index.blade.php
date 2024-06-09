@@ -146,14 +146,11 @@
                                                                     </button>
                                                                 </a>
 
-                                                                <form action="{{ url('/pengumuman/' . $p->id) }}"
-                                                                    method="POST"
-                                                                    onsubmit="return confirm('Are you sure delete data?')">
+                                                                <form id="delete-form-{{ $p->id }}" action="{{ url('/pengumuman/' . $p->id) }}" method="POST">
                                                                     @method('DELETE')
                                                                     @csrf
-                                                                    <button class="btn btn-sm btn-danger mx-1">
-                                                                        <i class="ion ion-trash-a" data-pack="default"
-                                                                            data-tags="delete, remove, dump"></i>
+                                                                    <button type="button" class="btn btn-sm btn-danger mx-1 swal-6" data-id="{{ $p->id }}">
+                                                                        <i class="ion ion-trash-a" data-pack="default" data-tags="delete, remove, dump"></i>
                                                                     </button>
                                                                 </form>
                                                             </div>
@@ -186,6 +183,7 @@
 
     <!-- JS Libraies -->
     <script src="{{ asset('node_modules/summernote/dist/summernote-bs4.js') }}"></script>
+    <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
 
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
@@ -198,6 +196,7 @@
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('assets/js/page/modules-datatables.js') }}"></script>
+    <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
 </body>
 
 </html>

@@ -1,0 +1,138 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Pengumuman;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+
+class PengumumanAdminSideController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index() {
+        $pengumuman = Pengumuman::select(
+            'id', 'created_by', 'judul', 'deskripsi', 'kategori', 'created_at'
+        )->orderBy('id', 'DESC')->get();
+
+        return view('pages.contents.admin.pengumuman.index', compact('pengumuman'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create() {
+        return view('pages.contents.admin.pengumuman.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request) {
+        $validatedData = Validator::make($request->all(), [
+            'judul'         => 'required',
+            'desc'          => 'required',
+            'cat'           => 'required',
+            'creator'       => 'required',
+            'date_created'  => 'required|date'
+        ]);
+
+        if ($validatedData->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'errors' => $validatedData->errors()
+            ], 422);
+        }
+
+        // Menyimpan hasil validasi yang sukses
+        $validatedData = $validatedData->validated();
+
+        // Menyimpan ke dalam database
+        DB::table('pengumuman')->insert([
+            'judul'         => $validatedData['judul'],
+            'deskripsi'     => strip_tags($validatedData['desc'], '<a><b><u>'),
+            'kategori'      => $validatedData['cat'],
+            'created_by'    => $validatedData['creator'],
+            'created_at'    => $validatedData['date_created']
+        ]);
+
+        // Mengembalikan respon sukses
+        return response()->json(['status' => 'success']);
+
+        // Redirect halaman: sudah ada di modules.sweetalert.js
+        // return redirect('/pengumuman');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Pengumuman $pengumuman)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit($id) {
+        $pengumuman = Pengumuman::find($id);
+
+        if(!$pengumuman) {
+            return redirect('/pengumuman')->with('error', 'Data tidak ditemukan');
+        }
+
+        return view('pages.contents.admin.pengumuman.edit', compact('pengumuman'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, $id) {
+        $validatedData  = $request->validate([
+            'judul'         => 'required',
+            'desc'          => 'required',
+            'cat'           => 'required',
+            'creator'       => 'required',
+            'date_created'  => 'required|date'
+        ]);
+
+        $pengumuman = Pengumuman::find($id);
+        if (!$pengumuman) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Data tidak ditemukan'
+            ], 404);
+        }
+
+        $pengumuman->update([
+            'judul'         => $validatedData['judul'],
+            'deskripsi'     => $validatedData['desc'],
+            'kategori'      => $validatedData['cat'],
+            'created_by'    => $validatedData['creator'],
+            'created_at'    => $validatedData['date_created']
+        ]);
+
+        // Mengembalikan respon sukses
+        return response()->json(['status' => 'success']);
+
+        // Redirect halaman: sudah ada di modules.sweetalert.js
+        // return redirect('/pengumuman');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($id) {
+        $pengumuman = DB::table('pengumuman')->where('id', $id)->first();
+
+        if ($pengumuman) {
+            $pengumuman = DB::table('pengumuman')->where('id', $id)->delete();
+
+            return redirect('/pengumuman');
+        }
+
+        return redirect('/pengumuman')->with('error', 'Data tidak ditemukan');
+    }
+}

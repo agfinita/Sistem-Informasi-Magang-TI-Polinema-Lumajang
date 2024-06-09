@@ -194,6 +194,36 @@ return [
         'alamat' => [
             'required' => 'Harap isi kolom alamat'
         ],
+        'judul' => [
+            'required'  => 'Harap isi kolom judul'
+        ],
+        'desc' => [
+            'required'  => 'Harap isi kolom deskripsi'
+        ],
+        'cat' => [
+            'required'  => 'Pilih kategori terlebih dahulu'
+        ],
+        'creator' => [
+            'required'  => 'Pilih penulis'
+        ],
+        'nip' => [
+            'required' => 'Harap isi kolom NIP'
+        ],
+        'alamat_magang' => [
+            'required'  => 'Harap masukkan alamat instansi magang'
+        ],
+        'instansi_magang' => [
+            'required'  => 'Harap masukkan tempat instansi magang'
+        ],
+        'period' => [
+            'required'  => 'Harap isi kolom periode magang'
+        ],
+        'file' => [
+            'required' => 'Kolom file tidak boleh kosong'
+        ],
+        'date_created' => [
+            'required'  => 'Pilih tanggal terlebih dahulu'
+        ],
     ],
 
     /*

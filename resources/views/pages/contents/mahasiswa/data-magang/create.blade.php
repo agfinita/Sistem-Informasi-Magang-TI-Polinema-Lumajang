@@ -66,21 +66,13 @@
                                         <h4>Formulir Data Magang Mahasiswa</h4>
                                     </div>
 
-                                    <form action="{{ url('/mahasiswa/data-magang') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
+                                    <form id="create-form-data" action="{{ url('/mahasiswa/data-magang') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
                                         @csrf
                                         <div class="card-body">
                                             <div class="form-group row">
                                                 <label for="nim" class="col-sm-3 col-form-label">NIM</label>
                                                 <div class="col-sm-7">
                                                     <input type="text" class="form-control" id="nim" name="nim" placeholder="Masukkan NIM" value="{{ $mahasiswa->nim }}" autofocus readonly>
-
-                                                    {{-- alert --}}
-                                                    @if (count($errors) > 0)
-                                                        <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                            {{ $errors->first('nim') }}
-                                                        </div>
-                                                    @endif
-                                                    {{-- end of alert --}}
                                                 </div>
                                             </div>
 
@@ -88,14 +80,6 @@
                                                 <label for="nama" class="col-sm-3 col-form-label">Nama</label>
                                                 <div class="col-sm-7">
                                                     <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama" value="{{ $mahasiswa->nama }}" disabled>
-
-                                                    {{-- alert --}}
-                                                    @if (count($errors) > 0)
-                                                        <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                            {{ $errors->first('nama') }}
-                                                        </div>
-                                                    @endif
-                                                    {{-- end of alert --}}
                                                 </div>
                                             </div>
 
@@ -106,14 +90,6 @@
                                                         <option value="3A" {{ $mahasiswa->kelas == '3A' ? 'selected' : '' }}>3A</option>
                                                         <option value="3B" {{ $mahasiswa->kelas == '3B' ? 'selected' : '' }}>3B</option>
                                                     </select>
-
-                                                    {{-- alert --}}
-                                                    @if (count($errors) > 0)
-                                                        <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                            {{ $errors->first('control-kelas') }}
-                                                        </div>
-                                                    @endif
-                                                    {{-- end of alert --}}
                                                 </div>
                                             </div>
 
@@ -124,14 +100,19 @@
                                                         <option value= "D3 TI" {{ $mahasiswa->jurusan == 'D3 TI' ? 'selected' : '' }}>D3 TI</option>
                                                         <option value= "D4 TI" {{ $mahasiswa->jurusan == 'D4 TI' ? 'selected' : '' }}>D4 TI</option>
                                                     </select>
+                                                </div>
+                                            </div>
 
-                                                    {{-- alert --}}
-                                                    @if (count($errors) > 0)
-                                                        <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                            {{ $errors->first('control-jurusan') }}
-                                                        </div>
-                                                    @endif
-                                                    {{-- end of alert --}}
+                                            <div class="form-group row">
+                                                <label for="kategori" class="col-sm-3 col-form-label">Kategori Magang</label>
+                                                <div class="col-sm-5">
+                                                    <select class="form-control" id="kategori" name="kategori">
+                                                        <option value="" selected disabled>- Pilih kategori magang -</option>
+                                                        <option value="MSIB">MSIB</option>
+                                                        <option value="Studi Independen">Studi Independen</option>
+                                                        <option value="MBKM">MBKM</option>
+                                                        <option value="Magang Mandiri">Magang Mandiri</option>
+                                                    </select>
                                                 </div>
                                             </div>
 
@@ -139,14 +120,6 @@
                                                 <label for="instansi_magang" class="col-sm-3 col-form-label">Instansi Magang</label>
                                                 <div class="col-sm-7">
                                                     <input type="text" class="form-control" id="instansi_magang" name="instansi_magang" placeholder="Masukkan instansi magang" value="{{ $pengajuanMagang->instansi_magang ?? '' }}" disabled>
-
-                                                    {{-- alert --}}
-                                                    @if (count($errors) > 0)
-                                                        <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                            {{ $errors->first('instansi_magang') }}
-                                                        </div>
-                                                    @endif
-                                                    {{-- end of alert --}}
                                                 </div>
                                             </div>
 
@@ -154,13 +127,6 @@
                                                 <label for="alamat_magang" class="col-sm-3 col-form-label">Alamat Instansi Magang</label>
                                                 <div class="col-sm-7">
                                                     <input type="text" class="form-control" id="alamat_magang" name="alamat_magang" placeholder="Masukkan alamat instansi magang" value="{{ $pengajuanMagang->alamat_magang ?? '' }}" disabled>
-                                                    {{-- alert --}}
-                                                    @if (count($errors) > 0)
-                                                        <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                            {{ $errors->first('alamat_magang') }}
-                                                        </div>
-                                                    @endif
-                                                    {{-- end of alert --}}
                                                 </div>
                                             </div>
 
@@ -168,14 +134,6 @@
                                                 <label for="period" class="col-sm-3 col-form-label"> Periode Magang </label>
                                                 <div class="col-sm-3">
                                                     <input type="text" class="form-control" id="period" name="period" placeholder="Contoh: 5 bulan">
-
-                                                    {{-- alert --}}
-                                                    @if (count($errors) > 0)
-                                                        <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                            {{ $errors->first('period') }}
-                                                        </div>
-                                                    @endif
-                                                    {{-- end of alert --}}
                                                 </div>
                                             </div>
 
@@ -199,12 +157,6 @@
                                                     <div class="form-group">
                                                         <input type="file" class="form-control-file" id="file" name="file">
                                                     </div>
-
-                                                    @if ($errors->has('file'))
-                                                        <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                            {{ $errors->first('file') }}
-                                                        </div>
-                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -241,12 +193,17 @@
     <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
     <!-- JS Libraies -->
+    <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
+    <script>
+        var redirectUrl = "{{ url('/mahasiswa/data-magang') }}";
+    </script>
 
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 
     <!-- Page Specific JS File -->
+    <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
 </body>
 
 </html>

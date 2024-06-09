@@ -14,52 +14,24 @@
             <div class="main-sidebar sidebar-style-2">
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
-                        <a href="{{ url('/') }}">Admin</a>
+                        <a href="{{ url('/dosen/dashboard') }}">{{ Auth::user()->role }}</a>
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
-                        <a href="{{ url('/') }}">SIMAG</a>
+                        <a href="{{ url('/dosen/dashboard') }}">SIMMAG</a>
                     </div>
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
                         <li class="menu-header">Dashboard</li>
-                        <li><a class="nav-link" href="{{ url('/') }}"><i class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i><span>Dashboard</span></a></li>
-                        <li><a class="nav-link" href="{{ url('/pengumuman') }}"><i class="ion ion-speakerphone"></i><span>Pengumuman</span></a></li>
+                        <li class="active"><a class="nav-link" href="{{ url('/dosen/dashboard') }}"><i class="ion ion-speedometer"
+                                    data-pack="default" data-tags="travel, accelerate"></i>
+                                <span>Dashboard</span></a></li>
 
-                        <li class="menu-header">Manajemen Pengguna</li>
-                        <li class="nav-item-dropdown">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                                <i class="ion ion-ios-paper"></i><span>Data Pengguna</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/data-pengguna/admin') }}"><span>Admin</span></a>
-                                </li>
-                                <li><a class="nav-link" href="{{ url('/data-pengguna/dosen') }}"><span>Dosen</span></a>
-                                </li>
-                                <li><a class="nav-link"
-                                        href="{{ url('/data-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                    class="ion ion-android-person"></i> <span>Kelola Pengguna</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link"
-                                        href="{{ url('/kelola-pengguna/admin') }}"><span>Admin</span></a></li>
-                                <li><a class="nav-link"
-                                        href="{{ url('/kelola-pengguna/dosen') }}"><span>Dosen</span></a></li>
-                                <li><a class="nav-link"
-                                        href="{{ url('/kelola-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
-                            </ul>
-                        </li>
+                        <li class="menu-header">Magang</li>
+                        <li><a class="nav-link" href="#"><i class="fas fa-columns"></i> <span>Data Magang</span></a></li>
 
-                        <li class="menu-header">Manajemen Magang</li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Magang</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a></li>
-                                <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
-                            </ul>
-                        </li>
+                        <li class="menu-header">Aktivitas Magang</li>
+                        <li><a class="nav-link" href="#"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
+                        <li><a class="nav-link" href="#"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
 
                         <li class="menu-header">Lainnya</li>
                         <li>
@@ -92,7 +64,7 @@
                                     <div class="card-header">
                                         <h4>Edit Pengumuman</h4>
                                     </div>
-                                    <form id="update-form" action="{{ url('/pengumuman/edit/' . $pengumuman->id) }}" method="POST">
+                                    <form id="update-form" action="{{ url('/dosen/dashboard/edit/' . $pengumuman->id) }}" method="POST">
                                         @method('patch')
                                         @csrf
                                         <div class="card-body">
@@ -100,6 +72,12 @@
                                                 <label for="judul" class="col-sm-3 col-form-label">Judul</label>
                                                 <div class="col-sm-9">
                                                     <input type="text" class="form-control" id="judul" name="judul" placeholder="Masukkan judul pengumuman" value="{{ $pengumuman->judul }}">
+
+                                                    @if (count($errors) > 0)
+                                                    <div style="width: auto; color:red; margin-top:0.25rem;">
+                                                        {{ $errors->first('judul') }}
+                                                    </div>
+                                                    @endif
                                                 </div>
                                             </div>
 
@@ -107,6 +85,12 @@
                                                 <label for="desc" class="col-sm-3 col-form-label">Deskripsi</label>
                                                 <div class="col-sm-9">
                                                     <textarea name="desc" class="summernote" cols="30" rows="10">{{ $pengumuman->deskripsi }}</textarea>
+
+                                                    @if (count($errors) > 0)
+                                                    <div style="width: auto; color:red; margin-top:0.25rem;">
+                                                        {{ $errors->first('desc') }}
+                                                    </div>
+                                                    @endif
                                                 </div>
                                             </div>
 
@@ -118,6 +102,12 @@
                                                         <option value="Informasi" {{ $pengumuman->kategori == 'Informasi' ? 'selected' : '' }}>Informasi</option>
                                                         <option value="Pendaftaran" {{ $pengumuman->kategori == 'Pendaftaran' ? 'selected' : '' }}>Pendaftaran</option>
                                                     </select>
+
+                                                    @if (count($errors) > 0)
+                                                    <div style="width: auto; color:red; margin-top:0.25rem;">
+                                                        {{ $errors->first('cat') }}
+                                                    </div>
+                                                    @endif
                                                 </div>
                                             </div>
 
@@ -129,6 +119,12 @@
                                                         <option value="Admin" {{ $pengumuman->created_by == 'Admin' ? 'selected' : '' }}>Admin</option>
                                                         <option value="Dosen" {{ $pengumuman->created_by == 'Dosen' ? 'selected' : '' }}>Dosen</option>
                                                     </select>
+
+                                                    @if (count($errors) > 0)
+                                                    <div style="width: auto; color:red; margin-top:0.25rem;">
+                                                        {{ $errors->first('creator') }}
+                                                    </div>
+                                                    @endif
                                                 </div>
                                             </div>
 
@@ -142,7 +138,7 @@
 
                                         <div class="card-footer">
                                             <button type="submit" id="kirim" name="kirim" class="btn btn-primary">Simpan</button>
-                                            <a href="{{ url('/pengumuman') }}" class="btn btn-warning m-2">Batal</a>
+                                            <a href="{{ url('/dosen/dashboard') }}" class="btn btn-warning m-2">Batal</a>
                                         </div>
                                     </form>
                                 </div>
@@ -169,7 +165,7 @@
     <script src="{{ asset('node_modules/summernote/dist/summernote-bs4.js') }}"></script>
     <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
     <script>
-        var redirectUrl = "{{ url('/pengumuman') }}";
+        var redirectUrl = "{{ url('/dosen/dashboard') }}";
     </script>
 
     <!-- Template JS File -->

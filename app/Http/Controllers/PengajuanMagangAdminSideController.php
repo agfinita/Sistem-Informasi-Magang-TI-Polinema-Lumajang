@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\PengajuanMagang;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class PengajuanMagangAdminSideController extends Controller
 {
@@ -34,19 +35,22 @@ class PengajuanMagangAdminSideController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request, $id) {
+        // Validasi input
         $validatedData = $request->validate([
-            'file'   => 'nullable|file|mimes:doc,docx,pdf',
+            'file'   => 'required|file|mimes:doc,docx,pdf',
             'status' => 'required|in:diproses,selesai'
         ]);
 
+        // Mencari data pengajuan magang berdasarkan id
         $pengajuanMagang = PengajuanMagang::findOrFail($id);
 
+        // Jika ada file yang diunggah
         if ($request->hasFile('file')) {
             $file = $request->file('file');
 
             // Generate nama file unik
-            $originalname = $file->getClientOriginalName();
-            $filename = uniqid() . '_' . $originalname;
+            $originalname   = $file->getClientOriginalName();
+            $filename       = uniqid() . '_' . $originalname;
 
             // Menentukan lokasi penyimpanan
             $path = $file->storeAs('uploads', $filename, 'public');
@@ -67,10 +71,11 @@ class PengajuanMagangAdminSideController extends Controller
         $pengajuanMagang->status = $validatedData['status'];
         $pengajuanMagang->save();
 
-        return redirect('/admin/mahasiswa/pengajuan-magang')->with('success', 'Success!');
+        // Mengembalikan respon sukses
+        return response()->json([ 'status'  => 'success' ]);
+
+        // return redirect('/admin/mahasiswa/pengajuan-magang')->with('success', 'Success!');
     }
-
-
 
     /**
      * Display the specified resource.

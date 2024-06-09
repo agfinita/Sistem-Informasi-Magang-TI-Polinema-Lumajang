@@ -1,62 +1,245 @@
 "use strict";
 
-$("#swal-1").click(function() {
-	swal('Hello');
-});
+// Alert sudah tambah data
+$(document).ready(function() {
+    $('#create-form').on('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
 
-$("#swal-2").click(function() {
-	swal('Good Job', 'You clicked the button!', 'success');
-});
+        // Clear previous error messages
+        $('.error-message').remove();
 
-$("#swal-3").click(function() {
-	swal('Good Job', 'You clicked the button!', 'warning');
-});
+        $.ajax({
+            url: $(this).attr('action'),
+            method: $(this).attr('method'),
+            data: $(this).serialize(),
+            success: function(response) {
+                if (response.status === 'success') {
+                    swal('Success', 'Data baru berhasil ditambahkan!', 'success')
+                    .then(() => {
+                        window.location.href = redirectUrl; // Redirect after success
+                    });
+                }
+            },
+            error: function(xhr) {
+                if (xhr.status === 422) {
+                    // Handle validation errors
+                    swal('Oops', 'Data gagal ditambahkan', 'error').then(() => {
+                        var errors = xhr.responseJSON.errors;
+                        $.each(errors, function(key, value) {
+                            var inputField = $('input[name="' + key + '"]');
+                            if (inputField.length) {
+                                inputField.after('<div class="error-message" style="color: red; margin-top: 0.25rem;">' + value[0] + '</div>');
+                            }
 
-$("#swal-4").click(function() {
-	swal('Good Job', 'You clicked the button!', 'info');
-});
+                            var textareaField = $('textarea[name="' + key + '"]');
+                            if (textareaField.length) {
+                                textareaField.after('<div class="error-message" style="color: red; margin-top: 0.25rem;">' + value[0] + '</div>');
+                            }
 
-$("#swal-5").click(function() {
-	swal('Good Job', 'You clicked the button!', 'error');
-});
-
-$("#swal-6").click(function() {
-  swal({
-      title: 'Are you sure?',
-      text: 'Once deleted, you will not be able to recover this imaginary file!',
-      icon: 'warning',
-      buttons: true,
-      dangerMode: true,
-    })
-    .then((willDelete) => {
-      if (willDelete) {
-      swal('Poof! Your imaginary file has been deleted!', {
-        icon: 'success',
-      });
-      } else {
-      swal('Your imaginary file is safe!');
-      }
+                            var selectField = $('select[name="' + key + '"]');
+                            if (selectField.length) {
+                                selectField.after('<div class="error-message" style="color: red; margin-top: 0.25rem;">' + value[0] + '</div>');
+                            }
+                        });
+                    });
+                } else {
+                    // Handle other errors
+                    swal('Oops', 'Data gagal ditambahkan', 'error');
+                }
+            }
+        });
     });
 });
 
-$("#swal-7").click(function() {
-  swal({
-    title: 'What is your name?',
-    content: {
-    element: 'input',
-    attributes: {
-      placeholder: 'Type your name',
-      type: 'text',
-    },
-    },
-  }).then((data) => {
-    swal('Hello, ' + data + '!');
-  });
+// Alert tambah data (file)
+$(document).ready(function() {
+    $('#create-form-data').on('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Clear previous error messages
+        $('.error-message').remove();
+
+        // Create FormData object
+        var formData = new FormData(this);
+
+        $.ajax({
+            url: $(this).attr('action'),
+            method: $(this).attr('method'),
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                if (response.status === 'success') {
+                    swal('Success', 'Data baru berhasil ditambahkan!', 'success')
+                    .then(() => {
+                        window.location.href = redirectUrl; // Redirect after success
+                    });
+                }
+            },
+            error: function(xhr) {
+                if (xhr.status === 422) {
+                    // Handle validation errors
+                    swal('Oops', 'Data gagal ditambahkan', 'error').then(() => {
+                        var errors = xhr.responseJSON.errors;
+                        $.each(errors, function(key, value) {
+                            var inputField = $('input[name="' + key + '"]');
+                            if (inputField.length) {
+                                inputField.after('<div class="error-message" style="color: red; margin-top: 0.25rem;">' + value[0] + '</div>');
+                            }
+
+                            var textareaField = $('textarea[name="' + key + '"]');
+                            if (textareaField.length) {
+                                textareaField.after('<div class="error-message" style="color: red; margin-top: 0.25rem;">' + value[0] + '</div>');
+                            }
+
+                            var selectField = $('select[name="' + key + '"]');
+                            if (selectField.length) {
+                                selectField.after('<div class="error-message" style="color: red; margin-top: 0.25rem;">' + value[0] + '</div>');
+                            }
+                        });
+                    });
+                } else {
+                    // Handle other errors
+                    swal('Oops', 'Data gagal ditambahkan', 'error');
+                }
+            }
+        });
+    });
 });
 
-$("#swal-8").click(function() {
-  swal('This modal will disappear soon!', {
-    buttons: false,
-    timer: 3000,
-  });
+
+// Alert update data
+$(document).ready(function() {
+    $('#update-form').on('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Clear previous error messages
+        $('.error-message').remove();
+
+        $.ajax({
+            url: $(this).attr('action'),
+            method: $(this).attr('method'),
+            data: $(this).serialize(),
+            success: function(response) {
+                if (response.status === 'success') {
+                    swal('Success', 'Data berhasil diperbarui!', 'success')
+                    .then(() => {
+                        window.location.href = redirectUrl; // Redirect after success
+                    });
+                }
+            },
+            error: function(xhr) {
+                if (xhr.status === 422) {
+                    // Handle validation errors
+                    swal('Oops', 'Data gagal diperbarui', 'error').then(() => {
+                        var errors = xhr.responseJSON.errors;
+                        $.each(errors, function(key, value) {
+                            var inputField = $('input[name="' + key + '"]');
+                            if (inputField.length) {
+                                inputField.after('<div class="error-message" style="color: red; margin-top: 0.25rem;">' + value[0] + '</div>');
+                            }
+
+                            var textareaField = $('textarea[name="' + key + '"]');
+                            if (textareaField.length) {
+                                textareaField.after('<div class="error-message" style="color: red; margin-top: 0.25rem;">' + value[0] + '</div>');
+                            }
+
+                            var selectField = $('select[name="' + key + '"]');
+                            if (selectField.length) {
+                                selectField.after('<div class="error-message" style="color: red; margin-top: 0.25rem;">' + value[0] + '</div>');
+                            }
+                        });
+                    });
+                } else {
+                    // Handle other errors
+                    swal('Oops', 'Data gagal diperbarui', 'error');
+                }
+            }
+        });
+    });
+});
+
+// Alert update data (file)
+$(document).ready(function() {
+    $('#update-form-data').on('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Clear previous error messages
+        $('.error-message').remove();
+
+        // Create FormData object
+        var formData = new FormData(this);
+
+        $.ajax({
+            url: $(this).attr('action'),
+            method: $(this).attr('method'),
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                if (response.status === 'success') {
+                    swal('Success', 'Data berhasil diperbarui!', 'success')
+                    .then(() => {
+                        window.location.href = redirectUrl; // Redirect after success
+                    });
+                }
+            },
+            error: function(xhr) {
+                if (xhr.status === 422) {
+                    // Handle validation errors
+                    swal('Oops', 'Data gagal diperbarui', 'error').then(() => {
+                        var errors = xhr.responseJSON.errors;
+                        $.each(errors, function(key, value) {
+                            var inputField = $('input[name="' + key + '"]');
+                            if (inputField.length) {
+                                inputField.after('<div class="error-message" style="color: red; margin-top: 0.25rem;">' + value[0] + '</div>');
+                            }
+
+                            var textareaField = $('textarea[name="' + key + '"]');
+                            if (textareaField.length) {
+                                textareaField.after('<div class="error-message" style="color: red; margin-top: 0.25rem;">' + value[0] + '</div>');
+                            }
+
+                            var selectField = $('select[name="' + key + '"]');
+                            if (selectField.length) {
+                                selectField.after('<div class="error-message" style="color: red; margin-top: 0.25rem;">' + value[0] + '</div>');
+                            }
+                        });
+                    });
+                } else {
+                    // Handle other errors
+                    swal('Oops', 'Data gagal diperbarui', 'error');
+                }
+            }
+        });
+    });
+});
+
+
+// Alert error message
+$(".swal-5").click(function () {
+    swal('Failed', 'Data tidak ditemukan!' , 'error');
+});
+
+// Alert hapus data
+$(".swal-6").click(function() {
+    var id = $(this).data('id');
+    swal({
+            title: 'Yakin hapus data?',
+            text: 'Data yang dihapus tidak dapat dikembalikan!',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                swal('Data berhasil dihapus!', {
+                    icon: 'success',
+                }).then(() => {
+                    $("#delete-form-" + id).submit();
+                });
+            } else {
+                swal('Data batal dihapus.');
+            }
+        });
 });

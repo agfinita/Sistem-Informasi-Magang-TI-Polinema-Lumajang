@@ -4,15 +4,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DataAdminController;
 use App\Http\Controllers\DataDosenController;
-use App\Http\Controllers\DataMagangController;
-use App\Http\Controllers\PengumumanController;
+use App\Http\Controllers\KelolaAdminController;
+use App\Http\Controllers\KelolaDosenController;
 use App\Http\Controllers\DataMahasiswaController;
-use App\Http\Controllers\FormKelolaAdminController;
-use App\Http\Controllers\FormKelolaDosenController;
-use App\Http\Controllers\PengajuanMagangController;
+use App\Http\Controllers\KelolaMahasiswaController;
 use App\Http\Controllers\DataMagangAdminSideController;
-use App\Http\Controllers\FormKelolaMahasiswaController;
+use App\Http\Controllers\PengumumanAdminSideController;
+use App\Http\Controllers\PengumumanDosenSideController;
+use App\Http\Controllers\DataMagangMahasiswaSideController;
 use App\Http\Controllers\PengajuanMagangAdminSideController;
+use App\Http\Controllers\PengajuanMagangMahasiswaSideController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,22 +34,22 @@ use App\Http\Controllers\PengajuanMagangAdminSideController;
 Route::group(['middleware' => 'role'], function () {
 
     // AUTH ADMIN
-    // Menampilkan index simmag admin
-    Route::get('/', [HomeController::class, 'statistik']);
+    // Menampilkan dashboard simag admin
+    Route::get('/', [HomeController::class, 'statistikDashboardAdmin']);
 
     //Kelola pengguna
     // Admin
-    Route::resource('/kelola-pengguna/admin', FormKelolaAdminController::class)->except('show', 'store', 'create');
-    Route::get('/kelola-pengguna/admin/edit/{id}', [FormKelolaAdminController::class, 'edit']);
-    Route::patch('/kelola-pengguna/admin/edit/{id}', [FormKelolaAdminController::class, 'update']);
+    Route::resource('/kelola-pengguna/admin', KelolaAdminController::class)->except('show', 'store', 'create');
+    Route::get('/kelola-pengguna/admin/edit/{id}', [KelolaAdminController::class, 'edit']);
+    Route::patch('/kelola-pengguna/admin/edit/{id}', [KelolaAdminController::class, 'update']);
     // Mahasiswa
-    Route::resource('/kelola-pengguna/mahasiswa', FormKelolaMahasiswaController::class)->except('show', 'create' ,'store');
-    Route::get('/kelola-pengguna/mahasiswa/edit/{id}', [FormKelolaMahasiswaController::class, 'edit']);
-    Route::patch('/kelola-pengguna/mahasiswa/edit/{id}', [FormKelolaMahasiswaController::class, 'update']);
+    Route::resource('/kelola-pengguna/mahasiswa', KelolaMahasiswaController::class)->except('show', 'create' ,'store');
+    Route::get('/kelola-pengguna/mahasiswa/edit/{id}', [KelolaMahasiswaController::class, 'edit']);
+    Route::patch('/kelola-pengguna/mahasiswa/edit/{id}', [KelolaMahasiswaController::class, 'update']);
     // Dosen
-    Route::resource('/kelola-pengguna/dosen', FormKelolaDosenController::class)->except('show', 'create', 'store');
-    Route::get('/kelola-pengguna/dosen/edit/{id}', [FormKelolaDosenController::class,'edit']);
-    Route::patch('/kelola-pengguna/dosen/edit/{id}', [FormKelolaDosenController::class, 'update']);
+    Route::resource('/kelola-pengguna/dosen', KelolaDosenController::class)->except('show', 'create', 'store');
+    Route::get('/kelola-pengguna/dosen/edit/{id}', [KelolaDosenController::class,'edit']);
+    Route::patch('/kelola-pengguna/dosen/edit/{id}', [KelolaDosenController::class, 'update']);
 
     // Data Pengguna
     // Admin
@@ -65,9 +66,9 @@ Route::group(['middleware' => 'role'], function () {
     Route::patch('/data-pengguna/dosen/edit/{id}', [DataDosenController::class, 'update']);
 
     // Pengumuman
-    Route::resource('/pengumuman', PengumumanController::class)->except('show');
-    Route::get('/pengumuman/edit/{id}', [PengumumanController::class,'edit']);
-    Route::patch('/pengumuman/edit/{id}', [PengumumanController::class,'update']);
+    Route::resource('/pengumuman', PengumumanAdminSideController::class)->except('show');
+    Route::get('/pengumuman/edit/{id}', [PengumumanAdminSideController::class,'edit']);
+    Route::patch('/pengumuman/edit/{id}', [PengumumanAdminSideController::class,'update']);
 
     // Data Magang - Admin Side
     Route::resource('/admin/data-magang', DataMagangAdminSideController::class)->except('show', 'create', 'edit', 'update', 'store');
@@ -79,22 +80,25 @@ Route::group(['middleware' => 'role'], function () {
 
 
     // AUTH MAHASISWA
-    // Menampilkan index simmag mahasiswa
+    // Menampilkan dashboard simag mahasiswa
     Route::get('/mahasiswa/dashboard', [HomeController::class, 'index']);
 
     // Pengajuan Magang
-    Route::resource('/mahasiswa/pengajuan-magang', PengajuanMagangController::class)->except('show', 'update', 'destroy', 'edit');
+    Route::resource('/mahasiswa/pengajuan-magang', PengajuanMagangMahasiswaSideController::class)->except('show', 'update', 'destroy', 'edit');
     // Data Magang - Mahasiswa Side
-    Route::resource('/mahasiswa/data-magang', DataMagangController::class)->except('show', 'destroy');
-    Route::get('/mahasiswa/data-magang/edit/{id}', [DataMagangController::class, 'edit']);
-    Route::patch('/mahasiswa/data-magang/edit/{id}', [DataMagangController::class, 'update']);
+    Route::resource('/mahasiswa/data-magang', DataMagangMahasiswaSideController::class)->except('show', 'destroy');
+    Route::get('/mahasiswa/data-magang/edit/{id}', [DataMagangMahasiswaSideController::class, 'edit']);
+    Route::patch('/mahasiswa/data-magang/edit/{id}', [DataMagangMahasiswaSideController::class, 'update']);
 
 
     // Auth Dosen
-    // Menampilkan index simmag dosen
-    Route::get('/dosen/dashboard', function() {
-        return view('pages.contents.dosen.index');
-    });
+    // Menampilkan dashboard simag dosen
+
+    // Pengumuman
+    Route::resource('/dosen/dashboard', PengumumanDosenSideController::class)->except('show');
+    Route::get('/dosen/dashboard/edit/{id}', [PengumumanDosenSideController::class,'edit']);
+    Route::patch('/dosen/dashboard/edit/{id}', [PengumumanDosenSideController::class,'update']);
+
 });
 
 

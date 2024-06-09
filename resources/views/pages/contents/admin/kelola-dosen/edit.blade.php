@@ -100,7 +100,7 @@
                                         <h4>Update user dosen</h4>
                                     </div>
 
-                                    <form action="{{ url('/kelola-pengguna/dosen/edit/' . $users->id) }}"
+                                    <form id="update-form" action="{{ url('/kelola-pengguna/dosen/edit/' . $users->id) }}"
                                         method="POST">
                                         @method('patch')
                                         @csrf
@@ -207,10 +207,7 @@
                                             <div class="row">
                                                 <button type="submit" id="kirim" name="kirim"
                                                     class="btn btn-primary m-2">Simpan</button>
-                                                <button class="btn btn-warning m-2">
-                                                    <a href="{{ url('/kelola-pengguna/dosen') }}"></a>
-                                                    Batal
-                                                </button>
+                                                <a href="{{ url('/kelola-pengguna/dosen') }}" class="btn btn-warning m-2">Batal</a>
                                             </div>
                                         </div>
                                     </form>
@@ -239,12 +236,17 @@
     <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
     <!-- JS Libraies -->
+    <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
+    <script>
+        var redirectUrl = "{{ url('/kelola-pengguna/dosen') }}";
+    </script>
 
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 
     <!-- Page Specific JS File -->
+    <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
 </body>
 
 </html>

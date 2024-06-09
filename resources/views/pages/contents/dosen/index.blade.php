@@ -56,6 +56,7 @@
                         <h1>Dashboard</h1>
                     </div>
                     <div class="row">
+                        <!-- Statistik --->
                         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                             <div class="card card-statistic-1">
                                 <div class="card-icon bg-danger">
@@ -63,10 +64,82 @@
                                 </div>
                                 <div class="card-wrap">
                                     <div class="card-header">
-                                        <h4>News</h4>
+                                        <h4>Pengumuman</h4>
                                     </div>
-                                    <div class="card-body">
-                                        42
+                                    <div class="card-body"> {{ $totalPengumuman }} </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Kelola pengumuman -->
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Kelola Pengumuman</h4>
+                                </div>
+
+                                <div class="col-md-6 mx-2 my-auto">
+                                    <!-- Tambah data -->
+                                    <button type="submit" class="btn btn-success">
+                                        <a href="{{ url('/dosen/dashboard/create') }}" class="text-decoration-none text-white">
+                                            <span>
+                                                <i class="ion ion-plus-circled" data-pack="default" data-tags="add, include, new, invite, +"> </i>
+                                            </span>
+                                            Tambah Data
+                                        </a>
+                                    </button>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped" id="table-1">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">No</th>
+                                                    <th>Judul</th>
+                                                    <th>Deskripsi</th>
+                                                    <th>Kategori</th>
+                                                    <th>Penulis</th>
+                                                    <th>Created</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+
+                                            @php
+                                                $no = 1;
+                                            @endphp
+                                            <tbody>
+                                                @foreach ($pengumuman as $p)
+                                                    <tr>
+                                                        <td class="text-center">{{ $no++ }}</td>
+                                                        <td>{{ $p->judul }}</td>
+                                                        <td>{!! $p->deskripsi !!}</td>
+                                                        <td>{{ $p->kategori }}</td>
+                                                        <td>{{ $p->created_by }}</td>
+                                                        <td>{{ $p->created_at }}</td>
+
+                                                        <td>
+                                                            <div class="row">
+                                                                <a href="{{ url('/dosen/dashboard/edit/' . $p->id) }}">
+                                                                    <button class="btn btn-sm btn-warning mx-1">
+                                                                        <i class="ion ion-edit" data-pack="default"
+                                                                            data-tags="change, update, write, type, pencil"></i>
+                                                                    </button>
+                                                                </a>
+
+                                                                <form id="delete-form-{{ $p->id }}" action="{{ url('/dosen/dashboard/' . $p->id) }}" method="POST">
+                                                                    @method('DELETE')
+                                                                    @csrf
+                                                                    <button type="button" class="btn btn-sm btn-danger mx-1 swal-6" data-id="{{ $p->id }}">
+                                                                        <i class="ion ion-trash-a" data-pack="default" data-tags="delete, remove, dump"></i>
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -94,12 +167,12 @@
     <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
     <!-- JS Libraies -->
-    <script src="{{ asset('node_modules/simpleweather/jquery.simpleWeather.min.js') }}"></script>
-    <script src="{{ asset('node_modules/chart.js/dist/Chart.min.js') }}"></script>
-    <script src="{{ asset('node_modules/jqvmap/dist/jquery.vmap.min.js') }}"></script>
-    <script src="{{ asset('node_modules/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
-    <script src="{{ asset('node_modules/summernote/dist/summernote-bs4.js') }}"></script>
-    <script src="{{ asset('node_modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
+    <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
+
+    <!-- Data Tables -->
+    <script src="{{ asset('node_modules/datatables/media/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('node_modules/datatables.net-select-bs4/js/select.bootstrap4.min.js') }}"></script>
 
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
@@ -107,6 +180,8 @@
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('assets/js/page/index-0.js') }}"></script>
+    <script src="{{ asset('assets/js/page/modules-datatables.js') }}"></script>
+    <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
 </body>
 
 </html>

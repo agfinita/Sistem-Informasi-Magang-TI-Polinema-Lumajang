@@ -8,15 +8,13 @@ use App\Models\Admin;
 use App\Models\Dosen;
 use App\Models\Mahasiswa;
 use App\Models\DataMagang;
-use App\Models\PengajuanMagang;
 use App\Models\Pengumuman;
 use Illuminate\Http\Request;
+use App\Models\PengajuanMagang;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
 
-
 class HomeController extends Controller {
-
     // Menampilkan halaman login
     public function masuk() {
         return view('pages.contents.auth-login');
@@ -74,7 +72,7 @@ class HomeController extends Controller {
     }
 
     // Dashboard admin
-    public function statistik() {
+    public function statistikDashboardAdmin() {
         // Jumlah user
         $totalUser  = User::count();
         // Jumlah admin

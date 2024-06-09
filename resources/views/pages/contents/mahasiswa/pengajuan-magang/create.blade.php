@@ -74,12 +74,12 @@
                                     <div class="card-header">
                                         <h4>Pengajuan Magang Mahasiswa</h4>
                                     </div>
-                                    <form action="{{ url('/mahasiswa/pengajuan-magang') }}" method="POST" autocomplete="off">
+                                    <form id="create-form" action="{{ url('/mahasiswa/pengajuan-magang') }}" method="POST" autocomplete="off">
                                         @csrf
                                         <div class="card-body">
                                             <div class="form-group row">
                                                 <label for="nim" class="col-sm-2 col-form-label">NIM</label>
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-5">
                                                     <input type="text" class="form-control" id="nim" name="nim" placeholder="Masukkan NIM" autofocus value="{{ $mahasiswa->nim ?? '' }}" readonly>
                                                     {{-- alert --}}
                                                     @if (count($errors) > 0)
@@ -92,7 +92,7 @@
                                             </div>
                                             <div class="form-group row">
                                                 <label for="instansi_magang" class="col-sm-2 col-form-label">Tempat Magang</label>
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-5">
                                                     <input type="text" class="form-control" id="instansi_magang" name="instansi_magang" placeholder="Masukkan Instansi Magang" autofocus>
                                                     {{-- alert --}}
                                                     @if (count($errors) > 0)
@@ -105,7 +105,7 @@
                                             </div>
                                             <div class="form-group row">
                                                 <label for="alamat_magang" class="col-sm-2 col-form-label">Alamat Magang</label>
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-5">
                                                     <input type="text" class="form-control" id="alamat_magang" name="alamat_magang" placeholder="Masukkan Alamat Instansi Magang" autofocus>
                                                     {{-- alert --}}
                                                     @if (count($errors) > 0)
@@ -119,11 +119,11 @@
                                         </div>
 
                                         <div class="card-footer">
-                                            <div class="row justify-content-end col-sm-4">
-                                                <div class="col-auto mr-2">
+                                            <div class="row justify-content-end col-sm-7">
+                                                <div class="col-12 col-sm-auto mb-2 mb-sm-0">
                                                     <button type="submit" id="kirim" name="kirim" class="btn btn-primary">Proses permintaan</button>
                                                 </div>
-                                                <div class="col-auto">
+                                                <div class="col-12 col-sm-auto">
                                                     <button type="button" class="btn btn-warning" onclick="window.history.back();">Batal</button>
                                                 </div>
                                             </div>
@@ -153,9 +153,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
+    <!-- JS Libraies -->
+    <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
+    <script>
+        var redirectUrl = "{{ url('/mahasiswa/pengajuan-magang') }}";
+    </script>
+
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
+
+    <!-- Page Specific JS File -->
+    <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
 </body>
 
 </html>

@@ -7,18 +7,20 @@ use Illuminate\Http\Request;
 use App\Models\PengajuanMagang;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
-class PengajuanMagangController extends Controller
+class PengajuanMagangMahasiswaSideController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index() {
+    public function index()
+    {
         // Mengambil pengajuan magang milik mahasiswa yang sedang login
         $mahasiswa_id = auth()->user()->username;
 
         $pengajuanMagang = DB::table('pengajuan_magang')
-            ->select('id','mahasiswa_id', 'instansi_magang', 'alamat_magang', 'status', 'files')
+            ->select('id', 'mahasiswa_id', 'instansi_magang', 'alamat_magang', 'status', 'files')
             ->orderBy('created_at', 'desc')
             ->where('mahasiswa_id', $mahasiswa_id)
             ->get();
@@ -28,7 +30,8 @@ class PengajuanMagangController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create() {
+    public function create()
+    {
         // Ambil user yang sedang login
         $user   = Auth::user();
 
@@ -47,24 +50,36 @@ class PengajuanMagangController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {
-        $validatedData  = $request->validate([
+    public function store(Request $request)
+    {
+        $validatedData = Validator::make($request->all(), [
             'nim'               => 'required',
             'instansi_magang'   => 'required',
             'alamat_magang'     => 'required'
         ]);
 
+        if ($validatedData->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'errors' => $validatedData->errors()
+            ], 422);
+        }
+
+        // Menyimpan hasil validasi yang sukses
+        $validated  = $validatedData->validated();
+
         // Menyimpan data ke database
-        $pengajuanMagang    = new PengajuanMagang([
-            'mahasiswa_id'      => $validatedData['nim'],
-            'instansi_magang'   => $validatedData['instansi_magang'],
-            'alamat_magang'     => $validatedData['alamat_magang']
+        PengajuanMagang::create([
+            'mahasiswa_id'      => $validated['nim'],
+            'instansi_magang'   => $validated['instansi_magang'],
+            'alamat_magang'     => $validated['alamat_magang']
         ]);
 
-        $pengajuanMagang->save();
+        // Mengembalikan respon sukses
+        return response()->json(['status' => 'success']);
 
-        // Redirect halaman
-        return redirect('/mahasiswa/pengajuan-magang')->with('status', 'Data berhasil ditambahkan!');
+        // Redirect halaman: sudah ada di modules.sweetalert.js
+        //return redirect('/mahasiswa/pengajuan-magang');
     }
 
     /**

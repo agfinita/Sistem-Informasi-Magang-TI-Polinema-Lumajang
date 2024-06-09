@@ -9,7 +9,8 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void {
+    public function up(): void
+    {
         Schema::create('mahasiswa', function (Blueprint $table) {
             $table->id();
             $table->string('nim', 20)->unique()->nullable(false);
@@ -19,6 +20,7 @@ return new class extends Migration
             $table->string('email', 100)->unique()->nullable();
             $table->char('telp', 15)->nullable();
             $table->string('alamat', 50)->nullable();
+            $table->enum('role', ['Mahasiswa', 'Admin', 'Dosen'] )->default('Mahasiswa');
             $table->enum('is_active', ['1', '0'])->default('1');
             $table->timestamps();
         });

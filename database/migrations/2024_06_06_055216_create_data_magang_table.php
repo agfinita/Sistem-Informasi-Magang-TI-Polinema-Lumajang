@@ -17,9 +17,11 @@ return new class extends Migration
             $table->unsignedBigInteger('pengajuan_magang_id');
             $table->foreign('mahasiswa_id')->references('nim')->on('mahasiswa')->onDelete('cascade');
             $table->foreign('pengajuan_magang_id')->references('id')->on('pengajuan_magang')->onDelete('cascade');
+            $table->string('kategori_magang', 50)->nullable(false);
             $table->string('periode', 20)->nullable(false);
             $table->date('tanggal_mulai')->nullable(false);
             $table->date('tanggal_selesai')->nullable(false);
+            $table->enum('status_magang', ['selesai', 'sedang magang', 'belum dimulai', 'dihentikan'])->default('belum dimulai');
             $table->string('files', 255)->nullable();
             $table->timestamps();
         });

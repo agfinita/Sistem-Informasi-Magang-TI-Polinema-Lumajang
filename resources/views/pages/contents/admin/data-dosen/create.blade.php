@@ -85,87 +85,43 @@
                                     <div class="card-header">
                                         <h4>Tambah Dosen</h4>
                                     </div>
-                                    <form action="{{ url('/data-pengguna/dosen') }}" method="POST" autocomplete="off">
+
+                                    <form id="create-form" action="{{ url('/data-pengguna/dosen') }}" method="POST" autocomplete="off">
                                         @csrf
                                         <div class="card-body">
                                             <div class="form-group row">
                                                 <label for="nip" class="col-sm-3 col-form-label">NIP</label>
                                                 <div class="col-sm-7">
-                                                    <input type="text" class="form-control" id="nip"
-                                                        name="nip" placeholder="Masukkan NIP" autofocus>
-
-                                                    {{-- alert --}}
-                                                    @if (count($errors) > 0)
-                                                        <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                            {{ $errors->first('nip') }}
-                                                        </div>
-                                                    @endif
-                                                    {{-- end of alert --}}
+                                                    <input type="text" class="form-control" id="nip" name="nip" placeholder="Masukkan NIP" autofocus>
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label for="nama" class="col-sm-3 col-form-label">Nama</label>
                                                 <div class="col-sm-7">
-                                                    <input type="text" class="form-control" id="nama"
-                                                        name="nama" placeholder="Masukkan nama">
-
-                                                    {{-- alert --}}
-                                                    @if (count($errors) > 0)
-                                                        <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                            {{ $errors->first('nama') }}
-                                                        </div>
-                                                    @endif
-                                                    {{-- end of alert --}}
+                                                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama">
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label for="email" class="col-sm-3 col-form-label">Email</label>
                                                 <div class="col-sm-7">
-                                                    <input type="email" class="form-control" id="email"
-                                                        name="email" placeholder="Masukkan Email">
-
-                                                    {{-- alert --}}
-                                                    @if (count($errors) > 0)
-                                                        <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                            {{ $errors->first('email') }}
-                                                        </div>
-                                                    @endif
-                                                    {{-- end of alert --}}
+                                                    <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Email">
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label for="telp" class="col-sm-3 col-form-label">No
                                                     Telepon</label>
-                                                <div class="col-sm-3">
-                                                    <input type="telp" class="form-control" id="telp"
-                                                        name="telp" placeholder="Masukkan no telepon aktif">
-
-                                                    {{-- alert --}}
-                                                    @if (count($errors) > 0)
-                                                        <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                            {{ $errors->first('telp') }}
-                                                        </div>
-                                                    @endif
-                                                    {{-- end of alert --}}
+                                                <div class="col-sm-5">
+                                                    <input type="telp" class="form-control" id="telp" name="telp" placeholder="Masukkan no telepon aktif">
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label for="alamat" class="col-sm-3 col-form-label">Alamat</label>
                                                 <div class="col-sm-7">
-                                                    <input type="text" class="form-control" id="alamat"
-                                                        name="alamat" placeholder="Masukkan alamat">
-
-                                                    {{-- alert --}}
-                                                    @if (count($errors) > 0)
-                                                    <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                        {{ $errors->first('alamat') }}
-                                                    </div>
-                                                    @endif
-                                                    {{-- end of alert --}}
+                                                    <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan alamat">
                                                 </div>
                                             </div>
                                         </div>
@@ -199,18 +155,17 @@
     <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
     <!-- JS Libraies -->
-    <script src="{{ asset('node_modules/simpleweather/jquery.simpleWeather.min.js') }}"></script>
-    <script src="{{ asset('node_modules/chart.js/dist/Chart.min.js') }}"></script>
-    <script src="{{ asset('node_modules/jqvmap/dist/jquery.vmap.min.js') }}"></script>
-    <script src="{{ asset('node_modules/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
-    <script src="{{ asset('node_modules/summernote/dist/summernote-bs4.js') }}"></script>
-    <script src="{{ asset('node_modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
+    <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
+    <script>
+        var redirectUrl = "{{ url('/data-pengguna/dosen') }}";
+    </script>
 
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 
     <!-- Page Specific JS File -->
+    <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
 </body>
 
 </html>

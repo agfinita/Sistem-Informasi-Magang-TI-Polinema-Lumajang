@@ -15,10 +15,16 @@ class DataMagang extends Model
     protected $fillable = [
         'mahasiswa_id',
         'pengajuan_magang_id',
+        'kategori_magang',
         'periode',
         'tanggal_mulai',
         'tanggal_selesai',
+        'status_magang',
         'files'
+    ];
+
+    protected $attributes   = [
+        'status_magang'   => 'belum dimulai',
     ];
 
     public function pengajuanMagang() {

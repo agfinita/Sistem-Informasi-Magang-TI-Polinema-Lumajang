@@ -11,7 +11,8 @@ class DataMagangAdminSideController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index() {
+    public function index()
+    {
         // Mengambil semua data magang dengan relasi mahasiswa dan pengajuan_magang
         $dataMagang = DataMagang::with(['mahasiswa', 'pengajuanMagang'])->get();
 
@@ -21,7 +22,8 @@ class DataMagangAdminSideController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create() {
+    public function create()
+    {
         //
     }
 
@@ -60,7 +62,8 @@ class DataMagangAdminSideController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $dataMagang    = DataMagang::find($id);
 
         if($dataMagang) {
@@ -74,9 +77,9 @@ class DataMagangAdminSideController extends Controller
             // Hapus data
             $dataMagang->delete();
 
-            return redirect ('/admin/data-magang')->with('status', 'Data deleted successfully!');
+            return redirect ('/admin/data-magang');
         }
 
-        return redirect('/admin/data-magang')->with('error', 'Data gagal dihapus.');
+        return redirect('/admin/data-magang');
     }
 }

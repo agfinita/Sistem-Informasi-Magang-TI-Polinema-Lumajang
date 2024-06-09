@@ -92,19 +92,14 @@
                                     <div class="card-header">
                                         <h4>Pengumuman Baru</h4>
                                     </div>
-                                    <form action="{{ url('/pengumuman') }}" method="POST">
+
+                                    <form id="create-form" action="{{ url('/pengumuman') }}" method="POST">
                                         @csrf
                                         <div class="card-body">
                                             <div class="form-group row">
                                                 <label for="judul" class="col-sm-3 col-form-label">Judul</label>
                                                 <div class="col-sm-9">
                                                     <input type="text" class="form-control" id="judul" name="judul" placeholder="Masukkan judul pengumuman">
-
-                                                    @if (count($errors) > 0)
-                                                    <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                        {{ $errors->first('judul') }}
-                                                    </div>
-                                                    @endif
                                                 </div>
                                             </div>
 
@@ -112,12 +107,6 @@
                                                 <label for="desc" class="col-sm-3 col-form-label">Deskripsi</label>
                                                 <div class="col-sm-9">
                                                     <textarea name="desc" class="summernote" cols="30" rows="10"></textarea>
-
-                                                    @if (count($errors) > 0)
-                                                    <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                        {{ $errors->first('desc') }}
-                                                    </div>
-                                                    @endif
                                                 </div>
                                             </div>
 
@@ -129,34 +118,23 @@
                                                         <option value="Informasi">Informasi</option>
                                                         <option value="Pendaftaran">Pendaftaran</option>
                                                     </select>
-
-                                                    @if (count($errors) > 0)
-                                                    <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                        {{ $errors->first('cat') }}
-                                                    </div>
-                                                    @endif
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label for="creator" class="col-sm-3 col-form-label">Penulis</label>
-                                                <div class="col-sm-9">
+                                                <div class="col-sm-3">
                                                     <select class="form-control" id="creator" name="creator">
                                                         <option selected disabled>- select -</option>
                                                         <option value="Admin">Admin</option>
                                                         <option value="Dosen">Dosen</option>
                                                     </select>
-                                                    @if (count($errors) > 0)
-                                                    <div style="width: auto; color:red; margin-top:0.25rem;">
-                                                        {{ $errors->first('creator') }}
-                                                    </div>
-                                                    @endif
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Date Created</label>
-                                                <div class="col-sm-9">
+                                                <div class="col-sm-3">
                                                     <input type="datetime-local"  name="date_created" id="date_created" class="form-control">
                                                 </div>
                                             </div>
@@ -189,12 +167,17 @@
 
     <!-- JS Libraies -->
     <script src="{{ asset('node_modules/summernote/dist/summernote-bs4.js') }}"></script>
+    <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
+    <script>
+        var redirectUrl = "{{ url('/pengumuman') }}";
+    </script>
 
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 
     <!-- Page Specific JS File -->
+    <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
 </body>
 
 </html>
