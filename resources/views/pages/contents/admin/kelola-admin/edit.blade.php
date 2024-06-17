@@ -57,6 +57,7 @@
                                 <li><a class="nav-link" href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a></li>
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
+                            <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i><span>Data Bimbingan</span></a></li>
                         </li>
 
                         <li class="menu-header">Lainnya</li>

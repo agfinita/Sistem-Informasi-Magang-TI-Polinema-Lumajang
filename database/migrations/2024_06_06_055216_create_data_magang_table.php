@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('mahasiswa_id', 20);
             $table->unsignedBigInteger('pengajuan_magang_id');
+
             $table->foreign('mahasiswa_id')->references('nim')->on('mahasiswa')->onDelete('cascade');
             $table->foreign('pengajuan_magang_id')->references('id')->on('pengajuan_magang')->onDelete('cascade');
+
             $table->string('kategori_magang', 50)->nullable(false);
             $table->string('periode', 20)->nullable(false);
             $table->date('tanggal_mulai')->nullable(false);

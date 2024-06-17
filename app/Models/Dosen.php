@@ -28,6 +28,10 @@ class Dosen extends Model
     ];
 
     public function user() {
-        return $this->hasOne(User::class);
+        return $this->hasOne(User::class, 'dosen_id', 'id');
+    }
+
+    public function dataBimbingan() {
+        return $this->hasMany(DataBimbingan::class, 'dosen_pembimbing_id', 'id');
     }
 }

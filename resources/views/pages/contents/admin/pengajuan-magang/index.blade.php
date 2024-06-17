@@ -64,6 +64,7 @@
                                 </li>
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
+                            <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i><span>Data Bimbingan</span></a></li>
                         </li>
 
                         <li class="menu-header">Lainnya</li>
@@ -100,12 +101,11 @@
                                         <table class="table table-striped" id="table-1">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">No</th>
+                                                    <th class="text-center">Action</th>
                                                     <th>NIM</th>
                                                     <th>Instansi Magang</th>
                                                     <th>Alamat Instansi Magang</th>
-                                                    <th>Status</th>
-                                                    <th>Action</th>
+                                                    <th class="text-center">Status</th>
                                                 </tr>
                                             </thead>
 
@@ -115,19 +115,8 @@
                                             <tbody>
                                                 @foreach ($pengajuanMagang as $pm)
                                                     <tr>
-                                                        <td class="text-center">{{ $no++ }}</td>
-                                                        <td>{{ $pm->mahasiswa_id }}</td>
-                                                        <td>{{ $pm->instansi_magang }}</td>
-                                                        <td>{{ $pm->alamat_magang }}</td>
                                                         <td>
-                                                            @if ($pm->status == 'diproses')
-                                                            <div class="badge badge-warning">diproses</div>
-                                                            @elseif ($pm->status == 'selesai')
-                                                            <div class="badge badge-success">selesai</div>
-                                                            @endif
-                                                        </td>
-                                                        <td>
-                                                            <div class="row">
+                                                            <div class="d-flex justify-content-center align-items-center">
                                                                 <a href="{{ ('/admin/mahasiswa/pengajuan-magang/create/' . $pm->id) }}">
                                                                     <button class="btn btn-sm btn-info mx-1">
                                                                         <i class="ion ion-compose"></i>
@@ -144,20 +133,20 @@
                                                                 </form>
                                                             </div>
                                                         </td>
+
+                                                        <td>{{ $pm->mahasiswa_id }}</td>
+                                                        <td>{{ $pm->instansi_magang }}</td>
+                                                        <td>{{ $pm->alamat_magang }}</td>
+                                                        <td class=" d-flex justify-content-center align-items-center">
+                                                            @if ($pm->status == 'diproses')
+                                                                <div class="badge badge-warning">diproses</div>
+                                                            @elseif ($pm->status == 'selesai')
+                                                                <div class="badge badge-success">selesai</div>
+                                                            @endif
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
-
-                                            <tfoot>
-                                                <tr>
-                                                    <th class="text-center">No</th>
-                                                    <th>NIM</th>
-                                                    <th>Instansi Magang</th>
-                                                    <th>Alamat Instansi Magang</th>
-                                                    <th>Status</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </tfoot>
                                         </table>
                                     </div>
                                 </div>

@@ -28,4 +28,8 @@ class PengajuanMagang extends Model
     public function dataMagang() {
         return $this->hasOne(DataMagang::class);
     }
+
+    public function laporanMagang() {
+        return $this->hasOne(LaporanMagang::class);
+    }
 }

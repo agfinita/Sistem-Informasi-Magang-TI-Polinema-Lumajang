@@ -35,4 +35,20 @@ class DataMagang extends Model
     public function mahasiswa() {
         return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id', 'nim');
     }
+
+    public function dataBimbingan() {
+        return $this->hasMany(DataBimbingan::class, 'data_magang_id');
+    }
+
+    public function logbook() {
+        return $this->hasMany(Logbook::class);
+    }
+
+    public function bimbingan() {
+        return $this->hasMany(Bimbingan::class);
+    }
+
+    public function laporanMagang() {
+        return $this->hasOne(LaporanMagang::class);
+    }
 }

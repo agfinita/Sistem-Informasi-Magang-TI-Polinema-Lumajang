@@ -57,6 +57,7 @@
                                 <li><a class="nav-link" href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a></li>
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
+                            <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i><span>Data Bimbingan</span></a></li>
                         </li>
 
                         <li class="menu-header">Lainnya</li>
@@ -107,15 +108,14 @@
                                             <table id="example" class="display nowrap" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center">No</th>
-                                                        <th>Nama</th>
-                                                        <th>Username</th>
-                                                        <th>Email</th>
-                                                        <th>Role</th>
-                                                        <th>Status</th>
-                                                        <th>Date Created</th>
-                                                        <th>Date Updated</th>
-                                                        <th>Action</th>
+                                                        <th class="text-center">Action</th>
+                                                        <th class="text-center">Nama</th>
+                                                        <th class="text-center">Username</th>
+                                                        <th class="text-center">Email</th>
+                                                        <th class="text-center">Role</th>
+                                                        <th class="text-center">Status</th>
+                                                        <th class="text-center">Date Created</th>
+                                                        <th class="text-center">Date Updated</th>
                                                     </tr>
                                                 </thead>
 
@@ -125,23 +125,8 @@
                                                 <tbody>
                                                     @foreach ($users as $u)
                                                         <tr>
-                                                            <td class="text-center">{{ $no++ }}</td>
-                                                            <td>{{ $u->nama }}</td>
-                                                            <td>{{ $u->username }}</td>
-                                                            <td>{{ $u->email }}</td>
-                                                            <td>{{ $u->role }}</td>
                                                             <td>
-                                                                @if ($u->is_active == 1)
-                                                                    <div class="badge badge-success">Active</div>
-                                                                @else
-                                                                    <div class="badge badge-danger">Not active</div>
-                                                                @endif
-                                                            </td>
-                                                            <td>{{ $u->created_at }}</td>
-                                                            <td>{{ $u->updated_at }}</td>
-
-                                                            <td>
-                                                                <div class="row">
+                                                                <div class="d-flex justify-content-center align-items-center">
                                                                     <a href="{{ url('/kelola-pengguna/admin/edit/' . $u->id) }}">
                                                                         <button class="btn btn-sm btn-warning mx-1">
                                                                             <i class="ion ion-edit" data-pack="default" data-tags="change, update, write, type, pencil"></i>
@@ -157,22 +142,23 @@
                                                                     </form>
                                                                 </div>
                                                             </td>
+
+                                                            <td>{{ $u->nama }}</td>
+                                                            <td>{{ $u->username }}</td>
+                                                            <td>{{ $u->email }}</td>
+                                                            <td>{{ $u->role }}</td>
+                                                            <td>
+                                                                @if ($u->is_active == 1)
+                                                                    <div class="badge badge-success">Active</div>
+                                                                @else
+                                                                    <div class="badge badge-danger">Not active</div>
+                                                                @endif
+                                                            </td>
+                                                            <td>{{ $u->created_at }}</td>
+                                                            <td>{{ $u->updated_at }}</td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th class="text-center">No</th>
-                                                        <th>Nama</th>
-                                                        <th>Username</th>
-                                                        <th>Email</th>
-                                                        <th>Role</th>
-                                                        <th>Status</th>
-                                                        <th>Date Created</th>
-                                                        <th>Date Updated</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </tfoot>
                                             </table>
                                         </div>
                                     </div>

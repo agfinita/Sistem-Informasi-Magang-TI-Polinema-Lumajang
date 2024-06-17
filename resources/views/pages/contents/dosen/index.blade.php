@@ -22,16 +22,18 @@
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
                         <li class="menu-header">Dashboard</li>
-                        <li class="active"><a class="nav-link" href="{{ url('/dosen/dashboard') }}"><i class="ion ion-speedometer"
-                                    data-pack="default" data-tags="travel, accelerate"></i>
-                                <span>Dashboard</span></a></li>
+                        <li class="active"><a class="nav-link" href="{{ url('/dosen/dashboard') }}"><i class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i> <span>Dashboard</span></a></li>
 
                         <li class="menu-header">Magang</li>
-                        <li><a class="nav-link" href="#"><i class="fas fa-columns"></i> <span>Data Magang</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/dosen/data-magang-mahasiswa') }}"><i class="fas fa-columns"></i> <span>Data Magang</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/dosen/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i> <span>Data Bimbingan</span></a></li>
 
                         <li class="menu-header">Aktivitas Magang</li>
                         <li><a class="nav-link" href="#"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
-                        <li><a class="nav-link" href="#"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/dosen/logbook-mahasiswa') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+
+                        <li class="menu-header">Verifikasi</li>
+                        <li><a class="nav-link" href="{{ url('/dosen/laporan-magang-mahasiswa') }}"><i class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
 
                         <li class="menu-header">Lainnya</li>
                         <li>
@@ -56,7 +58,21 @@
                         <h1>Dashboard</h1>
                     </div>
                     <div class="row">
-                        <!-- Statistik --->
+                        <!-- Total data bimbingan -->
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                            <div class="card card-statistic-1">
+                                <div class="card-icon bg-warning">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="card-wrap">
+                                    <div class="card-header">
+                                        <h4>Bimbingan</h4>
+                                    </div>
+                                    <div class="card-body"> {{ $totalBimbingan }} </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Total pengumuman -->
                         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                             <div class="card card-statistic-1">
                                 <div class="card-icon bg-danger">
@@ -67,6 +83,20 @@
                                         <h4>Pengumuman</h4>
                                     </div>
                                     <div class="card-body"> {{ $totalPengumuman }} </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Total data magang selesai -->
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                            <div class="card card-statistic-1">
+                                <div class="card-icon bg-primary">
+                                    <i class="ion ion-android-people"></i>
+                                </div>
+                                <div class="card-wrap">
+                                    <div class="card-header">
+                                        <h4>Selesai Magang</h4>
+                                    </div>
+                                    <div class="card-body"> {{ $totalSelesai }} </div>
                                 </div>
                             </div>
                         </div>
@@ -95,13 +125,12 @@
                                         <table class="table table-striped" id="table-1">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">No</th>
-                                                    <th>Judul</th>
-                                                    <th>Deskripsi</th>
-                                                    <th>Kategori</th>
-                                                    <th>Penulis</th>
-                                                    <th>Created</th>
-                                                    <th>Action</th>
+                                                    <th class="text-center">Action</th>
+                                                    <th class="text-center">Judul</th>
+                                                    <th class="text-center">Deskripsi</th>
+                                                    <th class="text-center">Kategori</th>
+                                                    <th class="text-center">Penulis</th>
+                                                    <th class="text-center">Created</th>
                                                 </tr>
                                             </thead>
 
@@ -111,15 +140,8 @@
                                             <tbody>
                                                 @foreach ($pengumuman as $p)
                                                     <tr>
-                                                        <td class="text-center">{{ $no++ }}</td>
-                                                        <td>{{ $p->judul }}</td>
-                                                        <td>{!! $p->deskripsi !!}</td>
-                                                        <td>{{ $p->kategori }}</td>
-                                                        <td>{{ $p->created_by }}</td>
-                                                        <td>{{ $p->created_at }}</td>
-
                                                         <td>
-                                                            <div class="row">
+                                                            <div class="d-flex justify-content-center align-items-center">
                                                                 <a href="{{ url('/dosen/dashboard/edit/' . $p->id) }}">
                                                                     <button class="btn btn-sm btn-warning mx-1">
                                                                         <i class="ion ion-edit" data-pack="default"
@@ -136,6 +158,12 @@
                                                                 </form>
                                                             </div>
                                                         </td>
+
+                                                        <td>{{ $p->judul }}</td>
+                                                        <td>{!! $p->deskripsi !!}</td>
+                                                        <td>{{ $p->kategori }}</td>
+                                                        <td>{{ $p->created_by }}</td>
+                                                        <td>{{ $p->created_at }}</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

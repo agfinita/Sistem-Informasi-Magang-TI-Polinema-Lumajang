@@ -32,7 +32,10 @@
 
                         <li class="menu-header">Aktivitas Magang</li>
                         <li><a class="nav-link" href="#"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
-                        <li><a class="nav-link" href="#"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/mahasiswa/logbook') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+
+                        <li class="menu-header">Finalisasi Magang</li>
+                        <li><a class="nav-link" href="{{ url('/mahasiswa/laporan-magang') }}"><i class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
 
                         {{-- <li class="nav-item dropdown">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
@@ -91,12 +94,10 @@
                                             <table class="table table-striped" id="table-1">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center">
-                                                            No
-                                                        </th>
+                                                        <th class="text-center">No</th>
                                                         <th>NIM</th>
                                                         <th>Status</th>
-                                                        <th>Files</th>
+                                                        <th>Surat Pengantar Magang</th>
                                                     </tr>
                                                 </thead>
 
@@ -125,16 +126,6 @@
                                                     </tr>
                                                     @endforeach
                                                 </tbody>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th class="text-center">
-                                                            No
-                                                        </th>
-                                                        <th>NIM</th>
-                                                        <th>Status</th>
-                                                        <th>Files</th>
-                                                    </tr>
-                                                </tfoot>
                                             </table>
                                         </div>
                                     </div>

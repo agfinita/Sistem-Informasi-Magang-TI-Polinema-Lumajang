@@ -60,6 +60,11 @@ class User extends Authenticatable
     }
 
     public function dosen() {
-        return $this->belongsTo(Dosen::class, 'dosen_id');
+        return $this->belongsTo(Dosen::class, 'dosen_id', 'id');
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
     }
 }

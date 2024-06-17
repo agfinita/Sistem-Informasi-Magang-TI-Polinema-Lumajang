@@ -6,13 +6,21 @@ use App\Http\Controllers\DataAdminController;
 use App\Http\Controllers\DataDosenController;
 use App\Http\Controllers\KelolaAdminController;
 use App\Http\Controllers\KelolaDosenController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\DataMahasiswaController;
 use App\Http\Controllers\KelolaMahasiswaController;
+use App\Http\Controllers\LogbookDosenSideController;
 use App\Http\Controllers\DataMagangAdminSideController;
+use App\Http\Controllers\DataMagangDosenSideController;
 use App\Http\Controllers\PengumumanAdminSideController;
 use App\Http\Controllers\PengumumanDosenSideController;
+use App\Http\Controllers\LogbookMahasiswaSideController;
+use App\Http\Controllers\DataBimbinganAdminSideController;
+use App\Http\Controllers\DataBimbinganDosenSideController;
+use App\Http\Controllers\LaporanMagangDosenSideController;
 use App\Http\Controllers\DataMagangMahasiswaSideController;
 use App\Http\Controllers\PengajuanMagangAdminSideController;
+use App\Http\Controllers\LaporanMagangMahasiswaSideController;
 use App\Http\Controllers\PengajuanMagangMahasiswaSideController;
 
 /*
@@ -32,6 +40,8 @@ use App\Http\Controllers\PengajuanMagangMahasiswaSideController;
 
 // Middleware
 Route::group(['middleware' => 'role'], function () {
+
+    Route::get('/notifications/markAllAsRead', [NotificationController::class, 'markAllAsRead'])->name('notifications.markAllAsRead');
 
     // AUTH ADMIN
     // Menampilkan dashboard simag admin
@@ -78,6 +88,12 @@ Route::group(['middleware' => 'role'], function () {
     Route::get('/admin/mahasiswa/pengajuan-magang/create/{id}', [PengajuanMagangAdminSideController::class,'create']);
     Route::post('/admin/mahasiswa/pengajuan-magang/store/{id}', [PengajuanMagangAdminSideController::class,'store']);
 
+    // Data Bimbingan Mahasiswa -Admin Side
+    Route::resource('/admin/data-bimbingan-mahasiswa', DataBimbinganAdminSideController::class)->except('create', 'store', 'show', 'destroy');
+    Route::get('/admin/data-bimbingan-mahasiswa/edit/{id}', [DataBimbinganAdminSideController::class, 'edit']);
+    Route::patch('/admin/data-bimbingan-mahasiswa/edit/{id}', [DataBimbinganAdminSideController::class, 'update']);
+
+    //
 
     // AUTH MAHASISWA
     // Menampilkan dashboard simag mahasiswa
@@ -85,20 +101,44 @@ Route::group(['middleware' => 'role'], function () {
 
     // Pengajuan Magang
     Route::resource('/mahasiswa/pengajuan-magang', PengajuanMagangMahasiswaSideController::class)->except('show', 'update', 'destroy', 'edit');
+
     // Data Magang - Mahasiswa Side
     Route::resource('/mahasiswa/data-magang', DataMagangMahasiswaSideController::class)->except('show', 'destroy');
     Route::get('/mahasiswa/data-magang/edit/{id}', [DataMagangMahasiswaSideController::class, 'edit']);
     Route::patch('/mahasiswa/data-magang/edit/{id}', [DataMagangMahasiswaSideController::class, 'update']);
 
+    // Laporan Magang - Mahasiswa Side
+    Route::resource('/mahasiswa/laporan-magang', LaporanMagangMahasiswaSideController::class)->except('show', 'create', 'store', 'destroy');
+    Route::get('/mahasiswa/laporan-magang/edit/{id}', [LaporanMagangMahasiswaSideController::class, 'edit']);
+    Route::patch('/mahasiswa/laporan-magang/edit/{id}', [LaporanMagangMahasiswaSideController::class, 'update']);
 
-    // Auth Dosen
+    // Logbook - Mahasiswa Side
+    Route::resource('/mahasiswa/logbook', LogbookMahasiswaSideController::class)->except('show', 'edit', 'update', 'destroy');
+
+    //
+
+    // Auth DOSEN
     // Menampilkan dashboard simag dosen
-
-    // Pengumuman
     Route::resource('/dosen/dashboard', PengumumanDosenSideController::class)->except('show');
     Route::get('/dosen/dashboard/edit/{id}', [PengumumanDosenSideController::class,'edit']);
     Route::patch('/dosen/dashboard/edit/{id}', [PengumumanDosenSideController::class,'update']);
 
+    // Data Bimbingan Mahasiswa - Dosen Side
+    Route::resource('/dosen/data-bimbingan-mahasiswa', DataBimbinganDosenSideController::class)->except('create', 'store', 'show', 'edit', 'update', 'destroy');
+
+    // Data Magang Mahasiswa - Dosen Side
+    Route::get('/dosen/data-magang-mahasiswa', [DataMagangDosenSideController::class, 'index']);
+
+    // Laporan Magang - Dosen Side
+    Route::resource('/dosen/laporan-magang-mahasiswa', LaporanMagangDosenSideController::class)->except('create', 'show', 'store', 'destroy');
+    Route::get('/dosen/laporan-magang-mahasiswa/edit/{id}', [LaporanMagangDosenSideController::class, 'edit']);
+    Route::patch('/dosen/laporan-magang-mahasiswa/edit/{id}', [LaporanMagangDosenSideController::class, 'update']);
+
+    // Logbook - Dosen Side
+    Route::resource('/dosen/logbook-mahasiswa', LogbookDosenSideController::class)->except('create', 'store', 'destroy');
+    Route::get('/dosen/logbook-mahasiswa/show/{data_magang_id}', [LogbookDosenSideController::class, 'show']);
+    Route::get('/dosen/logbook-mahasiswa/edit/{id}', [LogbookDosenSideController::class, 'edit']);
+    Route::patch('/dosen/logbook-mahasiswa/edit/{id}', [LogbookDosenSideController::class, 'update']);
 });
 
 

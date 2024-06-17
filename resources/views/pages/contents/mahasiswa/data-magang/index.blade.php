@@ -32,7 +32,10 @@
 
                         <li class="menu-header">Aktivitas Magang</li>
                         <li><a class="nav-link" href="#"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
-                        <li><a class="nav-link" href="#"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/mahasiswa/logbook') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+
+                        <li class="menu-header">Finalisasi Magang</li>
+                        <li><a class="nav-link" href="{{ url('/mahasiswa/laporan-magang') }}"><i class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
 
                         <li class="menu-header">Lainnya</li>
                         <li>
@@ -65,8 +68,8 @@
                                         <h6>*Mahasiswa dapat mengisi data magang apabila telah memperoleh surat balasan magang/Letter of Acceptance (LoA) dari instansi magang yang dituju</h6>
                                     </div>
 
+                                    <!-- Tambah data -->
                                     <div class="col-md-6 mx-2 my-4">
-                                        <!-- Tambah data -->
                                         <button type="submit" class="btn btn-success">
                                             <a href="{{ url('/mahasiswa/data-magang/create') }}" class="text-decoration-none text-white">
                                                 <span>
@@ -78,14 +81,26 @@
                                         </button>
                                     </div>
 
+                                    <!-- Dosen pembimbing -->
+                                    <div class="d-flex justify-content-end mx-3">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <th>Dosen Pembimbing:</th>
+                                                    <td>
+                                                        {{ $dataBimbingan->dosen ? $dataBimbingan->dosen->nama : '-' }}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
                                     <div class="card-body">
                                         <div class="table-responsive">
                                             <table class="table table-striped" id="table-1">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center">
-                                                            No
-                                                        </th>
+                                                        <th>Action</th>
                                                         <th>NIM</th>
                                                         <th>Nama</th>
                                                         <th>Kelas</th>
@@ -97,17 +112,22 @@
                                                         <th>Periode</th>
                                                         <th>Tanggal Dimulai</th>
                                                         <th>Tanggal Selesai</th>
-                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
 
-                                                @php
-                                                    $no = 1;
-                                                @endphp
                                                 <tbody>
                                                     @foreach ( $dataMagang as $dm )
                                                     <tr>
-                                                        <td class="text-center">{{ $no++ }}</td>
+                                                        <td>
+                                                            <!-- Update -->
+                                                            <a href="{{ url('/mahasiswa/data-magang/edit/' . $dm->id) }}">
+                                                                <button class="btn btn-sm btn-warning mx-1">
+                                                                    <i class="ion ion-edit" data-pack="default"
+                                                                    data-tags="change, update, write, type, pencil"></i>
+                                                                </button>
+                                                            </a>
+                                                        </td>
+
                                                         <td>{{ $dm->mahasiswa->nim }}</td>
                                                         <td>{{ $dm->mahasiswa->nama }}</td>
                                                         <td>{{ $dm->mahasiswa->kelas }}</td>
@@ -127,15 +147,7 @@
                                                         <td>{{ $dm->periode }}</td>
                                                         <td>{{ $dm->tanggal_mulai }}</td>
                                                         <td>{{ $dm->tanggal_selesai }}</td>
-                                                        <td>
-                                                            <!-- Update -->
-                                                            <a href="{{ url('/mahasiswa/data-magang/edit/' . $dm->id) }}">
-                                                                <button class="btn btn-sm btn-warning mx-1">
-                                                                    <i class="ion ion-edit" data-pack="default"
-                                                                    data-tags="change, update, write, type, pencil"></i>
-                                                                </button>
-                                                            </a>
-                                                        </td>
+
                                                     </tr>
                                                     @endforeach
                                                 </tbody>

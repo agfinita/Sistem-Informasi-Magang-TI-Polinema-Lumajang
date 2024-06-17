@@ -19,6 +19,12 @@ class CheckRole
             return redirect('/login');
         }
 
+        // Cek apakah pengguna masih aktif
+        if (auth()->user()->is_active != 1) {
+            auth()->logout();
+            return redirect('/login')->with('error', 'Akun sudah tidak aktif.');
+        }
+
         // Jika pengguna sudah berada pada rute yang sesuai, lanjutkan permintaan
         if ($request->is('mahasiswa/*') && auth()->user()->role == 'Mahasiswa') {
             return $next($request);

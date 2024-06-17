@@ -10,6 +10,7 @@ use App\Models\Mahasiswa;
 use App\Models\DataMagang;
 use App\Models\Pengumuman;
 use Illuminate\Http\Request;
+use App\Models\DataBimbingan;
 use App\Models\PengajuanMagang;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
@@ -34,20 +35,33 @@ class HomeController extends Controller {
 
         //proses pengecekan login
         if(Auth::attempt($credentials)) {
+            $user   = Auth::user();
+
+            // Cek apakah pengguna aktif
+            if ($user->is_active != 1) {
+                Auth::logout();
+                return redirect('/login')->with('error', 'Akun sudah tidak aktif.');
+            }
+
             $request->session()->regenerate();
 
             // Cek role pengguna setelah login
-            $role   = Auth::user()->role;
+            $role   = $user->role;
             switch ($role) {
                 case 'Admin':
                     return redirect()->intended('/');
                 case 'Mahasiswa':
-                    return redirect('/mahasiswa/dashboard');
+                    return redirect('mahasiswa/dashboard');
                 case 'Dosen':
-                    return redirect('/dosen/dashboard');
+                    return redirect('dosen/dashboard');
                 default:
-                abort(403, 'Unauthorized action.');
+                    abort(403, 'Unauthorized action');
             }
+
+            return back()->withErrors([
+                'username'  => 'Username atau password salah!',
+                'password'  => 'Username atau password salah!',
+            ]);
         }
 
         return back()->with('error', 'Username atau password salah!');
@@ -97,4 +111,28 @@ class HomeController extends Controller {
     }
 
     // Dashboard dosen
+    public function statistikDashboardDosen() {
+        // Mengambil user yang sedang login
+        $user   = Auth::user();
+
+        // Mendapatkan ID dosen dari relasi user
+        $dosen      = $user->dosen;
+        $dosen_id   = $dosen->id;
+
+        // Menghitung jumlah data bimbingan dari dosen yang sedang login
+        $totalBimbingan = DataBimbingan::where('dosen_pembimbing_id', $dosen_id)->count();
+
+        // Menghitung jumlah status_magang 'selesai' mahasiswa bimbingan dari dosen yang sedang login
+        $totalBimbinganIds  = DataBimbingan::where('dosen_pembimbing_id', $dosen_id)
+                            ->pluck('data_magang_id');
+        $totalSelesai   = DataMagang::whereIn('id', $totalBimbinganIds)
+                            ->where('status_magang', 'selesai')
+                            ->count();
+
+        return [
+            'total_bimbingan'       => $totalBimbingan,
+            'total_selesai'         => $totalSelesai,
+        ];
+    }
+
 }

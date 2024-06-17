@@ -66,6 +66,7 @@
                                 </li>
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
+                            <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i><span>Data Bimbingan</span></a></li>
                         </li>
 
                         <li class="menu-header">Lainnya</li>
@@ -136,22 +137,14 @@
                                                 <label class="col-sm-3 col-form-label">Status</label>
                                                 <div class="col-sm-9">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                            name="gridRadios-status" id="gridRadios-status-1"
-                                                            value="1"
+                                                        <input class="form-check-input" type="radio" name="gridRadios-status" id="gridRadios-status-1" value="1"
                                                             {{ $users->is_active == 1 ? 'checked' : '' }}>
-                                                        <label class="form-check-label" for="gridRadios-status">
-                                                            Active
-                                                        </label>
+                                                        <label class="form-check-label" for="gridRadios-status"> Active </label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                            name="gridRadios-status" id="gridRadios-status-2"
-                                                            value="0"
+                                                        <input class="form-check-input" type="radio" name="gridRadios-status" id="gridRadios-status-2" value="0"
                                                             {{ $users->is_active == 0 ? 'checked' : '' }}>
-                                                        <label class="form-check-label" for="gridRadios-status">
-                                                            Non-active
-                                                        </label>
+                                                        <label class="form-check-label" for="gridRadios-status"> Non-active </label>
                                                     </div>
                                                 </div>
                                             </fieldset>

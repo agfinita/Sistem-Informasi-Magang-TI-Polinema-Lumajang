@@ -33,15 +33,10 @@
 
                         <li class="menu-header">Aktivitas Magang</li>
                         <li><a class="nav-link" href="#"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
-                        <li><a class="nav-link" href="#"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/mahasiswa/logbook') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
 
-                        {{-- <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                    class="fas fa-columns"></i> <span>Magang</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/persuratan') }}">Persuratan</a></li>
-                            </ul>
-                        </li> --}}
+                        <li class="menu-header">Finalisasi Magang</li>
+                        <li><a class="nav-link" href="{{ url('/mahasiswa/laporan-magang') }}"><i class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
 
                         <li class="menu-header">Lainnya</li>
                         <li>

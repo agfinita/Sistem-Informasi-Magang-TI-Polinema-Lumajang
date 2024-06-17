@@ -163,7 +163,7 @@ class DataMahasiswaController extends Controller
             $user   = User::where('mahasiswa_id', $mahasiswa->id)->first();
             if ($user) {
                 $user->update([
-                    'username'  => $mahasiswa->nip,
+                    'username'  => $mahasiswa->nim,
                     'nama'      => $mahasiswa->nama,
                     'email'     => $mahasiswa->email,
                 ]);

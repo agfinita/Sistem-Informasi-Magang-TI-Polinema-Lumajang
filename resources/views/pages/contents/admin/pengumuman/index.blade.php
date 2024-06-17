@@ -64,6 +64,7 @@
                                 <li><a class="nav-link" href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a></li>
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
+                            <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i><span>Data Bimbingan</span></a></li>
                         </li>
 
                         <li class="menu-header">Lainnya</li>
@@ -114,13 +115,12 @@
                                         <table class="table table-striped" id="table-1">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">No</th>
-                                                    <th>Judul</th>
-                                                    <th>Deskripsi</th>
-                                                    <th>Kategori</th>
-                                                    <th>Penulis</th>
-                                                    <th>Created</th>
-                                                    <th>Action</th>
+                                                    <th class="text-center">Action</th>
+                                                    <th class="text-center">Judul</th>
+                                                    <th class="text-center">Deskripsi</th>
+                                                    <th class="text-center">Kategori</th>
+                                                    <th class="text-center">Penulis</th>
+                                                    <th class="text-center">Created</th>
                                                 </tr>
                                             </thead>
 
@@ -130,15 +130,8 @@
                                             <tbody>
                                                 @foreach ($pengumuman as $p)
                                                     <tr>
-                                                        <td class="text-center">{{ $no++ }}</td>
-                                                        <td>{{ $p->judul }}</td>
-                                                        <td>{!! $p->deskripsi !!}</td>
-                                                        <td>{{ $p->kategori }}</td>
-                                                        <td>{{ $p->created_by }}</td>
-                                                        <td>{{ $p->created_at }}</td>
-
                                                         <td>
-                                                            <div class="row">
+                                                            <div class="d-flex justify-content-center align-items-center">
                                                                 <a href="{{ url('/pengumuman/edit/' . $p->id) }}">
                                                                     <button class="btn btn-sm btn-warning mx-1">
                                                                         <i class="ion ion-edit" data-pack="default"
@@ -155,6 +148,12 @@
                                                                 </form>
                                                             </div>
                                                         </td>
+
+                                                        <td>{{ $p->judul }}</td>
+                                                        <td>{!! $p->deskripsi !!}</td>
+                                                        <td>{{ $p->kategori }}</td>
+                                                        <td>{{ $p->created_by }}</td>
+                                                        <td>{{ $p->created_at }}</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

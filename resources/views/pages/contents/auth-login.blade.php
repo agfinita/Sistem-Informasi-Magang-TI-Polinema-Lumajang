@@ -37,16 +37,21 @@
                         <form method="POST" action="{{ url('/prosesLogin') }}" autocomplete="off">
                             @csrf
 
+                            <!-- Alert error dari validasi -->
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    @foreach ($errors->all() as $error)
+                                        <div>{{ $error }}</div>
+                                    @endforeach
+                                </div>
+                            @endif
+
+                            <!-- Alert dari error autentikasi-->
                             @if (session('error'))
                                 <div class="alert alert-danger">
                                     {{ session('error') }}
                                 </div>
                             @endif
-
-                            <div id="alertUsernamePassword" class="alert alert-danger" style="display: none;">
-                                Mohon lengkapi username dan password terlebih dahulu.
-                            </div>
-
 
                             <div class="form-group">
                                 <label for="username">Username</label>
@@ -66,24 +71,24 @@
                                 <div class="col-auto custom-control custom-checkbox">
                                     <input type="checkbox" name="show" class="custom-control-input" tabindex="3"
                                         id="show-password" onclick="togglePasswordVisibility()">
-                                    <label class="custom-control-label" for="show-password">Show Password</label>
+                                    <label class="custom-control-label" for="show-password">Tampilkan Password</label>
                                 </div>
 
-                                <div class="col-auto custom-control custom-checkbox">
+                                {{-- <div class="col-auto custom-control custom-checkbox">
                                     <input type="checkbox" name="remember" class="custom-control-input" tabindex="3"
                                         id="remember-me">
                                     <label class="custom-control-label" for="remember-me">Remember Me</label>
-                                </div>
+                                </div> --}}
                             </div>
 
-                            <div class="form-group text-right">
-                                <a href="{{ url('/forgot') }}" class="float-left mt-3">
-                                    Forgot Password?
-                                </a>
-                                <button type="submit" id="loginBtn" name="login"
-                                    class="btn btn-primary btn-lg btn-icon icon-right" tabindex="4">
+                            <div class="form-group d-flex justify-content-between align-items-center">
+                                <button type="submit" name="login" class="btn btn-primary btn-lg btn-icon icon-left">
                                     Login
                                 </button>
+
+                                <a href="{{ url('/forgot') }}" class="mt-3">
+                                    Lupa Password?
+                                </a>
                             </div>
                         </form>
                     </div>
@@ -114,19 +119,6 @@
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 
     <script>
-        // Proses login
-        document.getElementById('loginBtn').addEventListener('click', function(e) {
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
-
-            if (!username || !password) {
-                e.preventDefault(); // Menghentikan submit form
-                alertUsernamePassword.style.display = 'block'; // Menampilkan peringatan
-            } else {
-                alertUsernamePassword.style.display = 'none'; // Menyembunyikan peringatan jika input sudah diisi
-            }
-        });
-
         // Show password
         function togglePasswordVisibility() {
             var passwordInput = document.getElementById('password');

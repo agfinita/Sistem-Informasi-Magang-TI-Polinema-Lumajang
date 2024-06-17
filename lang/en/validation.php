@@ -174,55 +174,70 @@ return [
         //     'rule-name' => 'custom-message',
         // ],
         'username' => [
-            'required' => 'Harap isi kolom username',
+            'required' => 'Username tidak boleh kosong',
         ],
         'password' => [
-            'required' => 'Harap isi kolom password',
+            'required' => 'Password tidak boleh kosong',
         ],
         'email' => [
-            'required' => 'Harap isi kolom email',
+            'required' => 'Email tidak boleh kosong',
         ],
         'nim' => [
-            'required' => 'Harap isi kolom NIM'
+            'required' => 'NIM tidak boleh kosong',
         ],
         'nama' => [
-            'required' => 'Harap isi kolom nama'
+            'required' => 'Nama tidak boleh kosong',
         ],
         'telp' => [
-            'required' => 'Harap isi kolom telepon'
+            'required' => 'Telepon tidak boleh kosong',
         ],
         'alamat' => [
-            'required' => 'Harap isi kolom alamat'
+            'required' => 'Alamat tidak boleh kosong',
         ],
         'judul' => [
-            'required'  => 'Harap isi kolom judul'
+            'required'  => 'Judul tidak boleh kosong',
         ],
         'desc' => [
-            'required'  => 'Harap isi kolom deskripsi'
+            'required'  => 'Deksripsi tidak boleh kosong',
         ],
         'cat' => [
-            'required'  => 'Pilih kategori terlebih dahulu'
+            'required'  => 'Pilih kategori terlebih dahulu',
         ],
         'creator' => [
-            'required'  => 'Pilih penulis'
+            'required'  => 'Pilih penulis',
         ],
         'nip' => [
-            'required' => 'Harap isi kolom NIP'
+            'required' => 'NIP tidak boleh kosong',
         ],
         'alamat_magang' => [
-            'required'  => 'Harap masukkan alamat instansi magang'
+            'required'  => 'Harap masukkan alamat instansi magang',
         ],
         'instansi_magang' => [
-            'required'  => 'Harap masukkan tempat instansi magang'
+            'required'  => 'Harap masukkan tempat instansi magang',
         ],
         'period' => [
-            'required'  => 'Harap isi kolom periode magang'
+            'required'  => 'Harap masukkan periode magang',
         ],
         'file' => [
-            'required' => 'Kolom file tidak boleh kosong'
+            'required' => 'File tidak boleh kosong',
         ],
         'date_created' => [
-            'required'  => 'Pilih tanggal terlebih dahulu'
+            'required'  => 'Pilih tanggal terlebih dahulu',
+        ],
+        'ts' => [
+            'required' => 'Lengkapi tanggal selesai',
+        ],
+        'tm' => [
+            'required' => 'Lengkapi tanggal mulai',
+        ],
+        'control-kelas' => [
+            'required' => 'Pilih kelas terlebih dahulu',
+        ],
+        'control-jurusan' => [
+            'required'  => 'Pilih jurusan terlebih dahulu',
+        ],
+        'kategori' => [
+            'required'  => 'Pilih kategori magang'
         ],
     ],
 

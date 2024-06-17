@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use App\Models\DataMagang;
 use Illuminate\Http\Request;
+use App\Models\DataBimbingan;
 use App\Models\PengajuanMagang;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class DataMagangMahasiswaSideController extends Controller
@@ -22,7 +24,18 @@ class DataMagangMahasiswaSideController extends Controller
         $dataMagang = DataMagang::where('mahasiswa_id', $mahasiswa_id)
             ->with('mahasiswa', 'pengajuanMagang')
             ->get();
-        return view('pages.contents.mahasiswa.data-magang.index', compact('dataMagang'));
+
+        // Ambil bimbingan berdasarkan mahasiswa yang login
+        $dataBimbingan  = DataBimbingan::where('mahasiswa_id', $mahasiswa_id)
+                            ->with('dosen')
+                            ->first();
+        // Jika data bimbingan tidak ada, buat objek kosong untuk menghindari error
+        if (!$dataBimbingan) {
+            $dataBimbingan          = new \stdclass();
+            $dataBimbingan->dosen   = null;
+        }
+
+        return view('pages.contents.mahasiswa.data-magang.index', compact('dataMagang', 'dataBimbingan'));
     }
 
     /**
@@ -82,17 +95,26 @@ class DataMagangMahasiswaSideController extends Controller
             ->orderBy('created_at', 'desc')
             ->first();
 
-        // Menyimpan ke database
-        DataMagang::create([
-            'mahasiswa_id'          => $validatedData['nim'],
-            'pengajuan_magang_id'   => $pengajuanMagang ? $pengajuanMagang->id : null,
-            'kategori_magang'       => $validatedData['kategori'],
-            'periode'               => $validatedData['period'],
-            'tanggal_mulai'         => $validatedData['tm'],
-            'tanggal_selesai'       => $validatedData['ts'],
-            'status_magang'         => 'belum dimulai',
-            'files'                 => $validatedData['file']
-        ]);
+        DB::transaction(function () use ($validatedData, $pengajuanMagang) {
+            // Buat data magang
+            $dataMagang = DataMagang::create([
+                'mahasiswa_id'          => $validatedData['nim'],
+                'pengajuan_magang_id'   => $pengajuanMagang ? $pengajuanMagang->id : null,
+                'kategori_magang'       => $validatedData['kategori'],
+                'periode'               => $validatedData['period'],
+                'tanggal_mulai'         => $validatedData['tm'],
+                'tanggal_selesai'       => $validatedData['ts'],
+                'status_magang'         => 'belum dimulai',
+                'files'                 => $validatedData['file']
+            ]);
+
+            // Buat data bimbingan mahasiswa berdasarkan data magang yang dibuat
+            DataBimbingan::updateOrCreate([
+                'mahasiswa_id'      => $dataMagang->mahasiswa_id,
+                'data_magang_id'    => $dataMagang->id,
+            ]);
+        });
+
 
         // Mengembalikan respon sukses
         return response()->json([ 'status'    => 'success' ]);

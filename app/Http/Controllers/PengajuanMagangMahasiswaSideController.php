@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Mahasiswa;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Models\PengajuanMagang;
 use Illuminate\Support\Facades\DB;
@@ -69,10 +71,23 @@ class PengajuanMagangMahasiswaSideController extends Controller
         $validated  = $validatedData->validated();
 
         // Menyimpan data ke database
-        PengajuanMagang::create([
+        $pengajuanMagang    = PengajuanMagang::create([
             'mahasiswa_id'      => $validated['nim'],
             'instansi_magang'   => $validated['instansi_magang'],
             'alamat_magang'     => $validated['alamat_magang']
+        ]);
+
+        // Buat notifikasi untuk admin
+        $admin = User::where('role', 'admin')->first();
+
+        // Mengambil nama mahasiswa yang mengajukan magang
+        $mahasiswa = Mahasiswa::where('nim', $validated['nim'])->first();
+        $namaMahasiswa = $mahasiswa ? $mahasiswa->nama : 'Mahasiswa tidak ditemukan';
+
+        Notification::create([
+            'user_id'   => $admin->id,
+            'type'      => 'pengajuan_magang',
+            'message'   => 'Pengajuan magang baru dari ' . $namaMahasiswa,
         ]);
 
         // Mengembalikan respon sukses

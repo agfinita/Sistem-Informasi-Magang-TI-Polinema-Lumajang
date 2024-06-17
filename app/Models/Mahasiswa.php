@@ -34,10 +34,26 @@ class Mahasiswa extends Model
     }
 
     public function dataMagang() {
-        return $this->hasMany(DataMagang::class);
+        return $this->hasOne(DataMagang::class);
     }
 
     public function user() {
         return $this->hasOne(User::class);
+    }
+
+    public function dataBimbingan() {
+        return $this->hasOne(DataBimbingan::class);
+    }
+
+    public function logbook() {
+        return $this->hasMany(Logbook::class);
+    }
+
+    public function bimbingan() {
+        return $this->hasMany(Bimbingan::class);
+    }
+
+    public function laporanMagang() {
+        return $this->hasOne(LaporanMagang::class);
     }
 }

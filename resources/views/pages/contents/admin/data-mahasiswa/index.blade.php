@@ -52,6 +52,7 @@
                                 <li><a class="nav-link" href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a></li>
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
+                            <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i><span>Data Bimbingan</span></a></li>
                         </li>
 
                         <li class="menu-header">Lainnya</li>
@@ -103,18 +104,15 @@
                                             <table id="example" class="display nowrap" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center">
-                                                            No
-                                                        </th>
-                                                        <th>NIM</th>
-                                                        <th>Nama</th>
-                                                        <th>Kelas</th>
-                                                        <th>Jurusan</th>
-                                                        <th>Email</th>
-                                                        <th>Telepon</th>
-                                                        <th>Alamat</th>
-                                                        <th>Role</th>
-                                                        <th>Action</th>
+                                                        <th class="text-center">Action</th>
+                                                        <th class="text-center">NIM</th>
+                                                        <th class="text-center">Nama</th>
+                                                        <th class="text-center">Kelas</th>
+                                                        <th class="text-center">Jurusan</th>
+                                                        <th class="text-center">Email</th>
+                                                        <th class="text-center">Telepon</th>
+                                                        <th class="text-center">Alamat</th>
+                                                        <th class="text-center">Role</th>
                                                     </tr>
                                                 </thead>
 
@@ -124,17 +122,8 @@
                                                 <tbody>
                                                     @foreach ( $mahasiswa as $mhs )
                                                     <tr>
-                                                        <td>{{ $no++ }}</td>
-                                                        <td>{{ $mhs->nim }}</td>
-                                                        <td>{{ $mhs->nama }}</td>
-                                                        <td>{{ $mhs->kelas }}</td>
-                                                        <td>{{ $mhs->jurusan }}</td>
-                                                        <td>{{ $mhs->email }}</td>
-                                                        <td>{{ $mhs->telp }}</td>
-                                                        <td>{{ $mhs->alamat }}</td>
-                                                        <td>{{ $mhs->role }}</td>
                                                         <td>
-                                                            <div class="row">
+                                                            <div class="d-flex justify-content-center align-items-center">
                                                                 <a href="{{ url('/data-pengguna/mahasiswa/edit/' . $mhs->id) }}">
                                                                     <button class="btn btn-sm btn-warning mx-1">
                                                                         <i class="ion ion-edit" data-pack="default" data-tags="change, update, write, type, pencil"></i>
@@ -150,25 +139,19 @@
                                                                 </form>
                                                             </div>
                                                         </td>
+
+                                                        <td>{{ $mhs->nim }}</td>
+                                                        <td>{{ $mhs->nama }}</td>
+                                                        <td>{{ $mhs->kelas }}</td>
+                                                        <td>{{ $mhs->jurusan }}</td>
+                                                        <td>{{ $mhs->email }}</td>
+                                                        <td>{{ $mhs->telp }}</td>
+                                                        <td>{{ $mhs->alamat }}</td>
+                                                        <td>{{ $mhs->role }}</td>
+
                                                     </tr>
                                                     @endforeach
                                                 </tbody>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th class="text-center">
-                                                            No
-                                                        </th>
-                                                        <th>NIM</th>
-                                                        <th>Nama</th>
-                                                        <th>Kelas</th>
-                                                        <th>Jurusan</th>
-                                                        <th>Email</th>
-                                                        <th>Telepon</th>
-                                                        <th>Alamat</th>
-                                                        <th>Role</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </tfoot>
                                             </table>
                                         </div>
                                     </div>

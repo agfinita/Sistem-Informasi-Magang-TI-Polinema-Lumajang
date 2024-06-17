@@ -60,10 +60,9 @@
                                     class="fas fa-columns"></i> <span>Magang</span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link" href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a></li>
-                                <li class="active"><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data
-                                        Magang</a>
-                                </li>
+                                <li class="active"><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a> </li>
                             </ul>
+                            <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i><span>Data Bimbingan</span></a></li>
                         </li>
 
                         <li class="menu-header">Lainnya</li>
@@ -117,22 +116,19 @@
                                             <table id="example" class="display nowrap" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center">
-                                                            No
-                                                        </th>
-                                                        <th>NIM</th>
-                                                        <th>Nama</th>
-                                                        <th>Kelas</th>
-                                                        <th>Jurusan</th>
-                                                        <th>Kategori</th>
-                                                        <th>Instansi Magang</th>
-                                                        <th>Alamat Instansi</th>
-                                                        <th>Status</th>
-                                                        <th>Periode</th>
-                                                        <th>Tanggal Dimulai</th>
-                                                        <th>Tanggal Selesai</th>
-                                                        <th>File LoA</th>
-                                                        <th>Action</th>
+                                                        <th class="text-center">Action</th>
+                                                        <th class="text-center">NIM</th>
+                                                        <th class="text-center">Nama</th>
+                                                        <th class="text-center">Kelas</th>
+                                                        <th class="text-center">Jurusan</th>
+                                                        <th class="text-center">Kategori</th>
+                                                        <th class="text-center">Instansi Magang</th>
+                                                        <th class="text-center">Alamat Instansi</th>
+                                                        <th class="text-center">Status</th>
+                                                        <th class="text-center">Periode</th>
+                                                        <th class="text-center">Tanggal Dimulai</th>
+                                                        <th class="text-center">Tanggal Selesai</th>
+                                                        <th class="text-center">File LoA</th>
                                                     </tr>
                                                 </thead>
 
@@ -142,7 +138,30 @@
                                                 <tbody>
                                                     @foreach ($dataMagang as $dm)
                                                         <tr>
-                                                            <td class="text-center">{{ $no++ }}</td>
+                                                            <td class="d-flex justify-content-center align-items-center">
+                                                                <!-- Hapus -->
+                                                                <form id="delete-form-{{ $dm->id }}" action="{{ url('/admin/data-magang/' . $dm->id) }}" method="POST" >
+                                                                    @method('DELETE')
+                                                                    @csrf
+                                                                    <button type="button" class="btn btn-sm btn-danger mx-1 swal-6" data-id="{{ $dm->id }}">
+                                                                        <i class="ion ion-trash-a"
+                                                                            data-pack="default"
+                                                                            data-tags="delete, remove, dump"></i>
+                                                                    </button>
+                                                                </form>
+                                                                {{-- <div class="row">
+                                                                    <!-- Update -->
+                                                                    <a
+                                                                        href="{{ url('/updateDataMahasiswa/' . $dm->id) }}">
+                                                                        <button class="btn btn-sm btn-warning mx-1">
+                                                                            <i class="ion ion-edit" data-pack="default"
+                                                                                data-tags="change, update, write, type, pencil"></i>
+                                                                        </button>
+                                                                    </a>
+
+                                                                </div> --}}
+                                                            </td>
+
                                                             <td>{{ $dm->mahasiswa->nim ?? '-' }}</td>
                                                             <td>{{ $dm->mahasiswa->nama ?? '-' }}</td>
                                                             <td>{{ $dm->mahasiswa->kelas ?? '-' }}</td>
@@ -168,52 +187,10 @@
                                                                 @else
                                                                     <h5> - </h5>
                                                                 @endif
-                                                            <td>
-                                                                <!-- Hapus -->
-                                                                <form id="delete-form-{{ $dm->id }}" action="{{ url('/admin/data-magang/' . $dm->id) }}" method="POST" >
-                                                                    @method('DELETE')
-                                                                    @csrf
-                                                                    <button type="button" class="btn btn-sm btn-danger mx-1 swal-6" data-id="{{ $dm->id }}">
-                                                                        <i class="ion ion-trash-a"
-                                                                            data-pack="default"
-                                                                            data-tags="delete, remove, dump"></i>
-                                                                    </button>
-                                                                </form>
-                                                                {{-- <div class="row">
-                                                                    <!-- Update -->
-                                                                    <a
-                                                                        href="{{ url('/updateDataMahasiswa/' . $dm->id) }}">
-                                                                        <button class="btn btn-sm btn-warning mx-1">
-                                                                            <i class="ion ion-edit" data-pack="default"
-                                                                                data-tags="change, update, write, type, pencil"></i>
-                                                                        </button>
-                                                                    </a>
-
-                                                                </div> --}}
                                                             </td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th class="text-center">
-                                                            No
-                                                        </th>
-                                                        <th>NIM</th>
-                                                        <th>Nama</th>
-                                                        <th>Kelas</th>
-                                                        <th>Jurusan</th>
-                                                        <th>Kategori</th>
-                                                        <th>Instansi Magang</th>
-                                                        <th>Alamat Instansi</th>
-                                                        <th>Status</th>
-                                                        <th>Periode</th>
-                                                        <th>Tanggal Dimulai</th>
-                                                        <th>Tanggal Selesai</th>
-                                                        <th>File LoA</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </tfoot>
                                             </table>
                                         </div>
                                     </div>

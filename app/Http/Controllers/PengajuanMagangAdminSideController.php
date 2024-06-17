@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mahasiswa;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Models\PengajuanMagang;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
 
 class PengajuanMagangAdminSideController extends Controller
 {
@@ -71,6 +72,24 @@ class PengajuanMagangAdminSideController extends Controller
         $pengajuanMagang->status = $validatedData['status'];
         $pengajuanMagang->save();
 
+        // Mengambil data pengajuan magang berdasarkan $id
+        $pengajuanMagang = PengajuanMagang::find($id);
+        // Jika pengajuan magang ditemukan
+        if ($pengajuanMagang) {
+            // Mengambil data mahasiswa berdasarkan nim dari pengajuan magang
+            $mahasiswa = Mahasiswa::where('nim', $pengajuanMagang->nim)->first();
+            // Jika mahasiswa ditemukan
+            if ($mahasiswa) {
+                // Buat notifikasi untuk mahasiswa
+                Notification::create([
+                    'user_id'   => $mahasiswa->id, // Menggunakan id mahasiswa
+                    'type'      => 'respon_pengajuan',
+                    'message'   => 'Pengajuan magang Anda telah direspon oleh admin.',
+                ]);
+            }
+        }
+
+
         // Mengembalikan respon sukses
         return response()->json([ 'status'  => 'success' ]);
 
@@ -111,9 +130,12 @@ class PengajuanMagangAdminSideController extends Controller
             $filepath           = $pengajuanMagang->files; //path file yang akan dihapus
 
             // Hapus file dari local storage
-            if (Storage::disk('public')->exists($filepath)) {
+            if ($filepath && Storage::disk('public')->exists($filepath)) {
                 Storage::disk('public')->delete($filepath);
             }
+            // if (Storage::disk('public')->exists($filepath)) {
+            //     Storage::disk('public')->delete($filepath);
+            // }
 
             // Hapus data
             $pengajuanMagang->delete();

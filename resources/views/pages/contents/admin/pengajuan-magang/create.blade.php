@@ -65,6 +65,7 @@
                                 </li>
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
+                            <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i><span>Data Bimbingan</span></a></li>
                         </li>
 
                         <li class="menu-header">Lainnya</li>
@@ -123,8 +124,8 @@
                                                 <div class="col-sm-5">
                                                     <select class="form-control" name="status">
                                                         <option disabled selected>- Select -</option>
-                                                        <option value="diproses" {{ old('status', $pengajuanMagang->status) == 'diproses' ? 'selected' : '' }}>diproses</option>
-                                                        <option value="selesai" {{ old('status', $pengajuanMagang->status) == 'selesai' ? 'selected' : '' }}>selesai</option>
+                                                        <option value="diproses" {{ old('status', $pengajuanMagang->status) == 'diproses' ? 'selected' : '' }}>Diproses</option>
+                                                        <option value="selesai" {{ old('status', $pengajuanMagang->status) == 'selesai' ? 'selected' : '' }}>Selesai</option>
                                                     </select>
 
                                                     @if ($errors->has('status'))

@@ -12,7 +12,22 @@
     new DataTable('#example', {
         layout: {
             topStart: {
-                buttons: ['copy', 'csv', 'excel', 'pdf', 'colvis', 'print']
+                buttons: [
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        download: 'open',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    'copy', 'csv', 'excel', 'colvis'
+                ]
             }
         }
     });

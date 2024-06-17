@@ -52,6 +52,7 @@
                                 <li><a class="nav-link" href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a></li>
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
+                            <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i><span>Data Bimbingan</span></a></li>
                         </li>
 
                         <li class="menu-header">Lainnya</li>
@@ -105,14 +106,13 @@
                                             <table id="example" class="display nowrap" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center">No</th>
-                                                        <th>NIP</th>
-                                                        <th>Nama</th>
-                                                        <th>Email</th>
-                                                        <th>Telepon</th>
-                                                        <th>Alamat</th>
-                                                        <th>Role</th>
-                                                        <th>Action</th>
+                                                        <th class="text-center">Action</th>
+                                                        <th class="text-center">NIP</th>
+                                                        <th class="text-center">Nama</th>
+                                                        <th class="text-center">Email</th>
+                                                        <th class="text-center">Telepon</th>
+                                                        <th class="text-center">Alamat</th>
+                                                        <th class="text-center">Role</th>
                                                     </tr>
                                                 </thead>
 
@@ -123,15 +123,8 @@
                                                 <tbody>
                                                     @foreach ($admin as $a)
                                                         <tr>
-                                                            <td>{{ $no++ }}</td>
-                                                            <td>{{ $a->nip }}</td>
-                                                            <td>{{ $a->nama }}</td>
-                                                            <td>{{ $a->email }}</td>
-                                                            <td>{{ $a->telp }}</td>
-                                                            <td>{{ $a->alamat }}</td>
-                                                            <td>{{ $a->role }}</td>
                                                             <td>
-                                                                <div class="row">
+                                                                <div class="d-flex justify-content-center align-items-center">
                                                                     <a href="{{ url('/data-pengguna/admin/edit/' . $a->id) }}">
                                                                         <button class="btn btn-sm btn-warning mx-1">
                                                                             <i class="ion ion-edit"
@@ -151,21 +144,16 @@
                                                                     </form>
                                                                 </div>
                                                             </td>
+
+                                                            <td>{{ $a->nip }}</td>
+                                                            <td>{{ $a->nama }}</td>
+                                                            <td>{{ $a->email }}</td>
+                                                            <td>{{ $a->telp }}</td>
+                                                            <td>{{ $a->alamat }}</td>
+                                                            <td>{{ $a->role }}</td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th class="text-center">No</th>
-                                                        <th>NIP</th>
-                                                        <th>Nama</th>
-                                                        <th>Email</th>
-                                                        <th>Telepon</th>
-                                                        <th>Alamat</th>
-                                                        <th>Role</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </tfoot>
                                             </table>
                                         </div>
                                     </div>
