@@ -63,27 +63,27 @@
                             <div class="col-12 ">
                                 <div class="card">
                                     <!-- Head Logbook -->
-                                    <div class="logbook-header text-center font-weight-bold mb-5 mt-5">
+                                    <div class="text-center font-weight-bold mb-5 mt-5">
                                         LOG BOOK AKTIVITAS HARIAN
                                     </div>
-                                    <div class="logbook-content mx-auto mb-5">
+                                    <div class="mb-5">
                                         @foreach ($dataMagang as $dm )
-                                        <div class="row mb-2">
+                                        <div class="row mb-2 mx-auto" style="max-width: 400px;">
                                             <div class="col-4">Nama</div>
                                             <div class="col-2">:</div>
                                             <div class="col-6">{{ $dm->mahasiswa->nama }}</div>
                                         </div>
-                                        <div class="row mb-2">
+                                        <div class="row mb-2 mx-auto" style="max-width: 400px;">
                                             <div class="col-4">NIM</div>
                                             <div class="col-2">:</div>
                                             <div class="col-6">{{ $dm->mahasiswa->nim }}</div>
                                         </div>
-                                        <div class="row mb-2">
+                                        <div class="row mb-2 mx-auto" style="max-width: 400px;">
                                             <div class="col-4">Jenis</div>
                                             <div class="col-2">:</div>
                                             <div class="col-6">{{ $dm->kategori_magang }}</div>
                                         </div>
-                                        <div class="row mb-2">
+                                        <div class="row mb-2 mx-auto" style="max-width: 400px;">
                                             <div class="col-4">Mitra Kegiatan</div>
                                             <div class="col-2">:</div>
                                             <div class="col-6">{{ $dm->pengajuanMagang->instansi_magang}} </div>

@@ -19,6 +19,7 @@ use App\Http\Controllers\DataBimbinganAdminSideController;
 use App\Http\Controllers\DataBimbinganDosenSideController;
 use App\Http\Controllers\LaporanMagangDosenSideController;
 use App\Http\Controllers\DataMagangMahasiswaSideController;
+use App\Http\Controllers\LaporanMagangAdminSideController;
 use App\Http\Controllers\PengajuanMagangAdminSideController;
 use App\Http\Controllers\LaporanMagangMahasiswaSideController;
 use App\Http\Controllers\PengajuanMagangMahasiswaSideController;
@@ -92,6 +93,9 @@ Route::group(['middleware' => 'role'], function () {
     Route::resource('/admin/data-bimbingan-mahasiswa', DataBimbinganAdminSideController::class)->except('create', 'store', 'show', 'destroy');
     Route::get('/admin/data-bimbingan-mahasiswa/edit/{id}', [DataBimbinganAdminSideController::class, 'edit']);
     Route::patch('/admin/data-bimbingan-mahasiswa/edit/{id}', [DataBimbinganAdminSideController::class, 'update']);
+
+    // Laporan Magang - Admin Side
+    Route::get('/admin/laporan-magang-mahasiswa', [LaporanMagangAdminSideController::class, 'index']);
 
     //
 

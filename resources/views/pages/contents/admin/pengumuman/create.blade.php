@@ -60,7 +60,11 @@
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
                             <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i><span>Data Bimbingan</span></a></li>
+                            <li><a class="nav-link" href="#"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
                         </li>
+
+                        <li class="menu-header">Finalisasi Magang</li>
+                        <li><a class="nav-link" href="{{ url('/admin/laporan-magang-mahasiswa') }}"><i class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
 
                         <li class="menu-header">Lainnya</li>
                         <li>
@@ -124,7 +128,7 @@
 
                                             <div class="form-group row">
                                                 <label for="creator" class="col-sm-3 col-form-label">Penulis</label>
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-5">
                                                     <select class="form-control" id="creator" name="creator">
                                                         <option selected disabled>- select -</option>
                                                         <option value="Admin">Admin</option>
@@ -135,7 +139,7 @@
 
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Date Created</label>
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-5">
                                                     <input type="datetime-local"  name="date_created" id="date_created" class="form-control">
                                                 </div>
                                             </div>

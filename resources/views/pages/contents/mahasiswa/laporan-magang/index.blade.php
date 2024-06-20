@@ -78,24 +78,24 @@
                                         <!-- Data Mahasiswa -->
                                             @foreach ($laporanMagang as $lpm )
                                                 <div class="row justify-content-start">
-                                                    <div class="col-sm-2 font-weight-bold">NIM</div>
-                                                    <div class="col-sm-4">: {{ $lpm->mahasiswa->nim }}</div>
-                                                    <div class="col-sm-2 font-weight-bold">Bidang</div>
-                                                    <div class="col-sm-4">: Part terlupakan</div>
+                                                    <div class="col-6 col-sm-2 font-weight-bold">NIM</div>
+                                                    <div class="col-6 col-sm-4">: {{ $lpm->mahasiswa->nim }}</div>
+                                                    <div class="col-6 col-sm-2 font-weight-bold">Bidang</div>
+                                                    <div class="col-6 col-sm-4">: Part terlupakan</div>
                                                 </div>
 
                                                 <div class="row justify-content-start">
-                                                    <div class="col-sm-2 font-weight-bold">Nama</div>
-                                                    <div class="col-sm-4">: {{ $lpm->mahasiswa->nama }}</div>
-                                                    <div class="col-sm-2 font-weight-bold">Kategori</div>
-                                                    <div class="col-sm-4">: {{ $lpm->dataMagang->kategori_magang }}</div>
+                                                    <div class="col-6 col-sm-2 font-weight-bold">Nama</div>
+                                                    <div class="col-6 col-sm-4">: {{ $lpm->mahasiswa->nama }}</div>
+                                                    <div class="col-6 col-sm-2 font-weight-bold">Kategori</div>
+                                                    <div class="col-6 col-sm-4">: {{ $lpm->dataMagang->kategori_magang }}</div>
                                                 </div>
 
                                                 <div class="row justify-content-start">
-                                                    <div class="col-sm-2 font-weight-bold">Dosen Pembimbing</div>
-                                                    <div class="col-sm-4">: {{ $lpm->dataBimbingan->dosen->nama ?? 'Belum ditentukan' }}</div>
-                                                    <div class="col-sm-2 font-weight-bold">Instansi</div>
-                                                    <div class="col-sm-4">: {{ $lpm->pengajuanMagang->instansi_magang }}</div>
+                                                    <div class="col-6 col-sm-2 font-weight-bold">Dosen Pembimbing</div>
+                                                    <div class="col-6 col-sm-4">: {{ $lpm->dataBimbingan->dosen->nama ?? 'Belum ditentukan' }}</div>
+                                                    <div class="col-6 col-sm-2 font-weight-bold">Instansi</div>
+                                                    <div class="col-6 col-sm-4">: {{ $lpm->pengajuanMagang->instansi_magang }}</div>
                                                 </div>
                                             @endforeach
 
