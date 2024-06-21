@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Logbook;
+use App\Models\DataMagang;
 use Illuminate\Http\Request;
+// use App\Models\DataBimbingan;
+use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\DB;
 
 class LogbookAdminSideController extends Controller
 {
@@ -12,7 +16,21 @@ class LogbookAdminSideController extends Controller
      */
     public function index()
     {
-        //
+        // Ambil mahasiswa yang login
+        $mahasiswa_id   = Auth::user()->username;
+
+        // Ambil data magang mahasiswa yang login
+        $dataMagang     = DataMagang::where('mahasiswa_id', $mahasiswa_id)
+                            ->with('mahasiswa','pengajuanMagang')
+                            ->get();
+
+        // // Kemudian ambil data logbook mahasiswa yang login
+        // $logbook        = Logbook::where('mahasiswa_id', $mahasiswa_id)
+        //                     ->with('mahasiswa', 'pengajuanMagang', 'dataMagang')
+        //                     ->get();
+        $logbook = Logbook::all();
+
+        return view('pages.contents.admin.logbook.index', compact('logbook','dataMagang'));
     }
 
     /**

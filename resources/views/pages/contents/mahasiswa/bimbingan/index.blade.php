@@ -29,8 +29,8 @@
                         <li><a class="nav-link" href="{{ url('/mahasiswa/data-magang') }}"><i class="fas fa-columns"></i> <span>Data Magang</span></a></li>
 
                         <li class="menu-header">Aktivitas Magang</li>
-                        <li><a class="nav-link" href="{{ url('/mahasiswa/bimbingan') }}"><i class="fas fa-users"></i> <span>Bimbingan</span></a> </li>
-                        <li class="active"><a class="nav-link" href="{{ url('/mahasiswa/logbook') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+                        <li class="active"><a class="nav-link" href="{{ url('/mahasiswa/bimbingan') }}"><i class="fas fa-users"></i> <span>Bimbingan</span></a> </li>
+                        <li ><a class="nav-link" href="{{ url('/mahasiswa/logbook') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
 
                         <li class="menu-header">Finalisasi Magang</li>
                         <li><a class="nav-link" href="{{ url('/mahasiswa/laporan-magang') }}"><i class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
@@ -55,7 +55,7 @@
             <div class="main-content">
                 <section class="section">
                     <div class="section-header">
-                        <h1>Log Book Aktivitas Mahasiswa</h1>
+                        <h1>Bimbingan Mahasiswa</h1>
                     </div>
 
                     <div class="section-body">
@@ -64,7 +64,7 @@
                                 <div class="card">
                                     <!-- Head Logbook -->
                                     <div class="text-center font-weight-bold mb-5 mt-5">
-                                        LOG BOOK AKTIVITAS HARIAN
+                                        BIMBINGAN MAHASISWA MAGANG
                                     </div>
                                     <div class="mb-5">
                                         @foreach ($dataMagang as $dm )
@@ -94,7 +94,7 @@
                                     <div class="col-md-6 mx-2 my-auto">
                                         <!-- Tambah data -->
                                         <button type="submit" class="btn btn-success">
-                                            <a href="{{ url('/mahasiswa/logbook/create') }}" class="text-decoration-none text-white">
+                                            <a href="{{ url('/mahasiswa/bimbingan/create') }}" class="text-decoration-none text-white">
                                                 <span>
                                                     <i class="ion ion-plus-circled" data-pack="default"
                                                         data-tags="add, include, new, invite, +">
@@ -112,10 +112,10 @@
                                                     <tr>
                                                         <th class="text-center">Action</th>
                                                         <th class="text-center">No</th>
+                                                        <th class="text-center">Pertemuan Ke-</th>
                                                         <th class="text-center">Tanggal</th>
-                                                        <th class="text-center">Jam Mulai</th>
-                                                        <th class="text-center">Jam Selesai</th>
-                                                        <th class="text-center">Penjelasan Kegiatan</th>
+                                                        <th class="text-center">Pembahasan</th>
+                                                        <th class="text-center">Batas Waktu</th>
                                                         <th class="text-center">Verifikasi Dosen Pembimbing</th>
                                                     </tr>
                                                 </thead>
@@ -125,11 +125,11 @@
                                                 @endphp
 
                                                 <tbody>
-                                                    @foreach ($logbook as $lb)
+                                                    @foreach ($bimbingan as $bm)
                                                         <tr>
                                                             <td class="d-flex justify-content-center align-items-center">
                                                                 <!-- Hapus -->
-                                                                {{-- <form id="delete-form-{{ $lb->id }}" action="{{ route('logbook.mahasiswa.destroy', $lb->id)  }}" method="POST">
+                                                                {{-- <form id="delete-form-{{ $bm->id }}" action="{{ url('/admin/data-magang/' . $bm->id) }}" method="POST">
                                                                     @method('DELETE')
                                                                     @csrf
                                                                     <button type="button" class="btn btn-sm btn-danger mx-1 swal-6" data-id="{{ $lb->id }}">
@@ -138,27 +138,36 @@
                                                                             data-tags="delete, remove, dump"></i>
                                                                     </button>
                                                                 </form> --}}
-
                                                                 <div class="row">
                                                                     <!-- Update -->
-                                                                    <a
-                                                                        href="{{ url('/mahasiswa/logbook/edit',$lb->id) }}">
+                                                                    {{-- <a
+                                                                        href="{{ url('/updateDataMahasiswa/' . $dm->id) }}">
                                                                         <button class="btn btn-sm btn-warning mx-1">
                                                                             <i class="ion ion-edit" data-pack="default"
                                                                                 data-tags="change, update, write, type, pencil"></i>
                                                                         </button>
-                                                                    </a>
+                                                                    </a> --}}
 
                                                                 </div>
                                                             </td>
 
                                                             <td class="text-center">{{ $no++ }}</td>
-                                                            <td>{{ $lb->tanggal_logbook ?? '-' }}</td>
-                                                            <td>{{ $lb->jam_mulai ?? '-' }}</td>
-                                                            <td>{{ $lb->jam_selesai ?? '-' }}</td>
-                                                            <td>{{ $lb->kegiatan ?? '-' }}</td>
+                                                            <td>{{ $bm->tanggal?? '-' }}</td>
+                                                            <td>{{ $bm->pertemuan ?? '-' }}</td>
+                                                            {{-- <td>{{ $bm->jam_mulai ?? '-' }}</td>
+                                                            <td>{{ $bm->jam_selesai ?? '-' }}</td> --}}
+                                                            <td>{{ $bm->pembahasan ?? '-' }}</td>
+                                                            <td>{{ $bm->batas_waktu ?? '-' }}</td>
+                                                            {{-- <td>
+                                                                @if ($bm->verifikasi_dosen == 'sudah diverifikasi')
+                                                                    <div class="badge badge-success">sudah diverifikasi</div>
+                                                                @elseif ($bm->verifikasi_dosen == 'belum diverifikasi')
+                                                                    <div class="badge badge-warning">belum diverifikasi</div>
+
+                                                                @endif
+                                                            </td> --}}
                                                             <td class="text-center">
-                                                                @if ($lb->verifikasi_dosen == '1')
+                                                                @if ($bm->verifikasi_dosen == '1')
                                                                     <div><i class="fas fa-check"></i></div>
                                                                 @else
                                                                     <h5> - </h5>

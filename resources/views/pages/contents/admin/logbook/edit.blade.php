@@ -57,7 +57,7 @@
             <div class="main-content">
                 <section class="section">
                     <div class="section-header">
-                        <h1>Log Book Aktivitas Mahasiswa</h1>
+                        <h1>Logbook Mahasiswa</h1>
                     </div>
 
                     <div class="section-body">
@@ -65,13 +65,21 @@
                             <div class="col-12 col-md col-lg">
                                 <!--Horizontal-->
                                 <div class="card">
-                                    <form id="create-form" action="{{ url('/mahasiswa/logbook') }}" method="POST" autocomplete="off">
+                                    <div class="card-header">
+                                        <h4>Edit Logbook Mahasiswa</h4>
+                                    </div>
+
+                                    <form action="{{ url('/mahasiswa/logbook/edit', $logbook->id) }}" method="POST">
                                         @csrf
+                                        @method('patch')
                                         <div class="card-body">
                                             <div class="form-group row">
                                                 <label for="tgl_logbook" class="col-sm-3 col-form-label">Tanggal</label>
                                                 <div class="col-sm-5">
-                                                    <input type="date" class="form-control" id="tgl_logbook" name="tgl_logbook" autofocus>
+                                                    <input type="date" class="form-control" id="tgl_logbook" name="tgl_logbook" value="{{ $logbook->tgl_logbook}}" autofocus>
+                                                    {{-- @error('tgl_logbook')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror --}}
                                                 </div>
                                             </div>
 
@@ -96,6 +104,7 @@
                                                 </div>
                                             </div>
                                         </div>
+
 
                                         <div class="card-footer">
                                             <div class="row">
@@ -128,18 +137,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
-    <!-- JS Libraies -->
-    <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
-    <script>
-        var redirectUrl = "{{ url('/mahasiswa/logbook') }}";
-    </script>
+  <!-- JS Libraies -->
+  <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
+  <script>
+      var redirectUrl = "{{ url('/mahasiswa/logbook') }}";
+  </script>
 
-    <!-- Template JS File -->
-    <script src="{{ asset('assets/js/scripts.js') }}"></script>
-    <script src="{{ asset('assets/js/custom.js') }}"></script>
+  <!-- Template JS File -->
+  <script src="{{ asset('assets/js/scripts.js') }}"></script>
+  <script src="{{ asset('assets/js/custom.js') }}"></script>
 
-    <!-- Page Specific JS File -->
-    <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
+  <!-- Page Specific JS File -->
+  <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
 </body>
 
 </html>

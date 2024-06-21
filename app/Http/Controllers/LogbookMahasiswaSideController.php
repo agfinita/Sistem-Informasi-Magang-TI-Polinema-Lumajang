@@ -7,6 +7,7 @@ use App\Models\DataMagang;
 use Illuminate\Http\Request;
 use App\Models\DataBimbingan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LogbookMahasiswaSideController extends Controller
 {
@@ -47,6 +48,7 @@ class LogbookMahasiswaSideController extends Controller
      */
     public function store(Request $request)
     {
+
         // Ambil mahasiswa yang login
         $mahasiswa_id   = Auth::user()->username;
 
@@ -69,7 +71,7 @@ class LogbookMahasiswaSideController extends Controller
         ]);
 
         // Menyimpan ke database
-        Logbook::create([
+        $logbook = Logbook::create([
             'mahasiswa_id'          => $dataBimbingan->mahasiswa->nim,
             'pengajuan_magang_id'   => $dataMagang->pengajuanMagang->id,
             'data_magang_id'        => $dataMagang->id,
@@ -82,6 +84,7 @@ class LogbookMahasiswaSideController extends Controller
 
         // Mengembalikan respon sukses
         return response()->json(['status' => 'success']);
+
     }
 
     /**
@@ -95,24 +98,68 @@ class LogbookMahasiswaSideController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Logbook $logbook)
+    public function edit($id)
     {
-        //
+        // Ambil mahasiswa yang login
+        $user = Auth::user();
+
+        // Pastikan hanya mahasiswa yang memiliki logbook tersebut yang bisa mengedit
+        // if ($logbook->mahasiswa_id !== $user->username) {
+        //     return redirect()->route('logbook.mahasiswa.index')->withErrors('Anda tidak memiliki izin untuk mengedit logbook ini.');
+        // }
+        $logbook = Logbook::findOrFail($id);
+
+        return view('pages.contents.mahasiswa.logbook.edit', compact('logbook'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Logbook $logbook)
+    public function update(Request $request, $id)
     {
-        //
+        // Validasi input
+        $validatedData = $request->validate([
+            'tgl_logbook' => 'required|date',
+            'jm'          => 'required|date_format:H:i',
+            'js'          => 'required|date_format:H:i',
+            'kegiatan'    => 'required|max:255'
+        ]);
+
+        // Update data logbook
+        $logbook=Logbook::findOrFail($id);
+        $logbook->update([
+            'tanggal_logbook' => $validatedData['tgl_logbook'],
+            'jam_mulai'       => $validatedData['jm'],
+            'jam_selesai'     => $validatedData['js'],
+            'kegiatan'        => $validatedData['kegiatan']
+        ]);
+
+        // Mengembalikan respon sukses
+
+
+        // return response()->json(['status' => 'success']);
+        return redirect('/mahasiswa/logbook')->with('status', 'Logbook berhasil diupdate!');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Logbook $logbook)
+    public function destroy($id)
     {
-        //
+        // Menghapus data logbook
+        $logbook= Logbook::findOrFail($id);
+
+
+        DB::transaction( function () use ($logbook) {
+            // Hapus data dosen terkait user
+
+
+            // Hapus data user
+            $logbook->delete();
+        });
+        // Mengembalikan respon sukses
+        return redirect()->route('logbook.mahasiswa.index');
+
     }
 }

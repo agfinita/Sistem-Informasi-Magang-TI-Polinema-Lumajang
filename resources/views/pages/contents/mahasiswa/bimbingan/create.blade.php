@@ -32,7 +32,7 @@
 
                         <li class="menu-header">Aktivitas Magang</li>
                         <li><a class="nav-link" href="{{ url('/mahasiswa/bimbingan') }}"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
-                        <li class="active"><a class="nav-link" href="{{ url('/mahasiswa/logbook') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/mahasiswa/logbook') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
 
                         <li class="menu-header">Finalisasi Magang</li>
                         <li><a class="nav-link" href="{{ url('/mahasiswa/laporan-magang') }}"><i class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
@@ -57,7 +57,7 @@
             <div class="main-content">
                 <section class="section">
                     <div class="section-header">
-                        <h1>Log Book Aktivitas Mahasiswa</h1>
+                        <h1>Tambah Bimbingan</h1>
                     </div>
 
                     <div class="section-body">
@@ -65,34 +65,52 @@
                             <div class="col-12 col-md col-lg">
                                 <!--Horizontal-->
                                 <div class="card">
-                                    <form id="create-form" action="{{ url('/mahasiswa/logbook') }}" method="POST" autocomplete="off">
+                                    <form id="create-form" action="{{ url('/mahasiswa/bimbingan') }}" method="POST" autocomplete="off">
                                         @csrf
                                         <div class="card-body">
                                             <div class="form-group row">
-                                                <label for="tgl_logbook" class="col-sm-3 col-form-label">Tanggal</label>
+                                                <label for="tgl_bimbingan" class="col-sm-3 col-form-label">Tanggal</label>
                                                 <div class="col-sm-5">
-                                                    <input type="date" class="form-control" id="tgl_logbook" name="tgl_logbook" autofocus>
+                                                    <input type="date" class="form-control" id="tanggal" name="tgl_bimbingan" autofocus>
                                                 </div>
                                             </div>
 
-                                            <div class="form-group row">
+                                            {{-- <div class="form-group row">
                                                 <label for="jm" class="col-sm-3 col-form-label">Jam Mulai</label>
                                                 <div class="col-sm-5">
                                                     <input type="time" class="form-control" id="jam_mulai" name="jm">
                                                 </div>
-                                            </div>
+                                            </div> --}}
 
-                                            <div class="form-group row">
+                                            {{-- <div class="form-group row">
                                                 <label for="js" class="col-sm-3 col-form-label">Jam Selesai</label>
                                                 <div class="col-sm-5">
                                                     <input type="time" class="form-control" id="jam_selesai" name="js">
                                                 </div>
+                                            </div> --}}
+                                            <div class="form-group row">
+                                                <label for="pertemuan" class="col-sm-3 col-form-label">Pertemuan Ke-</label>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="pertemuan" name="pertemuan" placeholder="Isikan Topik Bimbingan" >
+                                                </div>
                                             </div>
 
                                             <div class="form-group row">
-                                                <label for="kegiatan" class="col-sm-3 col-form-label">Penjelasan Kegiatan</label>
+                                                <label for="pembahasan" class="col-sm-3 col-form-label">Pembahasan</label>
                                                 <div class="col-sm-5">
-                                                    <textarea class="form-control" name="kegiatan" id="kegiatan" cols="60" rows="5" placeholder="Deskripsi aktivitas magang"></textarea>
+                                                    <input type="text" class="form-control" id="pembahasan" name="pembahasan" placeholder="Isikan Topik Bimbingan" >
+                                                </div>
+                                            </div>
+                                            {{-- <div class="form-group row">
+                                                <label for="kegiatan" class="col-sm-3 col-form-label">Deskripsi Bimbingan</label>
+                                                <div class="col-sm-5">
+                                                    <textarea class="form-control" name="kegiatan" id="kegiatan" cols="60" rows="5" placeholder="Isikan pembahasan saat bimbingan"></textarea>
+                                                </div>
+                                            </div> --}}
+                                            <div class="form-group row">
+                                                <label for="tgl_bimbingan" class="col-sm-3 col-form-label">Batas Waktu</label>
+                                                <div class="col-sm-5">
+                                                    <input type="date" class="form-control" id="batas_waktu" name="tgl_bimbingan" autofocus>
                                                 </div>
                                             </div>
                                         </div>
@@ -131,7 +149,7 @@
     <!-- JS Libraies -->
     <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
     <script>
-        var redirectUrl = "{{ url('/mahasiswa/logbook') }}";
+        var redirectUrl = "{{ url('/mahasiswa/bimbingan') }}";
     </script>
 
     <!-- Template JS File -->

@@ -11,13 +11,13 @@
             @include('pages.layouts.navbar')
 
             <!-- Sidebar -->
-            <div class="main-sidebar sidebar-style-2">
+            <div class="main-sidebar sidebar-style-2 non-printable">
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
-                        <a href="{{ url('/') }}">Admin</a>
+                        <a href="{{ url('/mahasiswa/dashboard') }}">{{ Auth::user()->role }}</a>
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
-                        <a href="{{ url('/') }}">SIMAG</a>
+                        <a href="{{ url('/mahasiswa/dashboard') }}">SIMAG</a>
                     </div>
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
@@ -39,13 +39,13 @@
                                     <li><a class="nav-link" href="{{ url('/data-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
                                 </ul>
                             </li>
-                            <li class="nav-item dropdown active">
+                            <li class="nav-item dropdown">
                                     <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                         class="ion ion-android-person"></i> <span>Kelola Pengguna</span></a>
                                     <ul class="dropdown-menu">
                                         <li><a class="nav-link" href="{{ url('/kelola-pengguna/admin') }}"><span>Admin</span></a></li>
                                         <li><a class="nav-link" href="{{ url('/kelola-pengguna/dosen') }}"><span>Dosen</span></a></li>
-                                        <li class="active"><a class="nav-link" href="{{ url('/kelola-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
+                                        <li ><a class="nav-link" href="{{ url('/kelola-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
                                     </ul>
                             </li>
 
@@ -58,7 +58,7 @@
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
                             <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i><span>Data Bimbingan</span></a></li>
-                            <li><a class="nav-link" href="{{  url('/admin/logbook/index') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+                            <li class="active"><a class="nav-link" href="{{  url('/admin/logbook/index') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
                         </li>
 
                         <li class="menu-header">Finalisasi Magang</li>
@@ -83,23 +83,49 @@
             <div class="main-content">
                 <section class="section">
                     <div class="section-header">
-                        <h1>Kelola Pengguna</h1>
+                        <h1>Log Book Aktivitas Mahasiswa</h1>
                     </div>
 
                     <div class="section-body">
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-12 ">
                                 <div class="card">
-                                    <div class="card-header">
-                                        <h4>User Mahasiswa</h4>
+                                    <!-- Head Logbook -->
+                                    <div class="text-center font-weight-bold mb-5 mt-5">
+                                        LOG BOOK AKTIVITAS HARIAN
+                                    </div>
+                                    <div class="mb-5">
+                                        @foreach ($dataMagang as $dm )
+                                        <div class="row mb-2 mx-auto" style="max-width: 400px;">
+                                            <div class="col-4">Nama</div>
+                                            <div class="col-2">:</div>
+                                            <div class="col-6">{{ $dm->mahasiswa->nama }}</div>
+                                        </div>
+                                        <div class="row mb-2 mx-auto" style="max-width: 400px;">
+                                            <div class="col-4">NIM</div>
+                                            <div class="col-2">:</div>
+                                            <div class="col-6">{{ $dm->mahasiswa->nim }}</div>
+                                        </div>
+                                        <div class="row mb-2 mx-auto" style="max-width: 400px;">
+                                            <div class="col-4">Jenis</div>
+                                            <div class="col-2">:</div>
+                                            <div class="col-6">{{ $dm->kategori_magang }}</div>
+                                        </div>
+                                        <div class="row mb-2 mx-auto" style="max-width: 400px;">
+                                            <div class="col-4">Mitra Kegiatan</div>
+                                            <div class="col-2">:</div>
+                                            <div class="col-6">{{ $dm->pengajuanMagang->instansi_magang}} </div>
+                                        </div>
+                                        @endforeach
                                     </div>
 
                                     {{-- <div class="col-md-6 mx-2 my-auto">
                                         <!-- Tambah data -->
                                         <button type="submit" class="btn btn-success">
-                                            <a href="{{ url('/kelolaMahasiswa') }}" class="text-decoration-none text-white">
+                                            <a href="{{ url('/mahasiswa/logbook/create') }}" class="text-decoration-none text-white">
                                                 <span>
-                                                    <i class="ion ion-plus-circled" data-pack="default" data-tags="add, include, new, invite, +">
+                                                    <i class="ion ion-plus-circled" data-pack="default"
+                                                        data-tags="add, include, new, invite, +">
                                                     </i>
                                                 </span>
                                                 Tambah Data
@@ -112,60 +138,67 @@
                                             <table id="example" class="display nowrap" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th>Action</th>
-                                                        <th>Nama</th>
-                                                        <th>Username</th>
-                                                        <th>Email</th>
-                                                        <th>Role</th>
-                                                        <th>Status</th>
-                                                        <th>Date Created</th>
-                                                        <th>Date Updated</th>
+                                                        <th class="text-center">Action</th>
+                                                        <th class="text-center">No</th>
+                                                        <th class="text-center">Tanggal</th>
+                                                        <th class="text-center">Jam Mulai</th>
+                                                        <th class="text-center">Jam Selesai</th>
+                                                        <th class="text-center">Penjelasan Kegiatan</th>
+                                                        <th class="text-center">Verifikasi Dosen Pembimbing</th>
                                                     </tr>
                                                 </thead>
 
                                                 @php
                                                     $no = 1;
                                                 @endphp
+
                                                 <tbody>
-                                                    @foreach ($users as $u)
+                                                    @foreach ($logbook as $lb)
                                                         <tr>
-                                                            <td>
-                                                                <div class="d-flex justify-content-center align-items-center">
-                                                                    <a href="{{ url('/kelola-pengguna/mahasiswa/edit/' . $u->id) }}">
+                                                            <td class="d-flex justify-content-center align-items-center">
+                                                                <!-- Hapus -->
+                                                                {{-- <form id="delete-form-{{ $lb->id }}" action="{{ route('logbook.mahasiswa.destroy', $lb->id)  }}" method="POST">
+                                                                    @method('DELETE')
+                                                                    @csrf
+                                                                    <button type="button" class="btn btn-sm btn-danger mx-1 swal-6" data-id="{{ $lb->id }}">
+                                                                        <i class="ion ion-trash-a"
+                                                                            data-pack="default"
+                                                                            data-tags="delete, remove, dump"></i>
+                                                                    </button>
+                                                                </form> --}}
+
+                                                                <div class="row">
+                                                                    <!-- Update -->
+                                                                    <a
+                                                                        href="{{ url('/admin/logbook/edit',$lb->id) }}">
                                                                         <button class="btn btn-sm btn-warning mx-1">
-                                                                            <i class="ion ion-edit" data-pack="default" data-tags="change, update, write, type, pencil"></i>
+                                                                            <i class="ion ion-edit" data-pack="default"
+                                                                                data-tags="change, update, write, type, pencil"></i>
                                                                         </button>
                                                                     </a>
 
-                                                                    <form id="delete-form-{{ $u->id }}" action="{{ url('/kelola-pengguna/mahasiswa/' . $u->id) }}" method="POST">
-                                                                        @method('DELETE')
-                                                                        @csrf
-                                                                        <button type="button" class="btn btn-sm btn-danger mx-1 swal-6" data-id="{{ $u->id }}">
-                                                                            <i class="ion ion-trash-a" data-pack="default" data-tags="delete, remove, dump"></i>
-                                                                        </button>
-                                                                    </form>
                                                                 </div>
                                                             </td>
 
-                                                            <td>{{ $u->nama }}</td>
-                                                            <td>{{ $u->username }}</td>
-                                                            <td>{{ $u->email }}</td>
-                                                            <td>{{ $u->role }}</td>
-                                                            <td>
-                                                                @if ($u->is_active == 1)
-                                                                    <div class="badge badge-success">Active</div>
+                                                            <td class="text-center">{{ $no++ }}</td>
+                                                            <td>{{ $lb->tanggal_logbook ?? '-' }}</td>
+                                                            <td>{{ $lb->jam_mulai ?? '-' }}</td>
+                                                            <td>{{ $lb->jam_selesai ?? '-' }}</td>
+                                                            <td>{{ $lb->kegiatan ?? '-' }}</td>
+                                                            <td class="text-center">
+                                                                @if ($lb->verifikasi_dosen == '1')
+                                                                    <div><i class="fas fa-check"></i></div>
                                                                 @else
-                                                                    <div class="badge badge-danger">Not active</div>
+                                                                    <h5> - </h5>
                                                                 @endif
                                                             </td>
-                                                            <td>{{ $u->created_at }}</td>
-                                                            <td>{{ $u->updated_at }}</td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -189,10 +222,10 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="{{ asset('/assets/js/stisla.js') }}"></script>
+    <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
     <!-- Data Tables -->
-    @include('pages.layouts.datatables')
+    {{-- @include('pages.layouts.datatables-admin') --}}
 
     <!-- JS Libraies -->
     <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
@@ -202,6 +235,7 @@
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 
     <!-- Page Specific JS File -->
+    <script src="{{ asset('assets/js/page/components-table.js') }}"></script>
     <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
 </body>
 
