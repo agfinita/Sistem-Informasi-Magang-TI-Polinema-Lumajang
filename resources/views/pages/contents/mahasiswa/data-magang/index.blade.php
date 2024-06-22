@@ -100,7 +100,6 @@
                                             <table class="table table-striped" id="table-1">
                                                 <thead>
                                                     <tr>
-                                                        <th>Action</th>
                                                         <th>NIM</th>
                                                         <th>Nama</th>
                                                         <th>Kelas</th>
@@ -112,21 +111,13 @@
                                                         <th>Periode</th>
                                                         <th>Tanggal Dimulai</th>
                                                         <th>Tanggal Selesai</th>
+                                                        <th>Aksi</th>
                                                     </tr>
                                                 </thead>
 
                                                 <tbody>
                                                     @foreach ( $dataMagang as $dm )
                                                     <tr>
-                                                        <td>
-                                                            <!-- Update -->
-                                                            <a href="{{ url('/mahasiswa/data-magang/edit/' . $dm->id) }}">
-                                                                <button class="btn btn-sm btn-warning mx-1">
-                                                                    <i class="ion ion-edit" data-pack="default"
-                                                                    data-tags="change, update, write, type, pencil"></i>
-                                                                </button>
-                                                            </a>
-                                                        </td>
 
                                                         <td>{{ $dm->mahasiswa->nim }}</td>
                                                         <td>{{ $dm->mahasiswa->nama }}</td>
@@ -137,16 +128,25 @@
                                                         <td>{{ $dm->pengajuanMagang->alamat_magang }}</td>
                                                         <td>
                                                             @if ($dm->status_magang == 'selesai')
-                                                                <div class="badge badge-success">Selesai</div>
+                                                            <div class="badge badge-success">Selesai</div>
                                                             @elseif ($dm->status_magang == 'sedang magang')
-                                                                <div class="badge badge-warning">Sedang magang</div>
+                                                            <div class="badge badge-warning">Sedang magang</div>
                                                             @elseif ($dm->status_magang == 'belum dimulai')
-                                                                <div class="badge badge-info">Belum dimulai</div>
+                                                            <div class="badge badge-info">Belum dimulai</div>
                                                             @endif
                                                         </td>
                                                         <td>{{ $dm->periode }}</td>
                                                         <td>{{ $dm->tanggal_mulai }}</td>
                                                         <td>{{ $dm->tanggal_selesai }}</td>
+                                                        <td>
+                                                            <!-- Update -->
+                                                            <a href="{{ url('/mahasiswa/data-magang/edit/' . $dm->id) }}">
+                                                                <button class="btn btn-sm btn-warning mx-1">
+                                                                    <i class="ion ion-edit" data-pack="default"
+                                                                    data-tags="change, update, write, type, pencil"></i>
+                                                                </button>
+                                                            </a>
+                                                        </td>
 
                                                     </tr>
                                                     @endforeach

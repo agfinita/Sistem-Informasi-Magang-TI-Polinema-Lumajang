@@ -22,55 +22,18 @@
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
                         <li class="menu-header">Dashboard</li>
-                        <li><a class="nav-link" href="{{ url('/') }}"><i class="ion ion-speedometer"
-                                    data-pack="default" data-tags="travel, accelerate"></i> <span>Dashboard</span></a>
-                        </li>
-                        <li><a class="nav-link" href="{{ url('/pengumuman') }}"><i class="ion ion-speakerphone"></i>
-                                <span>Pengumuman</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/dosen/dashboard') }}"><i class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i> <span>Dashboard</span></a></li>
 
+                        <li class="menu-header">Magang</li>
+                        <li><a class="nav-link" href="{{ url('/dosen/data-magang-mahasiswa') }}"><i class="fas fa-columns"></i> <span>Data Magang</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/dosen/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i> <span>Data Bimbingan</span></a></li>
 
-                        <li class="menu-header">Manajemen Pengguna</li>
-                        <li class="nav-item-dropdown">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
-                                <i class="ion ion-ios-paper"></i><span>Data Pengguna</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/data-pengguna/admin') }}"><span>Admin</span></a>
-                                </li>
-                                <li><a class="nav-link" href="{{ url('/data-pengguna/dosen') }}"><span>Dosen</span></a>
-                                </li>
-                                <li><a class="nav-link"
-                                        href="{{ url('/data-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                    class="ion ion-android-person"></i> <span>Kelola Pengguna</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link"
-                                        href="{{ url('/kelola-pengguna/admin') }}"><span>Admin</span></a></li>
-                                <li><a class="nav-link"
-                                        href="{{ url('/kelola-pengguna/dosen') }}"><span>Dosen</span></a></li>
-                                <li><a class="nav-link"
-                                        href="{{ url('/kelola-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
-                            </ul>
-                        </li>
+                        <li class="menu-header">Aktivitas Magang</li>
+                        <li class="active"><a class="nav-link" href="/dosen/bimbingan-mahasiswa"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/dosen/logbook-mahasiswa') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
 
-                        <li class="menu-header">Manajemen Magang</li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Magang</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link"
-                                        href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a>
-                                </li>
-                                <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
-                            </ul>
-                            <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i><span>Data Bimbingan</span></a></li>
-                            <li class="active"><a class="nav-link" href="{{  url('/admin/logbook/index') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
-                        </li>
-
-                        <li class="menu-header">Finalisasi Magang</li>
-                        <li ><a class="nav-link" href="{{ url('/admin/laporan-magang-mahasiswa') }}"><i class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
+                        <li class="menu-header">Verifikasi</li>
+                        <li><a class="nav-link" href="{{ url('/dosen/laporan-magang-mahasiswa') }}"><i class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
 
                         <li class="menu-header">Lainnya</li>
                         <li>
@@ -83,17 +46,6 @@
                             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
-                        </li>
-
-                        <li class="menu-header">Pages</li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown"><i class="far fa-user"></i>
-                                <span>Auth</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{ url('/forgot') }}">Forgot Password</a></li>
-                                <li><a href="{{ url('/login') }}">Login</a></li>
-                                <li><a href="{{ url('/reset') }}">Reset Password</a></li>
-                            </ul>
                         </li>
                     </ul>
                 </aside>
@@ -112,10 +64,10 @@
                                 <div class="card">
                                     <!-- Head Logbook -->
                                     <div class="logbook-header text-center font-weight-bold mb-5 mt-5">
-                                        VERIFIKASI LOG BOOK AKTIVITAS HARIAN
+                                        VERIFIKASI BIMBINGAN MAHASISWA
                                     </div>
 
-                                    <form id="update-form" action="{{ url ('/dosen/logbook-mahasiswa/edit/' . $logbook->id) }}" method="POST" enctype="multipart/form-data">
+                                    <form id="update-form" action="{{ url ('/dosen/bimbingan-mahasiswa/edit/' . $bimbingan->id) }}" method="POST" enctype="multipart/form-data">
                                         @method('patch')
                                         @csrf
                                         <div class="card-body">
@@ -124,8 +76,8 @@
                                                 <div class="col-sm-5">
                                                     <select class="form-control" id="verif_dosen" name="verif">
                                                         <option value="" disabled>- Pilih status log book -</option>
-                                                        <option value="0" {{ $logbook->verifikasi_dosen == 0 ? 'selected' : '' }}>Belum diverifikasi</option>
-                                                        <option value="1" {{ $logbook->verifikasi_dosen == 1 ? 'selected' : '' }}>Verified</option>
+                                                        <option value="0" {{ $bimbingan->verifikasi_dosen == 0 ? 'selected' : '' }}>Belum diverifikasi</option>
+                                                        <option value="1" {{ $bimbingan->verifikasi_dosen == 1 ? 'selected' : '' }}>Verified</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -163,7 +115,7 @@
     <!-- JS Libraies -->
     <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
     <script>
-        var redirectUrl = "{{ url('/dosen/logbook-mahasiswa') }}";
+        var redirectUrl = "{{ url('/dosen/bimbingan-mahasiswa') }}";
     </script>
 
     <!-- Template JS File -->

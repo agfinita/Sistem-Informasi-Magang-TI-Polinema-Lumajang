@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataBimbingan;
 use App\Models\Logbook;
 use App\Models\DataMagang;
 use Illuminate\Http\Request;
@@ -16,21 +17,19 @@ class LogbookAdminSideController extends Controller
      */
     public function index()
     {
-        // Ambil mahasiswa yang login
-        $mahasiswa_id   = Auth::user()->username;
+       // Mengambil user yang sedang login
+       $user   = Auth::user();
 
-        // Ambil data magang mahasiswa yang login
-        $dataMagang     = DataMagang::where('mahasiswa_id', $mahasiswa_id)
-                            ->with('mahasiswa','pengajuanMagang')
-                            ->get();
+       // Mendapatkan ID dosen dari relasi user
+       $admin      = $user->admin;
+       $admin_id   = $admin->id;
 
-        // // Kemudian ambil data logbook mahasiswa yang login
-        // $logbook        = Logbook::where('mahasiswa_id', $mahasiswa_id)
-        //                     ->with('mahasiswa', 'pengajuanMagang', 'dataMagang')
-        //                     ->get();
-        $logbook = Logbook::all();
+       // Kemudian cari data bimbingan yang terkait dengan dosen yang login
+       $dataBimbingan = DataBimbingan::where('dosen_pembimbing_id', $admin_id)
+                           ->with('mahasiswa', 'dataMagang', 'dosen')
+                           ->get();
 
-        return view('pages.contents.admin.logbook.index', compact('logbook','dataMagang'));
+       return view('pages.contents.admin.logbook.index', compact('dataBimbingan'));
     }
 
     /**
@@ -52,9 +51,21 @@ class LogbookAdminSideController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Logbook $logbook)
+    public function show($data_magang_id)
     {
-        //
+        // Ambil dosen yang login
+        $admin_id = Auth::user()->id;
+
+        // Ambil data bimbingan milik mahasiswa
+        $dataBimbingan = DataBimbingan::with('mahasiswa', 'dataMagang')
+                            ->where('dosen_pembimbing_id', $admin_id)
+                            ->where('data_magang_id', $data_magang_id)
+                            ->get();
+
+        // Ambil data logbook mahasiswa yang dipilih
+        $logbook = Logbook::where('data_magang_id', $data_magang_id)->get();
+
+        return view('pages.contents.admin.logbook.show', compact('logbook'));
     }
 
     /**

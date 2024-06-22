@@ -69,38 +69,35 @@
                                         <h4>Edit Logbook Mahasiswa</h4>
                                     </div>
 
-                                    <form action="{{ url('/mahasiswa/logbook/edit', $logbook->id) }}" method="POST">
+                                    <form id="update-form" action="{{ url('/mahasiswa/logbook/edit', $logbook->id) }}" method="POST">
                                         @csrf
                                         @method('patch')
                                         <div class="card-body">
                                             <div class="form-group row">
                                                 <label for="tgl_logbook" class="col-sm-3 col-form-label">Tanggal</label>
                                                 <div class="col-sm-5">
-                                                    <input type="date" class="form-control" id="tgl_logbook" name="tgl_logbook" value="{{ $logbook->tgl_logbook}}" autofocus>
-                                                    {{-- @error('tgl_logbook')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror --}}
+                                                    <input type="date" class="form-control" id="tanggal_logbook" name="tgl_logbook" value="{{ $logbook->tanggal_logbook}}" autofocus>
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label for="jm" class="col-sm-3 col-form-label">Jam Mulai</label>
                                                 <div class="col-sm-5">
-                                                    <input type="time" class="form-control" id="jam_mulai" name="jm">
+                                                    <input type="time" class="form-control" id="jam_mulai" name="jm" value="{{ old('jm', $logbook->jam_mulai ? \Carbon\Carbon::parse($logbook->jam_mulai)->format('H:i') : '') }}" >
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label for="js" class="col-sm-3 col-form-label">Jam Selesai</label>
                                                 <div class="col-sm-5">
-                                                    <input type="time" class="form-control" id="jam_selesai" name="js">
+                                                    <input type="time" class="form-control" id="jam_selesai" name="js" value="{{ old('js', $logbook->jam_selesai ? \Carbon\Carbon::parse($logbook->jam_selesai)->format('H:i') : '') }}">
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label for="kegiatan" class="col-sm-3 col-form-label">Penjelasan Kegiatan</label>
                                                 <div class="col-sm-5">
-                                                    <textarea class="form-control" name="kegiatan" id="kegiatan" cols="60" rows="5" placeholder="Deskripsi aktivitas magang"></textarea>
+                                                    <textarea class="form-control" name="kegiatan" id="kegiatan" cols="60" rows="5" placeholder="Deskripsi aktivitas magang">{{ old('kegiatan', $logbook->kegiatan) }}</textarea>
                                                 </div>
                                             </div>
                                         </div>

@@ -103,10 +103,6 @@ class LogbookMahasiswaSideController extends Controller
         // Ambil mahasiswa yang login
         $user = Auth::user();
 
-        // Pastikan hanya mahasiswa yang memiliki logbook tersebut yang bisa mengedit
-        // if ($logbook->mahasiswa_id !== $user->username) {
-        //     return redirect()->route('logbook.mahasiswa.index')->withErrors('Anda tidak memiliki izin untuk mengedit logbook ini.');
-        // }
         $logbook = Logbook::findOrFail($id);
 
         return view('pages.contents.mahasiswa.logbook.edit', compact('logbook'));
@@ -129,16 +125,16 @@ class LogbookMahasiswaSideController extends Controller
         $logbook=Logbook::findOrFail($id);
         $logbook->update([
             'tanggal_logbook' => $validatedData['tgl_logbook'],
-            'jam_mulai'       => $validatedData['jm'],
-            'jam_selesai'     => $validatedData['js'],
+            'jam_mulai'       => $validatedData['jm'] ?? $logbook->jam_mulai,
+            'jam_selesai'     => $validatedData['js'] ?? $logbook->jam_selesai,
             'kegiatan'        => $validatedData['kegiatan']
         ]);
 
         // Mengembalikan respon sukses
 
 
-        // return response()->json(['status' => 'success']);
-        return redirect('/mahasiswa/logbook')->with('status', 'Logbook berhasil diupdate!');
+        return response()->json(['status' => 'success']);
+        // return redirect('/mahasiswa/logbook')->with('status', 'Logbook berhasil diupdate!');
     }
 
 

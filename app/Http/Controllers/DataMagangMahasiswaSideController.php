@@ -145,6 +145,7 @@ class DataMagangMahasiswaSideController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request);
         $validatedData = $request->validate([
             'nim'           => 'required|exists:mahasiswa,nim',
             'kategori'      => 'required',

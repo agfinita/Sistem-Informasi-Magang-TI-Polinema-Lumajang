@@ -29,8 +29,8 @@
                         <li><a class="nav-link" href="{{ url('/dosen/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i> <span>Data Bimbingan</span></a></li>
 
                         <li class="menu-header">Aktivitas Magang</li>
-                        <li><a class="nav-link" href="/dosen/bimbingan-mahasiswa"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
-                        <li class="active"><a class="nav-link" href="{{ url('/dosen/logbook-mahasiswa') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+                        <li class="active"><a class="nav-link" href="/dosen/bimbingan-mahasiswa"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/dosen/logbook-mahasiswa') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
 
                         <li class="menu-header">Verifikasi</li>
                         <li><a class="nav-link" href="{{ url('/dosen/laporan-magang-mahasiswa') }}"><i class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
@@ -55,7 +55,7 @@
             <div class="main-content">
                 <section class="section">
                     <div class="section-header">
-                        <h1>Log Book Aktivitas Mahasiswa</h1>
+                        <h1>Bimbingan Mahasiswa</h1>
                     </div>
 
                     <div class="section-body">
@@ -64,7 +64,7 @@
                                 <div class="card">
                                     <!-- Head Logbook -->
                                     <div class="logbook-header text-center font-weight-bold mb-5 mt-5">
-                                        LOG BOOK AKTIVITAS HARIAN
+                                        BIMBINGAN MAHASISWA
                                     </div>
 
                                     <div class="card-body">
@@ -72,13 +72,13 @@
                                             <table class="table table-bordered display nowrap" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center">Action</th>
                                                         <th class="text-center">No</th>
+                                                        <th class="text-center">Pertemuan Ke-</th>
                                                         <th class="text-center">Tanggal</th>
-                                                        <th class="text-center">Jam Mulai</th>
-                                                        <th class="text-center">Jam Selesai</th>
-                                                        <th class="text-center">Penjelasan Kegiatan</th>
+                                                        <th class="text-center">Pembahasan</th>
+                                                        <th class="text-center">Batas Waktu</th>
                                                         <th class="text-center">Verifikasi Dosen Pembimbing</th>
+                                                        <th class="text-center">Aksi</th>
                                                     </tr>
                                                 </thead>
 
@@ -87,29 +87,30 @@
                                                 @endphp
 
                                                 <tbody>
-                                                    @foreach ($logbook as $lb)
+                                                    @foreach ($bimbingan as $bm)
                                                         <tr>
+                                                            <td class="text-center">{{ $no++ }}</td>
+                                                            <td>{{ $bm->pertemuan ?? '-' }}</td>
+                                                            <td>{{ $bm->tanggal?? '-' }}</td>
+                                                            <td>{{ $bm->pembahasan ?? '-' }}</td>
+                                                            <td>{{ $bm->batas_waktu ?? '-' }}</td>
+                                                            <td class="text-center">
+                                                                @if ($bm->verifikasi_dosen == '1')
+                                                                <div class="badge badge-success">Sudah diverifikasi</div>
+                                                                @else
+                                                                <h5> - </h5>
+                                                                @endif
+                                                            </td>
                                                             <td class="d-flex justify-content-center align-items-center">
                                                                 <!-- Update -->
-                                                                <a href="{{ url('/dosen/logbook-mahasiswa/edit/' . $lb->id)}}">
+                                                                <a href="{{ url('/dosen/bimbingan-mahasiswa/edit/' . $bm->id)}}">
                                                                     <button class="btn btn-sm btn-warning mx-1">
                                                                         <i class="ion ion-edit" data-pack="default" data-tags="change, update, write, type, pencil"></i>
                                                                     </button>
                                                                 </a>
                                                             </td>
 
-                                                            <td class="text-center">{{ $no++ }}</td>
-                                                            <td>{{ $lb->tanggal_logbook ?? '-' }}</td>
-                                                            <td>{{ $lb->jam_mulai ?? '-' }}</td>
-                                                            <td>{{ $lb->jam_selesai ?? '-' }}</td>
-                                                            <td>{{ $lb->kegiatan ?? '-' }}</td>
-                                                            <td class="text-center">
-                                                                @if ($lb->verifikasi_dosen == '1')
-                                                                    <div class="badge badge-success">Sudah diverifikasi</div>
-                                                                @else
-                                                                    <h5> - </h5>
-                                                                @endif
-                                                            </td>
+
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
@@ -117,7 +118,7 @@
                                         </div>
                                     </div>
                                     <div class="card-footer d-flex justify-content-end">
-                                        <a href="{{ url('/dosen/logbook-mahasiswa') }}" class="btn btn-warning m-2">Batal</a>
+                                        <a href="{{ url('/dosen/bimbingan-mahasiswa') }}" class="btn btn-warning m-2">Batal</a>
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +147,7 @@
     <!-- JS Libraies -->
     <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
     <script>
-        var redirectUrl = "{{ url('/dosen/logbook-mahasiswa') }}";
+        var redirectUrl = "{{ url('/dosen/bimbingan-mahasiswa') }}";
     </script>
 
     <!-- Template JS File -->

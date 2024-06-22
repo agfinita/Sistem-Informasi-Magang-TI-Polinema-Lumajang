@@ -110,13 +110,13 @@
                                             <table id="example" class="display nowrap" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center">Action</th>
                                                         <th class="text-center">No</th>
                                                         <th class="text-center">Pertemuan Ke-</th>
                                                         <th class="text-center">Tanggal</th>
                                                         <th class="text-center">Pembahasan</th>
                                                         <th class="text-center">Batas Waktu</th>
                                                         <th class="text-center">Verifikasi Dosen Pembimbing</th>
+                                                        <th class="text-center">Aksi</th>
                                                     </tr>
                                                 </thead>
 
@@ -127,6 +127,19 @@
                                                 <tbody>
                                                     @foreach ($bimbingan as $bm)
                                                         <tr>
+
+                                                            <td class="text-center">{{ $no++ }}</td>
+                                                            <td>{{ $bm->pertemuan ?? '-' }}</td>
+                                                            <td>{{ $bm->tanggal?? '-' }}</td>
+                                                            <td>{{ $bm->pembahasan ?? '-' }}</td>
+                                                            <td>{{ $bm->batas_waktu ?? '-' }}</td>
+                                                            <td class="text-center">
+                                                                @if ($bm->verifikasi_dosen == '1')
+                                                                <div class="badge badge-success">Sudah diverifikasi</div>
+                                                                @else
+                                                                <h10> Belum diverikasi </h10>
+                                                                @endif
+                                                            </td>
                                                             <td class="d-flex justify-content-center align-items-center">
                                                                 <!-- Hapus -->
                                                                 {{-- <form id="delete-form-{{ $bm->id }}" action="{{ url('/admin/data-magang/' . $bm->id) }}" method="POST">
@@ -140,38 +153,15 @@
                                                                 </form> --}}
                                                                 <div class="row">
                                                                     <!-- Update -->
-                                                                    {{-- <a
-                                                                        href="{{ url('/updateDataMahasiswa/' . $dm->id) }}">
+                                                                    <a
+                                                                        href="{{ url('/mahasiswa/bimbingan/edit/' . $bm->id) }}">
                                                                         <button class="btn btn-sm btn-warning mx-1">
                                                                             <i class="ion ion-edit" data-pack="default"
                                                                                 data-tags="change, update, write, type, pencil"></i>
                                                                         </button>
-                                                                    </a> --}}
+                                                                    </a>
 
                                                                 </div>
-                                                            </td>
-
-                                                            <td class="text-center">{{ $no++ }}</td>
-                                                            <td>{{ $bm->tanggal?? '-' }}</td>
-                                                            <td>{{ $bm->pertemuan ?? '-' }}</td>
-                                                            {{-- <td>{{ $bm->jam_mulai ?? '-' }}</td>
-                                                            <td>{{ $bm->jam_selesai ?? '-' }}</td> --}}
-                                                            <td>{{ $bm->pembahasan ?? '-' }}</td>
-                                                            <td>{{ $bm->batas_waktu ?? '-' }}</td>
-                                                            {{-- <td>
-                                                                @if ($bm->verifikasi_dosen == 'sudah diverifikasi')
-                                                                    <div class="badge badge-success">sudah diverifikasi</div>
-                                                                @elseif ($bm->verifikasi_dosen == 'belum diverifikasi')
-                                                                    <div class="badge badge-warning">belum diverifikasi</div>
-
-                                                                @endif
-                                                            </td> --}}
-                                                            <td class="text-center">
-                                                                @if ($bm->verifikasi_dosen == '1')
-                                                                    <div><i class="fas fa-check"></i></div>
-                                                                @else
-                                                                    <h5> - </h5>
-                                                                @endif
                                                             </td>
                                                         </tr>
                                                     @endforeach

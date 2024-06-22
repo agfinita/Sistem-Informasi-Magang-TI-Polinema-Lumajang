@@ -130,7 +130,7 @@
                                             <div class="form-group row">
                                                 <label for="kategori" class="col-sm-3 col-form-label">Kategori Magang</label>
                                                 <div class="col-sm-5">
-                                                    <select class="form-control" id="kategori" name="kategori">
+                                                    <select class="form-control" id="kategori_magang" name="kategori">
                                                         <option value="MSIB" {{ $dm->kategori_magang == 'MSIB' ? 'selected' : '' }}>MSIB</option>
                                                         <option value="Studi Independen" {{ $dm->kategori_magang == 'Studi Independen' ? 'selected' : '' }}>Studi Independen</option>
                                                         <option value="MBKM" {{ $dm->kategori_magang == 'MBKM' ? 'selected' : '' }}>MBKM</option>
@@ -176,7 +176,7 @@
                                             <div class="form-group row">
                                                 <label for="period" class="col-sm-3 col-form-label">Periode Magang</label>
                                                 <div class="col-sm-3">
-                                                    <input type="text" class="form-control" id="period" name="period" placeholder="Contoh: 5 bulan" value="{{ $dm->periode }}">
+                                                    <input type="text" class="form-control" id="periode" name="period" placeholder="Contoh: 5 bulan" value="{{ $dm->periode }}">
                                                     @if (count($errors) > 0)
                                                         <div style="width: auto; color:red; margin-top:0.25rem;">
                                                             {{ $errors->first('period') }}
@@ -188,14 +188,14 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Tanggal Mulai</label>
                                                 <div class="col-sm-3">
-                                                    <input type="date" name="tm" id="tm" class="form-control" value="{{ $dm->tanggal_mulai }}">
+                                                    <input type="date" name="tm" id="tanggal_mulai" class="form-control" value="{{ $dm->tanggal_mulai }}">
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Tanggal Selesai</label>
                                                 <div class="col-sm-3">
-                                                    <input type="date" name="ts" id="ts" class="form-control" value="{{ $dm->tanggal_selesai }}">
+                                                    <input type="date" name="ts" id="tanggal_selesai" class="form-control" value="{{ $dm->tanggal_selesai }}">
                                                 </div>
                                             </div>
 

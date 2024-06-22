@@ -59,12 +59,13 @@ class BimbinganMahasiswaSideController extends Controller
                         ->with('mahasiswa')
                         ->first();
 
-        // Masukkan data logbook mahasiswa yang login berdasarkan relasi yang terkait
+
         // Validasi input
         $validatedData  = $request->validate([
             'tgl_bimbingan'   => 'required|date',
-            'pembahasan'      => 'required|max:255',
-            'pertemuan'      => 'required|max:255'
+            'bw'               => 'required|date',
+            'pem'      => 'required|max:255',
+            'per'      => 'required|max:255'
         ]);
 
         // Menyimpan ke database
@@ -73,10 +74,10 @@ class BimbinganMahasiswaSideController extends Controller
             'pengajuan_magang_id'   => $dataMagang->pengajuanMagang->id,
             'data_magang_id'        => $dataMagang->id,
             'data_bimbingan_id'     => $dataBimbingan->id,
-            'pertemuan'             => $validatedData['pertemuan'],
+            'pertemuan'             => $validatedData['per'],
             'tanggal'               => $validatedData['tgl_bimbingan'],
-            'pembahasan'            => $validatedData['pembahasan'],
-            'batas_waktu'           => $validatedData['tgl_bimbingan'],
+            'pembahasan'            => $validatedData['pem'],
+            'batas_waktu'           => $validatedData['bw'],
             // 'verifikasi_dosen'      => 'belum diverifikasi'
 
         ]);
@@ -97,17 +98,36 @@ class BimbinganMahasiswaSideController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Bimbingan $bimbingan)
+    public function edit($id)
     {
-        //
+        $user = Auth::user();
+        $bimbingan = Bimbingan::findOrFail($id);
+
+        return view('pages.contents.mahasiswa.bimbingan.edit', compact('bimbingan'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Bimbingan $bimbingan)
+    public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'tgl_bimbingan'   => 'required|date',
+            'bw'               => 'required|date',
+            'pem'      => 'required|max:255',
+            'per'      => 'required|max:255'
+        ]);
+        $bimbingan = Bimbingan::findOrFail($id);
+        $bimbingan->update([
+            'pertemuan'             => $validatedData['per'],
+            'tanggal'               => $validatedData['tgl_bimbingan'],
+            'pembahasan'            => $validatedData['pem'],
+            'batas_waktu'           => $validatedData['bw']
+
+
+        ]);
+        return response()->json(['status' => 'success']);
+
     }
 
     /**

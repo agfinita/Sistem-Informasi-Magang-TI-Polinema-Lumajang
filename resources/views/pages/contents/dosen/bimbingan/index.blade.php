@@ -26,11 +26,11 @@
 
                         <li class="menu-header">Magang</li>
                         <li><a class="nav-link" href="{{ url('/dosen/data-magang-mahasiswa') }}"><i class="fas fa-columns"></i> <span>Data Magang</span></a></li>
-                        <li class="active"><a class="nav-link" href="{{ url('/dosen/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i> <span>Data Bimbingan</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/dosen/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i> <span>Data Bimbingan</span></a></li>
 
                         <li class="menu-header">Aktivitas Magang</li>
-                        <li><a class="nav-link" href="/dosen/bimbingan-mahasiswa"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
-                        <li><a class="nav-link" href="{{ url('/dosen/logbook-mahasiswa') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+                        <li class="active"><a class="nav-link" href="/dosen/bimbingan-mahasiswa"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
+                        <li ><a class="nav-link" href="{{ url('/dosen/logbook-mahasiswa') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
 
                         <li class="menu-header">Verifikasi</li>
                         <li><a class="nav-link" href="{{ url('/dosen/laporan-magang-mahasiswa') }}"><i class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
@@ -55,7 +55,7 @@
             <div class="main-content">
                 <section class="section">
                     <div class="section-header">
-                        <h1>Data Bimbingan Mahasiswa</h1>
+                        <h1>Bimbingan Mahasiswa</h1>
                     </div>
 
                     <div class="row">
@@ -68,8 +68,9 @@
                                                 <tr>
                                                     <th>Nama</th>
                                                     <th>Kelas</th>
+                                                    <th>Instansi Magang</th>
                                                     <th>Kategori</th>
-                                                    <th>Periode</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
 
@@ -81,8 +82,16 @@
                                                     <tr>
                                                         <td>{{ $db->mahasiswa->nama }}</td>
                                                         <td>{{ $db->mahasiswa->kelas }}</td>
+                                                        <td>{{ $db->dataMagang->pengajuanMagang->instansi_magang }}</td>
                                                         <td>{{ $db->dataMagang->kategori_magang }}</td>
-                                                        <td>{{ $db->dataMagang->periode }}</td>
+                                                        <td>
+                                                            <!-- Lihat detail logbook mahasiswa -->
+                                                            <a href="{{ url('/dosen/bimbingan-mahasiswa/show', $db->dataMagang->id) }}">
+                                                                <button class="btn btn-sm btn-info mx-1">
+                                                                    Detail
+                                                                </button>
+                                                            </a>
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

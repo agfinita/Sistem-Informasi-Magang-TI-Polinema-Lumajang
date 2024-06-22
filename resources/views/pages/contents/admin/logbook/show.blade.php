@@ -108,34 +108,66 @@
 
                     <div class="section-body">
                         <div class="row">
-                            <div class="col-12 col-md col-lg">
+                            <div class="col-12 ">
                                 <div class="card">
                                     <!-- Head Logbook -->
                                     <div class="logbook-header text-center font-weight-bold mb-5 mt-5">
-                                        VERIFIKASI LOG BOOK AKTIVITAS HARIAN
+                                        LOG BOOK AKTIVITAS HARIAN
                                     </div>
 
-                                    <form id="update-form" action="{{ url ('/dosen/logbook-mahasiswa/edit/' . $logbook->id) }}" method="POST" enctype="multipart/form-data">
-                                        @method('patch')
-                                        @csrf
-                                        <div class="card-body">
-                                            <div class="form-group row">
-                                                <label for="verif" class="col-sm-3 col-form-label">Verifikasi Dosen</label>
-                                                <div class="col-sm-5">
-                                                    <select class="form-control" id="verif_dosen" name="verif">
-                                                        <option value="" disabled>- Pilih status log book -</option>
-                                                        <option value="0" {{ $logbook->verifikasi_dosen == 0 ? 'selected' : '' }}>Belum diverifikasi</option>
-                                                        <option value="1" {{ $logbook->verifikasi_dosen == 1 ? 'selected' : '' }}>Verified</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        <div class="card-footer">
-                                            <div class="row">
-                                                <button type="submit" id="kirim" name="kirim" class="btn btn-primary m-2">Kirim</button>
-                                                <button type="button" class="btn btn-warning m-2" onclick="window.history.back();">Batal</button>
-                                            </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered display nowrap" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        {{-- <th class="text-center">Action</th> --}}
+                                                        <th class="text-center">No</th>
+                                                        <th class="text-center">Tanggal</th>
+                                                        <th class="text-center">Jam Mulai</th>
+                                                        <th class="text-center">Jam Selesai</th>
+                                                        <th class="text-center">Penjelasan Kegiatan</th>
+                                                        <th class="text-center">Verifikasi Dosen Pembimbing</th>
+                                                    </tr>
+                                                </thead>
+
+                                                @php
+                                                    $no = 1;
+                                                @endphp
+
+                                                <tbody>
+                                                    @foreach ($logbook as $lb)
+                                                        <tr>
+
+                                                            {{-- <td class="d-flex justify-content-center align-items-center">
+                                                                <!-- Update -->
+                                                                <a href="{{ url('/dosen/logbook-mahasiswa/edit/' . $lb->id)}}">
+                                                                    <button class="btn btn-sm btn-warning mx-1">
+                                                                        <i class="ion ion-edit" data-pack="default" data-tags="change, update, write, type, pencil"></i>
+                                                                    </button>
+                                                                </a>
+                                                            </td> --}}
+
+                                                            <td class="text-center">{{ $no++ }}</td>
+                                                            <td>{{ $lb->tanggal_logbook ?? '-' }}</td>
+                                                            <td>{{ $lb->jam_mulai ?? '-' }}</td>
+                                                            <td>{{ $lb->jam_selesai ?? '-' }}</td>
+                                                            <td>{{ $lb->kegiatan ?? '-' }}</td>
+                                                            <td class="text-center">
+                                                                @if ($lb->verifikasi_dosen == '1')
+                                                                    <div class="badge badge-success">Sudah diverifikasi</div>
+                                                                @else
+                                                                    <h5> - </h5>
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
                                         </div>
-                                    </form>
+                                    </div>
+                                    <div class="card-footer d-flex justify-content-end">
+                                        <a href="{{ url('/admin/logbook/index') }}" class="btn btn-warning m-2">Kembali</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -157,13 +189,13 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
     <!-- JS Libraies -->
     <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
     <script>
-        var redirectUrl = "{{ url('/dosen/logbook-mahasiswa') }}";
+        var redirectUrl = "{{ url('/admin/logbook/index') }}";
     </script>
 
     <!-- Template JS File -->

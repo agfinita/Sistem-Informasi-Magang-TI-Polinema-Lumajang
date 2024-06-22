@@ -31,7 +31,7 @@
                         <li><a class="nav-link" href="{{ url('/mahasiswa/data-magang') }}"><i class="fas fa-columns" ></i> <span>Data Magang</span></a></li>
 
                         <li class="menu-header">Aktivitas Magang</li>
-                        <li><a class="nav-link" href="{{ url('/mahasiswa/bimbingan') }}"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
+                        <li class="active"><a class="nav-link" href="{{ url('/mahasiswa/bimbingan') }}"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
                         <li><a class="nav-link" href="{{ url('/mahasiswa/logbook') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
 
                         <li class="menu-header">Finalisasi Magang</li>
@@ -91,14 +91,14 @@
                                             <div class="form-group row">
                                                 <label for="pertemuan" class="col-sm-3 col-form-label">Pertemuan Ke-</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="pertemuan" name="pertemuan" placeholder="Isikan Topik Bimbingan" >
+                                                    <input type="text" class="form-control" id="pertemuan" name="per" placeholder="Isikan angka (Contoh: 1)" >
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label for="pembahasan" class="col-sm-3 col-form-label">Pembahasan</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="pembahasan" name="pembahasan" placeholder="Isikan Topik Bimbingan" >
+                                                    <input type="text" class="form-control" id="pembahasan" name="pem" placeholder="Isikan Topik Bimbingan" >
                                                 </div>
                                             </div>
                                             {{-- <div class="form-group row">
@@ -108,9 +108,9 @@
                                                 </div>
                                             </div> --}}
                                             <div class="form-group row">
-                                                <label for="tgl_bimbingan" class="col-sm-3 col-form-label">Batas Waktu</label>
+                                                <label for="bw" class="col-sm-3 col-form-label">Batas Waktu</label>
                                                 <div class="col-sm-5">
-                                                    <input type="date" class="form-control" id="batas_waktu" name="tgl_bimbingan" autofocus>
+                                                    <input type="date" class="form-control" id="batas_waktu" name="bw" autofocus>
                                                 </div>
                                             </div>
                                         </div>

@@ -110,13 +110,13 @@
                                             <table id="example" class="display nowrap" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center">Action</th>
                                                         <th class="text-center">No</th>
                                                         <th class="text-center">Tanggal</th>
                                                         <th class="text-center">Jam Mulai</th>
                                                         <th class="text-center">Jam Selesai</th>
                                                         <th class="text-center">Penjelasan Kegiatan</th>
                                                         <th class="text-center">Verifikasi Dosen Pembimbing</th>
+                                                        <th class="text-center">Aksi</th>
                                                     </tr>
                                                 </thead>
 
@@ -127,6 +127,26 @@
                                                 <tbody>
                                                     @foreach ($logbook as $lb)
                                                         <tr>
+
+                                                            <td class="text-center">{{ $no++ }}</td>
+                                                            <td>{{ $lb->tanggal_logbook ?? '-' }}</td>
+                                                            <td>{{ $lb->jam_mulai ?? '-' }}</td>
+                                                            <td>{{ $lb->jam_selesai ?? '-' }}</td>
+                                                            <td>{{ $lb->kegiatan ?? '-' }}</td>
+                                                            <td class="text-center">
+                                                                @if ($lb->verifikasi_dosen == '1')
+                                                                <div class="badge badge-success">Sudah diverifikasi</i></div>
+                                                                @else
+                                                                <h10 > Belum diverifikasi </h10>
+                                                                @endif
+                                                            </td>
+                                                            {{-- <td>
+                                                                @if ($lb->verifikasi_dosen == 'diproses')
+                                                                    <div class="badge badge-warning">diproses</div>
+                                                                @elseif ($lb->verifikasi_dosen == 'selesai')
+                                                                    <div class="badge badge-success">selesai</div>
+                                                                @endif
+                                                            </td> --}}
                                                             <td class="d-flex justify-content-center align-items-center">
                                                                 <!-- Hapus -->
                                                                 {{-- <form id="delete-form-{{ $lb->id }}" action="{{ route('logbook.mahasiswa.destroy', $lb->id)  }}" method="POST">
@@ -150,19 +170,6 @@
                                                                     </a>
 
                                                                 </div>
-                                                            </td>
-
-                                                            <td class="text-center">{{ $no++ }}</td>
-                                                            <td>{{ $lb->tanggal_logbook ?? '-' }}</td>
-                                                            <td>{{ $lb->jam_mulai ?? '-' }}</td>
-                                                            <td>{{ $lb->jam_selesai ?? '-' }}</td>
-                                                            <td>{{ $lb->kegiatan ?? '-' }}</td>
-                                                            <td class="text-center">
-                                                                @if ($lb->verifikasi_dosen == '1')
-                                                                    <div><i class="fas fa-check"></i></div>
-                                                                @else
-                                                                    <h5> - </h5>
-                                                                @endif
                                                             </td>
                                                         </tr>
                                                     @endforeach

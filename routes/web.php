@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BimbinganDosenSideController;
 use App\Http\Controllers\BimbinganMahasiswaSideController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -99,9 +100,8 @@ Route::group(['middleware' => 'role'], function () {
     // Laporan Magang - Admin Side
     Route::get('/admin/laporan-magang-mahasiswa', [LaporanMagangAdminSideController::class, 'index']);
 
-    //Logbook
-    // Route::put('/admin/logbook', [LogbookAdminSideController::class, 'index']);
-    Route::resource('/admin/logbook/index', LogbookAdminSideController::class)->except('show');
+    // Logbook - Admin Side
+    Route::resource('/admin/logbook/index', LogbookAdminSideController::class)->except('create');
 
     // AUTH MAHASISWA
     // Menampilkan dashboard simag mahasiswa
@@ -124,23 +124,12 @@ Route::group(['middleware' => 'role'], function () {
     Route::resource('/mahasiswa/logbook', LogbookMahasiswaSideController::class)->except('show');
     Route::get('/mahasiswa/logbook/edit/{id}', [LogbookMahasiswaSideController::class, 'edit']);
     Route::patch('/mahasiswa/logbook/edit/{id}', [LogbookMahasiswaSideController::class, 'update']);
-    // Route::get('/mahasiswa/logbook', [LogbookMahasiswaSideController::class, 'index'])->name('logbook.mahasiswa.index');
-    // Route::get('/logbook/create', [LogbookMahasiswaSideController::class, 'create'])->name('logbook.create');
-    // Route::post('/logbook', [LogbookMahasiswaSideController::class, 'store'])->name('logbook.store');
-    // Route::delete('/logbook/{id}', [LogbookMahasiswaSideController::class, 'destroy'])->name('logbook.mahasiswa.destroy');
-    // Route::get('mahasiswa/logbook/edit{id}', [LogbookMahasiswaSideController::class, 'edit'])->name('logbook.mahasiswa.edit');
-    // Route::put('logbook/{id}', [LogbookMahasiswaSideController::class, 'update'])->name('logbook.mahasiswa.update');
 
     // Bimbingan - Mahasiswa Side
     Route::resource('/mahasiswa/bimbingan', BimbinganMahasiswaSideController::class)->except('show');
-    // Menampilkan formulir untuk menambah data bimbingan
-    Route::get('/bimbingan/create', [BimbinganMahasiswaSideController::class, 'create'])->name('bimbingan.create');
-
-    // Menyimpan data bimbingan baru ke database
-    Route::post('/bimbingan/store', [BimbinganMahasiswaSideController::class, 'store'])->name('bimbingan.store');
-
     Route::get('/mahasiswa/bimbingan/edit/{id}', [BimbinganMahasiswaSideController::class, 'edit']);
-    Route::patch('/mahasiswa/bimbingan/edit/{id}', [BimbinganMahasiswaSideController::class, 'update']);
+    Route::patch('/mahasiswa/bimbingan/edit/{id}', [BimbinganMahasiswaSideController::class, 'update'])->name('mahasiswa.bimbingan.update');
+
 
     // Auth DOSEN
     // Menampilkan dashboard simag dosen
@@ -164,6 +153,13 @@ Route::group(['middleware' => 'role'], function () {
     Route::get('/dosen/logbook-mahasiswa/show/{data_magang_id}', [LogbookDosenSideController::class, 'show']);
     Route::get('/dosen/logbook-mahasiswa/edit/{id}', [LogbookDosenSideController::class, 'edit']);
     Route::patch('/dosen/logbook-mahasiswa/edit/{id}', [LogbookDosenSideController::class, 'update']);
+
+    // Bimbingan - Dosen Side
+    Route::resource('/dosen/bimbingan-mahasiswa', BimbinganDosenSideController::class)->except('create', 'store', 'destroy');
+    Route::get('/dosen/bimbingan-mahasiswa/show/{data_magang_id}', [BimbinganDosenSideController::class, 'show']);
+    Route::get('/dosen/bimbingan-mahasiswa/edit/{id}', [BimbinganDosenSideController::class, 'edit']);
+    Route::patch('/dosen/bimbingan-mahasiswa/edit/{id}', [BimbinganDosenSideController::class, 'update']);
+
 });
 
 
