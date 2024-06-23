@@ -116,7 +116,7 @@
                                                 <tr>
                                                     <th class="text-center">No</th>
                                                     <th>Nama</th>
-                                                    <th>Kelas</th>
+                                                    <th class="text-center">Kelas</th>
                                                     <th>Instansi Magang</th>
                                                     <th>Kategori</th>
                                                     <th>Action</th>
@@ -131,7 +131,7 @@
                                                     <tr>
                                                         <td class="text-center">{{ $no++ }}</td>
                                                         <td>{{ $db->mahasiswa->nama }}</td>
-                                                        <td>{{ $db->mahasiswa->kelas }}</td>
+                                                        <td class="text-center">{{ $db->mahasiswa->kelas }}</td>
                                                         <td>{{ $db->dataMagang->pengajuanMagang->instansi_magang }}</td>
                                                         <td>{{ $db->dataMagang->kategori_magang }}</td>
                                                         <td>

@@ -110,37 +110,30 @@
                                             <table id="example" class="display nowrap" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center">No</th>
                                                         <th class="text-center">Pertemuan Ke-</th>
                                                         <th class="text-center">Tanggal</th>
-                                                        <th class="text-center">Pembahasan</th>
+                                                        <th>Pembahasan</th>
                                                         <th class="text-center">Batas Waktu</th>
                                                         <th class="text-center">Verifikasi Dosen Pembimbing</th>
                                                         <th class="text-center">Aksi</th>
                                                     </tr>
                                                 </thead>
 
-                                                @php
-                                                    $no = 1;
-                                                @endphp
-
                                                 <tbody>
                                                     @foreach ($bimbingan as $bm)
                                                         <tr>
-
-                                                            <td class="text-center">{{ $no++ }}</td>
-                                                            <td>{{ $bm->pertemuan ?? '-' }}</td>
-                                                            <td>{{ $bm->tanggal?? '-' }}</td>
+                                                            <td class="text-center">{{ $bm->pertemuan ?? '-' }}</td>
+                                                            <td class="text-center">{{ $bm->tanggal?? '-' }}</td>
                                                             <td>{{ $bm->pembahasan ?? '-' }}</td>
-                                                            <td>{{ $bm->batas_waktu ?? '-' }}</td>
+                                                            <td class="text-center">{{ $bm->batas_waktu ?? '-' }}</td>
                                                             <td class="text-center">
                                                                 @if ($bm->verifikasi_dosen == '1')
-                                                                <div class="badge badge-success">Sudah diverifikasi</div>
+                                                                    <div class="badge badge-success">Sudah diverifikasi</div>
                                                                 @else
-                                                                <h10> Belum diverikasi </h10>
+                                                                    <div class="badge badge-secondary text-dark">Menunggu verifikasi</div>
                                                                 @endif
                                                             </td>
-                                                            <td class="d-flex justify-content-center align-items-center">
+                                                            <td class="d-flex justify-content-center align-items-center text-center">
                                                                 <!-- Hapus -->
                                                                 {{-- <form id="delete-form-{{ $bm->id }}" action="{{ url('/admin/data-magang/' . $bm->id) }}" method="POST">
                                                                     @method('DELETE')

@@ -114,10 +114,10 @@
                                                     <tr>
                                                         <th>Action</th>
                                                         <th>Nama</th>
-                                                        <th>Username</th>
+                                                        <th class="text-center">Username</th>
                                                         <th>Email</th>
-                                                        <th>Role</th>
-                                                        <th>Status</th>
+                                                        <th class="text-center">Role</th>
+                                                        <th class="text-center">Status</th>
                                                         <th>Date Created</th>
                                                         <th>Date Updated</th>
                                                     </tr>
@@ -148,10 +148,10 @@
                                                             </td>
 
                                                             <td>{{ $u->nama }}</td>
-                                                            <td>{{ $u->username }}</td>
+                                                            <td class="text-center">{{ $u->username }}</td>
                                                             <td>{{ $u->email }}</td>
-                                                            <td>{{ $u->role }}</td>
-                                                            <td>
+                                                            <td class="text-center">{{ $u->role }}</td>
+                                                            <td class="text-center">
                                                                 @if ($u->is_active == 1)
                                                                     <div class="badge badge-success">Active</div>
                                                                 @else

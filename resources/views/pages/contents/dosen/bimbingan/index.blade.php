@@ -66,11 +66,12 @@
                                         <table class="table table-striped" id="table-1">
                                             <thead>
                                                 <tr>
+                                                    <th class="text-center">No</th>
                                                     <th>Nama</th>
-                                                    <th>Kelas</th>
+                                                    <th class="text-center">Kelas</th>
                                                     <th>Instansi Magang</th>
                                                     <th>Kategori</th>
-                                                    <th>Action</th>
+                                                    <th class="text-center">Action</th>
                                                 </tr>
                                             </thead>
 
@@ -80,11 +81,12 @@
                                             <tbody>
                                                 @foreach ($dataBimbingan as $db)
                                                     <tr>
+                                                        <td class="text-center">{{ $no++ }}</td>
                                                         <td>{{ $db->mahasiswa->nama }}</td>
-                                                        <td>{{ $db->mahasiswa->kelas }}</td>
+                                                        <td class="text-center">{{ $db->mahasiswa->kelas }}</td>
                                                         <td>{{ $db->dataMagang->pengajuanMagang->instansi_magang }}</td>
                                                         <td>{{ $db->dataMagang->kategori_magang }}</td>
-                                                        <td>
+                                                        <td class="text-center">
                                                             <!-- Lihat detail logbook mahasiswa -->
                                                             <a href="{{ url('/dosen/bimbingan-mahasiswa/show', $db->dataMagang->id) }}">
                                                                 <button class="btn btn-sm btn-info mx-1">

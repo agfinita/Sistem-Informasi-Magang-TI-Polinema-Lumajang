@@ -75,7 +75,7 @@
                                             <div class="form-group row">
                                                 <label for="judul" class="col-sm-3 col-form-label">Judul</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="judul" name="judul" placeholder="Masukkan judul pengumuman">
+                                                    <input type="text" class="form-control" id="judul" name="judul" placeholder="Masukkan judul pengumuman" autofocus>
 
                                                     @if (count($errors) > 0)
                                                     <div style="width: auto; color:red; margin-top:0.25rem;">

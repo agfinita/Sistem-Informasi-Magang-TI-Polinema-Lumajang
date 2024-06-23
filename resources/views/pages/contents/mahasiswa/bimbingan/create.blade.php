@@ -63,7 +63,6 @@
                     <div class="section-body">
                         <div class="row">
                             <div class="col-12 col-md col-lg">
-                                <!--Horizontal-->
                                 <div class="card">
                                     <form id="create-form" action="{{ url('/mahasiswa/bimbingan') }}" method="POST" autocomplete="off">
                                         @csrf
@@ -71,46 +70,28 @@
                                             <div class="form-group row">
                                                 <label for="tgl_bimbingan" class="col-sm-3 col-form-label">Tanggal</label>
                                                 <div class="col-sm-5">
-                                                    <input type="date" class="form-control" id="tanggal" name="tgl_bimbingan" autofocus>
+                                                    <input type="date" class="form-control" id="tanggal" name="tgl_bimbingan">
                                                 </div>
                                             </div>
 
-                                            {{-- <div class="form-group row">
-                                                <label for="jm" class="col-sm-3 col-form-label">Jam Mulai</label>
-                                                <div class="col-sm-5">
-                                                    <input type="time" class="form-control" id="jam_mulai" name="jm">
-                                                </div>
-                                            </div> --}}
-
-                                            {{-- <div class="form-group row">
-                                                <label for="js" class="col-sm-3 col-form-label">Jam Selesai</label>
-                                                <div class="col-sm-5">
-                                                    <input type="time" class="form-control" id="jam_selesai" name="js">
-                                                </div>
-                                            </div> --}}
                                             <div class="form-group row">
                                                 <label for="pertemuan" class="col-sm-3 col-form-label">Pertemuan Ke-</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="pertemuan" name="per" placeholder="Isikan angka (Contoh: 1)" >
+                                                    <input type="text" class="form-control" id="pertemuan" name="per" placeholder="Masukkan angka (Contoh: 1)" >
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label for="pembahasan" class="col-sm-3 col-form-label">Pembahasan</label>
                                                 <div class="col-sm-5">
-                                                    <input type="text" class="form-control" id="pembahasan" name="pem" placeholder="Isikan Topik Bimbingan" >
+                                                    <input type="text" class="form-control" id="pembahasan" name="pem" placeholder="Tuliskan topik bimbingan" >
                                                 </div>
                                             </div>
-                                            {{-- <div class="form-group row">
-                                                <label for="kegiatan" class="col-sm-3 col-form-label">Deskripsi Bimbingan</label>
-                                                <div class="col-sm-5">
-                                                    <textarea class="form-control" name="kegiatan" id="kegiatan" cols="60" rows="5" placeholder="Isikan pembahasan saat bimbingan"></textarea>
-                                                </div>
-                                            </div> --}}
+
                                             <div class="form-group row">
                                                 <label for="bw" class="col-sm-3 col-form-label">Batas Waktu</label>
                                                 <div class="col-sm-5">
-                                                    <input type="date" class="form-control" id="batas_waktu" name="bw" autofocus>
+                                                    <input type="date" class="form-control" id="batas_waktu" name="bw">
                                                 </div>
                                             </div>
                                         </div>

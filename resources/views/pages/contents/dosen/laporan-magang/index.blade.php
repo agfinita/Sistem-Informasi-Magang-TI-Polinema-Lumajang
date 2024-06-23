@@ -65,7 +65,7 @@
                                         <table class="table table-striped" id="table-1">
                                             <thead>
                                                 <tr>
-                                                    <th>Action</th>
+                                                    <th class="text-center">Action</th>
                                                     <th>NIM</th>
                                                     <th>Nama</th>
                                                     <th>Kategori Magang</th>
@@ -73,8 +73,8 @@
                                                     <th>Dosen Pembimbing</th>
                                                     <th>Laporan Magang</th>
                                                     <th>Catatan</th>
-                                                    <th>Status Laporan</th>
-                                                    <th>Status Magang</th>
+                                                    <th class="text-center">Status Laporan</th>
+                                                    <th class="text-center">Status Magang</th>
                                                 </tr>
                                             </thead>
 
@@ -84,7 +84,7 @@
                                             <tbody>
                                                 @foreach ($laporanMagang as $lm)
                                                     <tr>
-                                                        <td>
+                                                        <td class="text-center">
                                                             <a href="{{ url('/dosen/laporan-magang-mahasiswa/edit/' . $lm->id) }}">
                                                                 <button class="btn btn-sm btn-warning mx-1">
                                                                     <i class="ion ion-edit" data-pack="default" data-tags="change, update, write, type, pencil"></i>
@@ -110,14 +110,14 @@
                                                                 <h5> - </h5>
                                                             @endif
                                                         </td>
-                                                        <td>
+                                                        <td class="text-center">
                                                             @if ($lm->status_laporan == '1')
                                                                 <div class="badge badge-success">Verified</div>
                                                             @else
                                                                 <h5> - </h5>
                                                             @endif
                                                         </td>
-                                                        <td>
+                                                        <td class="text-center">
                                                             @if ($lm->dataMagang->status_magang == 'selesai')
                                                                 <div class="badge badge-success">Selesai</div>
                                                             @elseif ($lm->dataMagang->status_magang == 'sedang magang')

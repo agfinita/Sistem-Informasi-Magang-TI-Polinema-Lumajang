@@ -105,11 +105,11 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center">Action</th>
-                                                    <th class="text-center">Nama</th>
+                                                    <th>Nama</th>
                                                     <th class="text-center">Kelas</th>
-                                                    <th class="text-center">Kategori</th>
+                                                    <th>Kategori</th>
                                                     <th class="text-center">Periode</th>
-                                                    <th class="text-center">Dosen Pembimbing</th>
+                                                    <th>Dosen Pembimbing</th>
                                                 </tr>
                                             </thead>
 
@@ -127,10 +127,10 @@
                                                             </a>
                                                         </td>
                                                         <td>{{ $db->mahasiswa->nama }}</td>
-                                                        <td>{{ $db->mahasiswa->kelas }}</td>
+                                                        <td class="text-center">{{ $db->mahasiswa->kelas }}</td>
                                                         <td>{{ $db->dataMagang->kategori_magang }}</td>
-                                                        <td>{{ $db->dataMagang->periode }}</td>
-                                                        <td class="text-center">{{ $db->dosen ? $db->dosen->nama : '-' }}</td>
+                                                        <td class="text-center">{{ $db->dataMagang->periode }}</td>
+                                                        <td>{{ $db->dosen ? $db->dosen->nama : '-' }}</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

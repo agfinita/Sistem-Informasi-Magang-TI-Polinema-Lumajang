@@ -114,7 +114,7 @@
                                                         <th class="text-center">Tanggal</th>
                                                         <th class="text-center">Jam Mulai</th>
                                                         <th class="text-center">Jam Selesai</th>
-                                                        <th class="text-center">Penjelasan Kegiatan</th>
+                                                        <th>Penjelasan Kegiatan</th>
                                                         <th class="text-center">Verifikasi Dosen Pembimbing</th>
                                                         <th class="text-center">Aksi</th>
                                                     </tr>
@@ -129,15 +129,15 @@
                                                         <tr>
 
                                                             <td class="text-center">{{ $no++ }}</td>
-                                                            <td>{{ $lb->tanggal_logbook ?? '-' }}</td>
-                                                            <td>{{ $lb->jam_mulai ?? '-' }}</td>
-                                                            <td>{{ $lb->jam_selesai ?? '-' }}</td>
+                                                            <td class="text-center">{{ $lb->tanggal_logbook ?? '-' }}</td>
+                                                            <td class="text-center">{{ $lb->jam_mulai ?? '-' }}</td>
+                                                            <td class="text-center">{{ $lb->jam_selesai ?? '-' }}</td>
                                                             <td>{{ $lb->kegiatan ?? '-' }}</td>
                                                             <td class="text-center">
                                                                 @if ($lb->verifikasi_dosen == '1')
-                                                                <div class="badge badge-success">Sudah diverifikasi</i></div>
+                                                                    <div class="badge badge-success">Sudah diverifikasi</i></div>
                                                                 @else
-                                                                <h10 > Belum diverifikasi </h10>
+                                                                    <div class="badge badge-secondary text-dark">Menunggu verifikasi</i></div>
                                                                 @endif
                                                             </td>
                                                             {{-- <td>

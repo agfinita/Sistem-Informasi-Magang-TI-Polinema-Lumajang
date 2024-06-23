@@ -112,10 +112,10 @@
                                                     <tr>
                                                         <th class="text-center">Action</th>
                                                         <th class="text-center">NIP</th>
-                                                        <th class="text-center">Nama</th>
-                                                        <th class="text-center">Email</th>
+                                                        <th>Nama</th>
+                                                        <th>Email</th>
                                                         <th class="text-center">Telepon</th>
-                                                        <th class="text-center">Alamat</th>
+                                                        <th>Alamat</th>
                                                         <th class="text-center">Role</th>
                                                     </tr>
                                                 </thead>
@@ -149,12 +149,12 @@
                                                                 </div>
                                                             </td>
 
-                                                            <td>{{ $d->nip }}</td>
+                                                            <td class="text-center">{{ $d->nip }}</td>
                                                             <td>{{ $d->nama }}</td>
                                                             <td>{{ $d->email }}</td>
-                                                            <td>{{ $d->telp }}</td>
+                                                            <td class="text-center">{{ $d->telp }}</td>
                                                             <td>{{ $d->alamat }}</td>
-                                                            <td>{{ $d->role }}</td>
+                                                            <td class="text-center">{{ $d->role }}</td>
 
                                                         </tr>
                                                     @endforeach

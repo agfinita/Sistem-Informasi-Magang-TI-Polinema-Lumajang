@@ -62,10 +62,10 @@ class BimbinganMahasiswaSideController extends Controller
 
         // Validasi input
         $validatedData  = $request->validate([
-            'tgl_bimbingan'   => 'required|date',
-            'bw'               => 'required|date',
-            'pem'      => 'required|max:255',
-            'per'      => 'required|max:255'
+            'tgl_bimbingan' => 'required|date',
+            'bw'            => 'required|date',
+            'pem'           => 'required|max:255',
+            'per'           => 'required|max:255'
         ]);
 
         // Menyimpan ke database
@@ -77,9 +77,7 @@ class BimbinganMahasiswaSideController extends Controller
             'pertemuan'             => $validatedData['per'],
             'tanggal'               => $validatedData['tgl_bimbingan'],
             'pembahasan'            => $validatedData['pem'],
-            'batas_waktu'           => $validatedData['bw'],
-            // 'verifikasi_dosen'      => 'belum diverifikasi'
-
+            'batas_waktu'           => $validatedData['bw']
         ]);
 
         // Mengembalikan respon sukses

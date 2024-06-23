@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('pertemuan')->nullable(false);
             $table->date('tanggal');
             $table->string('pembahasan');
-            $table->time('batas_waktu');
+            $table->date('batas_waktu');
             $table->enum('verifikasi_dosen', ['1', '0'])->default('0');
 
             $table->foreign('mahasiswa_id')->references('nim')->on('mahasiswa')->onDelete('cascade');

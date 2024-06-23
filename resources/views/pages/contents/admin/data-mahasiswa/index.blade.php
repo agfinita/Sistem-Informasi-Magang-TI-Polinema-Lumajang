@@ -110,12 +110,12 @@
                                                     <tr>
                                                         <th class="text-center">Action</th>
                                                         <th class="text-center">NIM</th>
-                                                        <th class="text-center">Nama</th>
+                                                        <th>Nama</th>
                                                         <th class="text-center">Kelas</th>
                                                         <th class="text-center">Jurusan</th>
-                                                        <th class="text-center">Email</th>
+                                                        <th>Email</th>
                                                         <th class="text-center">Telepon</th>
-                                                        <th class="text-center">Alamat</th>
+                                                        <th>Alamat</th>
                                                         <th class="text-center">Role</th>
                                                     </tr>
                                                 </thead>
@@ -144,14 +144,14 @@
                                                             </div>
                                                         </td>
 
-                                                        <td>{{ $mhs->nim }}</td>
+                                                        <td class="text-center">{{ $mhs->nim }}</td>
                                                         <td>{{ $mhs->nama }}</td>
-                                                        <td>{{ $mhs->kelas }}</td>
-                                                        <td>{{ $mhs->jurusan }}</td>
+                                                        <td class="text-center">{{ $mhs->kelas }}</td>
+                                                        <td class="text-center">{{ $mhs->jurusan }}</td>
                                                         <td>{{ $mhs->email }}</td>
-                                                        <td>{{ $mhs->telp }}</td>
+                                                        <td class="text-center">{{ $mhs->telp }}</td>
                                                         <td>{{ $mhs->alamat }}</td>
-                                                        <td>{{ $mhs->role }}</td>
+                                                        <td class="text-center">{{ $mhs->role }}</td>
 
                                                     </tr>
                                                     @endforeach

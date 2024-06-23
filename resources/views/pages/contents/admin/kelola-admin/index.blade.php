@@ -113,13 +113,13 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center">Action</th>
-                                                        <th class="text-center">Nama</th>
+                                                        <th>Nama</th>
                                                         <th class="text-center">Username</th>
-                                                        <th class="text-center">Email</th>
+                                                        <th>Email</th>
                                                         <th class="text-center">Role</th>
                                                         <th class="text-center">Status</th>
-                                                        <th class="text-center">Date Created</th>
-                                                        <th class="text-center">Date Updated</th>
+                                                        <th>Date Created</th>
+                                                        <th>Date Updated</th>
                                                     </tr>
                                                 </thead>
 
@@ -148,14 +148,14 @@
                                                             </td>
 
                                                             <td>{{ $u->nama }}</td>
-                                                            <td>{{ $u->username }}</td>
+                                                            <td class="text-center">{{ $u->username }}</td>
                                                             <td>{{ $u->email }}</td>
                                                             <td>{{ $u->role }}</td>
-                                                            <td>
+                                                            <td class="text-center">
                                                                 @if ($u->is_active == 1)
-                                                                    <div class="badge badge-success">Active</div>
+                                                                    <div class="badge badge-success">Aktif</div>
                                                                 @else
-                                                                    <div class="badge badge-danger">Not active</div>
+                                                                    <div class="badge badge-danger">Tidak aktif</div>
                                                                 @endif
                                                             </td>
                                                             <td>{{ $u->created_at }}</td>

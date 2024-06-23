@@ -66,10 +66,11 @@
                                         <table class="table table-striped" id="table-1">
                                             <thead>
                                                 <tr>
+                                                    <th class="text-center">No</th>
                                                     <th>Nama</th>
-                                                    <th>Kelas</th>
+                                                    <th class="text-center">Kelas</th>
                                                     <th>Kategori</th>
-                                                    <th>Periode</th>
+                                                    <th class="text-center">Periode</th>
                                                 </tr>
                                             </thead>
 
@@ -79,10 +80,11 @@
                                             <tbody>
                                                 @foreach ($dataBimbingan as $db)
                                                     <tr>
+                                                        <td class="text-center">{{ $no++ }}</td>
                                                         <td>{{ $db->mahasiswa->nama }}</td>
-                                                        <td>{{ $db->mahasiswa->kelas }}</td>
+                                                        <td class="text-center">{{ $db->mahasiswa->kelas }}</td>
                                                         <td>{{ $db->dataMagang->kategori_magang }}</td>
-                                                        <td>{{ $db->dataMagang->periode }}</td>
+                                                        <td class="text-center">{{ $db->dataMagang->periode }}</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

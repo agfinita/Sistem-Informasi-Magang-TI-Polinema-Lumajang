@@ -67,14 +67,14 @@
                                                 <tr>
                                                     <th>NIM</th>
                                                     <th>Nama</th>
-                                                    <th>Kelas</th>
+                                                    <th class="text-center">Kelas</th>
                                                     <th>Kategori Magang</th>
                                                     <th>Instansi</th>
                                                     <th>Alamat Instansi</th>
-                                                    <th>Periode</th>
-                                                    <th>Tanggal Mulai</th>
-                                                    <th>Tanggal Selesai</th>
-                                                    <th>Status Magang</th>
+                                                    <th class="text-center">Periode</th>
+                                                    <th class="text-center">Tanggal Mulai</th>
+                                                    <th class="text-center">Tanggal Selesai</th>
+                                                    <th class="text-center">Status Magang</th>
                                                 </tr>
                                             </thead>
 
@@ -86,14 +86,14 @@
                                                     <tr>
                                                         <td>{{ $db->mahasiswa->nim }}</td>
                                                         <td>{{ $db->mahasiswa->nama }}</td>
-                                                        <td>{{ $db->mahasiswa->kelas }}</td>
+                                                        <td class="text-center">{{ $db->mahasiswa->kelas }}</td>
                                                         <td>{{ $db->dataMagang->kategori_magang }}</td>
                                                         <td>{{ $db->dataMagang->pengajuanMagang->instansi_magang }}</td>
                                                         <td>{{ $db->dataMagang->pengajuanMagang->alamat_magang }}</td>
-                                                        <td>{{ $db->dataMagang->periode }}</td>
-                                                        <td>{{ $db->dataMagang->tanggal_mulai }}</td>
-                                                        <td>{{ $db->dataMagang->tanggal_selesai }}</td>
-                                                        <td>
+                                                        <td class="text-center">{{ $db->dataMagang->periode }}</td>
+                                                        <td class="text-center">{{ $db->dataMagang->tanggal_mulai }}</td>
+                                                        <td class="text-center">{{ $db->dataMagang->tanggal_selesai }}</td>
+                                                        <td class="text-center">
                                                             @if ($db->dataMagang->status_magang == 'selesai')
                                                                     <div class="badge badge-success">Selesai</div>
                                                             @elseif ($db->dataMagang->status_magang == 'sedang magang')

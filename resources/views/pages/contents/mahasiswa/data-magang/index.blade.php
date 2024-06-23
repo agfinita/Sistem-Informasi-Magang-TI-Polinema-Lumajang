@@ -102,16 +102,16 @@
                                                     <tr>
                                                         <th>NIM</th>
                                                         <th>Nama</th>
-                                                        <th>Kelas</th>
-                                                        <th>Jurusan</th>
+                                                        <th class="text-center">Kelas</th>
+                                                        <th class="text-center">Jurusan</th>
                                                         <th>Kategori</th>
                                                         <th>Instansi Magang</th>
                                                         <th>Alamat Instansi</th>
-                                                        <th>Status</th>
-                                                        <th>Periode</th>
-                                                        <th>Tanggal Dimulai</th>
-                                                        <th>Tanggal Selesai</th>
-                                                        <th>Aksi</th>
+                                                        <th class="text-center">Status</th>
+                                                        <th class="text-center">Periode</th>
+                                                        <th class="text-center">Tanggal Dimulai</th>
+                                                        <th class="text-center">Tanggal Selesai</th>
+                                                        <th class="text-center">Aksi</th>
                                                     </tr>
                                                 </thead>
 
@@ -121,12 +121,12 @@
 
                                                         <td>{{ $dm->mahasiswa->nim }}</td>
                                                         <td>{{ $dm->mahasiswa->nama }}</td>
-                                                        <td>{{ $dm->mahasiswa->kelas }}</td>
-                                                        <td>{{ $dm->mahasiswa->jurusan }}</td>
+                                                        <td class="text-center">{{ $dm->mahasiswa->kelas }}</td>
+                                                        <td class="text-center">{{ $dm->mahasiswa->jurusan }}</td>
                                                         <td>{{ $dm->kategori_magang }}</td>
                                                         <td>{{ $dm->pengajuanMagang->instansi_magang }}</td>
                                                         <td>{{ $dm->pengajuanMagang->alamat_magang }}</td>
-                                                        <td>
+                                                        <td class="text-center">
                                                             @if ($dm->status_magang == 'selesai')
                                                             <div class="badge badge-success">Selesai</div>
                                                             @elseif ($dm->status_magang == 'sedang magang')
@@ -135,10 +135,10 @@
                                                             <div class="badge badge-info">Belum dimulai</div>
                                                             @endif
                                                         </td>
-                                                        <td>{{ $dm->periode }}</td>
-                                                        <td>{{ $dm->tanggal_mulai }}</td>
-                                                        <td>{{ $dm->tanggal_selesai }}</td>
-                                                        <td>
+                                                        <td class="text-center">{{ $dm->periode }}</td>
+                                                        <td class="text-center">{{ $dm->tanggal_mulai }}</td>
+                                                        <td class="text-center">{{ $dm->tanggal_selesai }}</td>
+                                                        <td class="text-center">
                                                             <!-- Update -->
                                                             <a href="{{ url('/mahasiswa/data-magang/edit/' . $dm->id) }}">
                                                                 <button class="btn btn-sm btn-warning mx-1">
