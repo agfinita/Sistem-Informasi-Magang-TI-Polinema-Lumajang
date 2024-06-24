@@ -72,13 +72,13 @@
                                             <table class="table table-bordered display nowrap" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center">Action</th>
                                                         <th class="text-center">No</th>
                                                         <th class="text-center">Tanggal</th>
                                                         <th class="text-center">Jam Mulai</th>
                                                         <th class="text-center">Jam Selesai</th>
                                                         <th>Penjelasan Kegiatan</th>
                                                         <th class="text-center">Verifikasi Dosen Pembimbing</th>
+                                                        <th class="text-center">Aksi</th>
                                                     </tr>
                                                 </thead>
 
@@ -89,14 +89,6 @@
                                                 <tbody>
                                                     @foreach ($logbook as $lb)
                                                         <tr>
-                                                            <td class="d-flex justify-content-center align-items-center">
-                                                                <!-- Update -->
-                                                                <a href="{{ url('/dosen/logbook-mahasiswa/edit/' . $lb->id)}}">
-                                                                    <button class="btn btn-sm btn-warning mx-1">
-                                                                        <i class="ion ion-edit" data-pack="default" data-tags="change, update, write, type, pencil"></i>
-                                                                    </button>
-                                                                </a>
-                                                            </td>
 
                                                             <td class="text-center">{{ $no++ }}</td>
                                                             <td class="text-center">{{ $lb->tanggal_logbook ?? '-' }}</td>
@@ -105,13 +97,21 @@
                                                             <td>{{ $lb->kegiatan ?? '-' }}</td>
                                                             <td class="text-center">
                                                                 @if ($lb->verifikasi_dosen == '1')
-                                                                    <div class="badge badge-success">Sudah diverifikasi</div>
+                                                                <div class="badge badge-success">Sudah diverifikasi</div>
                                                                 @else
-                                                                    <div class="badge badge-secondary">Menunggu verifikasi</div>
+                                                                <div class="badge badge-secondary">Menunggu verifikasi</div>
                                                                 @endif
                                                             </td>
+                                                            <td class="d-flex justify-content-center align-items-center">
+                                                                <!-- Update -->
+                                                                <a href="{{ url('/dosen/logbook-mahasiswa/edit/' . $lb->id)}}">
+                                                                    <button class="btn btn-sm btn-warning mx-1">
+                                                                        <i class="ion ion-edit" data-pack="default" data-tags="change, update, write, type, pencil"></i>
+                                                                    </button>
+                                                                </a>
+                                                            </td>
                                                         </tr>
-                                                    @endforeach
+                                                        @endforeach
                                                 </tbody>
                                             </table>
                                         </div>

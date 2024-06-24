@@ -65,10 +65,6 @@
                                         <table class="table table-striped" id="table-1">
                                             <thead>
                                                 <tr>
-<<<<<<< Updated upstream
-                                                    <th class="text-center">Action</th>
-=======
->>>>>>> Stashed changes
                                                     <th>NIM</th>
                                                     <th>Nama</th>
                                                     <th>Kategori Magang</th>
@@ -76,14 +72,9 @@
                                                     <th>Dosen Pembimbing</th>
                                                     <th>Laporan Magang</th>
                                                     <th>Catatan</th>
-<<<<<<< Updated upstream
-                                                    <th class="text-center">Status Laporan</th>
-                                                    <th class="text-center">Status Magang</th>
-=======
                                                     <th>Status Laporan</th>
                                                     <th>Status Magang</th>
                                                     <th>Aksi</th>
->>>>>>> Stashed changes
                                                 </tr>
                                             </thead>
 
@@ -93,16 +84,6 @@
                                             <tbody>
                                                 @foreach ($laporanMagang as $lm)
                                                     <tr>
-<<<<<<< Updated upstream
-                                                        <td class="text-center">
-                                                            <a href="{{ url('/dosen/laporan-magang-mahasiswa/edit/' . $lm->id) }}">
-                                                                <button class="btn btn-sm btn-warning mx-1">
-                                                                    <i class="ion ion-edit" data-pack="default" data-tags="change, update, write, type, pencil"></i>
-                                                                </button>
-                                                            </a>
-                                                        </td>
-=======
->>>>>>> Stashed changes
                                                         <td>{{ $lm->mahasiswa->nim }}</td>
                                                         <td>{{ $lm->mahasiswa->nama }}</td>
                                                         <td>{{ $lm->dataMagang->kategori_magang }}</td>

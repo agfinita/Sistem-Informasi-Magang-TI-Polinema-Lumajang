@@ -58,19 +58,24 @@
 
                         <li class="menu-header">Manajemen Magang</li>
                         <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Magang</span></a>
+                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                                    class="fas fa-columns"></i> <span>Magang</span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link"
                                         href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a>
                                 </li>
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
-                            <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i><span>Data Bimbingan</span></a></li>
-                            <li class="active"><a class="nav-link" href="{{  url('/admin/logbook/index') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i
+                                    class="ion ion-android-list"></i><span>Data Bimbingan</span></a></li>
+                        <li class="active"><a class="nav-link" href="{{ url('/admin/logbook/index') }}"><i
+                                    class="ion ion-clipboard" data-pack="default" data-tags="write"></i>
+                                <span>Logbook</span></a></li>
                         </li>
 
                         <li class="menu-header">Finalisasi Magang</li>
-                        <li ><a class="nav-link" href="{{ url('/admin/laporan-magang-mahasiswa') }}"><i class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
+                        <li><a class="nav-link" href="{{ url('/admin/laporan-magang-mahasiswa') }}"><i
+                                    class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
 
                         <li class="menu-header">Lainnya</li>
                         <li>
@@ -119,6 +124,7 @@
                                                     <th class="text-center">Kelas</th>
                                                     <th>Instansi Magang</th>
                                                     <th>Kategori</th>
+                                                    <th>Dosen Pembimbing</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
@@ -131,12 +137,15 @@
                                                     <tr>
                                                         <td class="text-center">{{ $no++ }}</td>
                                                         <td>{{ $db->mahasiswa->nama }}</td>
-                                                        <td class="text-center">{{ $db->mahasiswa->kelas }}</td>
-                                                        <td>{{ $db->dataMagang->pengajuanMagang->instansi_magang }}</td>
+                                                        <td>{{ $db->mahasiswa->kelas }}</td>
+                                                        <td>{{ $db->dataMagang->pengajuanMagang->instansi_magang }}
+                                                        </td>
                                                         <td>{{ $db->dataMagang->kategori_magang }}</td>
+                                                        <td>{{ $db->dosen->nama }}</td>
                                                         <td>
                                                             <!-- Lihat detail logbook mahasiswa -->
-                                                            <a href="{{ url('/admin/logbook/index', $db->dataMagang->id) }}">
+                                                            <a
+                                                                href="{{ url('/admin/logbook/index', $db->dataMagang->id) }}">
                                                                 <button class="btn btn-sm btn-info mx-1">
                                                                     Detail
                                                                 </button>
