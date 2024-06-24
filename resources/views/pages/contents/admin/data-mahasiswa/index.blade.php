@@ -108,7 +108,6 @@
                                             <table id="example" class="display nowrap" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center">Action</th>
                                                         <th class="text-center">NIM</th>
                                                         <th>Nama</th>
                                                         <th class="text-center">Kelas</th>
@@ -117,6 +116,7 @@
                                                         <th class="text-center">Telepon</th>
                                                         <th>Alamat</th>
                                                         <th class="text-center">Role</th>
+                                                        <th class="text-center">Aksi</th>
                                                     </tr>
                                                 </thead>
 
@@ -126,6 +126,15 @@
                                                 <tbody>
                                                     @foreach ( $mahasiswa as $mhs )
                                                     <tr>
+
+                                                        <td>{{ $mhs->nim }}</td>
+                                                        <td>{{ $mhs->nama }}</td>
+                                                        <td>{{ $mhs->kelas }}</td>
+                                                        <td>{{ $mhs->jurusan }}</td>
+                                                        <td>{{ $mhs->email }}</td>
+                                                        <td>{{ $mhs->telp }}</td>
+                                                        <td>{{ $mhs->alamat }}</td>
+                                                        <td>{{ $mhs->role }}</td>
                                                         <td>
                                                             <div class="d-flex justify-content-center align-items-center">
                                                                 <a href="{{ url('/data-pengguna/mahasiswa/edit/' . $mhs->id) }}">
@@ -143,15 +152,6 @@
                                                                 </form>
                                                             </div>
                                                         </td>
-
-                                                        <td class="text-center">{{ $mhs->nim }}</td>
-                                                        <td>{{ $mhs->nama }}</td>
-                                                        <td class="text-center">{{ $mhs->kelas }}</td>
-                                                        <td class="text-center">{{ $mhs->jurusan }}</td>
-                                                        <td>{{ $mhs->email }}</td>
-                                                        <td class="text-center">{{ $mhs->telp }}</td>
-                                                        <td>{{ $mhs->alamat }}</td>
-                                                        <td class="text-center">{{ $mhs->role }}</td>
 
                                                     </tr>
                                                     @endforeach

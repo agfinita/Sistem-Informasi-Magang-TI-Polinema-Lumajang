@@ -125,12 +125,12 @@
                                         <table class="table table-striped" id="table-1">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">Action</th>
                                                     <th class="text-center">Judul</th>
                                                     <th class="text-center">Deskripsi</th>
                                                     <th class="text-center">Kategori</th>
                                                     <th class="text-center">Penulis</th>
                                                     <th class="text-center">Created</th>
+                                                    <th class="text-center">Aksi</th>
                                                 </tr>
                                             </thead>
 
@@ -140,6 +140,12 @@
                                             <tbody>
                                                 @foreach ($pengumuman as $p)
                                                     <tr>
+
+                                                        <td>{{ $p->judul }}</td>
+                                                        <td>{!! $p->deskripsi !!}</td>
+                                                        <td>{{ $p->kategori }}</td>
+                                                        <td>{{ $p->created_by }}</td>
+                                                        <td>{{ $p->created_at }}</td>
                                                         <td>
                                                             <div class="d-flex justify-content-center align-items-center">
                                                                 <a href="{{ url('/dosen/dashboard/edit/' . $p->id) }}">
@@ -158,14 +164,8 @@
                                                                 </form>
                                                             </div>
                                                         </td>
-
-                                                        <td>{{ $p->judul }}</td>
-                                                        <td>{!! $p->deskripsi !!}</td>
-                                                        <td>{{ $p->kategori }}</td>
-                                                        <td>{{ $p->created_by }}</td>
-                                                        <td>{{ $p->created_at }}</td>
                                                     </tr>
-                                                @endforeach
+                                                    @endforeach
                                             </tbody>
                                         </table>
                                     </div>

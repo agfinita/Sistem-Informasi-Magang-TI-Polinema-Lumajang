@@ -107,7 +107,7 @@
                                                         <th>Laporan Magang</th>
                                                         <th>Catatan</th>
                                                         <th>Status Laporan</th>
-                                                        <th>Action</th>
+                                                        <th>Aksi</th>
                                                     </tr>
                                                 </thead>
 

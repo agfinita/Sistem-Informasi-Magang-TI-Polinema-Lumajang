@@ -110,13 +110,13 @@
                                             <table id="example" class="display nowrap" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center">Action</th>
                                                         <th class="text-center">NIP</th>
                                                         <th>Nama</th>
                                                         <th>Email</th>
                                                         <th class="text-center">Telepon</th>
                                                         <th>Alamat</th>
                                                         <th class="text-center">Role</th>
+                                                        <th class="text-center">Aksi</th>
                                                     </tr>
                                                 </thead>
 
@@ -127,6 +127,13 @@
                                                 <tbody>
                                                     @foreach ($dosen as $d)
                                                         <tr>
+
+                                                            <td>{{ $d->nip }}</td>
+                                                            <td>{{ $d->nama }}</td>
+                                                            <td>{{ $d->email }}</td>
+                                                            <td>{{ $d->telp }}</td>
+                                                            <td>{{ $d->alamat }}</td>
+                                                            <td>{{ $d->role }}</td>
                                                             <td>
                                                                 <div class="d-flex justify-content-center align-items-center">
                                                                     <a href="{{ url('/data-pengguna/dosen/edit/' . $d->id) }}">
@@ -149,15 +156,8 @@
                                                                 </div>
                                                             </td>
 
-                                                            <td class="text-center">{{ $d->nip }}</td>
-                                                            <td>{{ $d->nama }}</td>
-                                                            <td>{{ $d->email }}</td>
-                                                            <td class="text-center">{{ $d->telp }}</td>
-                                                            <td>{{ $d->alamat }}</td>
-                                                            <td class="text-center">{{ $d->role }}</td>
-
                                                         </tr>
-                                                    @endforeach
+                                                        @endforeach
                                                 </tbody>
                                             </table>
                                         </div>

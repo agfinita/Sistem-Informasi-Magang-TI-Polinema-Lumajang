@@ -115,7 +115,7 @@
     <!-- JS Libraies -->
     <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
     <script>
-        var redirectUrl = "{{ url('/dosen/bimbingan-mahasiswa') }}";
+        var redirectUrl = "{{ url('/dosen/bimbingan-mahasiswa/show/2') }}";
     </script>
 
     <!-- Template JS File -->

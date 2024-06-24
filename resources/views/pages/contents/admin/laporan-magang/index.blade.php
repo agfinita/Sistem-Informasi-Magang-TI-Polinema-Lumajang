@@ -131,7 +131,7 @@
                                                         <td>{{ $lm->mahasiswa ? $lm->mahasiswa->nama : 'Mahasiswa tidak ditemukan' }}</td>
                                                         <td class="text-center">
                                                             @if ($lm->status_laporan == '1')
-                                                                <div class="badge badge-success">Verified</div>
+                                                                <div class="badge badge-success">Sudah Diverifikasi</div>
                                                             @else
                                                                 <h5> - </h5>
                                                             @endif

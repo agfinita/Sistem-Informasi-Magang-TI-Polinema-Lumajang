@@ -66,12 +66,15 @@
                                 </li>
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
-                            <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i><span>Data Bimbingan</span></a></li>
-                            <li><a class="nav-link" href="{{  url('/admin/logbook/index') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i
+                                    class="ion ion-android-list"></i><span>Data Bimbingan</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/admin/logbook/index') }}"><i class="ion ion-clipboard"
+                                    data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
                         </li>
 
                         <li class="menu-header">Finalisasi Magang</li>
-                        <li><a class="nav-link" href="{{ url('/admin/laporan-magang-mahasiswa') }}"><i class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
+                        <li><a class="nav-link" href="{{ url('/admin/laporan-magang-mahasiswa') }}"><i
+                                    class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
 
                         <li class="menu-header">Lainnya</li>
                         <li>
@@ -122,7 +125,6 @@
                                             <table id="example" class="display nowrap" style="width:100%"">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center">Action</th>
                                                         <th>Nama</th>
                                                         <th class="text-center">Username</th>
                                                         <th>Email</th>
@@ -130,6 +132,7 @@
                                                         <th class="text-center">Status</th>
                                                         <th>Date Created</th>
                                                         <th>Date Updated</th>
+                                                        <th>Aksi</th>
                                                     </tr>
                                                 </thead>
 
@@ -139,8 +142,23 @@
                                                 <tbody>
                                                     @foreach ($users as $u)
                                                         <tr>
+
+                                                            <td>{{ $u->nama }}</td>
+                                                            <td>{{ $u->username }}</td>
+                                                            <td>{{ $u->email }}</td>
+                                                            <td>{{ $u->role }}</td>
                                                             <td>
-                                                                <div class="d-flex justify-content-center align-items-center">
+                                                                @if ($u->is_active == 1)
+                                                                    <div class="badge badge-success">Active</div>
+                                                                @else
+                                                                    <div class="badge badge-danger">Not active</div>
+                                                                @endif
+                                                            </td>
+                                                            <td>{{ $u->created_at }}</td>
+                                                            <td>{{ $u->updated_at }}</td>
+                                                            <td>
+                                                                <div
+                                                                    class="d-flex justify-content-center align-items-center">
                                                                     <a
                                                                         href="{{ url('/kelola-pengguna/dosen/edit/' . $u->id) }}">
                                                                         <button class="btn btn-sm btn-warning mx-1">
@@ -149,13 +167,14 @@
                                                                         </button>
                                                                     </a>
 
-                                                                    <form
-                                                                    id="delete-form-{{ $u->id }}"
+                                                                    <form id="delete-form-{{ $u->id }}"
                                                                         action="{{ url('/kelola-pengguna/dosen/' . $u->id) }}"
                                                                         method="POST">
                                                                         @method('DELETE')
                                                                         @csrf
-                                                                        <button type="button" class="btn btn-sm btn-danger mx-1 swal-6" data-id="{{ $u->id }}">
+                                                                        <button type="button"
+                                                                            class="btn btn-sm btn-danger mx-1 swal-6"
+                                                                            data-id="{{ $u->id }}">
                                                                             <i class="ion ion-trash-a"
                                                                                 data-pack="default"
                                                                                 data-tags="delete, remove, dump"></i>
@@ -163,20 +182,6 @@
                                                                     </form>
                                                                 </div>
                                                             </td>
-
-                                                            <td>{{ $u->nama }}</td>
-                                                            <td class="text-center">{{ $u->username }}</td>
-                                                            <td>{{ $u->email }}</td>
-                                                            <td class="text-center">{{ $u->role }}</td>
-                                                            <td class="text-center">
-                                                                @if ($u->is_active == 1)
-                                                                    <div class="badge badge-success">Aktif</div>
-                                                                @else
-                                                                    <div class="badge badge-danger">Tidak aktif</div>
-                                                                @endif
-                                                            </td>
-                                                            <td>{{ $u->created_at }}</td>
-                                                            <td>{{ $u->updated_at }}</td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>

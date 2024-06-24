@@ -23,7 +23,7 @@
                     <ul class="sidebar-menu">
                         <li class="menu-header">Dashboard</li>
                         <li><a class="nav-link" href="{{ url('/') }}"><i class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i><span>Dashboard</span></a></li>
-                        <li><a class="nav-link" href="{{ url('/pengumuman') }}"><i class="ion ion-speakerphone"></i><span>Pengumuman</span></a></li>
+                        <li class="active"><a class="nav-link" href="{{ url('/pengumuman') }}"><i class="ion ion-speakerphone"></i><span>Pengumuman</span></a></li>
 
                         <li class="menu-header">Manajemen Pengguna</li>
                         <li class="nav-item-dropdown">

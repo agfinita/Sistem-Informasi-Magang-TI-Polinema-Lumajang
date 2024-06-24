@@ -155,7 +155,7 @@ Route::group(['middleware' => 'role'], function () {
     Route::patch('/dosen/logbook-mahasiswa/edit/{id}', [LogbookDosenSideController::class, 'update']);
 
     // Bimbingan - Dosen Side
-    Route::resource('/dosen/bimbingan-mahasiswa', BimbinganDosenSideController::class)->except('create', 'store', 'destroy');
+    Route::resource('/dosen/bimbingan-mahasiswa', BimbinganDosenSideController::class)->except('destroy');
     Route::get('/dosen/bimbingan-mahasiswa/show/{data_magang_id}', [BimbinganDosenSideController::class, 'show']);
     Route::get('/dosen/bimbingan-mahasiswa/edit/{id}', [BimbinganDosenSideController::class, 'edit']);
     Route::patch('/dosen/bimbingan-mahasiswa/edit/{id}', [BimbinganDosenSideController::class, 'update']);

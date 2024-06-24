@@ -119,7 +119,7 @@
                                                     <th class="text-center">Kelas</th>
                                                     <th>Instansi Magang</th>
                                                     <th>Kategori</th>
-                                                    <th>Action</th>
+                                                    <th>Aksi</th>
                                                 </tr>
                                             </thead>
 

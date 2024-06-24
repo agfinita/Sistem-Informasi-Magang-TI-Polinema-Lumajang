@@ -27,7 +27,7 @@
                                 <span>Dashboard</span></a></li>
 
                         <li class="menu-header">Magang</li>
-                        <li><a class="nav-link" href="{{ url('/mahasiswa/pengajuan-magang') }}"><i class="ion ion-archive" data-pack="default" data-tags="mail"></i> <span>Pengajuan
+                        <li class="active"><a class="nav-link" href="{{ url('/mahasiswa/pengajuan-magang') }}"><i class="ion ion-archive" data-pack="default" data-tags="mail"></i> <span>Pengajuan
                                     Magang</span></a></li>
                         <li><a class="nav-link" href="{{ url('/mahasiswa/data-magang') }}"><i class="fas fa-columns"></i> <span>Data Magang</span></a></li>
 

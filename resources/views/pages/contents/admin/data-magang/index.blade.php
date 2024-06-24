@@ -120,7 +120,6 @@
                                             <table id="example" class="display nowrap" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center">Action</th>
                                                         <th class="text-center">NIM</th>
                                                         <th>Nama</th>
                                                         <th class="text-center">Kelas</th>
@@ -132,7 +131,7 @@
                                                         <th class="text-center">Periode</th>
                                                         <th class="text-center">Tanggal Dimulai</th>
                                                         <th class="text-center">Tanggal Selesai</th>
-                                                        <th>File LoA</th>
+                                                        <th class="text-center">File LoA</th>
                                                     </tr>
                                                 </thead>
 
@@ -142,6 +141,33 @@
                                                 <tbody>
                                                     @foreach ($dataMagang as $dm)
                                                         <tr>
+
+                                                            <td class="text-center">{{ $dm->mahasiswa->nim ?? '-' }}</td>
+                                                            <td>{{ $dm->mahasiswa->nama ?? '-' }}</td>
+                                                            <td class="text-center">{{ $dm->mahasiswa->kelas ?? '-' }}</td>
+                                                            <td class="text-center">{{ $dm->mahasiswa->jurusan ?? '-' }}</td>
+                                                            <td>{{ $dm->kategori_magang }}</td>
+                                                            <td>{{ $dm->pengajuanMagang->instansi_magang ?? '-' }} </td>
+                                                            <td>{{ $dm->pengajuanMagang->alamat_magang ?? '-' }}</td>
+                                                            <td class="text-center">
+                                                                @if ($dm->status_magang == 'selesai')
+                                                                <div class="badge badge-success">Selesai</div>
+                                                                @elseif ($dm->status_magang == 'sedang magang')
+                                                                <div class="badge badge-warning">Sedang magang</div>
+                                                                @elseif ($dm->status_magang == 'belum dimulai')
+                                                                <div class="badge badge-info">Belum dimulai</div>
+                                                                @endif
+                                                            </td>
+                                                            <td class="text-center">{{ $dm->periode }}</td>
+                                                            <td class="text-center">{{ $dm->tanggal_mulai }}</td>
+                                                            <td class="text-center">{{ $dm->tanggal_selesai }}</td>
+                                                            <td>
+                                                                @if ($dm->files)
+                                                                <a href="#" onclick="openFile('{{ asset('storage/' . $dm->files) }}'); return false;">{{ basename($dm->files) }}</a>
+                                                                @else
+                                                                <h5> - </h5>
+                                                                @endif
+                                                            </td>
                                                             <td class="d-flex justify-content-center align-items-center">
                                                                 <!-- Hapus -->
                                                                 <form id="delete-form-{{ $dm->id }}" action="{{ url('/admin/data-magang/' . $dm->id) }}" method="POST" >
@@ -164,33 +190,6 @@
                                                                     </a>
 
                                                                 </div> --}}
-                                                            </td>
-
-                                                            <td class="text-center">{{ $dm->mahasiswa->nim ?? '-' }}</td>
-                                                            <td>{{ $dm->mahasiswa->nama ?? '-' }}</td>
-                                                            <td class="text-center">{{ $dm->mahasiswa->kelas ?? '-' }}</td>
-                                                            <td class="text-center">{{ $dm->mahasiswa->jurusan ?? '-' }}</td>
-                                                            <td>{{ $dm->kategori_magang }}</td>
-                                                            <td>{{ $dm->pengajuanMagang->instansi_magang ?? '-' }} </td>
-                                                            <td>{{ $dm->pengajuanMagang->alamat_magang ?? '-' }}</td>
-                                                            <td class="text-center">
-                                                                @if ($dm->status_magang == 'selesai')
-                                                                    <div class="badge badge-success">Selesai</div>
-                                                                @elseif ($dm->status_magang == 'sedang magang')
-                                                                    <div class="badge badge-warning">Sedang magang</div>
-                                                                @elseif ($dm->status_magang == 'belum dimulai')
-                                                                    <div class="badge badge-info">Belum dimulai</div>
-                                                                @endif
-                                                            </td>
-                                                            <td class="text-center">{{ $dm->periode }}</td>
-                                                            <td class="text-center">{{ $dm->tanggal_mulai }}</td>
-                                                            <td class="text-center">{{ $dm->tanggal_selesai }}</td>
-                                                            <td>
-                                                                @if ($dm->files)
-                                                                    <a href="#" onclick="openFile('{{ asset('storage/' . $dm->files) }}'); return false;">{{ basename($dm->files) }}</a>
-                                                                @else
-                                                                    <h5> - </h5>
-                                                                @endif
                                                             </td>
                                                         </tr>
                                                     @endforeach

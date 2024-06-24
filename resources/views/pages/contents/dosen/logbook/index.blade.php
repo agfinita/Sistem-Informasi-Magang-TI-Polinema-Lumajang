@@ -71,7 +71,11 @@
                                                     <th class="text-center">Kelas</th>
                                                     <th>Instansi Magang</th>
                                                     <th>Kategori</th>
+<<<<<<< Updated upstream
                                                     <th class="text-center">Action</th>
+=======
+                                                    <th>Aksi</th>
+>>>>>>> Stashed changes
                                                 </tr>
                                             </thead>
 

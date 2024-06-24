@@ -105,11 +105,11 @@
                                         <table class="table table-striped" id="table-1">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">Action</th>
                                                     <th>NIM</th>
                                                     <th>Instansi Magang</th>
                                                     <th>Alamat Instansi Magang</th>
                                                     <th class="text-center">Status</th>
+                                                    <th class="text-center">Aksi</th>
                                                 </tr>
                                             </thead>
 
@@ -119,6 +119,17 @@
                                             <tbody>
                                                 @foreach ($pengajuanMagang as $pm)
                                                     <tr>
+
+                                                        <td>{{ $pm->mahasiswa_id }}</td>
+                                                        <td>{{ $pm->instansi_magang }}</td>
+                                                        <td>{{ $pm->alamat_magang }}</td>
+                                                        <td class=" d-flex justify-content-center align-items-center">
+                                                            @if ($pm->status == 'diproses')
+                                                            <div class="badge badge-warning">Diproses</div>
+                                                            @elseif ($pm->status == 'selesai')
+                                                            <div class="badge badge-success">Selesai</div>
+                                                            @endif
+                                                        </td>
                                                         <td>
                                                             <div class="d-flex justify-content-center align-items-center">
                                                                 <a href="{{ ('/admin/mahasiswa/pengajuan-magang/create/' . $pm->id) }}">
@@ -136,17 +147,6 @@
                                                                     </button>
                                                                 </form>
                                                             </div>
-                                                        </td>
-
-                                                        <td>{{ $pm->mahasiswa_id }}</td>
-                                                        <td>{{ $pm->instansi_magang }}</td>
-                                                        <td>{{ $pm->alamat_magang }}</td>
-                                                        <td class=" d-flex justify-content-center align-items-center">
-                                                            @if ($pm->status == 'diproses')
-                                                                <div class="badge badge-warning">diproses</div>
-                                                            @elseif ($pm->status == 'selesai')
-                                                                <div class="badge badge-success">selesai</div>
-                                                            @endif
                                                         </td>
                                                     </tr>
                                                 @endforeach

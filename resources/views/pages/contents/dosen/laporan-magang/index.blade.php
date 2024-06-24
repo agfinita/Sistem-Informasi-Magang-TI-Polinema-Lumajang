@@ -65,7 +65,10 @@
                                         <table class="table table-striped" id="table-1">
                                             <thead>
                                                 <tr>
+<<<<<<< Updated upstream
                                                     <th class="text-center">Action</th>
+=======
+>>>>>>> Stashed changes
                                                     <th>NIM</th>
                                                     <th>Nama</th>
                                                     <th>Kategori Magang</th>
@@ -73,8 +76,14 @@
                                                     <th>Dosen Pembimbing</th>
                                                     <th>Laporan Magang</th>
                                                     <th>Catatan</th>
+<<<<<<< Updated upstream
                                                     <th class="text-center">Status Laporan</th>
                                                     <th class="text-center">Status Magang</th>
+=======
+                                                    <th>Status Laporan</th>
+                                                    <th>Status Magang</th>
+                                                    <th>Aksi</th>
+>>>>>>> Stashed changes
                                                 </tr>
                                             </thead>
 
@@ -84,6 +93,7 @@
                                             <tbody>
                                                 @foreach ($laporanMagang as $lm)
                                                     <tr>
+<<<<<<< Updated upstream
                                                         <td class="text-center">
                                                             <a href="{{ url('/dosen/laporan-magang-mahasiswa/edit/' . $lm->id) }}">
                                                                 <button class="btn btn-sm btn-warning mx-1">
@@ -91,6 +101,8 @@
                                                                 </button>
                                                             </a>
                                                         </td>
+=======
+>>>>>>> Stashed changes
                                                         <td>{{ $lm->mahasiswa->nim }}</td>
                                                         <td>{{ $lm->mahasiswa->nama }}</td>
                                                         <td>{{ $lm->dataMagang->kategori_magang }}</td>
@@ -98,42 +110,49 @@
                                                         <td>{{ $lm->dataBimbingan->dosen->nama }}</td>
                                                         <td>
                                                             @if ($lm->laporan_magang)
-                                                                <a href="{{ asset('storage/uploads/laporan-magang/' . $lm->laporan_magang) }}" download>{{ basename($lm->laporan_magang) }}</a>
+                                                            <a href="{{ asset('storage/uploads/laporan-magang/' . $lm->laporan_magang) }}" download>{{ basename($lm->laporan_magang) }}</a>
                                                             @else
-                                                                <h5> - </h5>
+                                                            <h5> - </h5>
                                                             @endif
                                                         </td>
                                                         <td>
                                                             @if (isset($lm->catatan))
-                                                                {{ $lm->catatan }}
+                                                            {{ $lm->catatan }}
                                                             @else
-                                                                <h5> - </h5>
+                                                            <h5> - </h5>
                                                             @endif
                                                         </td>
                                                         <td class="text-center">
                                                             @if ($lm->status_laporan == '1')
-                                                                <div class="badge badge-success">Verified</div>
+                                                            <div class="badge badge-success">Verified</div>
                                                             @else
-                                                                <h5> - </h5>
+                                                            <h5> - </h5>
                                                             @endif
                                                         </td>
                                                         <td class="text-center">
                                                             @if ($lm->dataMagang->status_magang == 'selesai')
-                                                                <div class="badge badge-success">Selesai</div>
+                                                            <div class="badge badge-success">Selesai</div>
                                                             @elseif ($lm->dataMagang->status_magang == 'sedang magang')
-                                                                <div class="badge badge-warning">Sedang magang</div>
+                                                            <div class="badge badge-warning">Sedang magang</div>
                                                             @elseif ($lm->dataMagang->status_magang == 'belum dimulai')
-                                                                <div class="badge badge-info">Belum dimulai</div>
+                                                            <div class="badge badge-info">Belum dimulai</div>
                                                             @elseif ($lm->dataMagang->status_magang == 'dihentikan')
-                                                                <div class="badge badge-danger">Dihentikan</div>
+                                                            <div class="badge badge-danger">Dihentikan</div>
                                                             @endif
                                                         </td>
+                                                        <td>
+                                                            <a href="{{ url('/dosen/laporan-magang-mahasiswa/edit/' . $lm->id) }}">
+                                                                <button class="btn btn-sm btn-warning mx-1">
+                                                                    <i class="ion ion-edit" data-pack="default" data-tags="change, update, write, type, pencil"></i>
+                                                                </button>
+                                                            </a>
+                                                        </td>
                                                     </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                </div>
                             </div>
                         </div>
                     </div>

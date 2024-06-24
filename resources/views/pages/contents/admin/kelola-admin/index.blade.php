@@ -112,14 +112,14 @@
                                             <table id="example" class="display nowrap" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center">Action</th>
-                                                        <th>Nama</th>
+                                                        <th class="text-center">Nama</th>
                                                         <th class="text-center">Username</th>
                                                         <th>Email</th>
                                                         <th class="text-center">Role</th>
                                                         <th class="text-center">Status</th>
-                                                        <th>Date Created</th>
-                                                        <th>Date Updated</th>
+                                                        <th class="text-center">Date Created</th>
+                                                        <th class="text-center">Date Updated</th>
+                                                        <th class="text-center">Aksi</th>
                                                     </tr>
                                                 </thead>
 
@@ -129,6 +129,20 @@
                                                 <tbody>
                                                     @foreach ($users as $u)
                                                         <tr>
+
+                                                            <td>{{ $u->nama }}</td>
+                                                            <td>{{ $u->username }}</td>
+                                                            <td>{{ $u->email }}</td>
+                                                            <td>{{ $u->role }}</td>
+                                                            <td>
+                                                                @if ($u->is_active == 1)
+                                                                <div class="badge badge-success">Active</div>
+                                                                @else
+                                                                <div class="badge badge-danger">Not active</div>
+                                                                @endif
+                                                            </td>
+                                                            <td>{{ $u->created_at }}</td>
+                                                            <td>{{ $u->updated_at }}</td>
                                                             <td>
                                                                 <div class="d-flex justify-content-center align-items-center">
                                                                     <a href="{{ url('/kelola-pengguna/admin/edit/' . $u->id) }}">
@@ -146,20 +160,6 @@
                                                                     </form>
                                                                 </div>
                                                             </td>
-
-                                                            <td>{{ $u->nama }}</td>
-                                                            <td class="text-center">{{ $u->username }}</td>
-                                                            <td>{{ $u->email }}</td>
-                                                            <td>{{ $u->role }}</td>
-                                                            <td class="text-center">
-                                                                @if ($u->is_active == 1)
-                                                                    <div class="badge badge-success">Aktif</div>
-                                                                @else
-                                                                    <div class="badge badge-danger">Tidak aktif</div>
-                                                                @endif
-                                                            </td>
-                                                            <td>{{ $u->created_at }}</td>
-                                                            <td>{{ $u->updated_at }}</td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
