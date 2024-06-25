@@ -115,7 +115,6 @@ class DataMagangMahasiswaSideController extends Controller
             ]);
         });
 
-
         // Mengembalikan respon sukses
         return response()->json([ 'status'    => 'success' ]);
 
@@ -183,7 +182,13 @@ class DataMagangMahasiswaSideController extends Controller
             unset($validatedData['files']);
         }
 
-        $dataMagang->update($validatedData);
+        $dataMagang->update([
+            'kategori_magang'    => $validatedData['kategori'],
+            'status_magang'      => $validatedData['status_magang'],
+            'periode'            => $validatedData['period'],
+            'tanggal_mulai'      => $validatedData['tm'],
+            'tanggal_selesai'    => $validatedData['ts']
+        ]);
 
         // Mengembalikan respon sukses
         return response()->json([ 'status' => 'success']);

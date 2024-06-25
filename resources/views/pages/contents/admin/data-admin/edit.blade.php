@@ -96,8 +96,7 @@
                                             <div class="form-group row">
                                                 <label for="nip" class="col-sm-3 col-form-label">NIP</label>
                                                 <div class="col-sm-7">
-                                                    <input type="text" class="form-control" id="nip"
-                                                        name="nip" placeholder="Masukkan NIM" value={{ $admin->nip }}>
+                                                    <input disabled type="text" class="form-control" id="nip" name="nip" placeholder="Masukkan NIM" value={{ $admin->nip }}>
                                                 </div>
                                             </div>
 

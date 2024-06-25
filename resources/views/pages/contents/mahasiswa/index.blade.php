@@ -22,18 +22,26 @@
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
                         <li class="menu-header">Dashboard</li>
-                        <li class="active"><a class="nav-link" href="{{ url('/mahasiswa/dashboard') }}"><i class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i><span>Dashboard</span></a></li>
+                        <li class="active"><a class="nav-link" href="{{ url('/mahasiswa/dashboard') }}"><i
+                                    class="ion ion-speedometer" data-pack="default"
+                                    data-tags="travel, accelerate"></i><span>Dashboard</span></a></li>
 
                         <li class="menu-header">Magang</li>
-                        <li><a class="nav-link" href="{{ url('/mahasiswa/pengajuan-magang') }}"><i class="ion ion-archive" data-pack="default" data-tags="mail"></i> <span>Pengajuan Magang</span></a></li>
-                        <li><a class="nav-link" href="{{ url('/mahasiswa/data-magang') }}"><i class="fas fa-columns"></i> <span>Data Magang</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/mahasiswa/pengajuan-magang') }}"><i
+                                    class="ion ion-archive" data-pack="default" data-tags="mail"></i> <span>Pengajuan
+                                    Magang</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/mahasiswa/data-magang') }}"><i
+                                    class="fas fa-columns"></i> <span>Data Magang</span></a></li>
 
                         <li class="menu-header">Aktivitas Magang</li>
-                        <li><a class="nav-link" href="{{ url('/mahasiswa/bimbingan') }}"><i class="fas fa-users"></i> <span>Bimbingan</span></a> </li>
-                        <li><a class="nav-link" href="{{ url('/mahasiswa/logbook') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/mahasiswa/bimbingan') }}"><i class="fas fa-users"></i>
+                                <span>Bimbingan</span></a> </li>
+                        <li><a class="nav-link" href="{{ url('/mahasiswa/logbook') }}"><i class="ion ion-clipboard"
+                                    data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
 
                         <li class="menu-header">Finalisasi Magang</li>
-                        <li><a class="nav-link" href="{{ url('/mahasiswa/laporan-magang') }}"><i class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
+                        <li><a class="nav-link" href="{{ url('/mahasiswa/laporan-magang') }}"><i
+                                    class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
 
                         <li class="menu-header">Lainnya</li>
                         <li>
@@ -78,20 +86,21 @@
                                                 $no = 1;
                                             @endphp
                                             @foreach ($pengumuman as $p)
-                                            <tr>
-                                                <td scope="row">{{ $no++ }}</td>
-                                                <td>{{ $p->judul }}</td>
-                                                <td>{{ $p->created_at }}</td>
-                                                <td>{{ $p->created_by }}</td>
-                                                <td>
-                                                    <button class="btn btn-sm btn-info mx-1 modal-2"
-                                                        onclick="showDetailModal('{{ $p->judul }}', '{{ $p->created_at }}', '{{ $p->created_by }}', '{{ $p->kategori }}', '{{ $p->deskripsi }}')">
-                                                        <i class="ion ion-ios-eye"></i>
-                                                        Detail
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        @endforeach
+                                                <tr>
+                                                    <td scope="row">{{ $no++ }}</td>
+                                                    <td>{{ $p->judul }}</td>
+                                                    <td>{{ $p->created_at }}</td>
+                                                    <td>{{ $p->created_by }}</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-info mx-1 modal-2"
+                                                            data-id="{{ $p->id }}" data-toggle="modal"
+                                                            data-target="#detailModal">
+                                                            <i class="ion ion-ios-eye"></i>
+                                                            Detail
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         </table>
                                     </div>
                                 </div>
@@ -105,6 +114,26 @@
         <!-- Footer -->
         @include('pages.layouts.footer')
 
+    </div>
+
+    <!-- Modal pengumuman -->
+    <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailModalLabel">Detail Berita Terkini</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Content di sini via AJAX -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Keluar</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- General JS Scripts-->

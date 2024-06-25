@@ -103,9 +103,11 @@ Route::group(['middleware' => 'role'], function () {
     // Logbook - Admin Side
     Route::resource('/admin/logbook/index', LogbookAdminSideController::class)->except('create');
 
+
     // AUTH MAHASISWA
     // Menampilkan dashboard simag mahasiswa
     Route::get('/mahasiswa/dashboard', [HomeController::class, 'index']);
+    Route::get('/mahasiswa/dashboard/{id}', [HomeController::class, 'showPengumumanMhs']);
 
     // Pengajuan Magang
     Route::resource('/mahasiswa/pengajuan-magang', PengajuanMagangMahasiswaSideController::class)->except('show', 'update', 'destroy', 'edit');

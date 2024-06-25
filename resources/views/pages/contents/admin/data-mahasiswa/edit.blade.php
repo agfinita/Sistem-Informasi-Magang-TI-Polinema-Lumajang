@@ -97,7 +97,7 @@
                                             <div class="form-group row">
                                                 <label for="nim" class="col-sm-3 col-form-label">NIM</label>
                                                 <div class="col-sm-7">
-                                                    <input type="text" class="form-control" id="nim"
+                                                    <input disabled type="text" class="form-control" id="nim"
                                                         name="nim" placeholder="Masukkan NIM" value={{ $mahasiswa->nim }}>
                                                 </div>
                                             </div>

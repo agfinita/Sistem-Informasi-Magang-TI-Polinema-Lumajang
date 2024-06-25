@@ -85,6 +85,16 @@ class HomeController extends Controller {
         return view('pages.contents.mahasiswa.index', compact('pengumuman'));
     }
 
+    public function showPengumumanMhs($id) {
+        $pengumuman = Pengumuman::find($id);
+
+        if ($pengumuman) {
+            return response()->json($pengumuman);
+        } else {
+            return response()->json(['error'], 404);
+        }
+    }
+
     // Dashboard admin
     public function statistikDashboardAdmin() {
         // Jumlah user

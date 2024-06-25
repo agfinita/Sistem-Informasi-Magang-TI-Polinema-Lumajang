@@ -131,10 +131,11 @@
                                                 <label for="kategori" class="col-sm-3 col-form-label">Kategori Magang</label>
                                                 <div class="col-sm-5">
                                                     <select class="form-control" id="kategori_magang" name="kategori">
-                                                        <option value="MSIB" {{ $dm->kategori_magang == 'MSIB' ? 'selected' : '' }}>MSIB</option>
-                                                        <option value="Studi Independen" {{ $dm->kategori_magang == 'Studi Independen' ? 'selected' : '' }}>Studi Independen</option>
-                                                        <option value="MBKM" {{ $dm->kategori_magang == 'MBKM' ? 'selected' : '' }}>MBKM</option>
-                                                        <option value="Magang Mandiri" {{ $dm->kategori_magang == 'Magang Mandiri' ? 'selected' : '' }}>Magang Mandiri</option>
+                                                        <option value="" disabled>- Pilih kategori magang -</option>
+                                                        <option {{ $dm->kategori_magang == 'MSIB' ? 'selected' : '' }}>MSIB</option>
+                                                        <option {{ $dm->kategori_magang == 'Studi Independen' ? 'selected' : '' }}>Studi Independen</option>
+                                                        <option {{ $dm->kategori_magang == 'MBKM' ? 'selected' : '' }}>MBKM</option>
+                                                        <option {{ $dm->kategori_magang == 'Magang Mandiri' ? 'selected' : '' }}>Magang Mandiri</option>
                                                     </select>
                                                 </div>
                                             </div>

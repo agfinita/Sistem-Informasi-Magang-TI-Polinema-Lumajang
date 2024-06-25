@@ -4,53 +4,68 @@ $("#modal-1").fireModal({
     body: 'Modal body text goes here.'
 });
 
-// Modal
-function showDetailModal(judul, createdAt, createdBy, kategori, deskripsi) {
-    let modalBody = `
-    <div class="container">
-        <div class="row mb-2">
-            <div class="col-6">
-                <b>Judul:</b>
-                <p>${judul}</p>
-            </div>
-            <div class="col-6">
-                <b>Penulis:</b>
-                <p>${createdBy}</p>
-            </div>
-        </div>
-        <div class="row mb-2">
-            <div class="col-6">
-                <b>Kategori:</b>
-                <p>${kategori}</p>
-            </div>
-            <div class="col-6">
-                <b>Waktu:</b>
-                <p>${createdAt}</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <b>Deskripsi</b>
-                <div class="card p-3">
-                    <p class="card-text">${deskripsi}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    `;
+// Modal detail pengumuman
+$(document).ready(function() {
+    $('#detailModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('id');
 
-    $(".modal-2").fireModal({
-        title: 'Detail Berita Terkini',
-        body: modalBody,
-        center: true,
-        buttons: [{
-            text: 'Keluar',
-            class: 'btn btn-warning',
-            handler: function (modal) {
-                modal.modal('hide');
+        $.ajax({
+            url: `/mahasiswa/dashboard/${id}`,
+            method: 'GET',
+            success: function(data) {
+                if (data.error) {
+                    console.error(data.error);
+                    return;
+                }
+
+                // Format created_at menggunakan moment.js
+                let formattedDate = formatDate(data.created_at);
+
+                let modalBody = `
+                    <div class="container">
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <b>Judul:</b>
+                                <p>${data.judul}</p>
+                            </div>
+                        <div class="col-6">
+                                <b>Penulis:</b>
+                                <p>${data.created_by}</p>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <b>Kategori:</b>
+                                <p>${data.kategori}</p>
+                            </div>
+                            <div class="col-6">
+                                <b>Waktu:</b>
+                                <p id="waktu">${formattedDate}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                            <b>Deskripsi</b>
+                                <div class="card p-3">
+                                    <p class="card-text">${data.deskripsi}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                $('#detailModal .modal-body').html(modalBody);
+            },
+            error: function(xhr) {
+                console.error(xhr.responseText);
             }
-        }]
+        });
     });
+});
+// Format waktu
+function formatDate(dateString) {
+    return moment.utc(dateString).format('DD-MM-YYYY HH:mm:ss');
 }
 
 // $("#modal-2").fireModal({
