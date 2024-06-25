@@ -43,6 +43,7 @@ class HomeController extends Controller {
                 return redirect('/login')->with('error', 'Akun sudah tidak aktif.');
             }
 
+            // Pemeriksaan session
             $request->session()->regenerate();
 
             // Cek role pengguna setelah login

@@ -108,11 +108,11 @@
                                         <table class="table table-striped" id="table-1">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">Nama</th>
+                                                    <th>Nama</th>
                                                     <th class="text-center">Kelas</th>
                                                     <th>Kategori</th>
                                                     <th class="text-center">Periode</th>
-                                                    <th class="text-center">Dosen Pembimbing</th>
+                                                    <th>Dosen Pembimbing</th>
                                                     <th class="text-center">Aksi</th>
                                                 </tr>
                                             </thead>
@@ -124,10 +124,10 @@
                                                 @foreach ($dataBimbingan as $db)
                                                     <tr>
                                                         <td>{{ $db->mahasiswa->nama }}</td>
-                                                        <td>{{ $db->mahasiswa->kelas }}</td>
+                                                        <td class="text-center">{{ $db->mahasiswa->kelas }}</td>
                                                         <td>{{ $db->dataMagang->kategori_magang }}</td>
-                                                        <td>{{ $db->dataMagang->periode }}</td>
-                                                        <td class="text-center">
+                                                        <td class="text-center">{{ $db->dataMagang->periode }}</td>
+                                                        <td>
                                                             {{ $db->dosen ? $db->dosen->nama : '-' }}</td>
                                                         <td class="d-flex justify-content-center align-items-center">
                                                             <a

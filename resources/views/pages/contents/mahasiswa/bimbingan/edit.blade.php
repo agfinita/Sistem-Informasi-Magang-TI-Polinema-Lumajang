@@ -73,7 +73,7 @@
                                             <div class="form-group row">
                                                 <label for="tgl_bimbingan" class="col-sm-3 col-form-label">Tanggal</label>
                                                 <div class="col-sm-5">
-                                                    <input type="date" class="form-control" id="tanggal" name="tgl_bimbingan" value="{{ $bimbingan->tanggal}}" autofocus>
+                                                    <input type="date" class="form-control" id="tanggal" name="tgl_bimbingan" value="{{ $bimbingan->tanggal}}">
                                                 </div>
                                             </div>
 
@@ -112,7 +112,7 @@
                                             <div class="form-group row">
                                                 <label for="bw" class="col-sm-3 col-form-label">Batas Waktu</label>
                                                 <div class="col-sm-5">
-                                                    <input type="date" class="form-control" id="batas_waktu" name="bw" autofocus value="{{ $bimbingan->batas_waktu }}">
+                                                    <input type="date" class="form-control" id="batas_waktu" name="bw" value="{{ $bimbingan->batas_waktu }}">
                                                 </div>
                                             </div>
                                         </div>

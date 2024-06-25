@@ -164,7 +164,6 @@ Route::group(['middleware' => 'role'], function () {
 
 });
 
-
 // Login
 Route::get('/login', [HomeController::class, 'masuk'])->name('login')->middleware('guest');
 Route::post('/prosesLogin', [HomeController::class, 'authenticate']);

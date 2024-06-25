@@ -91,7 +91,6 @@
                                 <span>Auth</span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{ url('/forgot') }}">Forgot Password</a></li>
-                                <li><a href="{{ url('/login') }}">Login</a></li>
                                 <li><a href="{{ url('/reset') }}">Reset Password</a></li>
                             </ul>
                         </li>
