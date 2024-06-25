@@ -22,42 +22,57 @@
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
                         <li class="menu-header">Dashboard</li>
-                        <li><a class="nav-link" href="{{ url('/') }}"><i class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i><span>Dashboard</span></a></li>
-                        <li><a class="nav-link" href="{{ url('/pengumuman') }}"><i class="ion ion-speakerphone"></i><span>Pengumuman</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/') }}"><i class="ion ion-speedometer"
+                                    data-pack="default" data-tags="travel, accelerate"></i><span>Dashboard</span></a>
+                        </li>
+                        <li><a class="nav-link" href="{{ url('/pengumuman') }}"><i
+                                    class="ion ion-speakerphone"></i><span>Pengumuman</span></a></li>
 
                         <li class="menu-header">Manajemen Pengguna</li>
                         <li class="nav-item dropdown active">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                     class="ion ion-ios-paper"></i> <span>Data Pengguna</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/data-pengguna/admin') }}"><span>Admin</span></a></li>
-                                <li><a class="nav-link" href="{{ url('/data-pengguna/dosen') }}"><span>Dosen</span></a></li>
-                                <li class="active"><a class="nav-link" href="{{ url('/data-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
+                                <li><a class="nav-link" href="{{ url('/data-pengguna/admin') }}"><span>Admin</span></a>
+                                </li>
+                                <li><a class="nav-link" href="{{ url('/data-pengguna/dosen') }}"><span>Dosen</span></a>
+                                </li>
+                                <li class="active"><a class="nav-link"
+                                        href="{{ url('/data-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                     class="ion ion-android-person"></i> <span>Kelola Pengguna</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/kelola-pengguna/admin') }}"><span>Admin</span></a></li>
-                                <li><a class="nav-link" href="{{ url('/kelola-pengguna/dosen') }}"><span>Dosen</span></a></li>
-                                <li><a class="nav-link" href="{{ url('/kelola-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
+                                <li><a class="nav-link"
+                                        href="{{ url('/kelola-pengguna/admin') }}"><span>Admin</span></a></li>
+                                <li><a class="nav-link"
+                                        href="{{ url('/kelola-pengguna/dosen') }}"><span>Dosen</span></a></li>
+                                <li><a class="nav-link"
+                                        href="{{ url('/kelola-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
                             </ul>
                         </li>
 
                         <li class="menu-header">Manajemen Magang</li>
                         <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Magang</span></a>
+                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                                    class="fas fa-columns"></i> <span>Magang</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a></li>
+                                <li><a class="nav-link"
+                                        href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a>
+                                </li>
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
-                            <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i><span>Data Bimbingan</span></a></li>
-                            <li><a class="nav-link" href="{{  url('/admin/logbook/index') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i
+                                    class="ion ion-android-list"></i><span>Data Bimbingan</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/admin/logbook/index') }}"><i class="ion ion-clipboard"
+                                    data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
                         </li>
 
                         <li class="menu-header">Finalisasi Magang</li>
-                        <li><a class="nav-link" href="{{ url('/admin/laporan-magang-mahasiswa') }}"><i class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
+                        <li><a class="nav-link" href="{{ url('/admin/laporan-magang-mahasiswa') }}"><i
+                                    class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
 
                         <li class="menu-header">Lainnya</li>
                         <li>
@@ -93,9 +108,11 @@
                                     <div class="col-md-6 mx-2 my-auto">
                                         <!-- Tambah data -->
                                         <button type="submit" class="btn btn-success">
-                                            <a href="{{ url('/data-pengguna/mahasiswa/create') }}" class="text-decoration-none text-white">
+                                            <a href="{{ url('/data-pengguna/mahasiswa/create') }}"
+                                                class="text-decoration-none text-white">
                                                 <span>
-                                                    <i class="ion ion-plus-circled" data-pack="default" data-tags="add, include, new, invite, +">
+                                                    <i class="ion ion-plus-circled" data-pack="default"
+                                                        data-tags="add, include, new, invite, +">
                                                     </i>
                                                 </span>
                                                 Tambah Data
@@ -124,36 +141,46 @@
                                                     $no = 1;
                                                 @endphp
                                                 <tbody>
-                                                    @foreach ( $mahasiswa as $mhs )
-                                                    <tr>
+                                                    @foreach ($mahasiswa as $mhs)
+                                                        <tr>
 
-                                                        <td>{{ $mhs->nim }}</td>
-                                                        <td>{{ $mhs->nama }}</td>
-                                                        <td>{{ $mhs->kelas }}</td>
-                                                        <td>{{ $mhs->jurusan }}</td>
-                                                        <td>{{ $mhs->email }}</td>
-                                                        <td>{{ $mhs->telp }}</td>
-                                                        <td>{{ $mhs->alamat }}</td>
-                                                        <td>{{ $mhs->role }}</td>
-                                                        <td>
-                                                            <div class="d-flex justify-content-center align-items-center">
-                                                                <a href="{{ url('/data-pengguna/mahasiswa/edit/' . $mhs->id) }}">
-                                                                    <button class="btn btn-sm btn-warning mx-1">
-                                                                        <i class="ion ion-edit" data-pack="default" data-tags="change, update, write, type, pencil"></i>
-                                                                    </button>
-                                                                </a>
+                                                            <td>{{ $mhs->nim }}</td>
+                                                            <td>{{ $mhs->nama }}</td>
+                                                            <td>{{ $mhs->kelas }}</td>
+                                                            <td>{{ $mhs->jurusan }}</td>
+                                                            <td>{{ $mhs->email }}</td>
+                                                            <td>{{ $mhs->telp }}</td>
+                                                            <td>{{ $mhs->alamat }}</td>
+                                                            <td>{{ $mhs->role }}</td>
+                                                            <td>
+                                                                <div
+                                                                    class="d-flex justify-content-center align-items-center">
+                                                                    <a
+                                                                        href="{{ url('/data-pengguna/mahasiswa/edit/' . $mhs->id) }}">
+                                                                        <button class="btn btn-sm btn-warning mx-1">
+                                                                            <i class="ion ion-edit"
+                                                                                data-pack="default"
+                                                                                data-tags="change, update, write, type, pencil"></i>
+                                                                        </button>
+                                                                    </a>
 
-                                                                <form id="delete-form-{{ $mhs->id }}" action="{{ url('/data-pengguna/mahasiswa/' . $mhs->id) }}" method="POST">
-                                                                    @method('DELETE')
-                                                                    @csrf
-                                                                    <button type="button" class="btn btn-sm btn-danger mx-1 swal-6" data-id="{{ $mhs->id }}">
-                                                                        <i class="ion ion-trash-a" data-pack="default" data-tags="delete, remove, dump"></i>
-                                                                    </button>
-                                                                </form>
-                                                            </div>
-                                                        </td>
+                                                                    <form id="delete-form-{{ $mhs->id }}"
+                                                                        action="{{ url('/data-pengguna/mahasiswa/' . $mhs->id) }}"
+                                                                        method="POST">
+                                                                        @method('DELETE')
+                                                                        @csrf
+                                                                        <button type="button"
+                                                                            class="btn btn-sm btn-danger mx-1 swal-6"
+                                                                            data-id="{{ $mhs->id }}">
+                                                                            <i class="ion ion-trash-a"
+                                                                                data-pack="default"
+                                                                                data-tags="delete, remove, dump"></i>
+                                                                        </button>
+                                                                    </form>
+                                                                </div>
+                                                            </td>
 
-                                                    </tr>
+                                                        </tr>
                                                     @endforeach
                                                 </tbody>
                                             </table>
@@ -175,8 +202,12 @@
 
     <!-- General JS Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="{{ asset('assets/js/stisla.js') }}"></script>

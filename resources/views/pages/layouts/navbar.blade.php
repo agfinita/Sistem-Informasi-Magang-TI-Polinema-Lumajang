@@ -20,9 +20,9 @@
                 @endif
             </a>
             <div class="dropdown-menu dropdown-list dropdown-menu-right">
-                <div class="dropdown-header">Messages
+                <div class="dropdown-header">Pesan
                     <div class="float-right">
-                        <a href="{{ route('notifications.markAllAsRead') }}">Mark All As Read</a>
+                        <a href="{{ route('notifications.markAllAsRead') }}">Tandai semua telah dibaca</a>
                     </div>
                 </div>
                 <div class="dropdown-list-content">

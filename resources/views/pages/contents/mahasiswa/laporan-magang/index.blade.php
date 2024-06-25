@@ -81,7 +81,7 @@
                                                     <div class="col-6 col-sm-2 font-weight-bold">NIM</div>
                                                     <div class="col-6 col-sm-4">: {{ $lpm->mahasiswa->nim }}</div>
                                                     <div class="col-6 col-sm-2 font-weight-bold">Bidang</div>
-                                                    <div class="col-6 col-sm-4">: Part terlupakan</div>
+                                                    <div class="col-6 col-sm-4">: -</div>
                                                 </div>
 
                                                 <div class="row justify-content-start">

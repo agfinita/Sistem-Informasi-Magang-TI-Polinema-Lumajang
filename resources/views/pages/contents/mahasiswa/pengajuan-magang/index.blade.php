@@ -111,9 +111,9 @@
                                                         <td>{{ $pm->mahasiswa_id }}</td>
                                                         <td>
                                                             @if ($pm->status == 'diproses')
-                                                                <div class="badge badge-warning">diproses</div>
+                                                                <div class="badge badge-warning">Diproses</div>
                                                             @elseif ($pm->status == 'selesai')
-                                                                <div class="badge badge-success">selesai</div>
+                                                                <div class="badge badge-success">Selesai</div>
                                                             @endif
                                                         </td>
                                                         <td>

@@ -80,7 +80,7 @@
                                                 <th>Judul</th>
                                                 <th>Tanggal</th>
                                                 <th>Penulis</th>
-                                                <th>Action</th>
+                                                <th>Aksi</th>
                                             </tr>
                                             @php
                                                 $no = 1;
