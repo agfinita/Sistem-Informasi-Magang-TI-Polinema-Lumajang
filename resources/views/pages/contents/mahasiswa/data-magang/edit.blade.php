@@ -143,7 +143,7 @@
                                             <div class="form-group row">
                                                 <label for="instansi_magang" class="col-sm-3 col-form-label">Instansi Magang</label>
                                                 <div class="col-sm-7">
-                                                    <input type="text" class="form-control" id="instansi_magang" name="instansi_magang" placeholder="Masukkan instansi magang" value="{{ $dm->pengajuanMagang->instansi_magang ?? '' }}" disabled>
+                                                    <input type="text" class="form-control" id="instansi_magang" name="instansi_magang" placeholder="Masukkan instansi magang" value="{{ $dm->pengajuanMagang->instansi_magang ?? '' }}">
                                                     @if (count($errors) > 0)
                                                         <div style="width: auto; color:red; margin-top:0.25rem;">
                                                             {{ $errors->first('instansi_magang') }}
@@ -155,7 +155,7 @@
                                             <div class="form-group row">
                                                 <label for="alamat_magang" class="col-sm-3 col-form-label">Alamat Instansi Magang</label>
                                                 <div class="col-sm-7">
-                                                    <input type="text" class="form-control" id="alamat_magang" name="alamat_magang" placeholder="Masukkan alamat instansi magang" value="{{ $dm->pengajuanMagang->alamat_magang ?? '' }}" disabled>
+                                                    <input type="text" class="form-control" id="alamat_magang" name="alamat_magang" placeholder="Masukkan alamat instansi magang" value="{{ $dm->pengajuanMagang->alamat_magang ?? '' }}">
                                                     @if (count($errors) > 0)
                                                         <div style="width: auto; color:red; margin-top:0.25rem;">
                                                             {{ $errors->first('alamat_magang') }}

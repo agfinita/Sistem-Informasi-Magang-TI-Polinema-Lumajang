@@ -14,11 +14,12 @@
             <div class="main-sidebar sidebar-style-2">
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
-                        <a href="{{ url('/') }}">Admin</a>
+                        <a href="{{ url('/dosen/dashboard') }}">{{ Auth::user()->role }}</a>
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
-                        <a href="{{ url('/') }}">SIMAG</a>
+                        <a href="{{ url('/dosen/dashboard') }}">SIMMAG</a>
                     </div>
+                    <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
                         <li class="menu-header">Dashboard</li>
                         <li><a class="nav-link" href="{{ url('/') }}"><i class="ion ion-speedometer"
@@ -56,11 +57,12 @@
                         </li>
 
                         <li class="menu-header">Manajemen Magang</li>
-                        <li class="nav-item dropdown active">
+                        <li class="nav-item dropdown">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                     class="fas fa-columns"></i> <span>Magang</span></a>
                             <ul class="dropdown-menu">
-                                <li class="active"><a class="nav-link" href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a>
+                                <li><a class="nav-link"
+                                        href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a>
                                 </li>
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
@@ -69,10 +71,11 @@
 
                         <li class="menu-header">Aktivitas Magang</li>
                         <li><a class="nav-link" href="{{  url('/admin/logbook') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
-                        <li><a class="nav-link" href="{{  url('/admin/bimbingan') }}"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
+                        <li class="active"><a class="nav-link" href="{{  url('/admin/bimbingan') }}"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
 
                         <li class="menu-header">Finalisasi Magang</li>
-                        <li><a class="nav-link" href="{{ url('/admin/laporan-magang-mahasiswa') }}"><i class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
+                        <li><a class="nav-link" href="{{ url('/admin/laporan-magang-mahasiswa') }}"><i
+                                    class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
 
                         <li class="menu-header">Lainnya</li>
                         <li>
@@ -94,24 +97,21 @@
             <div class="main-content">
                 <section class="section">
                     <div class="section-header">
-                        <h1>Pengajuan Magang Mahasiswa</h1>
+                        <h1>Bimbingan Mahasiswa</h1>
                     </div>
 
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <div class="card-header">
-                                    <h4>Kelola Permintaan Magang</h4>
-                                </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table table-striped" id="table-1">
+                                        <table class="table table-striped table-bordered" id="table-1">
                                             <thead>
                                                 <tr>
+                                                    <th class="text-center">No</th>
                                                     <th>NIM</th>
-                                                    <th>Instansi Magang</th>
-                                                    <th>Alamat Instansi Magang</th>
-                                                    <th class="text-center">Status</th>
+                                                    <th>Nama</th>
+                                                    <th>Kelas</th>
                                                     <th class="text-center">Aksi</th>
                                                 </tr>
                                             </thead>
@@ -120,36 +120,20 @@
                                                 $no = 1;
                                             @endphp
                                             <tbody>
-                                                @foreach ($pengajuanMagang as $pm)
+                                                @foreach ($dataBimbingan as $db)
                                                     <tr>
-
-                                                        <td>{{ $pm->mahasiswa_id }}</td>
-                                                        <td>{{ $pm->instansi_magang }}</td>
-                                                        <td>{{ $pm->alamat_magang }}</td>
-                                                        <td class=" d-flex justify-content-center align-items-center">
-                                                            @if ($pm->status == 'diproses')
-                                                                <div class="badge badge-warning">Diproses</div>
-                                                            @elseif ($pm->status == 'selesai')
-                                                                <div class="badge badge-success">Selesai</div>
-                                                            @endif
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex justify-content-center align-items-center">
-                                                                <a href="{{ ('/admin/mahasiswa/pengajuan-magang/create/' . $pm->id) }}">
-                                                                    <button class="btn btn-sm btn-info mx-1">
-                                                                        <i class="ion ion-compose"></i>
-                                                                    </button>
-                                                                </a>
-
-                                                                <form id="delete-form-{{ $pm->id }}" action="{{ url('/admin/mahasiswa/pengajuan-magang/' . $pm->id) }}"
-                                                                    method="POST" >
-                                                                    @method('DELETE')
-                                                                    @csrf
-                                                                    <button type="button" class="btn btn-sm btn-danger mx-1 swal-6" data-id="{{ $pm->id }}">
-                                                                        <i class="ion ion-trash-a"></i>
-                                                                    </button>
-                                                                </form>
-                                                            </div>
+                                                        <td class="text-center">{{ $no++ }}</td>
+                                                        <td>{{ $db->mahasiswa->nim }}</td>
+                                                        <td>{{ $db->mahasiswa->nama }}</td>
+                                                        <td>{{ $db->mahasiswa->kelas }}</td>
+                                                        <td class="text-center">
+                                                            <!-- Lihat detail bimbingan mahasiswa -->
+                                                            <a
+                                                                href="{{ url('/admin/bimbingan/show/' . $db->id) }}">
+                                                                <button class="btn btn-sm btn-info mx-1">
+                                                                    Detail
+                                                                </button>
+                                                            </a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

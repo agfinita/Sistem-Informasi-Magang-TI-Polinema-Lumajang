@@ -116,6 +116,7 @@
                                             </table>
                                         </div>
                                     </div>
+
                                     <div class="card-footer d-flex justify-content-end">
                                         <a href="{{ url('/dosen/logbook-mahasiswa') }}" class="btn btn-warning m-2">Batal</a>
                                     </div>

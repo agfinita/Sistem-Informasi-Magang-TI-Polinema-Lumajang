@@ -65,9 +65,12 @@
                                 </li>
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
-                            <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i><span>Data Bimbingan</span></a></li>
-                            <li><a class="nav-link" href="{{  url('/admin/logbook/index') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+                            <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i><span>Dosen Pembimbing</span></a></li>
                         </li>
+
+                        <li class="menu-header">Aktivitas Magang</li>
+                        <li><a class="nav-link" href="{{  url('/admin/logbook') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+                        <li><a class="nav-link" href="{{  url('/admin/bimbingan') }}"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
 
                         <li class="menu-header">Finalisasi Magang</li>
                         <li><a class="nav-link" href="{{ url('/admin/laporan-magang-mahasiswa') }}"><i class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
@@ -83,16 +86,6 @@
                             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
-                        </li>
-
-                        <li class="menu-header">Pages</li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown"><i class="far fa-user"></i>
-                                <span>Auth</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{ url('/forgot') }}">Forgot Password</a></li>
-                                <li><a href="{{ url('/reset') }}">Reset Password</a></li>
-                            </ul>
                         </li>
                     </ul>
                 </aside>

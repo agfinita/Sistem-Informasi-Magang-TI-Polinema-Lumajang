@@ -144,18 +144,19 @@ class DataMagangMahasiswaSideController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request);
         $validatedData = $request->validate([
-            'nim'           => 'required|exists:mahasiswa,nim',
-            'kategori'      => 'required',
-            'status_magang' => 'required',
-            'period'        => 'required',
-            'tm'            => 'required|date',
-            'ts'            => 'required|date',
-            'file'          => 'nullable|file|mimes:docx,doc,pdf',
+            'nim'               => 'required|exists:mahasiswa,nim',
+            'kategori'          => 'required',
+            'status_magang'     => 'required',
+            'period'            => 'required',
+            'tm'                => 'required|date',
+            'ts'                => 'required|date',
+            'file'              => 'nullable|file|mimes:docx,doc,pdf',
+            'instansi_magang'   => 'required|max:255',
+            'alamat_magang'     => 'required|max:255'
         ]);
 
-        $dataMagang = DataMagang::findOrFail($id);
+        $dataMagang = DataMagang::findOrFail($id);  // cari data magang berdasar id
 
         if ($request->hasFile('file')) {
             $file = $request->file('file');
@@ -182,13 +183,25 @@ class DataMagangMahasiswaSideController extends Controller
             unset($validatedData['files']);
         }
 
-        $dataMagang->update([
-            'kategori_magang'    => $validatedData['kategori'],
-            'status_magang'      => $validatedData['status_magang'],
-            'periode'            => $validatedData['period'],
-            'tanggal_mulai'      => $validatedData['tm'],
-            'tanggal_selesai'    => $validatedData['ts']
-        ]);
+        DB::transaction( function () use ($validatedData, $dataMagang) {
+            // Updata data magang
+            $dataMagang->update([
+                'kategori_magang'    => $validatedData['kategori'],
+                'status_magang'      => $validatedData['status_magang'],
+                'periode'            => $validatedData['period'],
+                'tanggal_mulai'      => $validatedData['tm'],
+                'tanggal_selesai'    => $validatedData['ts']
+            ]);
+
+            // Update pengajuan magang mahasiswa tersebut
+            $pengajuanMagang    = PengajuanMagang::where('id', $dataMagang->pengajuan_magang_id)->first();
+            if ($pengajuanMagang) {
+                $pengajuanMagang->update([
+                    'instansi_magang'   => $validatedData['instansi_magang'],
+                    'alamat_magang'     => $validatedData['alamat_magang']
+                ]);
+            }
+        });
 
         // Mengembalikan respon sukses
         return response()->json([ 'status' => 'success']);

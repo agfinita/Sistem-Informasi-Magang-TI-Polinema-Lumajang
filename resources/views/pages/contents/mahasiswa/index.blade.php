@@ -92,9 +92,7 @@
                                                     <td>{{ $p->created_at }}</td>
                                                     <td>{{ $p->created_by }}</td>
                                                     <td>
-                                                        <button class="btn btn-sm btn-info mx-1 modal-2"
-                                                            data-id="{{ $p->id }}" data-toggle="modal"
-                                                            data-target="#detailModal">
+                                                        <button class="btn btn-sm btn-info mx-1 modal-2" data-id="{{ $p->id }}" data-toggle="modal" data-target="#detailModal">
                                                             <i class="ion ion-ios-eye"></i>
                                                             Detail
                                                         </button>

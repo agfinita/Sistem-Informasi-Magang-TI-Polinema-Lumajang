@@ -28,12 +28,9 @@ class HomeController extends Controller {
         ]);
 
         // Save input ketika berhasil divalidasi
-        $credentials   = [
-            'username'  => $request->username,
-            'password'  => $request->password
-        ];
+        $credentials   = $request->only('username', 'password');
 
-        //proses pengecekan login
+        // Proses pengecekan login
         if(Auth::attempt($credentials)) {
             $user   = Auth::user();
 
@@ -58,14 +55,10 @@ class HomeController extends Controller {
                 default:
                     abort(403, 'Unauthorized action');
             }
-
-            return back()->withErrors([
-                'username'  => 'Username atau password salah!',
-                'password'  => 'Username atau password salah!',
-            ]);
         }
-
-        return back()->with('error', 'Username atau password salah!');
+        return back()
+        ->withInput($request->only('username'))
+        ->withErrors(['username'  => 'Username atau password salah!']);
     }
 
     //Logout

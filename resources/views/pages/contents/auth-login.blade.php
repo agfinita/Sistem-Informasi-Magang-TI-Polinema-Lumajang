@@ -2,6 +2,7 @@
 <html lang="en">
 
 <!-- Head --->
+
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
@@ -34,17 +35,17 @@
                         <p class="text-muted">PSDKU Politeknik Negeri Malang di Lumajang</p>
 
                         <!-- Form Login -->
-                        <form method="POST" action="{{ url('/prosesLogin') }}" autocomplete="off">
+                        <form method="POST" action="{{ url('/prosesLogin') }}">
                             @csrf
 
                             <!-- Alert error dari validasi -->
-                            @if ($errors->any())
+                            {{-- @if ($errors->any())
                                 <div class="alert alert-danger">
                                     @foreach ($errors->all() as $error)
                                         <div>{{ $error }}</div>
                                     @endforeach
                                 </div>
-                            @endif
+                            @endif --}}
 
                             <!-- Alert dari error autentikasi-->
                             @if (session('error'))
@@ -56,7 +57,11 @@
                             <div class="form-group">
                                 <label for="username">Username</label>
                                 <input id="username" type="text" class="form-control" name="username" tabindex="1"
-                                    autofocus>
+                                    value="{{ old('username') }}" autofocus>
+                                <!-- Alert error dari validasi -->
+                                @if ($errors->has('username'))
+                                    <span class="text-danger">{{ $errors->first('username') }}</span>
+                                @endif
                             </div>
 
                             <div class="form-group">
@@ -64,7 +69,11 @@
                                     <label for="password" class="control-label">Password</label>
                                 </div>
                                 <input id="password" type="password" class="form-control" name="password"
-                                    tabindex="2">
+                                    value="{{ old('password') }}" tabindex="2">
+                                <!-- Alert error dari validasi -->
+                                @if ($errors->has('password'))
+                                    <span class="text-danger">{{ $errors->first('password') }}</span>
+                                @endif
                             </div>
 
                             <div class="form-group row justify-content-between mx-auto">

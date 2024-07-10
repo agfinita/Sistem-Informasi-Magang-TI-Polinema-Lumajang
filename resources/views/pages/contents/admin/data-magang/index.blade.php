@@ -65,11 +65,12 @@
                                 <li class="active"><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data
                                         Magang</a> </li>
                             </ul>
-                        <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i
-                                    class="ion ion-android-list"></i><span>Data Bimbingan</span></a></li>
-                        <li><a class="nav-link" href="{{ url('/admin/logbook/index') }}"><i class="ion ion-clipboard"
-                                    data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+                            <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i><span>Dosen Pembimbing</span></a></li>
                         </li>
+
+                        <li class="menu-header">Aktivitas Magang</li>
+                        <li><a class="nav-link" href="{{  url('/admin/logbook') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+                        <li><a class="nav-link" href="{{  url('/admin/bimbingan') }}"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
 
                         <li class="menu-header">Finalisasi Magang</li>
                         <li><a class="nav-link" href="{{ url('/admin/laporan-magang-mahasiswa') }}"><i
@@ -129,15 +130,15 @@
                                                         <th class="text-center">NIM</th>
                                                         <th>Nama</th>
                                                         <th class="text-center">Kelas</th>
-                                                        <th class="text-center">Jurusan</th>
+                                                        {{-- <th class="text-center">Jurusan</th> --}}
                                                         <th>Kategori</th>
                                                         <th>Instansi Magang</th>
-                                                        <th>Alamat Instansi</th>
+                                                        {{-- <th>Alamat Instansi</th> --}}
                                                         <th class="text-center">Status</th>
-                                                        <th class="text-center">Periode</th>
+                                                        {{-- <th class="text-center">Periode</th>
                                                         <th class="text-center">Tanggal Dimulai</th>
-                                                        <th class="text-center">Tanggal Selesai</th>
-                                                        <th class="text-center">File LoA</th>
+                                                        <th class="text-center">Tanggal Selesai</th> --}}
+                                                        <th>File LoA</th>
                                                         <th class="text-center">Aksi</th>
                                                     </tr>
                                                 </thead>
@@ -148,18 +149,17 @@
                                                 <tbody>
                                                     @foreach ($dataMagang as $dm)
                                                         <tr>
-
                                                             <td class="text-center">{{ $dm->mahasiswa->nim ?? '-' }}
                                                             </td>
                                                             <td>{{ $dm->mahasiswa->nama ?? '-' }}</td>
                                                             <td class="text-center">{{ $dm->mahasiswa->kelas ?? '-' }}
                                                             </td>
-                                                            <td class="text-center">
-                                                                {{ $dm->mahasiswa->jurusan ?? '-' }}</td>
+                                                            {{-- <td class="text-center">
+                                                                {{ $dm->mahasiswa->jurusan ?? '-' }}</td> --}}
                                                             <td>{{ $dm->kategori_magang }}</td>
                                                             <td>{{ $dm->pengajuanMagang->instansi_magang ?? '-' }}
                                                             </td>
-                                                            <td>{{ $dm->pengajuanMagang->alamat_magang ?? '-' }}</td>
+                                                            {{-- <td>{{ $dm->pengajuanMagang->alamat_magang ?? '-' }}</td> --}}
                                                             <td class="text-center">
                                                                 @if ($dm->status_magang == 'selesai')
                                                                     <div class="badge badge-success">Selesai</div>
@@ -170,9 +170,9 @@
                                                                     <div class="badge badge-info">Belum dimulai</div>
                                                                 @endif
                                                             </td>
-                                                            <td class="text-center">{{ $dm->periode }}</td>
+                                                            {{-- <td class="text-center">{{ $dm->periode }}</td>
                                                             <td class="text-center">{{ $dm->tanggal_mulai }}</td>
-                                                            <td class="text-center">{{ $dm->tanggal_selesai }}</td>
+                                                            <td class="text-center">{{ $dm->tanggal_selesai }}</td> --}}
                                                             <td>
                                                                 @if ($dm->files)
                                                                     <a href="#"
@@ -181,32 +181,24 @@
                                                                     <h5> - </h5>
                                                                 @endif
                                                             </td>
-                                                            <td
-                                                                class="d-flex justify-content-center align-items-center">
-                                                                <!-- Hapus -->
-                                                                <form id="delete-form-{{ $dm->id }}"
-                                                                    action="{{ url('/admin/data-magang/' . $dm->id) }}"
-                                                                    method="POST">
-                                                                    @method('DELETE')
-                                                                    @csrf
-                                                                    <button type="button"
-                                                                        class="btn btn-sm btn-danger mx-1 swal-6"
-                                                                        data-id="{{ $dm->id }}">
-                                                                        <i class="ion ion-trash-a" data-pack="default"
-                                                                            data-tags="delete, remove, dump"></i>
+                                                            <td class="d-flex justify-content-center align-items-center">
+                                                                <div class="row">
+                                                                    <!-- Lihat detail -->
+                                                                    <button class="btn btn-sm btn-info mx-1 modal-3" data-id="{{ $dm->id }}" data-toggle="modal" data-target="#detailModal1">
+                                                                        <i class="ion ion-ios-eye"></i>
                                                                     </button>
-                                                                </form>
-                                                                {{-- <div class="row">
-                                                                    <!-- Update -->
-                                                                    <a
-                                                                        href="{{ url('/updateDataMahasiswa/' . $dm->id) }}">
-                                                                        <button class="btn btn-sm btn-warning mx-1">
-                                                                            <i class="ion ion-edit" data-pack="default"
-                                                                                data-tags="change, update, write, type, pencil"></i>
-                                                                        </button>
-                                                                    </a>
 
-                                                                </div> --}}
+                                                                    <!-- Hapus -->
+                                                                    <form id="delete-form-{{ $dm->id }}"
+                                                                        action="{{ url('/admin/data-magang/' . $dm->id) }}"
+                                                                        method="POST">
+                                                                        @method('DELETE')
+                                                                        @csrf
+                                                                        <button type="button" class="btn btn-sm btn-danger mx-1 swal-6" data-id="{{ $dm->id }}">
+                                                                            <i class="ion ion-trash-a" data-pack="default" data-tags="delete, remove, dump"></i>
+                                                                        </button>
+                                                                    </form>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -223,6 +215,26 @@
 
             <!-- Footer -->
             @include('pages.layouts.footer')
+
+            <!-- Modal data magang -->
+            <div class="modal fade" id="detailModal1" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="detailModalLabel">Detail Data Magang Mahasiswa</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Content di sini via AJAX -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">Keluar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -251,6 +263,7 @@
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
+    <script src="{{ asset('assets/js/page/bootstrap-modal.js') }}"></script>
 
     <script>
         function openFile(url) {

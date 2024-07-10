@@ -97,6 +97,7 @@
                                                         <th class="text-center">No</th>
                                                         <th>NIM</th>
                                                         <th>Status</th>
+                                                        <th>Tanggal</th>
                                                         <th>Surat Pengantar Magang</th>
                                                     </tr>
                                                 </thead>
@@ -116,6 +117,7 @@
                                                                 <div class="badge badge-success">Selesai</div>
                                                             @endif
                                                         </td>
+                                                        <td>{{ date('d-m-Y', strtotime($pm->created_at)) }}</td>
                                                         <td>
                                                             @if ($pm->files)
                                                             <a href="{{ asset('storage/' . $pm->files) }}" download>{{ basename($pm->files) }}</a>

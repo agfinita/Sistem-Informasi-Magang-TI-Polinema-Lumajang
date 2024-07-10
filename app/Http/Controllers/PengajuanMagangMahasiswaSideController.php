@@ -22,7 +22,7 @@ class PengajuanMagangMahasiswaSideController extends Controller
         $mahasiswa_id = auth()->user()->username;
 
         $pengajuanMagang = DB::table('pengajuan_magang')
-            ->select('id', 'mahasiswa_id', 'instansi_magang', 'alamat_magang', 'status', 'files')
+            ->select('id', 'mahasiswa_id', 'instansi_magang', 'alamat_magang', 'status', 'files', 'created_at')
             ->orderBy('created_at', 'desc')
             ->where('mahasiswa_id', $mahasiswa_id)
             ->get();

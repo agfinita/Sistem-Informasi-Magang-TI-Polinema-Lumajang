@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Logbook;
+use App\Models\Bimbingan;
 use Illuminate\Http\Request;
 use App\Models\DataBimbingan;
 
-class LogbookAdminSideController extends Controller
+class BimbinganAdminSideController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,11 +14,10 @@ class LogbookAdminSideController extends Controller
     public function index()
     {
         // Ambil data mahasiswa melalui data bimbingannya
-        $dataBimbingan  = DataBimbingan::select('id','mahasiswa_id')
-                        ->with('mahasiswa')
-                        ->get();
-
-        return view('pages.contents.admin.logbook.index', compact('dataBimbingan'));
+        $dataBimbingan  = DataBimbingan::select('id', 'mahasiswa_id')
+                            ->with('mahasiswa')
+                            ->get();
+        return view('pages.contents.admin.bimbingan.index', compact('dataBimbingan'));
     }
 
     /**
@@ -43,20 +42,19 @@ class LogbookAdminSideController extends Controller
     public function show($id)
     {
         // Ambil id data bimbingan mahasiswa
-        $dataBimbingan = DataBimbingan::findOrFail($id);
+        $dataBimbingan  = DataBimbingan::findOrFail($id);
 
-        // Ambil data logbook mahasiswa berdasarkan id data bimbingan
-        $logbook        = Logbook::where('data_bimbingan_id', $dataBimbingan->id)
-                    ->with('dataBimbingan')
-                    ->get();
-
-        return view('pages.contents.admin.logbook.show', compact('logbook', 'dataBimbingan'));
+        // Ambil data bimbingan mahasiswa berdasarkan id data bimbingan
+        $bimbingan      = Bimbingan::where('data_bimbingan_id', $dataBimbingan->id)
+                            ->with('dataBimbingan')
+                            ->get();
+        return view('pages.contents.admin.bimbingan.show', compact('bimbingan', 'dataBimbingan'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Logbook $logbook)
+    public function edit(Bimbingan $bimbingan)
     {
         //
     }
@@ -64,7 +62,7 @@ class LogbookAdminSideController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Logbook $logbook)
+    public function update(Request $request, Bimbingan $bimbingan)
     {
         //
     }
@@ -72,7 +70,7 @@ class LogbookAdminSideController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Logbook $logbook)
+    public function destroy(Bimbingan $bimbingan)
     {
         //
     }

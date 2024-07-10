@@ -12,7 +12,7 @@
 
     <ul class="navbar-nav navbar-right">
         <!-- Notification -->
-        <li class="dropdown dropdown-list-toggle">
+        {{-- <li class="dropdown dropdown-list-toggle">
             <a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle {{ Auth::check() && Auth::user()->notifications->where('read', false)->count() > 0 ? 'beep' : '' }}">
                 <i class="far fa-envelope"></i>
                 @if(Auth::check() && Auth::user()->notifications->where('read', false)->count() > 0)
@@ -36,7 +36,7 @@
                     @endforeach
                 </div>
             </div>
-        </li>
+        </li> --}}
 
         <li class="dropdown">
             <!-- User  avatar -->
@@ -48,9 +48,10 @@
                 <!-- Waktu login user -->
                 <div class="dropdown-title">Logged in {{ $timeAgo }}</div>
 
-                <a href="features-profile.html" class="dropdown-item has-icon">
+                <!-- Profile -->
+                {{-- <a href="features-profile.html" class="dropdown-item has-icon">
                     <i class="far fa-user"></i> Profile
-                </a>
+                </a> --}}
 
                 <!-- Form logout -->
                 <div class="dropdown-divider"></div>

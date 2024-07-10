@@ -68,6 +68,113 @@ function formatDate(dateString) {
     return moment.utc(dateString).format('DD-MM-YYYY HH:mm:ss');
 }
 
+// Modal detail data magang mahasiswa
+$(document).ready(function() {
+    $('#detailModal1').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('id');
+
+        $.ajax({
+            url: `/admin/data-magang/${id}`,
+            method: 'GET',
+            success: function(data) {
+                if (data.error) {
+                    console.error(data.error);
+                    return;
+                }
+
+                let modalBody = `
+                    <div class="container">
+                        <div class="card-header text-center">
+                            Identitas Mahasiswa
+                        </div>
+                        <div class="row mb-2">
+                                <div class="col-8">
+                                    <b>NIM:</b>
+                                    <span>${data.mahasiswa.nim}</span>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-10">
+                                    <b>Nama:</b>
+                                    <span>${data.mahasiswa.nama}</span>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-8">
+                                    <b>Kelas:</b>
+                                    <span>${data.mahasiswa.kelas}</span>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-8">
+                                    <b>Jurusan:</b>
+                                    <span>${data.mahasiswa.jurusan}</span>
+                                </div>
+                            </div>
+
+                        <div class="card-header text-center">
+                            Data Magang
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-10">
+                                <b>Kategori:</b>
+                                <span>${data.kategori_magang}</span>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-10">
+                                <b>Instansi Magang:</b>
+                                <span>${data.pengajuan_magang.instansi_magang}</span>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-12">
+                                <b>Alamat Instansi:</b>
+                                <span>${data.pengajuan_magang.alamat_magang}</span>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-8">
+                                <b>Status Magang:</b>
+                                <span>${data.status_magang}</span>
+                            </div>
+                        </div>
+
+                        <div class="card-header text-center">
+                            Periode Magang
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <b>Periode:</b>
+                                <span>${data.periode}</span>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <b>Tanggal Mulai:</b>
+                                <span>${data.tanggal_mulai}</span>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <b>Tanggal Selesai:</b>
+                                <span>${data.tanggal_selesai}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                $('#detailModal1 .modal-body').html(modalBody);
+            },
+            error: function(xhr) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+});
+
+
 // $("#modal-2").fireModal({
 //     body: 'Modal body text goes here.',
 //     center: true

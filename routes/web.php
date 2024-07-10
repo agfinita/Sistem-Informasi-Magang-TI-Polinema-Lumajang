@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BimbinganAdminSideController;
 use App\Http\Controllers\BimbinganDosenSideController;
 use App\Http\Controllers\BimbinganMahasiswaSideController;
 use Illuminate\Support\Facades\Route;
@@ -86,6 +87,7 @@ Route::group(['middleware' => 'role'], function () {
 
     // Data Magang - Admin Side
     Route::resource('/admin/data-magang', DataMagangAdminSideController::class)->except('show', 'create', 'edit', 'update', 'store');
+    Route::get('/admin/data-magang/{id}', [DataMagangAdminSideController::class, 'showDataMagangMhs']);
 
     // Pengajuan Magang - Admin Side
     Route::resource('/admin/mahasiswa/pengajuan-magang', PengajuanMagangAdminSideController::class)->except('show', 'update', 'edit');
@@ -101,7 +103,12 @@ Route::group(['middleware' => 'role'], function () {
     Route::get('/admin/laporan-magang-mahasiswa', [LaporanMagangAdminSideController::class, 'index']);
 
     // Logbook - Admin Side
-    Route::resource('/admin/logbook/index', LogbookAdminSideController::class)->except('create');
+    Route::resource('/admin/logbook', LogbookAdminSideController::class)->except('create', 'store', 'edit', 'update', 'destroy');
+    Route::get('/admin/logbook/show/{id}', [LogbookAdminSideController::class, 'show']);
+
+    // Bimbingan - Admin Side
+    Route::resource('/admin/bimbingan', BimbinganAdminSideController::class)->except('create', 'store', 'edit', 'update', 'destroy');
+    Route::get('/admin/bimbingan/show/{id}', [BimbinganAdminSideController::class, 'show']);
 
 
     // AUTH MAHASISWA

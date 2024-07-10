@@ -14,11 +14,12 @@
             <div class="main-sidebar sidebar-style-2">
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
-                        <a href="{{ url('/') }}">Admin</a>
+                        <a href="{{ url('/dosen/dashboard') }}">{{ Auth::user()->role }}</a>
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
-                        <a href="{{ url('/') }}">SIMAG</a>
+                        <a href="{{ url('/dosen/dashboard') }}">SIMMAG</a>
                     </div>
+                    <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
                         <li class="menu-header">Dashboard</li>
                         <li><a class="nav-link" href="{{ url('/') }}"><i class="ion ion-speedometer"
@@ -56,11 +57,11 @@
                         </li>
 
                         <li class="menu-header">Manajemen Magang</li>
-                        <li class="nav-item dropdown active">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                                    class="fas fa-columns"></i> <span>Magang</span></a>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Magang</span></a>
                             <ul class="dropdown-menu">
-                                <li class="active"><a class="nav-link" href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a>
+                                <li><a class="nav-link"
+                                        href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a>
                                 </li>
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
@@ -68,11 +69,11 @@
                         </li>
 
                         <li class="menu-header">Aktivitas Magang</li>
-                        <li><a class="nav-link" href="{{  url('/admin/logbook') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+                        <li class="active"><a class="nav-link" href="{{  url('/admin/logbook') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
                         <li><a class="nav-link" href="{{  url('/admin/bimbingan') }}"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
 
                         <li class="menu-header">Finalisasi Magang</li>
-                        <li><a class="nav-link" href="{{ url('/admin/laporan-magang-mahasiswa') }}"><i class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
+                        <li ><a class="nav-link" href="{{ url('/admin/laporan-magang-mahasiswa') }}"><i class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
 
                         <li class="menu-header">Lainnya</li>
                         <li>
@@ -86,6 +87,17 @@
                                 @csrf
                             </form>
                         </li>
+
+                        <li class="menu-header">Pages</li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link has-dropdown"><i class="far fa-user"></i>
+                                <span>Auth</span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ url('/forgot') }}">Forgot Password</a></li>
+                                <li><a href="{{ url('/login') }}">Login</a></li>
+                                <li><a href="{{ url('/reset') }}">Reset Password</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </aside>
             </div>
@@ -94,67 +106,60 @@
             <div class="main-content">
                 <section class="section">
                     <div class="section-header">
-                        <h1>Pengajuan Magang Mahasiswa</h1>
+                        <h1>Log Book Aktivitas Mahasiswa</h1>
                     </div>
 
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4>Kelola Permintaan Magang</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped" id="table-1">
-                                            <thead>
-                                                <tr>
-                                                    <th>NIM</th>
-                                                    <th>Instansi Magang</th>
-                                                    <th>Alamat Instansi Magang</th>
-                                                    <th class="text-center">Status</th>
-                                                    <th class="text-center">Aksi</th>
-                                                </tr>
-                                            </thead>
+                    <div class="section-body">
+                        <div class="row">
+                            <div class="col-12 ">
+                                <div class="card">
+                                    <!-- Head Logbook -->
+                                    <div class="logbook-header text-center font-weight-bold mb-5 mt-5">
+                                        LOG BOOK AKTIVITAS HARIAN
+                                    </div>
 
-                                            @php
-                                                $no = 1;
-                                            @endphp
-                                            <tbody>
-                                                @foreach ($pengajuanMagang as $pm)
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered display nowrap" style="width:100%">
+                                                <thead>
                                                     <tr>
-
-                                                        <td>{{ $pm->mahasiswa_id }}</td>
-                                                        <td>{{ $pm->instansi_magang }}</td>
-                                                        <td>{{ $pm->alamat_magang }}</td>
-                                                        <td class=" d-flex justify-content-center align-items-center">
-                                                            @if ($pm->status == 'diproses')
-                                                                <div class="badge badge-warning">Diproses</div>
-                                                            @elseif ($pm->status == 'selesai')
-                                                                <div class="badge badge-success">Selesai</div>
-                                                            @endif
-                                                        </td>
-                                                        <td>
-                                                            <div class="d-flex justify-content-center align-items-center">
-                                                                <a href="{{ ('/admin/mahasiswa/pengajuan-magang/create/' . $pm->id) }}">
-                                                                    <button class="btn btn-sm btn-info mx-1">
-                                                                        <i class="ion ion-compose"></i>
-                                                                    </button>
-                                                                </a>
-
-                                                                <form id="delete-form-{{ $pm->id }}" action="{{ url('/admin/mahasiswa/pengajuan-magang/' . $pm->id) }}"
-                                                                    method="POST" >
-                                                                    @method('DELETE')
-                                                                    @csrf
-                                                                    <button type="button" class="btn btn-sm btn-danger mx-1 swal-6" data-id="{{ $pm->id }}">
-                                                                        <i class="ion ion-trash-a"></i>
-                                                                    </button>
-                                                                </form>
-                                                            </div>
-                                                        </td>
+                                                        <tr>
+                                                            <th class="text-center">Pertemuan Ke-</th>
+                                                            <th class="text-center">Tanggal</th>
+                                                            <th>Pembahasan</th>
+                                                            <th class="text-center">Batas Waktu</th>
+                                                            <th class="text-center">Verifikasi Dosen Pembimbing</th>
+                                                        </tr>
                                                     </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
+                                                </thead>
+
+                                                @php
+                                                    $no = 1;
+                                                @endphp
+
+                                                <tbody>
+                                                    @foreach ($bimbingan as $bm)
+                                                        <tr>
+                                                            <td class="text-center">{{ $bm->pertemuan ?? '-' }}</td>
+                                                            <td class="text-center">{{ $bm->tanggal?? '-' }}</td>
+                                                            <td>{{ $bm->pembahasan ?? '-' }}</td>
+                                                            <td class="text-center">{{ $bm->batas_waktu ?? '-' }}</td>
+                                                            <td class="text-center">
+                                                                @if ($bm->verifikasi_dosen == '1')
+                                                                    <div class="badge badge-success">Sudah diverifikasi</div>
+                                                                @else
+                                                                    <div class="badge badge-secondary">Menunggu verifikasi</div>
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                        @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-footer d-flex justify-content-end">
+                                        <a href="{{ url('/admin/bimbingan') }}" class="btn btn-warning m-2">Kembali</a>
                                     </div>
                                 </div>
                             </div>
@@ -165,7 +170,6 @@
 
             <!-- Footer -->
             @include('pages.layouts.footer')
-
         </div>
     </div>
 
@@ -183,18 +187,15 @@
 
     <!-- JS Libraies -->
     <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
+    <script>
+        var redirectUrl = "{{ url('/admin/bimbingan/index') }}";
+    </script>
 
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 
-    <!-- Data Tables -->
-    <script src="{{ asset('node_modules/datatables/media/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('node_modules/datatables.net-select-bs4/js/select.bootstrap4.min.js') }}"></script>
-
     <!-- Page Specific JS File -->
-    <script src="{{ asset('assets/js/page/modules-datatables.js') }}"></script>
     <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
 </body>
 

@@ -66,12 +66,12 @@
                                 </li>
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
-                        <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i
-                                    class="ion ion-android-list"></i><span>Data Bimbingan</span></a></li>
-                        <li class="active"><a class="nav-link" href="{{ url('/admin/logbook/index') }}"><i
-                                    class="ion ion-clipboard" data-pack="default" data-tags="write"></i>
-                                <span>Logbook</span></a></li>
+                            <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i><span>Dosen Pembimbing</span></a></li>
                         </li>
+
+                        <li class="menu-header">Aktivitas Magang</li>
+                        <li class="active"><a class="nav-link" href="{{  url('/admin/logbook') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+                        <li><a class="nav-link" href="{{  url('/admin/bimbingan') }}"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
 
                         <li class="menu-header">Finalisasi Magang</li>
                         <li><a class="nav-link" href="{{ url('/admin/laporan-magang-mahasiswa') }}"><i
@@ -89,17 +89,6 @@
                                 @csrf
                             </form>
                         </li>
-
-                        <li class="menu-header">Pages</li>
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown"><i class="far fa-user"></i>
-                                <span>Auth</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{ url('/forgot') }}">Forgot Password</a></li>
-                                <li><a href="{{ url('/login') }}">Login</a></li>
-                                <li><a href="{{ url('/reset') }}">Reset Password</a></li>
-                            </ul>
-                        </li>
                     </ul>
                 </aside>
             </div>
@@ -116,16 +105,14 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table table-striped" id="table-1">
+                                        <table class="table table-striped table-bordered" id="table-1">
                                             <thead>
                                                 <tr>
                                                     <th class="text-center">No</th>
+                                                    <th>NIM</th>
                                                     <th>Nama</th>
-                                                    <th class="text-center">Kelas</th>
-                                                    <th>Instansi Magang</th>
-                                                    <th>Kategori</th>
-                                                    <th>Dosen Pembimbing</th>
-                                                    <th>Aksi</th>
+                                                    <th>Kelas</th>
+                                                    <th class="text-center">Aksi</th>
                                                 </tr>
                                             </thead>
 
@@ -136,16 +123,13 @@
                                                 @foreach ($dataBimbingan as $db)
                                                     <tr>
                                                         <td class="text-center">{{ $no++ }}</td>
+                                                        <td>{{ $db->mahasiswa->nim }}</td>
                                                         <td>{{ $db->mahasiswa->nama }}</td>
                                                         <td>{{ $db->mahasiswa->kelas }}</td>
-                                                        <td>{{ $db->dataMagang->pengajuanMagang->instansi_magang }}
-                                                        </td>
-                                                        <td>{{ $db->dataMagang->kategori_magang }}</td>
-                                                        <td>{{ $db->dosen->nama }}</td>
-                                                        <td>
+                                                        <td class="text-center">
                                                             <!-- Lihat detail logbook mahasiswa -->
                                                             <a
-                                                                href="{{ url('/admin/logbook/index', $db->dataMagang->id) }}">
+                                                                href="{{ url('/admin/logbook/show/' . $db->id) }}">
                                                                 <button class="btn btn-sm btn-info mx-1">
                                                                     Detail
                                                                 </button>

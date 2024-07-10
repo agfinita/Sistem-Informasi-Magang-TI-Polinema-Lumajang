@@ -65,9 +65,12 @@
                                 </li>
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
-                            <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i><span>Data Bimbingan</span></a></li>
-                            <li class="active"><a class="nav-link" href="{{  url('/admin/logbook/index') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+                            <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i><span>Dosen Pembimbing</span></a></li>
                         </li>
+
+                        <li class="menu-header">Aktivitas Magang</li>
+                        <li class="active"><a class="nav-link" href="{{  url('/admin/logbook') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+                        <li><a class="nav-link" href="{{  url('/admin/bimbingan') }}"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
 
                         <li class="menu-header">Finalisasi Magang</li>
                         <li ><a class="nav-link" href="{{ url('/admin/laporan-magang-mahasiswa') }}"><i class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
@@ -120,7 +123,6 @@
                                             <table class="table table-bordered display nowrap" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        {{-- <th class="text-center">Action</th> --}}
                                                         <th class="text-center">No</th>
                                                         <th class="text-center">Tanggal</th>
                                                         <th class="text-center">Jam Mulai</th>
@@ -138,15 +140,6 @@
                                                     @foreach ($logbook as $lb)
                                                         <tr>
 
-                                                            {{-- <td class="d-flex justify-content-center align-items-center">
-                                                                <!-- Update -->
-                                                                <a href="{{ url('/dosen/logbook-mahasiswa/edit/' . $lb->id)}}">
-                                                                    <button class="btn btn-sm btn-warning mx-1">
-                                                                        <i class="ion ion-edit" data-pack="default" data-tags="change, update, write, type, pencil"></i>
-                                                                    </button>
-                                                                </a>
-                                                            </td> --}}
-
                                                             <td class="text-center">{{ $no++ }}</td>
                                                             <td class="text-center">{{ $lb->tanggal_logbook ?? '-' }}</td>
                                                             <td class="text-center">{{ $lb->jam_mulai ?? '-' }}</td>
@@ -154,19 +147,20 @@
                                                             <td>{{ $lb->kegiatan ?? '-' }}</td>
                                                             <td class="text-center">
                                                                 @if ($lb->verifikasi_dosen == '1')
-                                                                    <div class="badge badge-success">Sudah diverifikasi</div>
+                                                                <div class="badge badge-success">Sudah diverifikasi</div>
                                                                 @else
-                                                                    <h5> - </h5>
+                                                                <div class="badge badge-secondary">Menunggu verifikasi</div>
                                                                 @endif
                                                             </td>
                                                         </tr>
-                                                    @endforeach
+                                                        @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
+
                                     <div class="card-footer d-flex justify-content-end">
-                                        <a href="{{ url('/admin/logbook/index') }}" class="btn btn-warning m-2">Kembali</a>
+                                        <a href="{{ url('/admin/logbook') }}" class="btn btn-warning m-2">Kembali</a>
                                     </div>
                                 </div>
                             </div>
