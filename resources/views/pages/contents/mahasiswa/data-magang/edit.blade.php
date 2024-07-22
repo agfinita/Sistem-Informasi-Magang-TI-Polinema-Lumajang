@@ -75,7 +75,7 @@
                                         <div class="card-body">
                                             <div class="form-group row">
                                                 <label for="nim" class="col-sm-3 col-form-label">NIM</label>
-                                                <div class="col-sm-7">
+                                                <div class="col-sm-2">
                                                     <input type="text" class="form-control" id="nim" name="nim" placeholder="Masukkan NIM" value="{{ $dm->mahasiswa->nim }}" readonly>
                                                     @if (count($errors) > 0)
                                                         <div style="width: auto; color:red; margin-top:0.25rem;">
@@ -87,7 +87,7 @@
 
                                             <div class="form-group row">
                                                 <label for="nama" class="col-sm-3 col-form-label">Nama</label>
-                                                <div class="col-sm-7">
+                                                <div class="col-sm-5">
                                                     <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama" value="{{ $dm->mahasiswa->nama }}" disabled>
                                                     @if (count($errors) > 0)
                                                         <div style="width: auto; color:red; margin-top:0.25rem;">
@@ -99,7 +99,7 @@
 
                                             <div class="form-group row">
                                                 <label for="control-kelas" class="col-sm-3 col-form-label">Kelas</label>
-                                                <div class="col-sm-5">
+                                                <div class="col-sm-2">
                                                     <select class="form-control" id="control-kelas" name="control-kelas" disabled>
                                                         <option value="3A" {{ $dm->mahasiswa->kelas == '3A' ? 'selected' : '' }}>3A</option>
                                                         <option value="3B" {{ $dm->mahasiswa->kelas == '3B' ? 'selected' : '' }}>3B</option>
@@ -114,7 +114,7 @@
 
                                             <div class="form-group row">
                                                 <label for="control-jurusan" class="col-sm-3 col-form-label">Jurusan</label>
-                                                <div class="col-sm-5">
+                                                <div class="col-sm-2">
                                                     <select class="form-control" id="control-jurusan" name="control-jurusan" disabled>
                                                         <option value="D3 TI" {{ $dm->mahasiswa->jurusan == 'D3 TI' ? 'selected' : '' }}>D3 TI</option>
                                                         <option value="D4 TI" {{ $dm->mahasiswa->jurusan == 'D4 TI' ? 'selected' : '' }}>D4 TI</option>
@@ -142,7 +142,7 @@
 
                                             <div class="form-group row">
                                                 <label for="instansi_magang" class="col-sm-3 col-form-label">Instansi Magang</label>
-                                                <div class="col-sm-7">
+                                                <div class="col-sm-5">
                                                     <input type="text" class="form-control" id="instansi_magang" name="instansi_magang" placeholder="Masukkan instansi magang" value="{{ $dm->pengajuanMagang->instansi_magang ?? '' }}">
                                                     @if (count($errors) > 0)
                                                         <div style="width: auto; color:red; margin-top:0.25rem;">
@@ -154,7 +154,7 @@
 
                                             <div class="form-group row">
                                                 <label for="alamat_magang" class="col-sm-3 col-form-label">Alamat Instansi Magang</label>
-                                                <div class="col-sm-7">
+                                                <div class="col-sm-5">
                                                     <input type="text" class="form-control" id="alamat_magang" name="alamat_magang" placeholder="Masukkan alamat instansi magang" value="{{ $dm->pengajuanMagang->alamat_magang ?? '' }}">
                                                     @if (count($errors) > 0)
                                                         <div style="width: auto; color:red; margin-top:0.25rem;">
@@ -166,7 +166,7 @@
 
                                             <div class="form-group row">
                                                 <label for="status_magang" class="col-sm-3 col-form-label">Status Magang</label>
-                                                <div class="col-sm-5">
+                                                <div class="col-sm-3">
                                                     <select class="form-control" name="status_magang" id="status_magang">
                                                         <option value="belum dimulai" {{ $dm->status_magang == 'belum dimulai' ? 'selected' : '' }}>Belum dimulai</option>
                                                         <option value="sedang magang" {{ $dm->status_magang == 'sedang magang' ? 'selected' : '' }}>Sedang magang</option>

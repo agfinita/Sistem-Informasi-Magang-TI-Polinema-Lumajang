@@ -48,9 +48,12 @@ class DataMagangAdminSideController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DataMagang $dataMagang)
+    public function show($id)
     {
-        //
+        // Ambil data magang mahasiswa berdasarkan id
+        $dataMagang = DataMagang::with('mahasiswa', 'pengajuanMagang')->findOrFail($id);
+
+        return view('pages.contents.admin.data-magang.show', compact('dataMagang'));
     }
 
     /**

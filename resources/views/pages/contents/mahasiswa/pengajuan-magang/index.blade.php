@@ -80,11 +80,7 @@
                                         <!-- Tambah data -->
                                         <button type="submit" class="btn btn-success">
                                             <a href="{{ url('/mahasiswa/pengajuan-magang/create') }}" class="text-decoration-none text-white">
-                                                <span>
-                                                    <i class="ion ion-plus-circled" data-pack="default" data-tags="add, include, new, invite, +">
-                                                    </i>
-                                                </span>
-                                                Data Baru
+                                                <i class="fas fa-plus-circle"></i> Data Baru
                                             </a>
                                         </button>
                                     </div>
@@ -120,9 +116,11 @@
                                                         <td>{{ date('d-m-Y', strtotime($pm->created_at)) }}</td>
                                                         <td>
                                                             @if ($pm->files)
-                                                            <a href="{{ asset('storage/' . $pm->files) }}" download>{{ basename($pm->files) }}</a>
+                                                                <!-- Unduh -->
+                                                                <a type="button" class="btn btn-sm btn-warning" href="{{ asset('storage/' . $pm->files) }}" download><i class="fas fa-download"></i> Unduh</a>
+                                                                {{-- <a href="{{ asset('storage/' . $pm->files) }}" download>{{ basename($pm->files) }}</a> --}}
                                                             @else
-                                                            <h5> - </h5>
+                                                                <h5> - </h5>
                                                             @endif
                                                         </td>
                                                     </tr>

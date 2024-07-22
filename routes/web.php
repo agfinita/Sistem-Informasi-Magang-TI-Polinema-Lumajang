@@ -86,7 +86,9 @@ Route::group(['middleware' => 'role'], function () {
     Route::patch('/pengumuman/edit/{id}', [PengumumanAdminSideController::class,'update']);
 
     // Data Magang - Admin Side
-    Route::resource('/admin/data-magang', DataMagangAdminSideController::class)->except('show', 'create', 'edit', 'update', 'store');
+    Route::resource('/admin/data-magang', DataMagangAdminSideController::class)->except('create', 'edit', 'update', 'store');
+    Route::get('/admin/data-magang/show/{id}', [DataMagangAdminSideController::class, 'show']);
+    // Modal
     Route::get('/admin/data-magang/{id}', [DataMagangAdminSideController::class, 'showDataMagangMhs']);
 
     // Pengajuan Magang - Admin Side
@@ -145,9 +147,6 @@ Route::group(['middleware' => 'role'], function () {
     Route::resource('/dosen/dashboard', PengumumanDosenSideController::class)->except('show');
     Route::get('/dosen/dashboard/edit/{id}', [PengumumanDosenSideController::class,'edit']);
     Route::patch('/dosen/dashboard/edit/{id}', [PengumumanDosenSideController::class,'update']);
-
-    // Data Bimbingan Mahasiswa - Dosen Side
-    Route::resource('/dosen/data-bimbingan-mahasiswa', DataBimbinganDosenSideController::class)->except('create', 'store', 'show', 'edit', 'update', 'destroy');
 
     // Data Magang Mahasiswa - Dosen Side
     Route::get('/dosen/data-magang-mahasiswa', [DataMagangDosenSideController::class, 'index']);

@@ -74,14 +74,14 @@
                                         <div class="card-body">
                                             <div class="form-group row">
                                                 <label for="nim" class="col-sm-3 col-form-label">NIM</label>
-                                                <div class="col-sm-7">
+                                                <div class="col-sm-2">
                                                     <input type="text" class="form-control" id="nim" name="nim" placeholder="Masukkan NIM" value="{{ $mahasiswa->nim }}" autofocus readonly>
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label for="nama" class="col-sm-3 col-form-label">Nama</label>
-                                                <div class="col-sm-7">
+                                                <div class="col-sm-5">
                                                     <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama" value="{{ $mahasiswa->nama }}" disabled>
                                                 </div>
                                             </div>
@@ -121,14 +121,14 @@
 
                                             <div class="form-group row">
                                                 <label for="instansi_magang" class="col-sm-3 col-form-label">Instansi Magang</label>
-                                                <div class="col-sm-7">
+                                                <div class="col-sm-5">
                                                     <input type="text" class="form-control" id="instansi_magang" name="instansi_magang" placeholder="Masukkan instansi magang" value="{{ $pengajuanMagang->instansi_magang ?? '' }}" disabled>
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label for="alamat_magang" class="col-sm-3 col-form-label">Alamat Instansi Magang</label>
-                                                <div class="col-sm-7">
+                                                <div class="col-sm-5">
                                                     <input type="text" class="form-control" id="alamat_magang" name="alamat_magang" placeholder="Masukkan alamat instansi magang" value="{{ $pengajuanMagang->alamat_magang ?? '' }}" disabled>
                                                 </div>
                                             </div>

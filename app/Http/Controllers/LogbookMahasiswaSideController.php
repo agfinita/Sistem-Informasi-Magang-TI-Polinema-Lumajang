@@ -146,14 +146,9 @@ class LogbookMahasiswaSideController extends Controller
         // Menghapus data logbook
         $logbook= Logbook::findOrFail($id);
 
+        // Hapus data user
+        $logbook->delete();
 
-        DB::transaction( function () use ($logbook) {
-            // Hapus data dosen terkait user
-
-
-            // Hapus data user
-            $logbook->delete();
-        });
         // Mengembalikan respon sukses
         return redirect()->route('logbook.mahasiswa.index');
 

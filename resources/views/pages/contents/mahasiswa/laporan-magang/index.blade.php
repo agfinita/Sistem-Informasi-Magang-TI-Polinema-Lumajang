@@ -34,10 +34,11 @@
                                     class="fas fa-columns"></i> <span>Data Magang</span></a></li>
 
                         <li class="menu-header">Aktivitas Magang</li>
-                        <li><a class="nav-link" href="{{ url('/mahasiswa/bimbingan') }}"><i class="fas fa-users"></i> <span>Bimbingan</span></a>
+                        <li><a class="nav-link" href="{{ url('/mahasiswa/bimbingan') }}"><i class="fas fa-users"></i>
+                                <span>Bimbingan</span></a>
                         </li>
-                        <li><a class="nav-link" href="{{ url('/mahasiswa/logbook') }}"><i class="ion ion-clipboard" data-pack="default"
-                                    data-tags="write"></i> <span>Logbook</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/mahasiswa/logbook') }}"><i class="ion ion-clipboard"
+                                    data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
 
                         <li class="menu-header">Finalisasi Magang</li>
                         <li class="active"><a class="nav-link" href="{{ url('/mahasiswa/laporan-magang') }}"><i
@@ -76,28 +77,31 @@
 
                                     <div class="card-body">
                                         <!-- Data Mahasiswa -->
-                                            @foreach ($laporanMagang as $lpm )
-                                                <div class="row justify-content-start">
-                                                    <div class="col-6 col-sm-2 font-weight-bold">NIM</div>
-                                                    <div class="col-6 col-sm-4">: {{ $lpm->mahasiswa->nim }}</div>
-                                                    <div class="col-6 col-sm-2 font-weight-bold">Bidang</div>
-                                                    <div class="col-6 col-sm-4">: -</div>
-                                                </div>
+                                        @foreach ($laporanMagang as $lpm)
+                                            <div class="row justify-content-start">
+                                                <div class="col-6 col-sm-2 font-weight-bold">NIM</div>
+                                                <div class="col-6 col-sm-4">: {{ $lpm->mahasiswa->nim }}</div>
+                                                <div class="col-6 col-sm-2 font-weight-bold">Bidang</div>
+                                                <div class="col-6 col-sm-4">: -</div>
+                                            </div>
 
-                                                <div class="row justify-content-start">
-                                                    <div class="col-6 col-sm-2 font-weight-bold">Nama</div>
-                                                    <div class="col-6 col-sm-4">: {{ $lpm->mahasiswa->nama }}</div>
-                                                    <div class="col-6 col-sm-2 font-weight-bold">Kategori</div>
-                                                    <div class="col-6 col-sm-4">: {{ $lpm->dataMagang->kategori_magang }}</div>
+                                            <div class="row justify-content-start">
+                                                <div class="col-6 col-sm-2 font-weight-bold">Nama</div>
+                                                <div class="col-6 col-sm-4">: {{ $lpm->mahasiswa->nama }}</div>
+                                                <div class="col-6 col-sm-2 font-weight-bold">Kategori</div>
+                                                <div class="col-6 col-sm-4">: {{ $lpm->dataMagang->kategori_magang }}
                                                 </div>
+                                            </div>
 
-                                                <div class="row justify-content-start">
-                                                    <div class="col-6 col-sm-2 font-weight-bold">Dosen Pembimbing</div>
-                                                    <div class="col-6 col-sm-4">: {{ $lpm->dataBimbingan->dosen->nama ?? 'Belum ditentukan' }}</div>
-                                                    <div class="col-6 col-sm-2 font-weight-bold">Instansi</div>
-                                                    <div class="col-6 col-sm-4">: {{ $lpm->pengajuanMagang->instansi_magang }}</div>
-                                                </div>
-                                            @endforeach
+                                            <div class="row justify-content-start">
+                                                <div class="col-6 col-sm-2 font-weight-bold">Dosen Pembimbing</div>
+                                                <div class="col-6 col-sm-4">:
+                                                    {{ $lpm->dataBimbingan->dosen->nama ?? 'Belum ditentukan' }}</div>
+                                                <div class="col-6 col-sm-2 font-weight-bold">Instansi</div>
+                                                <div class="col-6 col-sm-4">:
+                                                    {{ $lpm->pengajuanMagang->instansi_magang }}</div>
+                                            </div>
+                                        @endforeach
 
                                         <!-- Data Laporan Magang -->
                                         <div class="table-responsive my-5">
@@ -112,41 +116,50 @@
                                                 </thead>
 
                                                 <tbody>
-                                                    @foreach ($laporanMagang as $lm)
+                                                    @if ($laporanMagang->isEmpty())
                                                         <tr>
-                                                            <td>
-                                                                @if ($lm->laporan_magang)
-                                                                    <a href="{{ asset('storage/uploads/laporan-magang/' . $lm->laporan_magang) }}" download>{{ basename($lm->laporan_magang) }}</a>
-                                                                @else
-                                                                    <h5> - </h5>
-                                                                @endif
-                                                            </td>
-
-                                                            <td>
-                                                                @if ($lm->catatan)
-                                                                    <p>{{ $lm->catatan }}</p>
-                                                                @else
-                                                                    <h5> - </h5>
-                                                                @endif
-                                                            </td>
-
-                                                            <td>
-                                                                @if ($lm->status_laporan == 1)
-                                                                    <div class="badge badge-success">Validated</div>
-                                                                @else
-                                                                    <h5> - </h5>
-                                                                @endif
-                                                            </td>
-
-                                                            <td>
-                                                                <a href="{{ url('/mahasiswa/laporan-magang/edit/' . $lm->id)}}">
-                                                                    <button class="btn btn-sm btn-warning mx-1">
-                                                                        <i class="ion ion-edit" data-pack="default" data-tags="change, update, write, type, pencil"></i>
-                                                                    </button>
-                                                                </a>
-                                                            </td>
+                                                            <td colspan="4" class="text-center">Data tidak tersedia.</td>
                                                         </tr>
-                                                    @endforeach
+                                                    @else
+                                                        @foreach ($laporanMagang as $lm)
+                                                            <tr>
+                                                                <td>
+                                                                    @if ($lm->laporan_magang)
+                                                                        <a href="{{ asset('storage/uploads/laporan-magang/' . $lm->laporan_magang) }}"
+                                                                            download>{{ basename($lm->laporan_magang) }}</a>
+                                                                    @else
+                                                                        <h5> - </h5>
+                                                                    @endif
+                                                                </td>
+
+                                                                <td>
+                                                                    @if ($lm->catatan)
+                                                                        <p>{{ $lm->catatan }}</p>
+                                                                    @else
+                                                                        <h5> - </h5>
+                                                                    @endif
+                                                                </td>
+
+                                                                <td>
+                                                                    @if ($lm->status_laporan == 1)
+                                                                        <div class="badge badge-success">Validated</div>
+                                                                    @else
+                                                                        <h5> - </h5>
+                                                                    @endif
+                                                                </td>
+
+                                                                <td>
+                                                                    <a
+                                                                        href="{{ url('/mahasiswa/laporan-magang/edit/' . $lm->id) }}">
+                                                                        <button class="btn btn-sm btn-warning mx-1">
+                                                                            <i class="ion ion-edit" data-pack="default"
+                                                                                data-tags="change, update, write, type, pencil"></i>
+                                                                        </button>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    @endif
                                                 </tbody>
                                             </table>
                                         </div>

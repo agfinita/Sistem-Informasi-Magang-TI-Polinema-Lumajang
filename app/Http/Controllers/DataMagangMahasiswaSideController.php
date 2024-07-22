@@ -20,6 +20,9 @@ class DataMagangMahasiswaSideController extends Controller
         // Mengambil data milik mahasiswa yang sedang login
         $mahasiswa_id = auth()->user()->username;
 
+        // Cek apakah data magang untuk mahasiswa ini sudah ada
+        $dataMagangExists = DataMagang::where('mahasiswa_id', $mahasiswa_id)->exists();
+
         // Kemudian cari mahasiswa yang login di tabel data magang dan relasinya dengan tabel mahasiswa dan tabel pengajuan_magang
         $dataMagang = DataMagang::where('mahasiswa_id', $mahasiswa_id)
             ->with('mahasiswa', 'pengajuanMagang')
@@ -35,7 +38,7 @@ class DataMagangMahasiswaSideController extends Controller
             $dataBimbingan->dosen   = null;
         }
 
-        return view('pages.contents.mahasiswa.data-magang.index', compact('dataMagang', 'dataBimbingan'));
+        return view('pages.contents.mahasiswa.data-magang.index', compact('dataMagang', 'dataBimbingan', 'dataMagangExists'));
     }
 
     /**

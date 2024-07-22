@@ -22,20 +22,26 @@
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
                         <li class="menu-header">Dashboard</li>
-                        <li><a class="nav-link" href="{{ url('/mahasiswa/dashboard') }}"><i
-                                    class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i>
+                        <li><a class="nav-link" href="{{ url('/mahasiswa/dashboard') }}"><i class="ion ion-speedometer"
+                                    data-pack="default" data-tags="travel, accelerate"></i>
                                 <span>Dashboard</span></a></li>
 
                         <li class="menu-header">Magang</li>
-                        <li><a class="nav-link" href="{{ url('/mahasiswa/pengajuan-magang') }}"><i class="ion ion-archive" data-pack="default" data-tags="mail""></i> <span>Pengajuan Magang</span></a></li>
-                        <li class="active"><a class="nav-link" href="{{ url('/mahasiswa/data-magang') }}"><i class="fas fa-columns" ></i> <span>Data Magang</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/mahasiswa/pengajuan-magang') }}"><i
+                                    class="ion ion-archive" data-pack="default" data-tags="mail""></i> <span>Pengajuan
+                                    Magang</span></a></li>
+                        <li class="active"><a class="nav-link" href="{{ url('/mahasiswa/data-magang') }}"><i
+                                    class="fas fa-columns"></i> <span>Data Magang</span></a></li>
 
                         <li class="menu-header">Aktivitas Magang</li>
-                        <li><a class="nav-link" href="{{ url('/mahasiswa/bimbingan') }}"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
-                        <li><a class="nav-link" href="{{ url('/mahasiswa/logbook') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/mahasiswa/bimbingan') }}"><i class="fas fa-users"></i>
+                                <span>Bimbingan</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/mahasiswa/logbook') }}"><i class="ion ion-clipboard"
+                                    data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
 
                         <li class="menu-header">Finalisasi Magang</li>
-                        <li><a class="nav-link" href="{{ url('/mahasiswa/laporan-magang') }}"><i class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
+                        <li><a class="nav-link" href="{{ url('/mahasiswa/laporan-magang') }}"><i
+                                    class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
 
                         <li class="menu-header">Lainnya</li>
                         <li>
@@ -65,20 +71,8 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header text-danger">
-                                        <h6>*Mahasiswa dapat mengisi data magang apabila telah memperoleh surat balasan magang/Letter of Acceptance (LoA) dari instansi magang yang dituju</h6>
-                                    </div>
-
-                                    <!-- Tambah data -->
-                                    <div class="col-md-6 mx-2 my-4">
-                                        <button type="submit" class="btn btn-success">
-                                            <a href="{{ url('/mahasiswa/data-magang/create') }}" class="text-decoration-none text-white">
-                                                <span>
-                                                    <i class="ion ion-plus-circled" data-pack="default" data-tags="add, include, new, invite, +">
-                                                    </i>
-                                                </span>
-                                                Data Baru
-                                            </a>
-                                        </button>
+                                        <h6>*Mahasiswa dapat mengisi data magang apabila telah memperoleh surat balasan
+                                            magang/Letter of Acceptance (LoA) dari instansi magang yang dituju</h6>
                                     </div>
 
                                     <!-- Dosen pembimbing -->
@@ -96,63 +90,140 @@
                                     </div>
 
                                     <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-striped" id="table-1">
-                                                <thead>
-                                                    <tr>
-                                                        <th>NIM</th>
-                                                        <th>Nama</th>
-                                                        <th class="text-center">Kelas</th>
-                                                        <th class="text-center">Jurusan</th>
-                                                        <th>Kategori</th>
-                                                        <th>Instansi Magang</th>
-                                                        <th>Alamat Instansi</th>
-                                                        <th class="text-center">Status</th>
-                                                        <th class="text-center">Periode</th>
-                                                        <th class="text-center">Tanggal Dimulai</th>
-                                                        <th class="text-center">Tanggal Selesai</th>
-                                                        <th class="text-center">Aksi</th>
-                                                    </tr>
-                                                </thead>
+                                        @if ($dataMagang->isEmpty())
+                                            <p class="text-center">Data tidak tersedia.</p>
+                                        @else
+                                            @foreach ($dataMagang as $dm)
+                                                <!-- Identitas Mahasiswa -->
+                                                <fieldset class="border p-4 mb-4">
+                                                    <legend class="w-auto">Identitas Mahasiswa</legend>
+                                                    <div class="mb-3 row">
+                                                        <label class="col-sm-2 col-form-label">NIM</label>
+                                                        <div class="col-sm-10">
+                                                            <p class="form-control-plaintext">{{ $dm->mahasiswa->nim }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 row">
+                                                        <label class="col-sm-2 col-form-label">Nama</label>
+                                                        <div class="col-sm-10">
+                                                            <p class="form-control-plaintext">
+                                                                {{ $dm->mahasiswa->nama }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 row">
+                                                        <label class="col-sm-2 col-form-label">Kelas</label>
+                                                        <div class="col-sm-10">
+                                                            <p class="form-control-plaintext">
+                                                                {{ $dm->mahasiswa->kelas }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 row">
+                                                        <label class="col-sm-2 col-form-label">Jurusan</label>
+                                                        <div class="col-sm-10">
+                                                            <p class="form-control-plaintext">
+                                                                {{ $dm->mahasiswa->jurusan }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
 
-                                                <tbody>
-                                                    @foreach ( $dataMagang as $dm )
-                                                    <tr>
+                                                <!-- Data Magang -->
+                                                <fieldset class="border p-4 mb-4">
+                                                    <legend class="w-auto">Data Magang</legend>
+                                                    <div class="mb-3 row">
+                                                        <label class="col-sm-2 col-form-label">Kategori</label>
+                                                        <div class="col-sm-10">
+                                                            <p class="form-control-plaintext">
+                                                                {{ $dm->kategori_magang }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 row">
+                                                        <label class="col-sm-2 col-form-label">Bidang</label>
+                                                        <div class="col-sm-10">
+                                                            <p class="form-control-plaintext">none</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 row">
+                                                        <label class="col-sm-2 col-form-label">Instansi Magang</label>
+                                                        <div class="col-sm-10">
+                                                            <p class="form-control-plaintext">
+                                                                {{ $dm->pengajuanMagang->instansi_magang }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 row">
+                                                        <label class="col-sm-2 col-form-label">Alamat</label>
+                                                        <div class="col-sm-10">
+                                                            <p class="form-control-plaintext">
+                                                                {{ $dm->pengajuanMagang->alamat_magang }}</p>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
 
-                                                        <td>{{ $dm->mahasiswa->nim }}</td>
-                                                        <td>{{ $dm->mahasiswa->nama }}</td>
-                                                        <td class="text-center">{{ $dm->mahasiswa->kelas }}</td>
-                                                        <td class="text-center">{{ $dm->mahasiswa->jurusan }}</td>
-                                                        <td>{{ $dm->kategori_magang }}</td>
-                                                        <td>{{ $dm->pengajuanMagang->instansi_magang }}</td>
-                                                        <td>{{ $dm->pengajuanMagang->alamat_magang }}</td>
-                                                        <td class="text-center">
+                                                <!-- Periode Magang -->
+                                                <fieldset class="border p-4 mb-4">
+                                                    <legend class="w-auto">Periode Magang</legend>
+                                                    <div class="mb-3 row">
+                                                        <label class="col-sm-2 col-form-label">Status</label>
+                                                        <div class="col-sm-10">
                                                             @if ($dm->status_magang == 'selesai')
-                                                            <div class="badge badge-success">Selesai</div>
+                                                                <div class="badge badge-success">Selesai</div>
                                                             @elseif ($dm->status_magang == 'sedang magang')
-                                                            <div class="badge badge-warning">Sedang magang</div>
+                                                                <div class="badge badge-warning">Sedang magang</div>
                                                             @elseif ($dm->status_magang == 'belum dimulai')
-                                                            <div class="badge badge-info">Belum dimulai</div>
+                                                                <div class="badge badge-info">Belum dimulai</div>
                                                             @endif
-                                                        </td>
-                                                        <td class="text-center">{{ $dm->periode }}</td>
-                                                        <td class="text-center">{{ $dm->tanggal_mulai }}</td>
-                                                        <td class="text-center">{{ $dm->tanggal_selesai }}</td>
-                                                        <td class="text-center">
-                                                            <!-- Update -->
-                                                            <a href="{{ url('/mahasiswa/data-magang/edit/' . $dm->id) }}">
-                                                                <button class="btn btn-sm btn-warning mx-1">
-                                                                    <i class="ion ion-edit" data-pack="default"
-                                                                    data-tags="change, update, write, type, pencil"></i>
-                                                                </button>
-                                                            </a>
-                                                        </td>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 row">
+                                                        <label class="col-sm-2 col-form-label">Periode</label>
+                                                        <div class="col-sm-10">
+                                                            <p class="form-control-plaintext">{{ $dm->periode }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 row">
+                                                        <label class="col-sm-2 col-form-label">Tanggal Mulai</label>
+                                                        <div class="col-sm-10">
+                                                            <p class="form-control-plaintext">{{ $dm->tanggal_mulai }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 row">
+                                                        <label class="col-sm-2 col-form-label">Tanggal Selesai</label>
+                                                        <div class="col-sm-10">
+                                                            <p class="form-control-plaintext">
+                                                                {{ $dm->tanggal_selesai }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            @endforeach
+                                        @endif
+                                    </div>
 
-                                                    </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                    <div class="card-footer d-flex justify-content-end flex-wrap">
+                                        <!-- Tambah data -->
+                                        @if (!$dataMagangExists)
+                                            <a href="{{ url('/mahasiswa/data-magang/create') }}"
+                                                class="btn btn-success m-1">
+                                                <i class="fas fa-plus-circle"></i> Data Baru
+                                            </a>
+                                        @else
+                                            <button class="btn btn-success m-1 swal-5" onclick="showAlert()">
+                                                <i class="fas fa-plus-circle"></i> Data Baru
+                                            </button>
+                                            <!-- Update -->
+                                            @foreach ($dataMagang as $dm)
+                                                <a href="{{ url('/mahasiswa/data-magang/edit/' . $dm->id) }}"
+                                                    class="btn btn-warning m-1">
+                                                    <i class="ion ion-edit" data-pack="default"
+                                                        data-tags="change, update, write, type, pencil"></i> Edit Data
+                                                </a>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -167,31 +238,31 @@
         </div>
     </div>
 
-<!-- General JS Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-</script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="{{ asset('assets/js/stisla.js') }}"></script>
+    <!-- General JS Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
-<!-- JS Libraies -->
+    <!-- JS Libraies -->
+    <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
 
-<!-- Template JS File -->
-<script src="{{ asset('assets/js/scripts.js') }}"></script>
-<script src="{{ asset('assets/js/custom.js') }}"></script>
+    <!-- Template JS File -->
+    <script src="{{ asset('assets/js/scripts.js') }}"></script>
+    <script src="{{ asset('assets/js/custom.js') }}"></script>
 
-<!-- Data Tables -->
-<script src="{{ asset('node_modules/datatables/media/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('node_modules/datatables.net-select-bs4/js/select.bootstrap4.min.js') }}"></script>
+    <!-- Data Tables -->
+    <script src="{{ asset('node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('node_modules/datatables.net-select-bs4/js/select.bootstrap4.min.js') }}"></script>
 
-<!-- Page Specific JS File -->
-<script src="{{ asset('assets/js/page/modules-datatables.js') }}"></script>
+    <!-- Page Specific JS File -->
+    <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
 
 </body>
 

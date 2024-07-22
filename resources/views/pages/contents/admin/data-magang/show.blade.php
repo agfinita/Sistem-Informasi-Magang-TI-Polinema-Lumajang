@@ -65,12 +65,15 @@
                                 <li class="active"><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data
                                         Magang</a> </li>
                             </ul>
-                            <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i><span>Dosen Pembimbing</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i
+                                    class="ion ion-android-list"></i><span>Dosen Pembimbing</span></a></li>
                         </li>
 
                         <li class="menu-header">Aktivitas Magang</li>
-                        <li><a class="nav-link" href="{{  url('/admin/logbook') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
-                        <li><a class="nav-link" href="{{  url('/admin/bimbingan') }}"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/admin/logbook') }}"><i class="ion ion-clipboard"
+                                    data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/admin/bimbingan') }}"><i class="fas fa-users"></i>
+                                <span>Bimbingan</span></a></li>
 
                         <li class="menu-header">Finalisasi Magang</li>
                         <li><a class="nav-link" href="{{ url('/admin/laporan-magang-mahasiswa') }}"><i
@@ -104,60 +107,116 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4>Data Magang Mahasiswa</h4>
+                                        <h4>Detail Data Magang Mahasiswa</h4>
                                     </div>
 
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table id="example" class="display nowrap" style="width:100%">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="text-center">NIM</th>
-                                                        <th>Nama</th>
-                                                        <th class="text-center">Kelas</th>
-                                                        <th>Kategori</th>
-                                                        <th>Instansi Magang</th>
-                                                        <th class="text-center">Aksi</th>
-                                                    </tr>
-                                                </thead>
+                                    {{-- <div class="col-md-6 mx-2 my-auto">
+                                        <!-- Tambah data -->
+                                        <button type="submit" class="btn btn-success">
+                                            <a href="{{ url('/admin/data-magang/create') }}"
+                                                class="text-decoration-none text-white">
+                                                <span>
+                                                    <i class="ion ion-plus-circled" data-pack="default"
+                                                        data-tags="add, include, new, invite, +">
+                                                    </i>
+                                                </span>
+                                                Tambah Data
+                                            </a>
+                                        </button>
+                                    </div> --}}
 
-                                                @php
-                                                    $no = 1;
-                                                @endphp
-                                                <tbody>
-                                                    @foreach ($dataMagang as $dm)
-                                                        <tr>
-                                                            <td class="text-center">{{ $dm->mahasiswa->nim ?? '-' }}
-                                                            </td>
-                                                            <td>{{ $dm->mahasiswa->nama ?? '-' }}</td>
-                                                            <td class="text-center">{{ $dm->mahasiswa->kelas ?? '-' }}
-                                                            </td>
-                                                            <td>{{ $dm->kategori_magang }}</td>
-                                                            <td>{{ $dm->pengajuanMagang->instansi_magang ?? '-' }}
-                                                            </td>
-                                                            <td>
-                                                                <div class="d-flex flex-column flex-sm-row">
-                                                                    <!-- Lihat -->
-                                                                    <a type="button" class="btn btn-sm btn-primary m-1" href="{{ url('/admin/data-magang/show/' . $dm->id) }}"><i class="ion ion-ios-eye"></i></a>
-                                                                    <!-- Unduh -->
-                                                                    <a type="button" class="btn btn-sm btn-warning m-1" href="{{ asset('storage/' . $dm->files) }}" download><i class="fas fa-download"></i></a>
-                                                                    <!-- Hapus -->
-                                                                    <form id="delete-form-{{ $dm->id }}"
-                                                                        action="{{ url('/admin/data-magang/' . $dm->id) }}"
-                                                                        method="POST">
-                                                                        @method('DELETE')
-                                                                        @csrf
-                                                                        <button type="button" class="btn btn-sm btn-danger m-1 swal-6" data-id="{{ $dm->id }}">
-                                                                            <i class="ion ion-trash-a"></i>
-                                                                        </button>
-                                                                    </form>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
+                                    <div class="card-body">
+                                        @php
+                                            $fields = [
+                                                'NIM' => $dataMagang->mahasiswa->nim ?? 'null',
+                                                'Instansi' => $dataMagang->pengajuanMagang->instansi_magang ?? 'null',
+
+                                                'Nama' => $dataMagang->mahasiswa->nama ?? 'null',
+                                                'Alamat Instansi' =>
+                                                    $dataMagang->pengajuanMagang->alamat_magang ?? 'null',
+
+                                                'Kelas' => $dataMagang->mahasiswa->kelas ?? 'null',
+                                                'Periode' => $dataMagang->periode ?? 'null',
+
+                                                'Jurusan' => $dataMagang->mahasiswa->jurusan ?? 'null',
+                                                'Status Magang' => function () use ($dataMagang) {
+                                                    if ($dataMagang->status_magang == 'selesai') {
+                                                        return '<div class="badge badge-success">Selesai</div>';
+                                                    } elseif ($dataMagang->status_magang == 'sedang magang') {
+                                                        return '<div class="badge badge-warning">Sedang magang</div>';
+                                                    } elseif ($dataMagang->status_magang == 'belum dimulai') {
+                                                        return '<div class="badge badge-info">Belum dimulai</div>';
+                                                    } else {
+                                                        return 'null';
+                                                    }
+                                                },
+
+                                                'Kategori' => $dataMagang->kategori_magang ?? 'null',
+                                                'Tanggal Mulai' => $dataMagang->tanggal_mulai,
+
+                                                'Bidang' => 'Belum ada data',
+                                                'Tanggal Selesai' => $dataMagang->tanggal_selesai,
+                                            ];
+                                        @endphp
+
+                                        <div class="row">
+                                            @foreach ($fields as $label => $value)
+                                                <div class="col-6 mb-1">
+                                                    <div class="row">
+                                                        <div class="col-4 col-md-3">
+                                                            <p class="fw-bold mb-0" style="font-size: 14px;">
+                                                                {{ $label }}</p>
+                                                        </div>
+                                                        <div class="col-1">
+                                                            <p class="mb-0" style="font-size: 14px;">:</p>
+                                                        </div>
+                                                        <div class="col-7 col-md-8">
+                                                            @if (is_callable($value))
+                                                                {!! $value() !!}
+                                                            @else
+                                                                <p class="mb-0" style="font-size: 14px;">
+                                                                    {{ $value }}</p>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @if ($loop->iteration % 2 == 0)
                                         </div>
+                                        <div class="row">
+                                            @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Preview -->
+                                    <div class="card-body">
+                                        @php
+                                            $fileExtension = pathinfo($dataMagang->files, PATHINFO_EXTENSION);
+                                        @endphp
+
+                                        <div class="embed-responsive embed-responsive-16by9">
+                                            @if ($fileExtension == 'pdf')
+                                                <embed class="embed-responsive-item"
+                                                    src="{{ asset('storage/' . $dataMagang->files) }}"
+                                                    type="application/pdf">
+                                            @elseif (in_array($fileExtension, ['doc', 'docx']))
+                                                <iframe class="embed-responsive-item"
+                                                    src="https://docs.google.com/gview?url={{ asset('storage/' . $dataMagang->files) }}&embedded=true"></iframe>
+                                            @else
+                                                <p>File format not supported for preview.</p>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="card-footer d-flex justify-content-end flex-wrap">
+                                        <!-- Kembali -->
+                                        <a href="{{ url('/admin/data-magang') }}"
+                                            class="btn btn-success m-1">Kembali</a>
+                                        <!-- Unduh -->
+                                        <a type="button" class="btn btn-warning m-1"
+                                            href="{{ asset('storage/' . $dataMagang->files) }}" download><i
+                                                class="fas fa-download"></i> Unduh</a>
                                     </div>
                                 </div>
                             </div>
@@ -170,7 +229,8 @@
             @include('pages.layouts.footer')
 
             <!-- Modal data magang -->
-            <div class="modal fade" id="detailModal1" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+            {{-- <div class="modal fade" id="detailModal1" tabindex="-1" role="dialog"
+                aria-labelledby="detailModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -187,7 +247,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
     </div>
@@ -216,7 +276,6 @@
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
-    <script src="{{ asset('assets/js/page/bootstrap-modal.js') }}"></script>
 
     <script>
         function openFile(url) {

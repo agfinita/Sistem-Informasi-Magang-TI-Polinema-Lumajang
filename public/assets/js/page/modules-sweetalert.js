@@ -217,8 +217,13 @@ $(document).ready(function() {
 
 
 // Alert error message
+// $(".swal-5").click(function () {
+//     swal('Failed', 'Data tidak ditemukan!' , 'error');
+// });
+
+// Alert tidak bisa tambah data
 $(".swal-5").click(function () {
-    swal('Failed', 'Data tidak ditemukan!' , 'error');
+    swal('Gagal', 'Data magang sudah ada.' , 'error');
 });
 
 // Alert hapus data
