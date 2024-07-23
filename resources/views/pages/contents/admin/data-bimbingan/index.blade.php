@@ -135,7 +135,7 @@
                                                             <a
                                                                 href="{{ '/admin/data-bimbingan-mahasiswa/edit/' . $db->id }}">
                                                                 <button class="btn btn-sm btn-warning mx-1">
-                                                                    <i class="ion ion-compose"></i>
+                                                                    <i class="ion ion-compose"></i> Kelola
                                                                 </button>
                                                             </a>
                                                         </td>

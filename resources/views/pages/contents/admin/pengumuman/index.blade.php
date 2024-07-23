@@ -148,7 +148,7 @@
                                                                 <a href="{{ url('/pengumuman/edit/' . $p->id) }}">
                                                                     <button class="btn btn-sm btn-warning mx-1">
                                                                         <i class="ion ion-edit" data-pack="default"
-                                                                            data-tags="change, update, write, type, pencil"></i>
+                                                                            data-tags="change, update, write, type, pencil"></i> Edit
                                                                     </button>
                                                                 </a>
 
@@ -156,7 +156,7 @@
                                                                     @method('DELETE')
                                                                     @csrf
                                                                     <button type="button" class="btn btn-sm btn-danger mx-1 swal-6" data-id="{{ $p->id }}">
-                                                                        <i class="ion ion-trash-a" data-pack="default" data-tags="delete, remove, dump"></i>
+                                                                        <i class="ion ion-trash-a" data-pack="default" data-tags="delete, remove, dump"></i> Hapus
                                                                     </button>
                                                                 </form>
                                                             </div>

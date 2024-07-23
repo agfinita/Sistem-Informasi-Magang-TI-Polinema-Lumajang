@@ -137,7 +137,7 @@
                                                             <div class="d-flex justify-content-center align-items-center">
                                                                 <a href="{{ ('/admin/mahasiswa/pengajuan-magang/create/' . $pm->id) }}">
                                                                     <button class="btn btn-sm btn-info mx-1">
-                                                                        <i class="ion ion-compose"></i>
+                                                                        <i class="ion ion-compose"></i> Proses
                                                                     </button>
                                                                 </a>
 
@@ -146,7 +146,7 @@
                                                                     @method('DELETE')
                                                                     @csrf
                                                                     <button type="button" class="btn btn-sm btn-danger mx-1 swal-6" data-id="{{ $pm->id }}">
-                                                                        <i class="ion ion-trash-a"></i>
+                                                                        <i class="ion ion-trash-a"></i> Hapus
                                                                     </button>
                                                                 </form>
                                                             </div>

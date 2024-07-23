@@ -161,7 +161,7 @@
                                                                         <button class="btn btn-sm btn-warning mx-1">
                                                                             <i class="ion ion-edit"
                                                                                 data-pack="default"
-                                                                                data-tags="change, update, write, type, pencil"></i>
+                                                                                data-tags="change, update, write, type, pencil"></i> Edit
                                                                         </button>
                                                                     </a>
 
@@ -175,7 +175,7 @@
                                                                             data-id="{{ $mhs->id }}">
                                                                             <i class="ion ion-trash-a"
                                                                                 data-pack="default"
-                                                                                data-tags="delete, remove, dump"></i>
+                                                                                data-tags="delete, remove, dump"></i> Hapus
                                                                         </button>
                                                                     </form>
                                                                 </div>

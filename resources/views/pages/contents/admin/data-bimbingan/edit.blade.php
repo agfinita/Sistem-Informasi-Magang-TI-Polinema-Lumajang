@@ -155,7 +155,7 @@
 
                                         <div class="card-footer">
                                             <button type="submit" id="kirim" name="kirim" class="btn btn-primary">Simpan</button>
-                                            <a href="{{ url('/admin/data-bimbingan-mahasiswa') }}" class="btn btn-warning m-2">Batal</a>
+                                            <a href="{{ url('/admin/data-bimbingan-mahasiswa') }}" class="btn btn-warning m-2">Kembali</a>
                                         </div>
                                     </form>
                                 </div>

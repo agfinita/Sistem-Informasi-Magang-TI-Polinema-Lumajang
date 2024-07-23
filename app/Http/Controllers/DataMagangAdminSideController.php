@@ -19,16 +19,6 @@ class DataMagangAdminSideController extends Controller
         return view('pages.contents.admin.data-magang.index', compact('dataMagang'));
     }
 
-    public function showDataMagangMhs($id) {
-        $dataMagang = DataMagang::with(['mahasiswa', 'pengajuanMagang'])->find($id);
-
-        if ($dataMagang) {
-            return response()->json($dataMagang);
-        } else {
-            return response()->json(['error' => 'Data not found'], 404);
-        }
-    }
-
     /**
      * Show the form for creating a new resource.
      */

@@ -111,7 +111,7 @@
                                                         <th>Laporan Magang</th>
                                                         <th>Catatan</th>
                                                         <th>Status Laporan</th>
-                                                        <th>Aksi</th>
+                                                        <th class="text-center">Aksi</th>
                                                     </tr>
                                                 </thead>
 
@@ -148,12 +148,12 @@
                                                                     @endif
                                                                 </td>
 
-                                                                <td>
+                                                                <td class="text-center">
                                                                     <a
                                                                         href="{{ url('/mahasiswa/laporan-magang/edit/' . $lm->id) }}">
                                                                         <button class="btn btn-sm btn-warning mx-1">
                                                                             <i class="ion ion-edit" data-pack="default"
-                                                                                data-tags="change, update, write, type, pencil"></i>
+                                                                                data-tags="change, update, write, type, pencil"></i> Update
                                                                         </button>
                                                                     </a>
                                                                 </td>

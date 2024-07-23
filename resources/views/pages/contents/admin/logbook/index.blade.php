@@ -131,7 +131,7 @@
                                                             <a
                                                                 href="{{ url('/admin/logbook/show/' . $db->id) }}">
                                                                 <button class="btn btn-sm btn-info mx-1">
-                                                                    Detail
+                                                                    <i class="fas fa-eye"></i> Detail
                                                                 </button>
                                                             </a>
                                                         </td>

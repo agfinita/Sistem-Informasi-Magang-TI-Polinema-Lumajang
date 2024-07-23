@@ -89,7 +89,7 @@
                                                             <!-- Lihat detail logbook mahasiswa -->
                                                             <a href="{{ url('/dosen/logbook-mahasiswa/show', $db->dataMagang->id) }}">
                                                                 <button class="btn btn-sm btn-info mx-1">
-                                                                    Detail
+                                                                    <i class="fas fa-eye"></i> Detail
                                                                 </button>
                                                             </a>
                                                         </td>

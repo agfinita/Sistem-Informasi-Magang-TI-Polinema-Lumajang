@@ -66,14 +66,15 @@
                                                 <tr>
                                                     <th>NIM</th>
                                                     <th>Nama</th>
+                                                    <th>Kelas</th>
                                                     <th>Kategori Magang</th>
                                                     <th>Instansi</th>
                                                     <th>Dosen Pembimbing</th>
-                                                    <th>Laporan Magang</th>
+                                                    {{-- <th>Laporan Magang</th>
                                                     <th>Catatan</th>
                                                     <th>Status Laporan</th>
-                                                    <th>Status Magang</th>
-                                                    <th>Aksi</th>
+                                                    <th>Status Magang</th> --}}
+                                                    <th class="text-center">Aksi</th>
                                                 </tr>
                                             </thead>
 
@@ -85,10 +86,11 @@
                                                     <tr>
                                                         <td>{{ $lm->mahasiswa->nim }}</td>
                                                         <td>{{ $lm->mahasiswa->nama }}</td>
+                                                        <td>{{ $lm->mahasiswa->kelas}}</td>
                                                         <td>{{ $lm->dataMagang->kategori_magang }}</td>
                                                         <td>{{ $lm->dataMagang->pengajuanMagang->instansi_magang }}</td>
                                                         <td>{{ $lm->dataBimbingan->dosen->nama }}</td>
-                                                        <td>
+                                                        {{-- <td>
                                                             @if ($lm->laporan_magang)
                                                             <a href="{{ asset('storage/uploads/laporan-magang/' . $lm->laporan_magang) }}" download>{{ basename($lm->laporan_magang) }}</a>
                                                             @else
@@ -119,11 +121,15 @@
                                                             @elseif ($lm->dataMagang->status_magang == 'dihentikan')
                                                             <div class="badge badge-danger">Dihentikan</div>
                                                             @endif
-                                                        </td>
-                                                        <td>
+                                                        </td> --}}
+                                                        <td class="text-center">
+                                                            <!-- Lihat -->
+                                                            <a type="button" class="btn btn-sm btn-primary m-1" href="#"><i class="fas fa-eye"></i> Lihat</a>
+
+                                                            <!-- Edit -->
                                                             <a href="{{ url('/dosen/laporan-magang-mahasiswa/edit/' . $lm->id) }}">
                                                                 <button class="btn btn-sm btn-warning mx-1">
-                                                                    <i class="ion ion-edit" data-pack="default" data-tags="change, update, write, type, pencil"></i>
+                                                                    <i class="ion ion-edit" data-pack="default" data-tags="change, update, write, type, pencil"></i> Edit
                                                                 </button>
                                                             </a>
                                                         </td>

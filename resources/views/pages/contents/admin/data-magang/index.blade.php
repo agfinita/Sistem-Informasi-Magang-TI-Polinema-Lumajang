@@ -138,9 +138,9 @@
                                                             <td>
                                                                 <div class="d-flex flex-column flex-sm-row">
                                                                     <!-- Lihat -->
-                                                                    <a type="button" class="btn btn-sm btn-primary m-1" href="{{ url('/admin/data-magang/show/' . $dm->id) }}"><i class="ion ion-ios-eye"></i></a>
+                                                                    <a type="button" class="btn btn-sm btn-primary m-1" href="{{ url('/admin/data-magang/show/' . $dm->id) }}"><i class="ion ion-ios-eye"></i> Lihat</a>
                                                                     <!-- Unduh -->
-                                                                    <a type="button" class="btn btn-sm btn-warning m-1" href="{{ asset('storage/' . $dm->files) }}" download><i class="fas fa-download"></i></a>
+                                                                    <a type="button" class="btn btn-sm btn-warning m-1" href="{{ asset('storage/' . $dm->files) }}" download><i class="fas fa-download"></i> Unduh</a>
                                                                     <!-- Hapus -->
                                                                     <form id="delete-form-{{ $dm->id }}"
                                                                         action="{{ url('/admin/data-magang/' . $dm->id) }}"
@@ -148,7 +148,7 @@
                                                                         @method('DELETE')
                                                                         @csrf
                                                                         <button type="button" class="btn btn-sm btn-danger m-1 swal-6" data-id="{{ $dm->id }}">
-                                                                            <i class="ion ion-trash-a"></i>
+                                                                            <i class="ion ion-trash-a"></i> Hapus
                                                                         </button>
                                                                     </form>
                                                                 </div>
@@ -168,26 +168,6 @@
 
             <!-- Footer -->
             @include('pages.layouts.footer')
-
-            <!-- Modal data magang -->
-            <div class="modal fade" id="detailModal1" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="detailModalLabel">Detail Data Magang Mahasiswa</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- Content di sini via AJAX -->
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-warning" data-dismiss="modal">Keluar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
         </div>
     </div>
@@ -216,7 +196,6 @@
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
-    <script src="{{ asset('assets/js/page/bootstrap-modal.js') }}"></script>
 
     <script>
         function openFile(url) {

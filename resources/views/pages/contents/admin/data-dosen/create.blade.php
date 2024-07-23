@@ -135,7 +135,7 @@
                                         </div>
                                         <div class="card-footer">
                                             <button type="submit" id="kirim" name="kirim" class="btn btn-primary">Tambah</button>
-                                            <a href="{{ url('/data-pengguna/dosen') }}" class="btn btn-warning m-2">Batal</a>
+                                            <a href="{{ url('/data-pengguna/dosen') }}" class="btn btn-warning m-2">Kembali</a>
                                         </div>
                                     </form>
                                 </div>

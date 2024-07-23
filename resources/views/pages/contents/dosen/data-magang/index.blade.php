@@ -69,11 +69,12 @@
                                                     <th class="text-center">Kelas</th>
                                                     <th>Kategori Magang</th>
                                                     <th>Instansi</th>
-                                                    <th>Alamat Instansi</th>
+                                                    {{-- <th>Alamat Instansi</th>
                                                     <th class="text-center">Periode</th>
                                                     <th class="text-center">Tanggal Mulai</th>
-                                                    <th class="text-center">Tanggal Selesai</th>
+                                                    <th class="text-center">Tanggal Selesai</th> --}}
                                                     <th class="text-center">Status Magang</th>
+                                                    <th class="text-center">Aksi</th>
                                                 </tr>
                                             </thead>
 
@@ -88,10 +89,10 @@
                                                         <td class="text-center">{{ $db->mahasiswa->kelas }}</td>
                                                         <td>{{ $db->dataMagang->kategori_magang }}</td>
                                                         <td>{{ $db->dataMagang->pengajuanMagang->instansi_magang }}</td>
-                                                        <td>{{ $db->dataMagang->pengajuanMagang->alamat_magang }}</td>
+                                                        {{-- <td>{{ $db->dataMagang->pengajuanMagang->alamat_magang }}</td>
                                                         <td class="text-center">{{ $db->dataMagang->periode }}</td>
                                                         <td class="text-center">{{ $db->dataMagang->tanggal_mulai }}</td>
-                                                        <td class="text-center">{{ $db->dataMagang->tanggal_selesai }}</td>
+                                                        <td class="text-center">{{ $db->dataMagang->tanggal_selesai }}</td> --}}
                                                         <td class="text-center">
                                                             @if ($db->dataMagang->status_magang == 'selesai')
                                                                     <div class="badge badge-success">Selesai</div>
@@ -100,6 +101,12 @@
                                                             @elseif ($db->dataMagang->status_magang == 'belum dimulai')
                                                                     <div class="badge badge-info">Belum dimulai</div>
                                                             @endif
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <!-- Lihat detail -->
+                                                            <button class="btn btn-sm btn-info mx-1" data-id="{{ $db->dataMagang->id }}" data-toggle="modal" data-target="#detailModal1">
+                                                                <i class="fas fa-eye"></i> Detail
+                                                            </button>
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -115,6 +122,26 @@
 
             <!-- Footer -->
             @include('pages.layouts.footer')
+
+            <!-- Modal data magang -->
+            <div class="modal fade" id="detailModal1" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="detailModalLabel">Detail Data Magang Mahasiswa</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Content di sini via AJAX -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">Keluar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -147,6 +174,7 @@
     <script src="{{ asset('assets/js/page/index-0.js') }}"></script>
     <script src="{{ asset('assets/js/page/modules-datatables.js') }}"></script>
     <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
+    <script src="{{ asset('assets/js/page/bootstrap-modal.js') }}"></script>
 </body>
 
 </html>

@@ -215,7 +215,7 @@
                                             <div class="row">
                                                 <button type="submit" id="kirim" name="kirim"
                                                     class="btn btn-primary m-2">Simpan</button>
-                                                <a href="{{ url('/kelola-pengguna/dosen') }}" class="btn btn-warning m-2">Batal</a>
+                                                <a href="{{ url('/kelola-pengguna/dosen') }}" class="btn btn-warning m-2">Kembali</a>
                                             </div>
                                         </div>
                                     </form>

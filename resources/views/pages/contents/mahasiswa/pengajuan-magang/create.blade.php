@@ -119,7 +119,7 @@
                                                     <button type="submit" id="kirim" name="kirim" class="btn btn-primary">Proses permintaan</button>
                                                 </div>
                                                 <div class="col-12 col-sm-auto">
-                                                    <button type="button" class="btn btn-warning" onclick="window.history.back();">Batal</button>
+                                                    <button type="button" class="btn btn-warning" onclick="window.history.back();">Kembali</button>
                                                 </div>
                                             </div>
                                         </div>
