@@ -142,7 +142,7 @@
 
                                                                 <td>
                                                                     @if ($lm->status_laporan == 1)
-                                                                        <div class="badge badge-success">Validated</div>
+                                                                        <div class="badge badge-success">Verified</div>
                                                                     @else
                                                                         <h5> - </h5>
                                                                     @endif

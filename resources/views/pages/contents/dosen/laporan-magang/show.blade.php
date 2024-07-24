@@ -22,6 +22,7 @@
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
                         <li class="menu-header">Dashboard</li>
+<<<<<<< HEAD
                         <li><a class="nav-link" href="{{ url('/dosen/dashboard') }}"><i class="ion ion-speedometer"
                                     data-pack="default" data-tags="travel, accelerate"></i> <span>Dashboard</span></a>
                         </li>
@@ -40,6 +41,19 @@
                         <li class="menu-header">Verifikasi</li>
                         <li class="active"><a class="nav-link" href="{{ url('/dosen/laporan-magang-mahasiswa') }}"><i
                                     class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
+=======
+                        <li><a class="nav-link" href="{{ url('/dosen/dashboard') }}"><i class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i> <span>Dashboard</span></a></li>
+
+                        <li class="menu-header">Magang</li>
+                        <li><a class="nav-link" href="{{ url('/dosen/data-magang-mahasiswa') }}"><i class="fas fa-columns"></i> <span>Data Magang</span></a></li>
+
+                        <li class="menu-header">Aktivitas Magang</li>
+                        <li><a class="nav-link" href="/dosen/bimbingan-mahasiswa"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/dosen/logbook-mahasiswa') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+
+                        <li class="menu-header">Verifikasi</li>
+                        <li class="active"><a class="nav-link" href="{{ url('/dosen/laporan-magang-mahasiswa') }}"><i class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
+>>>>>>> aa5b2ed910f2b86847c223282a14084c7e45b1ca
 
                         <li class="menu-header">Lainnya</li>
                         <li>
@@ -75,6 +89,7 @@
                                     <div class="card-body">
                                         @php
                                             $fields = [
+<<<<<<< HEAD
                                                 'NIM' => $laporanMagang->mahasiswa->nim ?? 'null',
                                                 'Kategori' => $laporanMagang->dataMagang->kategori_magang ?? 'null',
 
@@ -84,6 +99,11 @@
 
                                                 'Kelas' => $laporanMagang->mahasiswa->kelas ?? 'null',
                                                 'Dosen Pembimbing' => $laporanMagang->dataBimbingan->dosen->nama ?? 'null',
+=======
+                                                'Nama' => $laporanMagang->mahasiswa->nama ?? 'null',
+                                                'Kelas' => $laporanMagang->mahasiswa->kelas ?? 'null',
+                                                'NIM' => $laporanMagang->mahasiswa->nim ?? 'null',
+>>>>>>> aa5b2ed910f2b86847c223282a14084c7e45b1ca
                                             ];
                                         @endphp
 
@@ -120,6 +140,7 @@
                                     <!-- Preview -->
                                     <div class="card-body">
                                         @php
+<<<<<<< HEAD
                                             $fileExtension = pathinfo(
                                                 $laporanMagang->laporan_magang,
                                                 PATHINFO_EXTENSION,
@@ -150,10 +171,28 @@
                                             @endif
                                         </div>
 
+=======
+                                            $fileExtension = pathinfo($laporanMagang->laporan_magang, PATHINFO_EXTENSION);
+                                        @endphp
+
+                                        <div class="embed-responsive embed-responsive-16by9">
+                                            @if ($fileExtension == 'pdf')
+                                                <embed class="embed-responsive-item"
+                                                    src="{{ asset('storage/' . $laporanMagang->laporan_magang) }}"
+                                                    type="application/pdf">
+                                            @elseif (in_array($fileExtension, ['doc', 'docx']))
+                                                <iframe class="embed-responsive-item"
+                                                    src="https://docs.google.com/gview?url={{ asset('storage/' . $laporanMagang->laporan_magang) }}&embedded=true"></iframe>
+                                            @else
+                                                <p>File format not supported for preview.</p>
+                                            @endif
+                                        </div>
+>>>>>>> aa5b2ed910f2b86847c223282a14084c7e45b1ca
                                     </div>
 
                                     <div class="card-footer d-flex justify-content-end flex-wrap">
                                         <!-- Kembali -->
+<<<<<<< HEAD
                                         <a href="{{ url('/dosen/laporan-magang-mahasiswa') }}"
                                             class="btn btn-success m-1">Kembali</a>
                                         <!-- Edit -->
@@ -164,6 +203,14 @@
                                                     data-tags="change, update, write, type, pencil"></i> Edit
                                             </button>
                                         </a>
+=======
+                                        <a href="{{ url('dosen/laporan-magang-mahasiswa') }}"
+                                            class="btn btn-success m-1">Kembali</a>
+                                        <!-- Unduh -->
+                                        <a type="button" class="btn btn-warning m-1"
+                                            href="{{ asset('storage/' . $laporanMagang->laporan_magang) }}" download><i
+                                                class="fas fa-download"></i> Unduh</a>
+>>>>>>> aa5b2ed910f2b86847c223282a14084c7e45b1ca
                                     </div>
                                 </div>
                             </div>
@@ -175,6 +222,30 @@
             <!-- Footer -->
             @include('pages.layouts.footer')
 
+<<<<<<< HEAD
+=======
+            <!-- Modal data magang -->
+            {{-- <div class="modal fade" id="detailModal1" tabindex="-1" role="dialog"
+                aria-labelledby="detailModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="detailModalLabel">Detail Data Magang Mahasiswa</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Content di sini via AJAX -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">Keluar</button>
+                        </div>
+                    </div>
+                </div>
+            </div> --}}
+
+>>>>>>> aa5b2ed910f2b86847c223282a14084c7e45b1ca
         </div>
     </div>
 

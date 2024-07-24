@@ -69,11 +69,11 @@
                                                     <th>Kelas</th>
                                                     <th>Kategori Magang</th>
                                                     <th>Instansi</th>
-                                                    <th>Dosen Pembimbing</th>
+                                                    <th class="text-center">Dosen Pembimbing</th>
                                                     {{-- <th>Laporan Magang</th>
                                                     <th>Catatan</th>
-                                                    <th>Status Laporan</th>
                                                     <th>Status Magang</th> --}}
+                                                    <th class="text-center">Status Laporan</th>
                                                     <th class="text-center">Aksi</th>
                                                 </tr>
                                             </thead>
@@ -90,6 +90,13 @@
                                                         <td>{{ $lm->dataMagang->kategori_magang }}</td>
                                                         <td>{{ $lm->dataMagang->pengajuanMagang->instansi_magang }}</td>
                                                         <td>{{ $lm->dataBimbingan->dosen->nama }}</td>
+                                                        <td class="text-center">
+                                                            @if ($lm->status_laporan == '1')
+                                                            <div class="badge badge-success">Verified</div>
+                                                            @else
+                                                            <h5> - </h5>
+                                                            @endif
+                                                        </td>
                                                         {{-- <td>
                                                             @if ($lm->laporan_magang)
                                                             <a href="{{ asset('storage/uploads/laporan-magang/' . $lm->laporan_magang) }}" download>{{ basename($lm->laporan_magang) }}</a>
@@ -100,13 +107,6 @@
                                                         <td>
                                                             @if (isset($lm->catatan))
                                                             {{ $lm->catatan }}
-                                                            @else
-                                                            <h5> - </h5>
-                                                            @endif
-                                                        </td>
-                                                        <td class="text-center">
-                                                            @if ($lm->status_laporan == '1')
-                                                            <div class="badge badge-success">Verified</div>
                                                             @else
                                                             <h5> - </h5>
                                                             @endif
@@ -124,7 +124,18 @@
                                                         </td> --}}
                                                         <td class="text-center">
                                                             <!-- Lihat -->
+<<<<<<< HEAD
                                                             <a type="button" class="btn btn-sm btn-primary m-1" href="{{ url('/dosen/laporan-magang-mahasiswa/show/' . $lm->id) }}"><i class="fas fa-eye"></i> Lihat</a>
+=======
+                                                            <a type="button" class="btn btn-sm btn-primary m-1" href="{{ url('dosen/laporan-magang-mahasiswa/show/' . $lm->id) }}"><i class="fas fa-eye"></i> Lihat</a>
+
+                                                            <!-- Edit -->
+                                                            <a href="{{ url('/dosen/laporan-magang-mahasiswa/edit/' . $lm->id) }}">
+                                                                <button class="btn btn-sm btn-warning mx-1">
+                                                                    <i class="ion ion-edit" data-pack="default" data-tags="change, update, write, type, pencil"></i> Edit
+                                                                </button>
+                                                            </a>
+>>>>>>> aa5b2ed910f2b86847c223282a14084c7e45b1ca
                                                         </td>
                                                     </tr>
                                                     @endforeach

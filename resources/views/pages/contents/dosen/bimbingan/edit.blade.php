@@ -74,7 +74,7 @@
                                                 <label for="verif" class="col-sm-3 col-form-label">Verifikasi Dosen</label>
                                                 <div class="col-sm-5">
                                                     <select class="form-control" id="verif_dosen" name="verif">
-                                                        <option value="" disabled>- Pilih status log book -</option>
+                                                        <option value="" disabled>- Pilih status bimbingan -</option>
                                                         <option value="0" {{ $bimbingan->verifikasi_dosen == 0 ? 'selected' : '' }}>Belum diverifikasi</option>
                                                         <option value="1" {{ $bimbingan->verifikasi_dosen == 1 ? 'selected' : '' }}>Verified</option>
                                                     </select>
