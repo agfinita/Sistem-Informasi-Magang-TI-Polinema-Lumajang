@@ -54,10 +54,30 @@ class LaporanMagangDosenSideController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(LaporanMagang $laporanMagang)
+    public function show($id)
     {
-        //
+        // Mengambil user yang sedang login
+        $user = Auth::user();
+
+        // Mendapatkan ID dosen dari relasi user
+        $dosen = $user->dosen;
+        $dosen_id = $dosen->id;
+
+        // Ambil laporan magang mahasiswa berdasarkan ID dan dosen yang login
+        $laporanMagang = LaporanMagang::where('id', $id)
+                            ->whereHas('dataBimbingan', function($query) use ($dosen_id) {
+                            $query->where('dosen_pembimbing_id', $dosen_id);
+                            })
+                            ->with('mahasiswa', 'pengajuanMagang', 'dataBimbingan.dosen')
+                            ->first();
+
+        if (!$laporanMagang) {
+            return redirect()->back()->with('error', 'Laporan magang tidak ditemukan.');
+        }
+
+        return view('pages.contents.dosen.laporan-magang.show', compact('laporanMagang'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

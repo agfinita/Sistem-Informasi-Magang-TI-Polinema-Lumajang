@@ -124,14 +124,7 @@
                                                         </td> --}}
                                                         <td class="text-center">
                                                             <!-- Lihat -->
-                                                            <a type="button" class="btn btn-sm btn-primary m-1" href="#"><i class="fas fa-eye"></i> Lihat</a>
-
-                                                            <!-- Edit -->
-                                                            <a href="{{ url('/dosen/laporan-magang-mahasiswa/edit/' . $lm->id) }}">
-                                                                <button class="btn btn-sm btn-warning mx-1">
-                                                                    <i class="ion ion-edit" data-pack="default" data-tags="change, update, write, type, pencil"></i> Edit
-                                                                </button>
-                                                            </a>
+                                                            <a type="button" class="btn btn-sm btn-primary m-1" href="{{ url('/dosen/laporan-magang-mahasiswa/show/' . $lm->id) }}"><i class="fas fa-eye"></i> Lihat</a>
                                                         </td>
                                                     </tr>
                                                     @endforeach

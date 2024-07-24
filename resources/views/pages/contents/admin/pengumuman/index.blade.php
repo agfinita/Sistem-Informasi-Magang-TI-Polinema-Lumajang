@@ -144,18 +144,17 @@
                                                         <td>{{ $p->created_by }}</td>
                                                         <td>{{ $p->created_at }}</td>
                                                         <td>
-                                                            <div class="d-flex justify-content-center align-items-center">
-                                                                <a href="{{ url('/pengumuman/edit/' . $p->id) }}">
-                                                                    <button class="btn btn-sm btn-warning mx-1">
-                                                                        <i class="ion ion-edit" data-pack="default"
-                                                                            data-tags="change, update, write, type, pencil"></i> Edit
+                                                            <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center">
+                                                                <a href="{{ url('/pengumuman/edit/' . $p->id) }}" class="mb-2 mb-sm-0">
+                                                                    <button class="btn btn-warning mx-1">
+                                                                        <i class="ion ion-edit" data-pack="default" data-tags="change, update, write, type, pencil"></i> Edit
                                                                     </button>
                                                                 </a>
 
-                                                                <form id="delete-form-{{ $p->id }}" action="{{ url('/pengumuman/' . $p->id) }}" method="POST">
+                                                                <form id="delete-form-{{ $p->id }}" action="{{ url('/pengumuman/' . $p->id) }}" method="POST" class="mb-2 mb-sm-0">
                                                                     @method('DELETE')
                                                                     @csrf
-                                                                    <button type="button" class="btn btn-sm btn-danger mx-1 swal-6" data-id="{{ $p->id }}">
+                                                                    <button type="button" class="btn btn-danger mx-1 swal-6" data-id="{{ $p->id }}">
                                                                         <i class="ion ion-trash-a" data-pack="default" data-tags="delete, remove, dump"></i> Hapus
                                                                     </button>
                                                                 </form>
