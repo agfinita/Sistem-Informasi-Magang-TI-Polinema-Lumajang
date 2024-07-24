@@ -118,7 +118,7 @@
 
 
                                     <!-- Preview -->
-                                    <div class="card-body">
+                                    {{-- <div class="card-body">
                                         @php
                                             $fileExtension = pathinfo(
                                                 $laporanMagang->laporan_magang,
@@ -150,6 +150,24 @@
                                             @endif
                                         </div>
 
+                                    </div> --}}
+                                    <div class="card-body">
+                                        @php
+                                            $fileExtension = pathinfo($laporanMagang->laporan_magang, PATHINFO_EXTENSION);
+                                        @endphp
+
+                                        <div class="embed-responsive embed-responsive-16by9">
+                                            @if ($fileExtension == 'pdf')
+                                                <embed class="embed-responsive-item"
+                                                    src="{{ asset('storage/' . $laporanMagang->laporan_magang) }}"
+                                                    type="application/pdf">
+                                            @elseif (in_array($fileExtension, ['doc', 'docx']))
+                                                <iframe class="embed-responsive-item"
+                                                    src="https://docs.google.com/gview?url={{ asset('storage/' . $laporanMagang->laporan_magang) }}&embedded=true"></iframe>
+                                            @else
+                                                <p>Belum ada file yang diunggah</p>
+                                            @endif
+                                        </div>
                                     </div>
 
                                     <div class="card-footer d-flex justify-content-end flex-wrap">
