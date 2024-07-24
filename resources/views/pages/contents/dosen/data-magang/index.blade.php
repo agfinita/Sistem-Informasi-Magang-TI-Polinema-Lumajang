@@ -22,24 +22,17 @@
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
                         <li class="menu-header">Dashboard</li>
-                        <li><a class="nav-link" href="{{ url('/dosen/dashboard') }}"><i class="ion ion-speedometer"
-                                    data-pack="default" data-tags="travel, accelerate"></i> <span>Dashboard</span></a>
-                        </li>
+                        <li><a class="nav-link" href="{{ url('/dosen/dashboard') }}"><i class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i> <span>Dashboard</span></a></li>
 
                         <li class="menu-header">Magang</li>
-                        <li class="active"><a class="nav-link" href="{{ url('/dosen/data-magang-mahasiswa') }}"><i
-                                    class="fas fa-columns"></i> <span>Data Magang</span></a></li>
+                        <li class="active"><a class="nav-link" href="{{ url('/dosen/data-magang-mahasiswa') }}"><i class="fas fa-columns"></i> <span>Data Magang</span></a></li>
 
                         <li class="menu-header">Aktivitas Magang</li>
-                        <li><a class="nav-link" href="/dosen/bimbingan-mahasiswa"><i class="fas fa-users"></i>
-                                <span>Bimbingan</span></a></li>
-                        <li><a class="nav-link" href="{{ url('/dosen/logbook-mahasiswa') }}"><i
-                                    class="ion ion-clipboard" data-pack="default" data-tags="write"></i>
-                                <span>Logbook</span></a></li>
+                        <li><a class="nav-link" href="/dosen/bimbingan-mahasiswa"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/dosen/logbook-mahasiswa') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
 
                         <li class="menu-header">Verifikasi</li>
-                        <li><a class="nav-link" href="{{ url('/dosen/laporan-magang-mahasiswa') }}"><i
-                                    class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
+                        <li><a class="nav-link" href="{{ url('/dosen/laporan-magang-mahasiswa') }}"><i class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
 
                         <li class="menu-header">Lainnya</li>
                         <li>
@@ -95,30 +88,26 @@
                                                         <td>{{ $db->mahasiswa->nama }}</td>
                                                         <td class="text-center">{{ $db->mahasiswa->kelas }}</td>
                                                         <td>{{ $db->dataMagang->kategori_magang }}</td>
-                                                        <td>{{ $db->dataMagang->pengajuanMagang->instansi_magang }}
-                                                        </td>
+                                                        <td>{{ $db->dataMagang->pengajuanMagang->instansi_magang }}</td>
                                                         {{-- <td>{{ $db->dataMagang->pengajuanMagang->alamat_magang }}</td>
                                                         <td class="text-center">{{ $db->dataMagang->periode }}</td>
                                                         <td class="text-center">{{ $db->dataMagang->tanggal_mulai }}</td>
                                                         <td class="text-center">{{ $db->dataMagang->tanggal_selesai }}</td> --}}
                                                         <td class="text-center">
                                                             @if ($db->dataMagang->status_magang == 'selesai')
-                                                                <div class="badge badge-success">Selesai</div>
+                                                                    <div class="badge badge-success">Selesai</div>
                                                             @elseif ($db->dataMagang->status_magang == 'sedang magang')
-                                                                <div class="badge badge-warning">Sedang magang</div>
+                                                                    <div class="badge badge-warning">Sedang magang</div>
                                                             @elseif ($db->dataMagang->status_magang == 'belum dimulai')
-                                                                <div class="badge badge-info">Belum dimulai</div>
+                                                                    <div class="badge badge-info">Belum dimulai</div>
                                                             @endif
                                                         </td>
                                                         <td class="text-center">
                                                             <!-- Lihat detail -->
-                                                            <button class="btn btn-sm btn-info mx-1"
-                                                                data-id="{{ $db->dataMagang->id }}"
-                                                                data-bs-toggle="modal" data-bs-target="#detailModal1">
+                                                            <button class="btn btn-sm btn-info mx-1" data-id="{{ $db->dataMagang->id }}" data-toggle="modal" data-target="#detailModal1">
                                                                 <i class="fas fa-eye"></i> Detail
                                                             </button>
                                                         </td>
-
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -135,8 +124,7 @@
             @include('pages.layouts.footer')
 
             <!-- Modal data magang -->
-            <div class="modal fade" id="detailModal1" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel"
-                aria-hidden="true">
+            <div class="modal fade" id="detailModal1" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">

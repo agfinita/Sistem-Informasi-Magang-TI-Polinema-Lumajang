@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DataBimbingan;
-use App\Models\DataMagang;
 use App\Models\LaporanMagang;
 use Illuminate\Support\Facades\Auth;
 
@@ -57,7 +56,6 @@ class LaporanMagangDosenSideController extends Controller
      */
     public function show($id)
     {
-<<<<<<< HEAD
         // Mengambil user yang sedang login
         $user = Auth::user();
 
@@ -76,9 +74,6 @@ class LaporanMagangDosenSideController extends Controller
         if (!$laporanMagang) {
             return redirect()->back()->with('error', 'Laporan magang tidak ditemukan.');
         }
-=======
-        $laporanMagang = LaporanMagang::with('mahasiswa', 'pengajuanMagang')->findOrFail($id);
->>>>>>> aa5b2ed910f2b86847c223282a14084c7e45b1ca
 
         return view('pages.contents.dosen.laporan-magang.show', compact('laporanMagang'));
     }
