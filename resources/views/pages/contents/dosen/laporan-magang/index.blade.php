@@ -124,7 +124,7 @@
                                                         </td> --}}
                                                         <td class="text-center">
                                                             <!-- Lihat -->
-                                                            <a type="button" class="btn btn-sm btn-primary m-1" href="{{ url('/dosen/laporan-magang-mahasiswa/show/' . $lm->id) }}"><i class="fas fa-eye"></i> Lihat</a>
+                                                            <a type="button" class="btn btn-sm btn-info m-1 detail" href="{{ url('/dosen/laporan-magang-mahasiswa/show/' . $lm->id) }}"><i class="fas fa-eye"></i></a>
                                                         </td>
                                                     </tr>
                                                     @endforeach

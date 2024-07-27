@@ -151,9 +151,8 @@
                                                                 <td class="text-center">
                                                                     <a
                                                                         href="{{ url('/mahasiswa/laporan-magang/edit/' . $lm->id) }}">
-                                                                        <button class="btn btn-sm btn-warning mx-1">
-                                                                            <i class="ion ion-edit" data-pack="default"
-                                                                                data-tags="change, update, write, type, pencil"></i> Update
+                                                                        <button class="btn btn-sm btn-warning mx-1 edit">
+                                                                            <i class="far fa-edit"></i>
                                                                         </button>
                                                                     </a>
                                                                 </td>

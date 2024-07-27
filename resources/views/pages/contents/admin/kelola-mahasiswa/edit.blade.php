@@ -43,7 +43,7 @@
                                         href="{{ url('/data-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
                             </ul>
                         </li>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown active">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                     class="ion ion-android-person"></i> <span>Kelola Pengguna</span></a>
                             <ul class="dropdown-menu">
@@ -51,7 +51,7 @@
                                         href="{{ url('/kelola-pengguna/admin') }}"><span>Admin</span></a></li>
                                 <li><a class="nav-link"
                                         href="{{ url('/kelola-pengguna/dosen') }}"><span>Dosen</span></a></li>
-                                <li><a class="nav-link"
+                                <li class="active"><a class="nav-link"
                                         href="{{ url('/kelola-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
                             </ul>
                         </li>
@@ -116,7 +116,7 @@
                                             <div class="form-group row">
                                                 <label for="username" class="col-sm-3 col-form-label">Username</label>
                                                 <div class="col-sm-9">
-                                                    <input disabled type="text" class="form-control" id="username"
+                                                    <input readonly type="text" class="form-control" id="username"
                                                         name="username" placeholder="Masukkan NIP"
                                                         value="{{ $users->username }}">
                                                 </div>

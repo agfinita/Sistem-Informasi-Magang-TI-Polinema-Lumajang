@@ -173,13 +173,12 @@
                                     <div class="card-footer d-flex justify-content-end flex-wrap">
                                         <!-- Kembali -->
                                         <a href="{{ url('/dosen/laporan-magang-mahasiswa') }}"
-                                            class="btn btn-success m-1">Kembali</a>
+                                            class="btn btn-warning m-1">Kembali</a>
                                         <!-- Edit -->
                                         <a
                                             href="{{ url('/dosen/laporan-magang-mahasiswa/edit/' . $laporanMagang->id) }}">
-                                            <button class="btn btn-warning m-1">
-                                                <i class="ion ion-edit" data-pack="default"
-                                                    data-tags="change, update, write, type, pencil"></i> Edit
+                                            <button class="btn btn-success m-1">
+                                                <i class="far fa-check-circle"></i> Validasi
                                             </button>
                                         </a>
                                     </div>

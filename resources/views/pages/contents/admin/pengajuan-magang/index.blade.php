@@ -136,8 +136,8 @@
                                                         <td>
                                                             <div class="d-flex justify-content-center align-items-center">
                                                                 <a href="{{ ('/admin/mahasiswa/pengajuan-magang/create/' . $pm->id) }}">
-                                                                    <button class="btn btn-sm btn-info mx-1">
-                                                                        <i class="ion ion-compose"></i> Proses
+                                                                    <button class="btn btn-sm btn-info mx-1 proses">
+                                                                        <i class="ion ion-compose"></i>
                                                                     </button>
                                                                 </a>
 
@@ -145,8 +145,8 @@
                                                                     method="POST" >
                                                                     @method('DELETE')
                                                                     @csrf
-                                                                    <button type="button" class="btn btn-sm btn-danger mx-1 swal-6" data-id="{{ $pm->id }}">
-                                                                        <i class="ion ion-trash-a"></i> Hapus
+                                                                    <button type="button" class="btn btn-sm btn-danger mx-1 swal-6 hapus" data-id="{{ $pm->id }}">
+                                                                        <i class="far fa-trash-alt"></i>
                                                                     </button>
                                                                 </form>
                                                             </div>

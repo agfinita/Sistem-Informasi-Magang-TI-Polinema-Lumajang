@@ -56,11 +56,11 @@
                         </li>
 
                         <li class="menu-header">Manajemen Magang</li>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown active">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                     class="fas fa-columns"></i> <span>Magang</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link"
+                                <li class="active"><a class="nav-link"
                                         href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a>
                                 </li>
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>

@@ -97,8 +97,8 @@
                                                             <td class="d-flex justify-content-center align-items-center">
                                                                 <!-- Update -->
                                                                 <a href="{{ url('/dosen/bimbingan-mahasiswa/edit/' . $bm->id)}}">
-                                                                    <button class="btn btn-sm btn-warning mx-1">
-                                                                        <i class="ion ion-edit" data-pack="default" data-tags="change, update, write, type, pencil"></i>
+                                                                    <button class="btn btn-sm btn-info mx-1 validasi">
+                                                                        <i class="far fa-check-circle"></i>
                                                                     </button>
                                                                 </a>
                                                             </td>

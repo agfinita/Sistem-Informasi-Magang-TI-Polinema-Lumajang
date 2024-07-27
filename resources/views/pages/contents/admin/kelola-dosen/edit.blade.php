@@ -43,13 +43,13 @@
                                         href="{{ url('/data-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>
                             </ul>
                         </li>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown active">
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                     class="ion ion-android-person"></i> <span>Kelola Pengguna</span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link"
                                         href="{{ url('/kelola-pengguna/admin') }}"><span>Admin</span></a></li>
-                                <li><a class="nav-link"
+                                <li class="active"><a class="nav-link"
                                         href="{{ url('/kelola-pengguna/dosen') }}"><span>Dosen</span></a></li>
                                 <li><a class="nav-link"
                                         href="{{ url('/kelola-pengguna/mahasiswa') }}"><span>Mahasiswa</span></a></li>

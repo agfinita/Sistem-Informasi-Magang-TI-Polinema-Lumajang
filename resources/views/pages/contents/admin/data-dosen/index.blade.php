@@ -151,10 +151,8 @@
                                                                     class="d-flex justify-content-center align-items-center">
                                                                     <a
                                                                         href="{{ url('/data-pengguna/dosen/edit/' . $d->id) }}">
-                                                                        <button class="btn btn-sm btn-warning mx-1">
-                                                                            <i class="ion ion-edit"
-                                                                                data-pack="default"
-                                                                                data-tags="change, update, write, type, pencil"></i> Edit
+                                                                        <button class="btn btn-sm btn-warning mx-1 edit">
+                                                                            <i class="far fa-edit"></i>
                                                                         </button>
                                                                     </a>
 
@@ -164,11 +162,9 @@
                                                                         @method('DELETE')
                                                                         @csrf
                                                                         <button type="button"
-                                                                            class="btn btn-sm btn-danger mx-1 swal-6"
+                                                                            class="btn btn-sm btn-danger mx-1 swal-6 hapus"
                                                                             data-id="{{ $d->id }}">
-                                                                            <i class="ion ion-trash-a"
-                                                                                data-pack="default"
-                                                                                data-tags="delete, remove, dump"></i> Hapus
+                                                                            <i class="far fa-trash-alt"></i>
                                                                         </button>
                                                                     </form>
                                                                 </div>

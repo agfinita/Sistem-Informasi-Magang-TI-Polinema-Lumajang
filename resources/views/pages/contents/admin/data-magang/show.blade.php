@@ -110,36 +110,18 @@
                                         <h4>Detail Data Magang Mahasiswa</h4>
                                     </div>
 
-                                    {{-- <div class="col-md-6 mx-2 my-auto">
-                                        <!-- Tambah data -->
-                                        <button type="submit" class="btn btn-success">
-                                            <a href="{{ url('/admin/data-magang/create') }}"
-                                                class="text-decoration-none text-white">
-                                                <span>
-                                                    <i class="ion ion-plus-circled" data-pack="default"
-                                                        data-tags="add, include, new, invite, +">
-                                                    </i>
-                                                </span>
-                                                Tambah Data
-                                            </a>
-                                        </button>
-                                    </div> --}}
-
                                     <div class="card-body">
                                         @php
                                             $fields = [
                                                 'NIM' => $dataMagang->mahasiswa->nim ?? 'null',
                                                 'Instansi' => $dataMagang->pengajuanMagang->instansi_magang ?? 'null',
-
                                                 'Nama' => $dataMagang->mahasiswa->nama ?? 'null',
-                                                'Alamat Instansi' =>
+                                                'Alamat' =>
                                                     $dataMagang->pengajuanMagang->alamat_magang ?? 'null',
-
                                                 'Kelas' => $dataMagang->mahasiswa->kelas ?? 'null',
                                                 'Periode' => $dataMagang->periode ?? 'null',
-
                                                 'Jurusan' => $dataMagang->mahasiswa->jurusan ?? 'null',
-                                                'Status Magang' => function () use ($dataMagang) {
+                                                'Status' => function () use ($dataMagang) {
                                                     if ($dataMagang->status_magang == 'selesai') {
                                                         return '<div class="badge badge-success">Selesai</div>';
                                                     } elseif ($dataMagang->status_magang == 'sedang magang') {
@@ -150,22 +132,21 @@
                                                         return 'null';
                                                     }
                                                 },
-
                                                 'Kategori' => $dataMagang->kategori_magang ?? 'null',
-                                                'Tanggal Mulai' => $dataMagang->tanggal_mulai,
-
+                                                'Mulai' => $dataMagang->tanggal_mulai,
                                                 'Bidang' => 'Belum ada data',
-                                                'Tanggal Selesai' => $dataMagang->tanggal_selesai,
+                                                'Selesai' => $dataMagang->tanggal_selesai,
                                             ];
                                         @endphp
 
                                         <div class="row">
                                             @foreach ($fields as $label => $value)
-                                                <div class="col-6 mb-1">
-                                                    <div class="row">
+                                                <div class="col-12 col-md-6 mb-3">
+                                                    <div class="d-flex">
                                                         <div class="col-4 col-md-3">
                                                             <p class="fw-bold mb-0" style="font-size: 14px;">
-                                                                {{ $label }}</p>
+                                                                {{ $label }}
+                                                            </p>
                                                         </div>
                                                         <div class="col-1">
                                                             <p class="mb-0" style="font-size: 14px;">:</p>
@@ -175,19 +156,15 @@
                                                                 {!! $value() !!}
                                                             @else
                                                                 <p class="mb-0" style="font-size: 14px;">
-                                                                    {{ $value }}</p>
+                                                                    {{ $value }}
+                                                                </p>
                                                             @endif
                                                         </div>
                                                     </div>
                                                 </div>
-                                                @if ($loop->iteration % 2 == 0)
-                                        </div>
-                                        <div class="row">
-                                            @endif
                                             @endforeach
                                         </div>
                                     </div>
-
 
                                     <!-- Preview -->
                                     <div class="card-body">
@@ -195,14 +172,11 @@
                                             $fileExtension = pathinfo($dataMagang->files, PATHINFO_EXTENSION);
                                         @endphp
 
-                                        <div class="embed-responsive embed-responsive-16by9">
+                                        <div class="responsive-embed">
                                             @if ($fileExtension == 'pdf')
-                                                <embed class="embed-responsive-item"
-                                                    src="{{ asset('storage/' . $dataMagang->files) }}"
-                                                    type="application/pdf">
+                                                <embed class="embed-responsive-item" src="{{ asset('storage/' . $dataMagang->files) }}" type="application/pdf">
                                             @elseif (in_array($fileExtension, ['doc', 'docx']))
-                                                <iframe class="embed-responsive-item"
-                                                    src="https://docs.google.com/gview?url={{ asset('storage/' . $dataMagang->files) }}&embedded=true"></iframe>
+                                                <iframe class="embed-responsive-item" src="https://docs.google.com/gview?url={{ asset('storage/' . $dataMagang->files) }}&embedded=true"></iframe>
                                             @else
                                                 <p>File format not supported for preview.</p>
                                             @endif
@@ -215,8 +189,9 @@
                                             class="btn btn-success m-1">Kembali</a>
                                         <!-- Unduh -->
                                         <a type="button" class="btn btn-warning m-1"
-                                            href="{{ asset('storage/' . $dataMagang->files) }}" download><i
-                                                class="fas fa-download"></i> Unduh</a>
+                                            href="{{ asset('storage/' . $dataMagang->files) }}" download>
+                                            <i class="fas fa-download"></i> Unduh
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -224,6 +199,7 @@
                     </div>
                 </section>
             </div>
+
 
             <!-- Footer -->
             @include('pages.layouts.footer')

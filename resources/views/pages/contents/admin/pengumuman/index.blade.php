@@ -61,18 +61,24 @@
                             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                                     class="fas fa-columns"></i> <span>Magang</span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a></li>
+                                <li><a class="nav-link"
+                                        href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a>
+                                </li>
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
-                            <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i><span>Dosen Pembimbing</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i
+                                    class="ion ion-android-list"></i><span>Dosen Pembimbing</span></a></li>
                         </li>
 
                         <li class="menu-header">Aktivitas Magang</li>
-                        <li><a class="nav-link" href="{{  url('/admin/logbook') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
-                        <li><a class="nav-link" href="{{  url('/admin/bimbingan') }}"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/admin/logbook') }}"><i class="ion ion-clipboard"
+                                    data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/admin/bimbingan') }}"><i class="fas fa-users"></i>
+                                <span>Bimbingan</span></a></li>
 
                         <li class="menu-header">Finalisasi Magang</li>
-                        <li><a class="nav-link" href="{{ url('/admin/laporan-magang-mahasiswa') }}"><i class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
+                        <li><a class="nav-link" href="{{ url('/admin/laporan-magang-mahasiswa') }}"><i
+                                    class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
 
                         <li class="menu-header">Lainnya</li>
                         <li>
@@ -106,7 +112,8 @@
                                 <div class="col-md-6 mx-2 my-auto">
                                     <!-- Tambah data -->
                                     <button type="submit" class="btn btn-success">
-                                        <a href="{{ url('/pengumuman/create') }}" class="text-decoration-none text-white">
+                                        <a href="{{ url('/pengumuman/create') }}"
+                                            class="text-decoration-none text-white">
                                             <span>
                                                 <i class="ion ion-plus-circled" data-pack="default"
                                                     data-tags="add, include, new, invite, +">
@@ -144,22 +151,25 @@
                                                         <td>{{ $p->created_by }}</td>
                                                         <td>{{ $p->created_at }}</td>
                                                         <td>
-                                                            <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center">
-                                                                <a href="{{ url('/pengumuman/edit/' . $p->id) }}" class="mb-2 mb-sm-0">
-                                                                    <button class="btn btn-warning mx-1">
-                                                                        <i class="ion ion-edit" data-pack="default" data-tags="change, update, write, type, pencil"></i> Edit
-                                                                    </button>
+                                                            <div
+                                                                class="d-flex flex-column flex-sm-row justify-content-center align-items-center">
+                                                                <!-- Tombol Edit -->
+                                                                <a href="{{ url('/pengumuman/edit/' . $p->id) }}" class="btn btn-sm btn-warning mb-2 mb-sm-0 mx-1 edit">
+                                                                    <i class="far fa-edit"></i>
                                                                 </a>
 
-                                                                <form id="delete-form-{{ $p->id }}" action="{{ url('/pengumuman/' . $p->id) }}" method="POST" class="mb-2 mb-sm-0">
+                                                                <!-- Form Hapus -->
+                                                                <form id="delete-form-{{ $p->id }}"
+                                                                    action="{{ url('/pengumuman/' . $p->id) }}" method="POST" class="mb-2 mb-sm-0">
                                                                     @method('DELETE')
                                                                     @csrf
-                                                                    <button type="button" class="btn btn-danger mx-1 swal-6" data-id="{{ $p->id }}">
-                                                                        <i class="ion ion-trash-a" data-pack="default" data-tags="delete, remove, dump"></i> Hapus
+                                                                    <button type="button" class="btn btn-sm btn-danger mx-1 swal-6 hapus" data-id="{{ $p->id }}">
+                                                                        <i class="far fa-trash-alt"></i>
                                                                     </button>
                                                                 </form>
                                                             </div>
                                                         </td>
+
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -180,8 +190,12 @@
 
     <!-- General JS Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="{{ asset('assets/js/stisla.js') }}"></script>

@@ -104,8 +104,8 @@
                                                         </td>
                                                         <td class="text-center">
                                                             <!-- Lihat detail -->
-                                                            <button class="btn btn-sm btn-info mx-1" data-id="{{ $db->dataMagang->id }}" data-toggle="modal" data-target="#detailModal1">
-                                                                <i class="fas fa-eye"></i> Detail
+                                                            <button class="btn btn-sm btn-info mx-1 detail" data-id="{{ $db->dataMagang->id }}" data-toggle="modal" data-target="#detailModal1">
+                                                                <i class="fas fa-eye"></i>
                                                             </button>
                                                         </td>
                                                     </tr>

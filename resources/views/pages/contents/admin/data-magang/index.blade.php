@@ -136,19 +136,19 @@
                                                             <td>{{ $dm->pengajuanMagang->instansi_magang ?? '-' }}
                                                             </td>
                                                             <td>
-                                                                <div class="d-flex flex-column flex-sm-row">
+                                                                <div class="d-flex justify-content-center align-items-center">
                                                                     <!-- Lihat -->
-                                                                    <a type="button" class="btn btn-sm btn-primary m-1" href="{{ url('/admin/data-magang/show/' . $dm->id) }}"><i class="ion ion-ios-eye"></i> Lihat</a>
+                                                                    <a type="button" class="btn btn-sm btn-primary m-1 lihat" href="{{ url('/admin/data-magang/show/' . $dm->id) }}"><i class="ion ion-ios-eye"></i></a>
                                                                     <!-- Unduh -->
-                                                                    <a type="button" class="btn btn-sm btn-warning m-1" href="{{ asset('storage/' . $dm->files) }}" download><i class="fas fa-download"></i> Unduh</a>
+                                                                    <a type="button" class="btn btn-sm btn-warning m-1 unduh" href="{{ asset('storage/' . $dm->files) }}" download><i class="fas fa-download"></i></a>
                                                                     <!-- Hapus -->
                                                                     <form id="delete-form-{{ $dm->id }}"
                                                                         action="{{ url('/admin/data-magang/' . $dm->id) }}"
                                                                         method="POST">
                                                                         @method('DELETE')
                                                                         @csrf
-                                                                        <button type="button" class="btn btn-sm btn-danger m-1 swal-6" data-id="{{ $dm->id }}">
-                                                                            <i class="ion ion-trash-a"></i> Hapus
+                                                                        <button type="button" class="btn btn-sm btn-danger m-1 swal-6 hapus" data-id="{{ $dm->id }}">
+                                                                            <i class="far fa-trash-alt"></i>
                                                                         </button>
                                                                     </form>
                                                                 </div>

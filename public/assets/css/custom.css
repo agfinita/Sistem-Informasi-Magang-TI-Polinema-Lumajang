@@ -2,7 +2,174 @@
  *
  * You can write your CSS code here, DO NOT touch the default JavaScript file
  * because it will make it harder for you to update.
- * 
+ *
  */
 
 /*# sourceMappingURL=custom.css.map */
+.btn-warning.edit {
+    position: relative; /* Tambahkan ini */
+}
+
+.btn-warning.edit:hover::after {
+    content: "Edit";
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    z-index: 1000; /* Agar overlay tidak tertutup elemen lain */
+}
+
+.btn-danger.hapus {
+    position: relative; /* Tambahkan ini */
+}
+
+.btn-danger.hapus:hover::after {
+    content: "Hapus";
+    position: absolute;
+    top: 6%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    z-index: 1000; /* Agar overlay tidak tertutup elemen lain */
+}
+
+/* Proses pengajuan magang */
+.btn-info.proses {
+    position: relative; /* Tambahkan ini */
+}
+
+.btn-info.proses:hover::after {
+    content: "Proses";
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    z-index: 1000; /* Agar overlay tidak tertutup elemen lain */
+}
+
+/* Unduh */
+.btn-warning.unduh {
+    position: relative; /* Tambahkan ini */
+}
+
+.btn-warning.unduh:hover::after {
+    content: "Unduh";
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    z-index: 1000; /* Agar overlay tidak tertutup elemen lain */
+}
+
+/* Lihat detail */
+.btn-primary.lihat {
+    position: relative; /* Tambahkan ini */
+}
+
+.btn-primary.lihat:hover::after {
+    content: "Lihat";
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    z-index: 1000; /* Agar overlay tidak tertutup elemen lain */
+}
+
+/* Menentukan dospem */
+.btn-warning.dospem {
+    position: relative; /* Tambahkan ini */
+}
+
+.btn-warning.dospem:hover::after {
+    content: "Pilih dosen";
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    z-index: 1000; /* Agar overlay tidak tertutup elemen lain */
+}
+
+/* Detail logbook, bimbingan */
+.btn-info.detail {
+    position: relative; /* Tambahkan ini */
+}
+
+.btn-info.detail:hover::after {
+    content: "Lihat";
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    z-index: 1000; /* Agar overlay tidak tertutup elemen lain */
+}
+
+/* Validasi */
+.btn-info.validasi {
+    position: relative; /* Tambahkan ini */
+}
+
+.btn-info.validasi:hover::after {
+    content: "Validasi";
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    z-index: 1000; /* Agar overlay tidak tertutup elemen lain */
+}
+/* CSS Preview PDF */
+.responsive-embed {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+}
+
+.responsive-embed embed,
+.responsive-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
