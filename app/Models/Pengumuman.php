@@ -18,5 +18,6 @@ class Pengumuman extends Model
         'deskripsi',
         'kategori',
         'files',
+        'created_at'
     ];
 }

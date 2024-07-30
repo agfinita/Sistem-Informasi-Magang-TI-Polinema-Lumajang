@@ -41,8 +41,8 @@ class KelolaAdminController extends Controller
             'email'         => 'required|email',
             'password'      => 'required|min:8',
             'gridRadios'    => 'required|in:Admin,Mahasiswa,Dosen',
-            'date_created'  => 'date',
-            'date_updated'  => 'date'
+            'date_created'  => 'required|date',
+            'date_updated'  => 'required|date'
         ]);
 
         if ($validatedData->fails()) {
@@ -61,7 +61,7 @@ class KelolaAdminController extends Controller
                 'email'         => $validatedData['email'],
                 'password'      => $validatedData['password'],
                 'role'          => $validatedData['gridRadios'],
-                'created_at'    => $validatedData['date_ceated'],
+                'created_at'    => $validatedData['date_created'],
                 'updated_at'    => $validatedData['date_updated']
             ]);
 
@@ -107,8 +107,8 @@ class KelolaAdminController extends Controller
             'username'          => 'required',
             'email'             => 'required|email',
             'gridRadios-status' => 'required|boolean',
-            'date_created'      => 'date',
-            'updated_at'        => 'date'
+            'date_created'      => 'required|date',
+            'date_updated'      => 'required|date'
         ]);
 
         // Mencari user berdasarkan id

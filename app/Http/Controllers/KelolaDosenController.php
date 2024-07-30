@@ -40,7 +40,8 @@ class KelolaDosenController extends Controller
             'email'         => 'required|email',
             'password'      => 'required|min:8',
             'gridRadios'    => 'required|in:Admin,Mahasiswa,Dosen',
-            'date_created'  => 'date'
+            'date_created'  => 'required|date',
+            'date_updated'  => 'required|date'
         ]);
 
         if ($validatedData) {
@@ -59,7 +60,8 @@ class KelolaDosenController extends Controller
                 'email'         => $validatedData['email'],
                 'password'      => $validatedData['password'],
                 'role'          => $validatedData['gridRadios'],
-                'created_at'    => $validatedData['date_created']
+                'created_at'    => $validatedData['date_created'],
+                'updated_at'    => $validatedData['date_updated']
             ]);
 
             // Menyimpan data dosen baru terkait user

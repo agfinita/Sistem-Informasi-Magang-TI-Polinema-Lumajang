@@ -64,8 +64,8 @@ class KelolaMahasiswaController extends Controller
             'username'              => 'required',
             'email'                 => 'required|email',
             'gridRadios-status'     => 'required|boolean',
-            'date_created'          => 'date',
-            'date_updated'          => 'date'
+            'date_created'          => 'required|date',
+            'date_updated'          => 'required|date'
         ]);
 
         // Mencari user berdasarkan id
