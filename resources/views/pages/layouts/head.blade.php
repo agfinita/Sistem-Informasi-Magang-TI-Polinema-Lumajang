@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+
+    <link rel="icon" type="image/png" href="{{ asset('img/archive.png') }}">
     <title>Sistem Informasi Magang</title>
 
     <!-- General CSS Files -->
