@@ -6,7 +6,6 @@ use App\Models\User;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Validator;
 
 class KelolaAdminController extends Controller
@@ -42,7 +41,8 @@ class KelolaAdminController extends Controller
             'email'         => 'required|email',
             'password'      => 'required|min:8',
             'gridRadios'    => 'required|in:Admin,Mahasiswa,Dosen',
-            'date_created'  => 'date'
+            'date_created'  => 'date',
+            'date_updated'  => 'date'
         ]);
 
         if ($validatedData->fails()) {
@@ -61,7 +61,8 @@ class KelolaAdminController extends Controller
                 'email'         => $validatedData['email'],
                 'password'      => $validatedData['password'],
                 'role'          => $validatedData['gridRadios'],
-                'created_at'    => $validatedData['date_ceated']
+                'created_at'    => $validatedData['date_ceated'],
+                'updated_at'    => $validatedData['date_updated']
             ]);
 
             // Menyimpan data admin baru terkait user

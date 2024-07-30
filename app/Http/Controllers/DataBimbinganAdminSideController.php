@@ -74,23 +74,35 @@ class DataBimbinganAdminSideController extends Controller
             ], 404);
         }
 
-        $dataBimbingan->dosen_pembimbing_id = $request->input('dosen_pembimbing_id');
-        $dataBimbingan->save();
+        // Memvalidasi input
+        // Validasi input
+        $validate = $request->validate([
+            'dosen_pembimbing_id' => 'required',
+        ]);
 
-        // Mengambil data magang berdasarkan id yang sesuai
-        $dataMagang = DataMagang::find($dataBimbingan->data_magang_id);
+        // Validasi input
+    $validate = $request->validate([
+        'dosen_pembimbing_id' => 'required',
+    ]);
 
-        // Buat atau perbarui laporan magang
-        LaporanMagang::updateOrCreate(
-            ['data_bimbingan_id' => $dataBimbingan->id],
-            [
-                'mahasiswa_id'          => $dataBimbingan->mahasiswa->nim,
-                'pengajuan_magang_id'   => $dataMagang->pengajuanMagang->id,
-                'data_magang_id'        => $dataBimbingan->data_magang_id,
-                'dosen_pembimbing_id'   => $dataBimbingan->dosen_pembimbing_id,
-                'status_laporan'        => '0',
-            ]
-        );
+    // Mengambil data magang berdasarkan id yang sesuai
+    $dataMagang = DataMagang::find($dataBimbingan->data_magang_id);
+
+    // Update data bimbingan
+    $dataBimbingan->dosen_pembimbing_id = $validate['dosen_pembimbing_id'];
+    $dataBimbingan->save();
+
+    // Buat atau perbarui laporan magang
+    LaporanMagang::updateOrCreate(
+        ['data_bimbingan_id' => $dataBimbingan->id],
+        [
+            'mahasiswa_id'          => $dataBimbingan->mahasiswa->nim,
+            'pengajuan_magang_id'   => $dataMagang->pengajuanMagang->id,
+            'data_magang_id'        => $dataBimbingan->data_magang_id,
+            'dosen_pembimbing_id'   => $validate['dosen_pembimbing_id'],
+            'status_laporan'        => '0',
+        ]
+    );
 
         // Mengembalikan respon sukses
         return response()->json(['status'   => 'success']);

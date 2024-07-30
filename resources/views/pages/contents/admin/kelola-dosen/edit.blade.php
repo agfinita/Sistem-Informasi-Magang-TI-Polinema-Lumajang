@@ -116,7 +116,7 @@
                                             <div class="form-group row">
                                                 <label for="username" class="col-sm-3 col-form-label">Username</label>
                                                 <div class="col-sm-9">
-                                                    <input disabled type="text" class="form-control" id="username"
+                                                    <input readonly type="text" class="form-control" id="username"
                                                         name="username" placeholder="Masukkan NIP"
                                                         value="{{ $users->username }}">
                                                 </div>

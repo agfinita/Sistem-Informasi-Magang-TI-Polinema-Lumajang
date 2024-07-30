@@ -65,7 +65,7 @@ class BimbinganMahasiswaSideController extends Controller
             'tgl_bimbingan' => 'required|date',
             'bw'            => 'required|date',
             'pem'           => 'required|max:255',
-            'per'           => 'required|max:255'
+            'per'           => 'required'
         ]);
 
         // Menyimpan ke database
@@ -110,10 +110,10 @@ class BimbinganMahasiswaSideController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'tgl_bimbingan'   => 'required|date',
+            'tgl_bimbingan'    => 'required|date',
             'bw'               => 'required|date',
-            'pem'      => 'required|max:255',
-            'per'      => 'required|max:255'
+            'pem'              => 'required|max:255',
+            'per'              => 'required|max:255'
         ]);
         $bimbingan = Bimbingan::findOrFail($id);
         $bimbingan->update([

@@ -239,6 +239,33 @@ return [
         'kategori' => [
             'required'  => 'Pilih kategori magang'
         ],
+        'dosen_pembimbing_id'   => [
+            'required' => 'Pilih dosen pembimbing untuk mahasiswa',
+        ],
+        'tgl_bimbingan' => [
+            'required'  => 'Pilih tanggal bimbingan',
+        ],
+        'per'  => [
+            'required'  => 'Tuliskan angka. Contoh: 1,2, dst.'
+        ],
+        'pem'   => [
+            'required'  => 'Topik bimbingan tidak boleh kosong'
+        ],
+        'bw'    => [
+            'required'  => 'Pilih batas waktu'
+        ],
+        'tgl_logbook'   => [
+            'required'  => 'Pilih tanggal kegiatan'
+        ],
+        'jm'    => [
+            'required'  => 'Masukkan jam mulai kegiatan'
+        ],
+        'js'    => [
+            'required'  => 'Masukkan jam selesai kegiatan'
+        ],
+        'kegiatan'      => [
+            'required'  => 'Tuliskan deskripsi kegiatan yang dilakukan'
+        ],
     ],
 
     /*
