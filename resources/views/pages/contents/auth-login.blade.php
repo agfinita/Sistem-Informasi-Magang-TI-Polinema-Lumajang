@@ -6,6 +6,8 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+
+    <link rel="icon" type="image/png" href="{{ asset('assets/img/logo_polinema.png') }}">
     <title>Login &mdash;</title>
 
     <!-- General CSS Files -->
