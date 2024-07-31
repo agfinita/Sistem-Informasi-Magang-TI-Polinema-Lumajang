@@ -105,7 +105,7 @@
                     </div>
                 </div>
                 <div class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 background-walk-y position-relative overlay-gradient-bottom"
-                    data-background="../assets/img/login-bg.jpg">
+                    data-background="{{ asset('assets/img/login-bg.JPG') }}">
                 </div>
             </div>
         </section>
