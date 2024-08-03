@@ -15,18 +15,18 @@ class BimbinganDosenSideController extends Controller
     public function index()
     {
          // Mengambil user yang sedang login
-         $user   = Auth::user();
+        $user   = Auth::user();
 
          // Mendapatkan ID dosen dari relasi user
-         $dosen      = $user->dosen;
-         $dosen_id   = $dosen->id;
+        $dosen      = $user->dosen;
+        $dosen_id   = $dosen->id;
 
-         // Kemudian cari data bimbingan yang terkait dengan dosen yang login
-         $dataBimbingan = DataBimbingan::where('dosen_pembimbing_id', $dosen_id)
-                             ->with('mahasiswa', 'dataMagang', 'dosen')
-                             ->get();
+        // Kemudian cari data bimbingan yang terkait dengan dosen yang login
+        $dataBimbingan = DataBimbingan::where('dosen_pembimbing_id', $dosen_id)
+                            ->with('mahasiswa', 'dataMagang', 'dosen')
+                            ->get();
 
-         return view('pages.contents.dosen.bimbingan.index', compact('dataBimbingan'));
+        return view('pages.contents.dosen.bimbingan.index', compact('dataBimbingan'));
     }
 
     /**
@@ -58,8 +58,6 @@ class BimbinganDosenSideController extends Controller
                             ->where('dosen_pembimbing_id', $dosen_id)
                             ->where('data_magang_id', $data_magang_id)
                             ->get();
-
-
 
         // Ambil data logbook mahasiswa yang dipilih
         $bimbingan = Bimbingan::where('data_magang_id', $data_magang_id)->get();
@@ -103,6 +101,23 @@ class BimbinganDosenSideController extends Controller
         // Mengembalikan respon sukses
         return response()->json(['status' => 'success']);
 
+    }
+
+    /**
+     * Validasi bimbingan yang dipilih
+     */
+    public function validasi(Request $request)
+    {
+        // Validasi input
+        $validatedData = $request->validate([
+            'ids'   => 'required|array',
+            'ids.*' => 'exists:bimbingan,id'
+        ]);
+
+        // Update status verifikasi
+        Bimbingan::whereIn('id', $validatedData['ids'])->update(['verifikasi_dosen' => 1]);
+
+        return response()->json(['status' => 'success']);
     }
 
     /**

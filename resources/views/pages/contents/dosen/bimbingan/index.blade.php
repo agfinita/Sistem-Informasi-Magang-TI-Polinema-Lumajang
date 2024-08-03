@@ -138,6 +138,7 @@
     <!-- Page Specific JS File -->
     <script src="{{ asset('assets/js/page/modules-datatables.js') }}"></script>
     <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
+
 </body>
 
 </html>

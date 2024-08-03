@@ -158,17 +158,18 @@ Route::group(['middleware' => 'role'], function () {
     Route::get('/dosen/laporan-magang-mahasiswa/show/{id}', [LaporanMagangDosenSideController::class, 'show']);
 
     // lOGBOOK - Dosen Side
-    Route::resource('/dosen/logbook-mahasiswa', LogbookDosenSideController::class)->except('create', 'store', 'destroy');
+    Route::resource('/dosen/logbook-mahasiswa', LogbookDosenSideController::class)->except('create', 'store', 'destroy', 'edit', 'update');
     Route::get('/dosen/logbook-mahasiswa/show/{data_magang_id}', [LogbookDosenSideController::class, 'show']);
-    Route::get('/dosen/logbook-mahasiswa/edit/{id}', [LogbookDosenSideController::class, 'edit']);
+    //Route::get('/dosen/logbook-mahasiswa/edit/{id}', [LogbookDosenSideController::class, 'edit']);
     Route::patch('/dosen/logbook-mahasiswa/edit/{id}', [LogbookDosenSideController::class, 'update']);
+    Route::post('dosen/logbook-mahasiswa/validasi', [LogbookDosenSideController::class, 'validasi']);
 
     // BIMBINGAN - Dosen Side
-    Route::resource('/dosen/bimbingan-mahasiswa', BimbinganDosenSideController::class)->except('destroy');
+    Route::resource('/dosen/bimbingan-mahasiswa', BimbinganDosenSideController::class)->except('create', 'store', 'destroy', 'edit', 'update');
     Route::get('/dosen/bimbingan-mahasiswa/show/{data_magang_id}', [BimbinganDosenSideController::class, 'show']);
-    Route::get('/dosen/bimbingan-mahasiswa/edit/{id}', [BimbinganDosenSideController::class, 'edit']);
+    //Route::get('/dosen/bimbingan-mahasiswa/edit/{id}', [BimbinganDosenSideController::class, 'edit']);
     Route::patch('/dosen/bimbingan-mahasiswa/edit/{id}', [BimbinganDosenSideController::class, 'update']);
-
+    Route::post('/dosen/bimbingan-mahasiswa/validasi', [BimbinganDosenSideController::class, 'validasi']);
 });
 
 // Login

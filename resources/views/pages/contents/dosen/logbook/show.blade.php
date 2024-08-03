@@ -77,7 +77,7 @@
                                                         <th class="text-center">Jam Selesai</th>
                                                         <th>Penjelasan Kegiatan</th>
                                                         <th class="text-center">Verifikasi Dosen Pembimbing</th>
-                                                        <th class="text-center">Aksi</th>
+                                                        {{-- <th class="text-center">Aksi</th> --}}
                                                     </tr>
                                                 </thead>
 
@@ -95,20 +95,21 @@
                                                             <td class="text-center">{{ $lb->jam_selesai ?? '-' }}</td>
                                                             <td>{{ $lb->kegiatan ?? '-' }}</td>
                                                             <td class="text-center">
-                                                                @if ($lb->verifikasi_dosen == '1')
+                                                                <input type="checkbox" class="verifikasi-checkbox" data-id="{{ $lb->id }}" {{ $lb->verifikasi_dosen == '1' ? 'checked' : '' }}>
+                                                                {{-- @if ($lb->verifikasi_dosen == '1')
                                                                 <div class="badge badge-success">Sudah diverifikasi</div>
                                                                 @else
                                                                 <div class="badge badge-secondary">Menunggu verifikasi</div>
-                                                                @endif
+                                                                @endif --}}
                                                             </td>
-                                                            <td class="d-flex justify-content-center align-items-center">
+                                                            {{-- <td class="d-flex justify-content-center align-items-center">
                                                                 <!-- Update -->
                                                                 <a href="{{ url('/dosen/logbook-mahasiswa/edit/' . $lb->id)}}">
                                                                     <button class="btn btn-sm btn-info mx-1 validasi">
                                                                         <i class="far fa-check-circle"></i>
                                                                     </button>
                                                                 </a>
-                                                            </td>
+                                                            </td> --}}
                                                         </tr>
                                                         @endforeach
                                                 </tbody>
@@ -117,8 +118,29 @@
                                     </div>
 
                                     <div class="card-footer d-flex justify-content-end">
-                                        <a href="{{ url('/dosen/logbook-mahasiswa') }}" class="btn btn-warning m-2">Kembali</a>
+                                        <!-- Button back -->
+                                        <a href="{{ url('/dosen/logbook-mahasiswa') }}" class="btn btn-warning m-1">Kembali</a>
+                                        <!-- Edit -->
+                                        <button id="btn-validasi" class="btn btn-success m-1">
+                                            <i class="far fa-check-circle"></i> Validasi
+                                        </button>
                                     </div>
+
+                                    <!-- Modal Loading -->
+                                    <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="loadingModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body text-center">
+                                                    <div class="spinner-border text-primary" role="status">
+                                                        <span class="sr-only">Loading...</span>
+                                                    </div>
+                                                    <p>Sedang memproses...</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -155,6 +177,45 @@
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
+
+    <!-- Fungsi validasi menggunakan ajax -->
+    <script>
+        $(document).ready(function() {
+            $('#btn-validasi').click(function() {
+                var selectedIds = [];
+                $('.verifikasi-checkbox:checked').each(function() {
+                    selectedIds.push($(this).data('id'));
+                });
+
+                if (selectedIds.length > 0) {
+                    // Tampilkan modal loading
+                    $('#loadingModal').modal('show');
+
+                    $.ajax({
+                        url: '{{ url('/dosen/logbook-mahasiswa/validasi') }}',
+                        method: 'POST',
+                        data: {
+                            ids: selectedIds,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            if (response.status == 'success') {
+                                location.reload();
+                            } else {
+                                alert('Validasi gagal.');
+                            }
+                        },
+                        complete: function() {
+                            // Sembunyikan modal loading
+                            $('#loadingModal').modal('hide');
+                        }
+                    });
+                } else {
+                    alert('Pilih setidaknya satu bimbingan untuk divalidasi.');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -105,6 +105,23 @@ class LogbookDosenSideController extends Controller
     }
 
     /**
+     * Validasi logbook yang dipilih
+     */
+    public function validasi(Request $request)
+    {
+        // Validasi input
+        $validatedData = $request->validate([
+            'ids'   => 'required|array',
+            'ids.*' => 'exists:logbook,id'
+        ]);
+
+        // Update status verifikasi
+        Logbook::whereIn('id', $validatedData['ids'])->update(['verifikasi_dosen' => 1]);
+
+        return response()->json(['status' => 'success']);
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(Logbook $logbook)
