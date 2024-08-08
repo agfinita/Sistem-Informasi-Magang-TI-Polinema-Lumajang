@@ -22,17 +22,26 @@
                     <!-- Menu Sidebar-->
                     <ul class="sidebar-menu">
                         <li class="menu-header">Dashboard</li>
-                        <li class="active"><a class="nav-link" href="{{ url('/dosen/dashboard') }}"><i class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i> <span>Dashboard</span></a></li>
+                        <li class="active"><a class="nav-link" href="{{ url('/dosen/dashboard') }}"><i
+                                    class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i>
+                                <span>Dashboard</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/dosen/pengumuman') }}"><i
+                                    class="ion ion-speakerphone"></i><span>Pengumuman</span></a></li>
 
                         <li class="menu-header">Magang</li>
-                        <li><a class="nav-link" href="{{ url('/dosen/data-magang-mahasiswa') }}"><i class="fas fa-columns"></i> <span>Data Magang</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/dosen/data-magang-mahasiswa') }}"><i
+                                    class="fas fa-columns"></i> <span>Data Magang</span></a></li>
 
                         <li class="menu-header">Aktivitas Magang</li>
-                        <li><a class="nav-link" href="/dosen/bimbingan-mahasiswa"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
-                        <li><a class="nav-link" href="{{ url('/dosen/logbook-mahasiswa') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+                        <li><a class="nav-link" href="/dosen/bimbingan-mahasiswa"><i class="fas fa-users"></i>
+                                <span>Bimbingan</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/dosen/logbook-mahasiswa') }}"><i
+                                    class="ion ion-clipboard" data-pack="default" data-tags="write"></i>
+                                <span>Logbook</span></a></li>
 
                         <li class="menu-header">Verifikasi</li>
-                        <li><a class="nav-link" href="{{ url('/dosen/laporan-magang-mahasiswa') }}"><i class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
+                        <li><a class="nav-link" href="{{ url('/dosen/laporan-magang-mahasiswa') }}"><i
+                                    class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
 
                         <li class="menu-header">Lainnya</li>
                         <li>
@@ -65,23 +74,9 @@
                                 </div>
                                 <div class="card-wrap">
                                     <div class="card-header">
-                                        <h4>Bimbingan</h4>
+                                        <h4>Jumlah Mahasiswa Bimbingan</h4>
                                     </div>
                                     <div class="card-body"> {{ $totalBimbingan }} </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Total pengumuman -->
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                            <div class="card card-statistic-1">
-                                <div class="card-icon bg-danger">
-                                    <i class="far fa-newspaper"></i>
-                                </div>
-                                <div class="card-wrap">
-                                    <div class="card-header">
-                                        <h4>Pengumuman</h4>
-                                    </div>
-                                    <div class="card-body"> {{ $totalPengumuman }} </div>
                                 </div>
                             </div>
                         </div>
@@ -93,86 +88,73 @@
                                 </div>
                                 <div class="card-wrap">
                                     <div class="card-header">
-                                        <h4>Selesai Magang</h4>
+                                        <h4>Jumlah Mahasiswa Selesai Magang</h4>
                                     </div>
                                     <div class="card-body"> {{ $totalSelesai }} </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Kelola pengumuman -->
-                        <div class="col-12">
+                    <!-- Logbook aktivitas terakhir -->
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="card">
-                                <div class="card-header">
-                                    <h4>Kelola Pengumuman</h4>
-                                </div>
+                                <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
+                                    <h4 class="mb-2 mb-md-0">Aktivitas Logbook Terbaru</h4>
 
-                                <div class="col-md-6 mx-2 my-auto">
-                                    <!-- Tambah data -->
-                                    <button type="submit" class="btn btn-success">
-                                        <a href="{{ url('/dosen/dashboard/create') }}" class="text-decoration-none text-white">
-                                            <span>
-                                                <i class="ion ion-plus-circled" data-pack="default" data-tags="add, include, new, invite, +"> </i>
-                                            </span>
-                                            Tambah Data
-                                        </a>
-                                    </button>
+                                    <!-- Dropdown untuk memilih jumlah entri yang ditampilkan -->
+                                    <form method="GET" action="{{ url('/dosen/dashboard') }}"
+                                        class="mb-0 d-flex align-items-center">
+                                        <div class="form-group mb-0 d-flex align-items-center">
+                                            <label for="per_page" class="mb-0 mr-2">Tampilkan:</label>
+                                            <select name="per_page" id="per_page"
+                                                class="custom-select custom-select-sm" onchange="this.form.submit()">
+                                                <option value="3"
+                                                    {{ request('per_page') == 3 ? 'selected' : '' }}>3</option>
+                                                <option value="5"
+                                                    {{ request('per_page') == 5 ? 'selected' : '' }}>5</option>
+                                                <option value="10"
+                                                    {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
+                                                <option value="15"
+                                                    {{ request('per_page') == 15 ? 'selected' : '' }}>15</option>
+                                            </select>
+                                        </div>
+                                    </form>
                                 </div>
 
                                 <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped" id="table-1">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center">Judul</th>
-                                                    <th class="text-center">Deskripsi</th>
-                                                    <th class="text-center">Kategori</th>
-                                                    <th class="text-center">Penulis</th>
-                                                    <th class="text-center">Created</th>
-                                                    <th class="text-center">Aksi</th>
-                                                </tr>
-                                            </thead>
+                                    @if ($logbooks->isEmpty())
+                                        <p>Tidak ada aktivitas logbook terbaru.</p>
+                                    @else
+                                        <ul class="list-group">
+                                            @foreach ($logbooks as $lb)
+                                                <li class="list-group-item">
+                                                    <strong
+                                                        class="text-danger">{{ $lb->dataMagang->mahasiswa->nama }}</strong>
+                                                    <br>{{ $lb->kegiatan }}<br>
+                                                    <small>{{ $lb->created_at->diffForHumans() }}</small>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
 
-                                            @php
-                                                $no = 1;
-                                            @endphp
-                                            <tbody>
-                                                @foreach ($pengumuman as $p)
-                                                    <tr>
-
-                                                        <td>{{ $p->judul }}</td>
-                                                        <td>{!! $p->deskripsi !!}</td>
-                                                        <td>{{ $p->kategori }}</td>
-                                                        <td>{{ $p->created_by }}</td>
-                                                        <td>{{ $p->created_at }}</td>
-                                                        <td>
-                                                            <div class="d-flex justify-content-center align-items-center">
-                                                                <!-- Edit -->
-                                                                <a href="{{ url('/dosen/dashboard/edit/' . $p->id) }}">
-                                                                    <button class="btn btn-sm btn-warning mx-1 edit">
-                                                                        <i class="far fa-edit"></i>
-                                                                    </button>
-                                                                </a>
-
-                                                                <!-- Form hapus -->
-                                                                <form id="delete-form-{{ $p->id }}" action="{{ url('/dosen/dashboard/' . $p->id) }}" method="POST">
-                                                                    @method('DELETE')
-                                                                    @csrf
-                                                                    <button type="button" class="btn btn-sm btn-danger mx-1 swal-6 hapus" data-id="{{ $p->id }}">
-                                                                        <i class="far fa-trash-alt"></i>
-                                                                    </button>
-                                                                </form>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
+                        <!-- Chart untuk Statistik Permintaan -->
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="mb-2 mb-md-0">Statistik Permintaan Validasi</h4>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="chartStatistics"></canvas>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </section>
             </div>
 
@@ -195,12 +177,7 @@
     <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
     <!-- JS Libraies -->
-    <script src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
-
-    <!-- Data Tables -->
-    <script src="{{ asset('node_modules/datatables/media/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('node_modules/datatables.net-select-bs4/js/select.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('node_modules/chart.js/dist/Chart.min.js') }}"></script>
 
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
@@ -208,8 +185,51 @@
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('assets/js/page/index-0.js') }}"></script>
-    <script src="{{ asset('assets/js/page/modules-datatables.js') }}"></script>
-    <script src="{{ asset('assets/js/page/modules-sweetalert.js') }}"></script>
+
+    <!-- Chart -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var ctx = document.getElementById('chartStatistics').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'bar', // Jenis chart
+                data: {
+                    labels: ['Logbook', 'Bimbingan', 'Laporan Magang'],
+                    datasets: [{
+                        // label: 'Permintaan Validasi', // Menghilangkan label
+                        data: [
+                            @json($validasiLogbook), // Data untuk validasi logbook
+                            @json($validasiBimbingan), // Data untuk validasi bimbingan
+                            @json($validasiLapMagang), // Data untuk validasi laporan magang (tambahkan jika ada)
+                        ],
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.2)', // Warna untuk Logbook
+                            'rgba(54, 162, 235, 0.2)', // Warna untuk Bimbingan
+                            'rgba(255, 206, 86, 0.2)' // Warna untuk Laporan Magang
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)', // Warna border untuk Logbook
+                            'rgba(54, 162, 235, 1)', // Warna border untuk Bimbingan
+                            'rgba(255, 206, 86, 1)' // Warna border untuk Laporan Magang
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    },
+                    legend: {
+                        display: false // Menghilangkan keseluruhan legenda
+                    }
+                }
+            });
+        });
+    </script>
+
 </body>
 
 </html>

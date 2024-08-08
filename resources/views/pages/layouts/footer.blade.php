@@ -6,6 +6,6 @@
         Design By <a href="https://nauv.al/">Muhamad Nauval Azhar</a> --}}
     </div>
     <div class="footer-right">
-        Sistem Informasi Magang Industri
+        SIMAG-TI
     </div>
 </footer>

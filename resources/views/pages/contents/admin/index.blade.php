@@ -58,22 +58,27 @@
 
                         <li class="menu-header">Manajemen Magang</li>
                         <li class="nav-item dropdown">
-                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Magang</span></a>
+                            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                                    class="fas fa-columns"></i> <span>Magang</span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link"
                                         href="{{ url('/admin/mahasiswa/pengajuan-magang') }}">Permintaan Magang</a>
                                 </li>
                                 <li><a class="nav-link" href="{{ url('/admin/data-magang') }}">Data Magang</a></li>
                             </ul>
-                            <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i class="ion ion-android-list"></i><span>Dosen Pembimbing</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/admin/data-bimbingan-mahasiswa') }}"><i
+                                    class="ion ion-android-list"></i><span>Dosen Pembimbing</span></a></li>
                         </li>
 
                         <li class="menu-header">Aktivitas Magang</li>
-                        <li><a class="nav-link" href="{{  url('/admin/logbook') }}"><i class="ion ion-clipboard" data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
-                        <li><a class="nav-link" href="{{  url('/admin/bimbingan') }}"><i class="fas fa-users"></i> <span>Bimbingan</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/admin/logbook') }}"><i class="ion ion-clipboard"
+                                    data-pack="default" data-tags="write"></i> <span>Logbook</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/admin/bimbingan') }}"><i class="fas fa-users"></i>
+                                <span>Bimbingan</span></a></li>
 
                         <li class="menu-header">Finalisasi Magang</li>
-                        <li><a class="nav-link" href="{{ url('/admin/laporan-magang-mahasiswa') }}"><i class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
+                        <li><a class="nav-link" href="{{ url('/admin/laporan-magang-mahasiswa') }}"><i
+                                    class="ion ion-ios-book"></i> <span>Laporan Magang</span></a> </li>
 
                         <li class="menu-header">Lainnya</li>
                         <li>
@@ -126,20 +131,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Total pengajuan magang -->
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                            <div class="card card-statistic-1">
-                                <div class="card-icon bg-warning">
-                                    <i class="far fa-file"></i>
-                                </div>
-                                <div class="card-wrap">
-                                    <div class="card-header">
-                                        <h4>Data Magang</h4>
-                                    </div>
-                                    <div class="card-body"> {{ $totalDataMagang }} </div>
-                                </div>
-                            </div>
-                        </div>
                         <!-- Online user -->
                         <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                             <div class="card card-statistic-1">
@@ -156,7 +147,7 @@
                         </div>
                     </div>
 
-                    <!-- Chart -->
+                    <!-- Statistik -->
                     <div class="row">
                         <div class="col-12 col-md-6 col-lg-6">
                             <div class="card">
@@ -176,6 +167,31 @@
                                 </div>
                                 <div class="card-body">
                                     <canvas id="myChart4"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Statistik bimbingan -->
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Statistik Bimbingan</h4>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="pieChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Statistik mahasiswa magang -->
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Statistik Mahasiswa Magang</h4>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="myDoughnutChart"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -210,13 +226,13 @@
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('assets/js/page/index-0.js') }}"></script>
-    <!-- Chart -->
+    <!-- Chart JS -->
     <script>
         "use strict";
 
-        // Bar chart
+        // Bar chart for Kategori Pengguna
         var ctx = document.getElementById("myChart2").getContext('2d');
-        var myChart = new Chart(ctx, {
+        var myChart2 = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: ["Admin", "Dosen", "Mahasiswa"],
@@ -224,43 +240,34 @@
                     label: 'Statistics',
                     data: [{{ $totalAdmin }}, {{ $totalDosen }}, {{ $totalMhs }}],
                     borderWidth: 2,
-                    backgroundColor: '#6777ef',
-                    borderColor: '#6777ef',
-                    borderWidth: 2.5,
-                    pointBackgroundColor: '#ffffff',
-                    pointRadius: 4
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.2)', // Dark Blue for Admin
+                        'rgba(54, 162, 235, 0.2)', // Light Blue for Dosen
+                        'rgba(255, 206, 86, 0.2)' // Mint Green for Mahasiswa
+                    ],
+                    // borderColor: 'rgba(44, 62, 80, 1)', // Dark Blue for border
+                    // borderWidth: 2.5,
+                    // pointBackgroundColor: '#ffffff',
+                    // pointRadius: 4
                 }]
             },
             options: {
-                legend: {
-                    display: false
-                },
                 scales: {
                     yAxes: [{
-                        gridLines: {
-                            drawBorder: false,
-                            color: '#f2f2f2',
-                        },
                         ticks: {
-                            beginAtZero: true,
-                            stepSize: 150
-                        }
-                    }],
-                    xAxes: [{
-                        ticks: {
-                            display: false
-                        },
-                        gridLines: {
-                            display: false
+                            beginAtZero: true
                         }
                     }]
                 },
+                legend: {
+                    display: false // Menghilangkan keseluruhan legenda
+                }
             }
         });
 
-        // Pie chart
-        var ctx = document.getElementById("myChart4").getContext('2d');
-        var myChart = new Chart(ctx, {
+        // Pie chart for Status Pengajuan Magang
+        var ctx4 = document.getElementById("myChart4").getContext('2d');
+        var myChart4 = new Chart(ctx4, {
             type: 'pie',
             data: {
                 datasets: [{
@@ -269,8 +276,8 @@
                         {{ $diproses }},
                     ],
                     backgroundColor: [
-                        '#63ed7a',
-                        '#ffa426',
+                        'rgba(52, 152, 219, 0.4)', // Light Blue for Selesai
+                        'rgba(231, 76, 60, 0.4)' // Red for Diproses
                     ],
                     label: 'Dataset 1'
                 }],
@@ -278,12 +285,73 @@
                     'Selesai',
                     'Diproses',
                 ],
+                borderColor: 'rgba(44, 62, 80, 1)', // Dark Blue for border
+                borderWidth: 1
             },
             options: {
                 responsive: true,
                 legend: {
                     position: 'bottom',
                 },
+            }
+        });
+
+        // Pie chart for Statistik Bimbingan
+        var ctxPie = document.getElementById('pieChart').getContext('2d');
+        var pieChart = new Chart(ctxPie, {
+            type: 'pie',
+            data: {
+                labels: ['Sudah Bimbingan', 'Belum Bimbingan'],
+                datasets: [{
+                    data: [
+                        {{ $sdhBimbingan }},
+                        {{ $blmBimbingan }},
+                    ],
+                    backgroundColor: [
+                        'rgba(52, 152, 219, 0.4)', // Light Blue for Sudah Bimbingan
+                        'rgba(149, 165, 166, 0.4)' // Gray for Belum Bimbingan
+                    ],
+                    borderColor: [
+                        'rgba(44, 62, 80, 1)', // Dark Blue for border
+                        'rgba(44, 62, 80, 1)' // Dark Blue for border
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'bottom',
+                }
+            }
+        });
+
+        // Doughnut chart for Internship Status
+        var ctxDoughnut = document.getElementById('myDoughnutChart').getContext('2d');
+        var myDoughnutChart = new Chart(ctxDoughnut, {
+            type: 'doughnut',
+            data: {
+                labels: ['Belum Magang', 'Belum Mulai', 'Sedang Magang', 'Magang Selesai'],
+                datasets: [{
+                    label: 'Jumlah Mahasiswa',
+                    data: [{{ $blmMagang }}, {{ $blmMulai }}, {{ $sedangMagang }},
+                        {{ $selesaiMagang }}
+                    ],
+                    backgroundColor: [
+                        'rgba(231, 76, 60, 0.4)', // Red for Belum Magang
+                        'rgba(44, 62, 80, 0.4)', // Dark Blue for Belum Mulai
+                        'rgba(46, 204, 113, 0.4)', // Mint Green for Sedang Magang
+                        'rgba(52, 152, 219, 0.4)' // Light Blue for Magang Selesai
+                    ],
+                    borderColor: 'rgba(44, 62, 80, 1)', // Dark Blue for border
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'bottom',
+                }
             }
         });
     </script>

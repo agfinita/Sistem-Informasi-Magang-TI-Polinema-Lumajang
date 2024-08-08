@@ -23,6 +23,7 @@
                     <ul class="sidebar-menu">
                         <li class="menu-header">Dashboard</li>
                         <li><a class="nav-link" href="{{ url('/dosen/dashboard') }}"><i class="ion ion-speedometer" data-pack="default" data-tags="travel, accelerate"></i> <span>Dashboard</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/dosen/pengumuman') }}"><i class="ion ion-speakerphone"></i><span>Pengumuman</span></a></li>
 
                         <li class="menu-header">Magang</li>
                         <li><a class="nav-link" href="{{ url('/dosen/data-magang-mahasiswa') }}"><i class="fas fa-columns"></i> <span>Data Magang</span></a></li>
@@ -70,6 +71,7 @@
                                                     <th>Kategori Magang</th>
                                                     <th>Instansi</th>
                                                     <th>Dosen Pembimbing</th>
+                                                    <th class="text-center">Status Laporan</th>
                                                     {{-- <th>Laporan Magang</th>
                                                     <th>Catatan</th>
                                                     <th>Status Laporan</th>
@@ -103,15 +105,15 @@
                                                             @else
                                                             <h5> - </h5>
                                                             @endif
-                                                        </td>
+                                                        </td> --}}
                                                         <td class="text-center">
                                                             @if ($lm->status_laporan == '1')
-                                                            <div class="badge badge-success">Verified</div>
+                                                                <div class="badge badge-success">Verified</div>
                                                             @else
-                                                            <h5> - </h5>
+                                                                <h5> - </h5>
                                                             @endif
                                                         </td>
-                                                        <td class="text-center">
+                                                        {{-- <td class="text-center">
                                                             @if ($lm->dataMagang->status_magang == 'selesai')
                                                             <div class="badge badge-success">Selesai</div>
                                                             @elseif ($lm->dataMagang->status_magang == 'sedang magang')

@@ -18,23 +18,23 @@ class PengumumanDosenSideController extends Controller
                 ->orderBy('id', 'DESC')
                 ->get();
 
-        // Menghitung total pengumuman
-        $totalPengumuman    = Pengumuman::count();
+        // // Menghitung total pengumuman
+        // $totalPengumuman    = Pengumuman::count();
 
-        // Membuat instance dari HomeController
-        $homeController = new HomeController();
-        // Panggil method untuk menghitung total bimbingan dosen
-        $totalBimbingan = $homeController->statistikDashboardDosen()['total_bimbingan'];
-        $totalSelesai = $homeController->statistikDashboardDosen()['total_selesai'];
+        // // Membuat instance dari HomeController
+        // $homeController = new HomeController();
+        // // Panggil method untuk menghitung total bimbingan dosen
+        // $totalBimbingan = $homeController->statistikDashboardDosen()['total_bimbingan'];
+        // $totalSelesai = $homeController->statistikDashboardDosen()['total_selesai'];
 
-        return view('pages.contents.dosen.index', compact('pengumuman', 'totalPengumuman', 'totalBimbingan', 'totalSelesai'));
+        return view('pages.contents.dosen.pengumuman.index', compact('pengumuman'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create() {
-        return view('pages.contents.dosen.create');
+        return view('pages.contents.dosen.pengumuman.create');
     }
 
     /**
@@ -93,7 +93,7 @@ class PengumumanDosenSideController extends Controller
             return redirect('/dosen/dashboard')->with('error', 'Data tidak ditemukan');
         }
 
-        return view('pages.contents.dosen.edit', compact('pengumuman'));
+        return view('pages.contents.dosen.pengumuman.edit', compact('pengumuman'));
     }
 
     /**

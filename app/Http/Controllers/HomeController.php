@@ -2,16 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use App\Models\User;
-use App\Models\Admin;
-use App\Models\Dosen;
-use App\Models\Mahasiswa;
-use App\Models\DataMagang;
 use App\Models\Pengumuman;
 use Illuminate\Http\Request;
-use App\Models\DataBimbingan;
-use App\Models\PengajuanMagang;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
 
@@ -88,55 +80,4 @@ class HomeController extends Controller {
             return response()->json(['error'], 404);
         }
     }
-
-    // Dashboard admin
-    public function statistikDashboardAdmin() {
-        // Jumlah user
-        $totalUser  = User::count();
-        // Jumlah admin
-        $totalAdmin  = Admin::count();
-        // Jumlah dosen
-        $totalDosen = Dosen::count();
-        // Jumlah mahasiswa
-        $totalMhs   = Mahasiswa::count();
-        // Total data magang
-        $totalDataMagang   = DataMagang::count();
-        // Pengguna aktif
-        $activeUsers = User::where('last_activity', '>=', Carbon::now()->subMinutes(5))->count();
-        // Total pengumuman
-        $totalPengumuman    = Pengumuman::count();
-        // Pengajuan Magang
-        $selesai = PengajuanMagang::where('status', 'selesai')->count();
-        $diproses = PengajuanMagang::where('status', 'diproses')->count();
-
-        return view('pages.contents.admin.index', compact('totalUser','totalAdmin', 'totalMhs',
-                                                        'totalDosen', 'totalDataMagang', 'activeUsers',
-                                                        'totalPengumuman', 'selesai', 'diproses'));
-    }
-
-    // Dashboard dosen
-    public function statistikDashboardDosen() {
-        // Mengambil user yang sedang login
-        $user   = Auth::user();
-
-        // Mendapatkan ID dosen dari relasi user
-        $dosen      = $user->dosen;
-        $dosen_id   = $dosen->id;
-
-        // Menghitung jumlah data bimbingan dari dosen yang sedang login
-        $totalBimbingan = DataBimbingan::where('dosen_pembimbing_id', $dosen_id)->count();
-
-        // Menghitung jumlah status_magang 'selesai' mahasiswa bimbingan dari dosen yang sedang login
-        $totalBimbinganIds  = DataBimbingan::where('dosen_pembimbing_id', $dosen_id)
-                            ->pluck('data_magang_id');
-        $totalSelesai   = DataMagang::whereIn('id', $totalBimbinganIds)
-                            ->where('status_magang', 'selesai')
-                            ->count();
-
-        return [
-            'total_bimbingan'       => $totalBimbingan,
-            'total_selesai'         => $totalSelesai,
-        ];
-    }
-
 }

@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\BimbinganAdminSideController;
-use App\Http\Controllers\BimbinganDosenSideController;
-use App\Http\Controllers\BimbinganMahasiswaSideController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DataAdminController;
@@ -11,19 +8,24 @@ use App\Http\Controllers\KelolaAdminController;
 use App\Http\Controllers\KelolaDosenController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\DataMahasiswaController;
+use App\Http\Controllers\DashboardDosenController;
 use App\Http\Controllers\KelolaMahasiswaController;
-use App\Http\Controllers\LogbookDosenSideController;
 use App\Http\Controllers\LogbookAdminSideController;
+use App\Http\Controllers\LogbookDosenSideController;
+use App\Http\Controllers\BimbinganAdminSideController;
+use App\Http\Controllers\BimbinganDosenSideController;
 use App\Http\Controllers\DataMagangAdminSideController;
 use App\Http\Controllers\DataMagangDosenSideController;
 use App\Http\Controllers\PengumumanAdminSideController;
 use App\Http\Controllers\PengumumanDosenSideController;
 use App\Http\Controllers\LogbookMahasiswaSideController;
+use App\Http\Controllers\BimbinganMahasiswaSideController;
+use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\DataBimbinganAdminSideController;
 use App\Http\Controllers\DataBimbinganDosenSideController;
+use App\Http\Controllers\LaporanMagangAdminSideController;
 use App\Http\Controllers\LaporanMagangDosenSideController;
 use App\Http\Controllers\DataMagangMahasiswaSideController;
-use App\Http\Controllers\LaporanMagangAdminSideController;
 use App\Http\Controllers\PengajuanMagangAdminSideController;
 use App\Http\Controllers\LaporanMagangMahasiswaSideController;
 use App\Http\Controllers\PengajuanMagangMahasiswaSideController;
@@ -50,7 +52,7 @@ Route::group(['middleware' => 'role'], function () {
 
     // AUTH ADMIN
     // Menampilkan dashboard simag admin
-    Route::get('/', [HomeController::class, 'statistikDashboardAdmin']);
+    Route::get('/', [DashboardAdminController::class, 'statistikDashboardAdmin']);
 
     //KELOLA PENGGUNA
     // Admin
@@ -142,9 +144,12 @@ Route::group(['middleware' => 'role'], function () {
 
     // Auth DOSEN
     // Menampilkan dashboard simag dosen
-    Route::resource('/dosen/dashboard', PengumumanDosenSideController::class)->except('show');
-    Route::get('/dosen/dashboard/edit/{id}', [PengumumanDosenSideController::class,'edit']);
-    Route::patch('/dosen/dashboard/edit/{id}', [PengumumanDosenSideController::class,'update']);
+    Route::get('/dosen/dashboard', [DashboardDosenController::class, 'statistikDashboardDosen']);
+
+    // Pengumuman dosen side
+    Route::resource('/dosen/pengumuman', PengumumanDosenSideController::class)->except('show');
+    Route::get('/dosen/pengumuman/edit/{id}', [PengumumanDosenSideController::class,'edit']);
+    Route::patch('/dosen/pengumuman/edit/{id}', [PengumumanDosenSideController::class,'update']);
 
     // DATA MAGANG MAHASISWA - Dosen Side
     Route::get('/dosen/data-magang-mahasiswa', [DataMagangDosenSideController::class, 'index']);
